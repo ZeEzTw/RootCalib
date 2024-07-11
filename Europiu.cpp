@@ -17,27 +17,17 @@ void fitGaussian(TF1 *gaus, TH1D *hist, double peakX, double rangeWidth)
 
 float extractBackgroundAreaForGaussian(TH1D *hist, int peakBin, TF1 *gaussian)
 {
-    float backgroundArea = 0;
+   /* float backgroundArea = 0;
 
-    float sd = gaussian->GetParameter(2);
+    // Obținem limitele stânga și dreapta ale vârfului
+    double leftLimit, rightLimit;
+    findStartOfPeak(hist, peakBin, gaussian, leftLimit, rightLimit);
 
-    int backgroundAreaWidth = (2 * sd); //The width of the adjustment range for the background
-
-    int backgroundAreaPosition = peakBin - 20 - backgroundAreaWidth / 2;
-
-    TF1 *gaussianBackground = new TF1("gaussianBackground", "pol1", backgroundAreaPosition, backgroundAreaPosition + backgroundAreaWidth);
-
-    hist->Fit(gaussianBackground, "QN0", "", backgroundAreaPosition, backgroundAreaPosition + backgroundAreaWidth);
-
-    backgroundArea = gaussianBackground->Integral(backgroundAreaPosition, backgroundAreaPosition + backgroundAreaWidth);
-
-    // cout << "backgroundArea: " << backgroundArea << std::endl;
-
-    delete gaussianBackground;
-
-    return backgroundArea;
+    // Calculăm aria totală sub gaussiană între aceste limite
+    double totalArea = gaussian->Integral(leftLimit, rightLimit);
+    */
+    
 }
-
 float calculateAreaOfGaussian(TF1 *gaussian)
 {
     float amplitude = gaussian->GetParameter(0);
@@ -91,7 +81,6 @@ void findStartOfPeak(TH1D *hist, int maxBin, TF1 *gaussian, double &leftLimitPos
         rightLimitPosition = mean + 2 * sigma;
 }
 
-
 int findPeak(TH1D *hist, int numBins, TH1D *mainHist, int peak, TF1 *gaus[]) {
     float maxPeakY = 0;
     int maxBin = 0;
@@ -106,22 +95,17 @@ int findPeak(TH1D *hist, int numBins, TH1D *mainHist, int peak, TF1 *gaus[]) {
         fitGaussian(guasianTemp, hist, bin, 3);
         
         double leftLimit, rightLimit;
-        findStartOfPeak(mainHist, bin, guasianTemp, leftLimit, rightLimit);
-        if(hist->GetBinContent(leftLimit) == 0 || hist->GetBinContent(rightLimit) == 0) continue;
-        double peakWithoutBackgroundTemp = binContent - (hist->GetBinContent(leftLimit) + hist->GetBinContent(rightLimit)) / 2;
+        findStartOfPeak(hist, bin, guasianTemp, leftLimit, rightLimit);
+        double peakWithoutBackgroundTemp = binContent - (mainHist->GetBinContent(mainHist->FindBin(leftLimit)) + mainHist->GetBinContent(mainHist->FindBin(rightLimit))) / 2;
         
         if (peakWithoutBackgroundTemp > peakWithoutBackground) {
-            //cout<<"leftLimit"<<leftLimit<<endl;
-            //cout<<"rightLimit"<<rightLimit<<endl;
-            //cout<<"mainHist->LeftLimit"<<hist->GetBinContent(leftLimit)<<endl;
-            //cout<<"mainHist->LeftLimit"<<hist->GetBinContent(rightLimit)<<endl;
             peakWithoutBackground = peakWithoutBackgroundTemp;
             maxPeakY = binContent;
             maxBin = bin;
         }
-        delete guasianTemp;
     }
-    cout<<"maxBin"<<maxBin<<endl;
+
+    cout << "maxBin: " << maxBin << endl;
 
     float maxPeakX = mainHist->GetXaxis()->GetBinCenter(maxBin);
     gaus[peak] = new TF1(Form("gaus%d_peak%d", peak, maxBin), "gaus", maxPeakX - 2.5, maxPeakX + 2.5); // Nume unic pentru fiecare fit Gaussian
