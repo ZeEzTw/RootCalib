@@ -96,44 +96,60 @@ void eliminatePeak(TH1D *hist, int maxBin, TF1* gaussian)
         hist->SetBinContent(i, 0); // i+1 deoarece hist->SetBinContent folosește indexare de la 1
     }
 }
-
 int findPeak(TH1D *hist, int numBins, TH1D *mainHist, int peak, TF1 *gaus[]) {
     float maxPeakY = 0;
     int maxBin = 0;
     double peakWithoutBackground = 0;
-    TF1* guasianTemp; // Declară variabila TF1
+    TF1* gaussianTemp = nullptr;
 
-    for (int bin = 1; bin <= numBins; ++bin) { // Începe de la 1 pentru a evita bin-ul 0
+    for (int bin = 1; bin <= numBins; ++bin) {
         float binContent = hist->GetBinContent(bin);
         if (binContent == 0) continue;
 
-        guasianTemp = new TF1("gausTemp", "gaus", bin - 4, bin + 4);
-        fitGaussian(guasianTemp, hist, bin, 3);
-        
+        // Definirea funcției temporare de fitare gaussiană
+        gaussianTemp = new TF1("fitFunc", "[0]*exp(-0.5*((x-[1])/[2])**2) + [3] + ([4]*x)", -5, 5);
+        fitGaussian(gaussianTemp, hist, bin, 3); // Funcția fitGaussian trebuie definită pentru a se potrivi gaussienei
+
+        // Determinarea limitelor stângii și dreptei a peak-ului bazat pe gaussiana fitată
         double leftLimit, rightLimit;
-        findStartOfPeak(hist, bin, guasianTemp, leftLimit, rightLimit);
+        findStartOfPeak(hist, bin, gaussianTemp, leftLimit, rightLimit); // Funcția findStartOfPeak trebuie definită pentru a găsi limita peak-ului
+
+        // Calcularea înălțimii peak-ului fără background
         double peakWithoutBackgroundTemp = binContent - (mainHist->GetBinContent(mainHist->FindBin(leftLimit)) + mainHist->GetBinContent(mainHist->FindBin(rightLimit))) / 2;
-        
+
+        // Actualizarea maximului bazat pe înălțimea peak-ului fără background
         if (peakWithoutBackgroundTemp > peakWithoutBackground) {
             peakWithoutBackground = peakWithoutBackgroundTemp;
             maxPeakY = binContent;
             maxBin = bin;
         }
-        iterations++;
+
+        delete gaussianTemp; // Eliberarea memoriei pentru TF1 temporar
     }
 
-    cout << "maxBin: " << maxBin << endl;
+    // Afișarea bin-ului maxim identificat
+    std::cout << "maxBin: " << maxBin << std::endl;
 
+    // Determinarea poziției x a bin-ului maxim pe axa x a histogramei principale
     float maxPeakX = mainHist->GetXaxis()->GetBinCenter(maxBin);
-    gaus[peak] = new TF1(Form("gaus%d_peak%d", peak, maxBin), "gaus", maxPeakX - 2.5, maxPeakX + 2.5); // Nume unic pentru fiecare fit Gaussian
-    gaus[peak]->SetParameters(maxPeakY, maxPeakX);
-    mainHist->Fit(gaus[peak], "RQ+"); // Ajustare și desenare fit Gaussian pe histogramă
-    
+
+    // Crearea și setarea funcției de fitare gaussiană pentru peak-ul identificat
+    gaus[peak] = new TF1(Form("gausFit_%d", peak), "[0]*exp(-0.5*((x-[1])/[2])**2) + [3] + ([4]*x)", maxPeakX - 5, maxPeakX + 5);
+    gaus[peak]->SetParameter(0, 0.0, maxPeakY); // Limita pentru parametrul [0] (amplitudinea) între 0 și maxPeakY
+    gaus[peak]->SetParameter(1, maxPeakX - 5, maxPeakX + 5); // Limita pentru parametrul [1] (poziția x) între maxPeakX - 5 și maxPeakX + 5
+    gaus[peak]->SetParameter(2, 0.1, 5.0); // Limita pentru parametrul [2] (deviația standard) între 0.1 și 5.0
+    gaus[peak]->SetParameter(3, 0.0, 20.0); // Limita pentru parametrul [3] (termen constant) între 0.0 și 20.0
+    gaus[peak]->SetParameter(4, -10.0, 10.0); // Limita pentru parametrul [4] (termen liniar) între -10.0 și 10.0
+
+    // Fitarea rapidă și silențioasă a funcției gaussiane pe histograma principală
+    mainHist->Fit(gaus[peak], "RQ+");
+
+    // Refinarea limitelor stângii și dreptei a peak-ului pe histograma principală și eliminarea peak-ului corespunzător pe histograme
     double leftLimit, rightLimit;
-    findStartOfPeak(mainHist, maxBin, gaus[peak], leftLimit, rightLimit);
-    eliminatePeak(hist, maxBin, gaus[peak]);
-    
-    return maxBin;
+    findStartOfPeak(mainHist, maxBin, gaus[peak], leftLimit, rightLimit); // Funcția findStartOfPeak trebuie definită pentru a găsi limita peak-ului
+    eliminatePeak(hist, maxBin, gaus[peak]); // Funcția eliminatePeak trebuie definită pentru a elimina peak-ul din histogramă
+
+    return maxBin; // Returnarea bin-ului maxim identificat
 }
 
 void pritnInFileJson(ofstream &file, int column, int peak, int peak_position, float area, float resolution)
