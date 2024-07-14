@@ -13,6 +13,8 @@
 int MaxDistance = 10;
 int MinDistance = 4;
 long int iterations = 0;
+long int goodGaus = 0;
+long int badGaus = 0;
 void fitGaussian(TF1 *gaus, TH1D *hist, double peakX, double rangeWidth)
 {
     hist->Fit(gaus, "RQ+", "", peakX - rangeWidth, peakX + rangeWidth);
@@ -43,11 +45,11 @@ float calculateAreaOfGaussian(TF1 *gaussian)
 
 float areaPeak(TF1 *gaussian, TH1D *hist, int peakBin)
 {
-    float peakArea = calculateAreaOfGaussian(gaussian);
-    float backgroundArea = extractBackgroundAreaForGaussian(hist, peakBin, gaussian);
-    float area = peakArea - backgroundArea;
+    //float peakArea = calculateAreaOfGaussian(gaussian);
+    //float backgroundArea = extractBackgroundAreaForGaussian(hist, peakBin, gaussian);
+    //float area = peakArea - backgroundArea;
     //cout << "area: " << area << endl;
-    return area;
+    return gaussian->Integral(gaussian->GetParameter(1) - 2 * gaussian->GetParameter(2), gaussian->GetParameter(1) + 2 * gaussian->GetParameter(2));
 }
 
 float calculateResolution(TF1 *gaussian)
@@ -68,13 +70,15 @@ void findStartOfPeak(TH1D *hist, int maxBin, TF1 *gaussian, double &leftLimitPos
         double right = abs(rightLimitPosition - maxBin);
         if(left > MaxDistance || left < MinDistance)
         {
-
+            badGaus++;
+            goodGaus--;
             leftLimitPosition = maxBin - MinDistance; 
         }
         if(right > MaxDistance || right < MinDistance)
         {
             rightLimitPosition = maxBin + MinDistance;
         }
+        goodGaus++;
 }
 
 void eliminatePeak(TH1D *hist, int maxBin, TF1* gaussian)
@@ -101,21 +105,23 @@ int findPeak(TH1D *hist, int numBins, TH1D *mainHist, int peak, TF1 *gaus[]) {
     int maxBin = 0;
     double peakWithoutBackground = 0;
     TF1* gaussianTemp = nullptr;
-
+    double leftLimit, rightLimit;
+    leftLimit = MinDistance;
+    rightLimit = MinDistance;
     for (int bin = 1; bin <= numBins; ++bin) {
         float binContent = hist->GetBinContent(bin);
         if (binContent == 0) continue;
 
         // Definirea funcției temporare de fitare gaussiană
-        gaussianTemp = new TF1("fitFunc", "[0]*exp(-0.5*((x-[1])/[2])**2) + [3] + ([4]*x)", -5, 5);
-        fitGaussian(gaussianTemp, hist, bin, 3); // Funcția fitGaussian trebuie definită pentru a se potrivi gaussienei
+        //gaussianTemp = new TF1("fitFunc", "[0]*exp(-0.5*((x-[1])/[2])**2) + [3] + ([4]*x)", -5, 5);
+        //fitGaussian(gaussianTemp, hist, bin, 3); // Funcția fitGaussian trebuie definită pentru a se potrivi gaussienei
 
         // Determinarea limitelor stângii și dreptei a peak-ului bazat pe gaussiana fitată
-        double leftLimit, rightLimit;
-        findStartOfPeak(hist, bin, gaussianTemp, leftLimit, rightLimit); // Funcția findStartOfPeak trebuie definită pentru a găsi limita peak-ului
-
+        //double leftLimit, rightLimit;
+        //findStartOfPeak(hist, bin, gaussianTemp, leftLimit, rightLimit); // Funcția findStartOfPeak trebuie definită pentru a găsi limita peak-ului
+        iterations++;
         // Calcularea înălțimii peak-ului fără background
-        double peakWithoutBackgroundTemp = binContent - (mainHist->GetBinContent(mainHist->FindBin(leftLimit)) + mainHist->GetBinContent(mainHist->FindBin(rightLimit))) / 2;
+        double peakWithoutBackgroundTemp = binContent - (mainHist->GetBinContent(mainHist->FindBin(bin - leftLimit)) + mainHist->GetBinContent(mainHist->FindBin(bin + rightLimit))) / 2;
 
         // Actualizarea maximului bazat pe înălțimea peak-ului fără background
         if (peakWithoutBackgroundTemp > peakWithoutBackground) {
@@ -128,25 +134,25 @@ int findPeak(TH1D *hist, int numBins, TH1D *mainHist, int peak, TF1 *gaus[]) {
     }
 
     // Afișarea bin-ului maxim identificat
-    std::cout << "maxBin: " << maxBin << std::endl;
+    //std::cout << "maxBin: " << maxBin << std::endl;
 
     // Determinarea poziției x a bin-ului maxim pe axa x a histogramei principale
     float maxPeakX = mainHist->GetXaxis()->GetBinCenter(maxBin);
 
     // Crearea și setarea funcției de fitare gaussiană pentru peak-ul identificat
-    gaus[peak] = new TF1(Form("gausFit_%d", peak), "[0]*exp(-0.5*((x-[1])/[2])**2) + [3] + ([4]*x)", maxPeakX - 5, maxPeakX + 5);
-    gaus[peak]->SetParameter(0, 0.0, maxPeakY); // Limita pentru parametrul [0] (amplitudinea) între 0 și maxPeakY
-    gaus[peak]->SetParameter(1, maxPeakX - 5, maxPeakX + 5); // Limita pentru parametrul [1] (poziția x) între maxPeakX - 5 și maxPeakX + 5
-    gaus[peak]->SetParameter(2, 0.1, 5.0); // Limita pentru parametrul [2] (deviația standard) între 0.1 și 5.0
-    gaus[peak]->SetParameter(3, 0.0, 20.0); // Limita pentru parametrul [3] (termen constant) între 0.0 și 20.0
-    gaus[peak]->SetParameter(4, -10.0, 10.0); // Limita pentru parametrul [4] (termen liniar) între -10.0 și 10.0
+    gaus[peak] = new TF1(Form("gausFit_%d", peak), "[0]*exp(-0.5*((x-[1])/[2])**2) + [3] + ([4]*x)", maxPeakX - 10, maxPeakX + 10);
+    gaus[peak]->SetParameters(maxPeakY, maxPeakX, 0.1, 0.0, 0.0); // Setarea parametrilor funcției gaussiane
+    //gaus[peak]->SetParameter(1, maxPeakX - 5, maxPeakX + 5); // Limita pentru parametrul [1] (poziția x) între maxPeakX - 5 și maxPeakX + 5
+    //gaus[peak]->SetParameter(2, 0.1, 5.0); // Limita pentru parametrul [2] (deviația standard) între 0.1 și 5.0
+    //gaus[peak]->SetParameter(3, 0.0, 20.0); // Limita pentru parametrul [3] (termen constant) între 0.0 și 20.0
+    //gaus[peak]->SetParameter(4, -10.0, 10.0); // Limita pentru parametrul [4] (termen liniar) între -10.0 și 10.0
 
     // Fitarea rapidă și silențioasă a funcției gaussiane pe histograma principală
     mainHist->Fit(gaus[peak], "RQ+");
 
     // Refinarea limitelor stângii și dreptei a peak-ului pe histograma principală și eliminarea peak-ului corespunzător pe histograme
-    double leftLimit, rightLimit;
-    findStartOfPeak(mainHist, maxBin, gaus[peak], leftLimit, rightLimit); // Funcția findStartOfPeak trebuie definită pentru a găsi limita peak-ului
+    //double leftLimit, rightLimit;
+    //findStartOfPeak(mainHist, maxBin, gaus[peak], leftLimit, rightLimit); // Funcția findStartOfPeak trebuie definită pentru a găsi limita peak-ului
     eliminatePeak(hist, maxBin, gaus[peak]); // Funcția eliminatePeak trebuie definită pentru a elimina peak-ul din histogramă
 
     return maxBin; // Returnarea bin-ului maxim identificat
@@ -311,7 +317,7 @@ void calibratePeaks(int peaks[], int peakCount, double knownEnergies[], int size
     }
 
     // Afișăm rezultatele
-    //std::cout << "Best m: " << bestM << ", Best b: " << bestB << ", Best Correlation: " << bestCorrelation << std::endl;
+    std::cout << "Best m: " << bestM << ", Best b: " << bestB << ", Best Correlation: " << bestCorrelation << std::endl;
 }
 
 void task1(int number_of_peaks, const char *file_path, double* energyArray, int size) {
@@ -338,10 +344,14 @@ void task1(int number_of_peaks, const char *file_path, double* energyArray, int 
         for (int peak = 0; peak < number_of_peaks; peak++) {
             int peak_position = findPeak(tempHist, hist1D->GetNbinsX(), hist1D, peak, gaus);
             peaks[peak] = peak_position;
-            hist1D->Fit(gaus[peak], "RQ+"); // Ajustare și desenare fit Gaussian pe histogramă
+            hist1D->Fit(gaus[peak], "RQ+"); 
+
+            pritnInFileJson(file, column, peak, peak_position, areaPeak(gaus[peak], hist1D, peak_position), calculateResolution(gaus[peak]));
+            // Ajustare și desenare fit Gaussian pe histogramă
             //fitGaussian(gaus[peak], hist1D, peak_position, 14);
             //fitGaussian(gaus[peak], hist1D, peak_position, 14);
         }
+
 
 
         // Afișează histograma pe canvasul dedicat coloanei
@@ -390,7 +400,9 @@ int main(int argc, char **argv)
     //calibration(peaks, size, energyArray);
     
     delete[] energyArray;
-    //cout<<endl<<"total number of iterations: "<<iterations<<endl;
+    cout<<endl<<"total number of iterations: "<<iterations<<endl;
+    cout<<"goodGaus"<<goodGaus<<endl;
+    cout<<"badGaus"<<badGaus<<endl;
     return 0;
 }
 

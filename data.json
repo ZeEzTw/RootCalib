@@ -1,0 +1,504 @@
+{
+  "Column": 102,
+  "Peak": 0,
+  "Position": 93,
+  "Area": 235890,
+  "Resolution": 0.00874588
+}
+{
+  "Column": 102,
+  "Peak": 1,
+  "Position": 263,
+  "Area": 83170.4,
+  "Resolution": 0.00311421
+}
+{
+  "Column": 103,
+  "Peak": 0,
+  "Position": 94,
+  "Area": 197637,
+  "Resolution": 0.00809925
+}
+{
+  "Column": 103,
+  "Peak": 1,
+  "Position": 264,
+  "Area": 78345.4,
+  "Resolution": 0.00295264
+}
+{
+  "Column": 104,
+  "Peak": 0,
+  "Position": 93,
+  "Area": 173736,
+  "Resolution": 0.00883515
+}
+{
+  "Column": 104,
+  "Peak": 1,
+  "Position": 263,
+  "Area": 73225,
+  "Resolution": 0.00319919
+}
+{
+  "Column": 105,
+  "Peak": 0,
+  "Position": 97,
+  "Area": 247078,
+  "Resolution": 0.00782288
+}
+{
+  "Column": 105,
+  "Peak": 1,
+  "Position": 274,
+  "Area": 86708.8,
+  "Resolution": 0.00285382
+}
+{
+  "Column": 106,
+  "Peak": 0,
+  "Position": 266,
+  "Area": 25512.7,
+  "Resolution": 0.00313942
+}
+{
+  "Column": 106,
+  "Peak": 1,
+  "Position": 1088,
+  "Area": 9351.29,
+  "Resolution": 0.000895086
+}
+{
+  "Column": 107,
+  "Peak": 0,
+  "Position": 253,
+  "Area": 23046.3,
+  "Resolution": 0.00428735
+}
+{
+  "Column": 107,
+  "Peak": 1,
+  "Position": 1038,
+  "Area": 8017.42,
+  "Resolution": 0.00116381
+}
+{
+  "Column": 108,
+  "Peak": 0,
+  "Position": 266,
+  "Area": 41170.2,
+  "Resolution": 0.00333357
+}
+{
+  "Column": 108,
+  "Peak": 1,
+  "Position": 94,
+  "Area": 41456.9,
+  "Resolution": 0.00958078
+}
+{
+  "Column": 109,
+  "Peak": 0,
+  "Position": 263,
+  "Area": 30768.4,
+  "Resolution": 0.00419069
+}
+{
+  "Column": 109,
+  "Peak": 1,
+  "Position": 1079,
+  "Area": 10001.4,
+  "Resolution": 0.0011213
+}
+{
+  "Column": 110,
+  "Peak": 0,
+  "Position": 265,
+  "Area": 585518,
+  "Resolution": 0.00324963
+}
+{
+  "Column": 110,
+  "Peak": 1,
+  "Position": 93,
+  "Area": 609159,
+  "Resolution": 0.00948054
+}
+{
+  "Column": 112,
+  "Peak": 0,
+  "Position": 97,
+  "Area": 226293,
+  "Resolution": 0.00865366
+}
+{
+  "Column": 112,
+  "Peak": 1,
+  "Position": 275,
+  "Area": 81080,
+  "Resolution": 0.00312665
+}
+{
+  "Column": 113,
+  "Peak": 0,
+  "Position": 96,
+  "Area": 234565,
+  "Resolution": 0.00796148
+}
+{
+  "Column": 113,
+  "Peak": 1,
+  "Position": 271,
+  "Area": 85658.6,
+  "Resolution": 0.00287071
+}
+{
+  "Column": 114,
+  "Peak": 0,
+  "Position": 96,
+  "Area": 211032,
+  "Resolution": 0.00864881
+}
+{
+  "Column": 114,
+  "Peak": 1,
+  "Position": 272,
+  "Area": 75671,
+  "Resolution": 0.00311633
+}
+{
+  "Column": 115,
+  "Peak": 0,
+  "Position": 96,
+  "Area": 209946,
+  "Resolution": 0.00802306
+}
+{
+  "Column": 115,
+  "Peak": 1,
+  "Position": 269,
+  "Area": 82564.2,
+  "Resolution": 0.00292315
+}
+{
+  "Column": 116,
+  "Peak": 0,
+  "Position": 266,
+  "Area": 25356.2,
+  "Resolution": 0.0032746
+}
+{
+  "Column": 116,
+  "Peak": 1,
+  "Position": 1086,
+  "Area": 9494.38,
+  "Resolution": 0.000901227
+}
+{
+  "Column": 117,
+  "Peak": 0,
+  "Position": 272,
+  "Area": 26161.6,
+  "Resolution": 0.00323579
+}
+{
+  "Column": 117,
+  "Peak": 1,
+  "Position": 1113,
+  "Area": 9488.13,
+  "Resolution": 0.000909394
+}
+{
+  "Column": 118,
+  "Peak": 0,
+  "Position": 276,
+  "Area": 48300.2,
+  "Resolution": 0.00349888
+}
+{
+  "Column": 118,
+  "Peak": 1,
+  "Position": 98,
+  "Area": 51604.1,
+  "Resolution": 0.00997971
+}
+{
+  "Column": 119,
+  "Peak": 0,
+  "Position": 267,
+  "Area": 24601.1,
+  "Resolution": 0.00390218
+}
+{
+  "Column": 119,
+  "Peak": 1,
+  "Position": 1090,
+  "Area": 8725.43,
+  "Resolution": 0.00105538
+}
+{
+  "Column": 120,
+  "Peak": 0,
+  "Position": 97,
+  "Area": 696855,
+  "Resolution": 0.00859962
+}
+{
+  "Column": 120,
+  "Peak": 1,
+  "Position": 273,
+  "Area": 587346,
+  "Resolution": 0.00307149
+}
+{
+  "Column": 122,
+  "Peak": 0,
+  "Position": 96,
+  "Area": 288922,
+  "Resolution": 0.00878101
+}
+{
+  "Column": 122,
+  "Peak": 1,
+  "Position": 271,
+  "Area": 92664.5,
+  "Resolution": 0.0031542
+}
+{
+  "Column": 123,
+  "Peak": 0,
+  "Position": 96,
+  "Area": 252536,
+  "Resolution": 0.00795769
+}
+{
+  "Column": 123,
+  "Peak": 1,
+  "Position": 272,
+  "Area": 89492.4,
+  "Resolution": 0.00289558
+}
+{
+  "Column": 124,
+  "Peak": 0,
+  "Position": 93,
+  "Area": 179053,
+  "Resolution": 0.00873316
+}
+{
+  "Column": 124,
+  "Peak": 1,
+  "Position": 261,
+  "Area": 70743.1,
+  "Resolution": 0.00314671
+}
+{
+  "Column": 125,
+  "Peak": 0,
+  "Position": 95,
+  "Area": 236136,
+  "Resolution": 0.00790553
+}
+{
+  "Column": 125,
+  "Peak": 1,
+  "Position": 267,
+  "Area": 88762.5,
+  "Resolution": 0.00283691
+}
+{
+  "Column": 126,
+  "Peak": 0,
+  "Position": 269,
+  "Area": 29932.1,
+  "Resolution": 0.00349234
+}
+{
+  "Column": 126,
+  "Peak": 1,
+  "Position": 95,
+  "Area": 28693.7,
+  "Resolution": 0.0094996
+}
+{
+  "Column": 127,
+  "Peak": 0,
+  "Position": 257,
+  "Area": 30069.5,
+  "Resolution": 0.00346311
+}
+{
+  "Column": 127,
+  "Peak": 1,
+  "Position": 91,
+  "Area": -28097.5,
+  "Resolution": -0.00940216
+}
+{
+  "Column": 128,
+  "Peak": 0,
+  "Position": 264,
+  "Area": 27728.7,
+  "Resolution": 0.00358441
+}
+{
+  "Column": 128,
+  "Peak": 1,
+  "Position": 1076,
+  "Area": 9991.11,
+  "Resolution": 0.000985037
+}
+{
+  "Column": 129,
+  "Peak": 0,
+  "Position": 266,
+  "Area": 26554.9,
+  "Resolution": 0.00425659
+}
+{
+  "Column": 129,
+  "Peak": 1,
+  "Position": 1092,
+  "Area": 9330.25,
+  "Resolution": 0.00111318
+}
+{
+  "Column": 130,
+  "Peak": 0,
+  "Position": 270,
+  "Area": 584006,
+  "Resolution": 0.00305793
+}
+{
+  "Column": 130,
+  "Peak": 1,
+  "Position": 95,
+  "Area": 627264,
+  "Resolution": 0.00837567
+}
+{
+  "Column": 132,
+  "Peak": 0,
+  "Position": 93,
+  "Area": 304685,
+  "Resolution": 0.00883824
+}
+{
+  "Column": 132,
+  "Peak": 1,
+  "Position": 263,
+  "Area": 95478.4,
+  "Resolution": 0.00317862
+}
+{
+  "Column": 133,
+  "Peak": 0,
+  "Position": 94,
+  "Area": 236826,
+  "Resolution": 0.00792816
+}
+{
+  "Column": 133,
+  "Peak": 1,
+  "Position": 266,
+  "Area": 88540,
+  "Resolution": 0.0029146
+}
+{
+  "Column": 134,
+  "Peak": 0,
+  "Position": 95,
+  "Area": 161592,
+  "Resolution": 0.00860876
+}
+{
+  "Column": 134,
+  "Peak": 1,
+  "Position": 268,
+  "Area": 72395.4,
+  "Resolution": 0.00309844
+}
+{
+  "Column": 135,
+  "Peak": 0,
+  "Position": 93,
+  "Area": 260199,
+  "Resolution": 0.00825494
+}
+{
+  "Column": 135,
+  "Peak": 1,
+  "Position": 265,
+  "Area": 92721.3,
+  "Resolution": 0.00291779
+}
+{
+  "Column": 136,
+  "Peak": 0,
+  "Position": 269,
+  "Area": 32067.1,
+  "Resolution": 0.00327005
+}
+{
+  "Column": 136,
+  "Peak": 1,
+  "Position": 95,
+  "Area": 36679.8,
+  "Resolution": 0.00969476
+}
+{
+  "Column": 137,
+  "Peak": 0,
+  "Position": 262,
+  "Area": 24920,
+  "Resolution": 0.00325469
+}
+{
+  "Column": 137,
+  "Peak": 1,
+  "Position": 1077,
+  "Area": 8905.92,
+  "Resolution": 0.000930211
+}
+{
+  "Column": 138,
+  "Peak": 0,
+  "Position": 270,
+  "Area": 25781.2,
+  "Resolution": 0.00323894
+}
+{
+  "Column": 138,
+  "Peak": 1,
+  "Position": 1104,
+  "Area": 9352.28,
+  "Resolution": 0.000916731
+}
+{
+  "Column": 139,
+  "Peak": 0,
+  "Position": 274,
+  "Area": 32891.1,
+  "Resolution": 0.00412375
+}
+{
+  "Column": 139,
+  "Peak": 1,
+  "Position": 1122,
+  "Area": 10642.2,
+  "Resolution": 0.00108791
+}
+{
+  "Column": 140,
+  "Peak": 0,
+  "Position": 98,
+  "Area": 919104,
+  "Resolution": 0.00863425
+}
+{
+  "Column": 140,
+  "Peak": 1,
+  "Position": 277,
+  "Area": 604193,
+  "Resolution": 0.00306533
+}
