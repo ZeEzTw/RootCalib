@@ -9,7 +9,7 @@
 #include "TH1.h"
 #include "TF1.h"
 #include "TCanvas.h"
-
+#include <limits>
 float MaxDistance = 10;
 float MinDistance = 1.9f;
 long int iterations = 0;
@@ -162,7 +162,7 @@ float findPeak(TH1D *hist, int numBins, TH1D *mainHist, int peak, TF1 *gaus[])
     return gaus[peak]->GetParameter(1);
 }
 
-void printInFileJson(ofstream &file, int column, int peak, float peak_position, float area, float resolution)
+void printInFileJson(ofstream &file, int column, int peak, double peak_position, float area, float resolution)
 {
     file << "{" << endl;
     file << "  \"Column\": " << column << "," << endl;
@@ -258,24 +258,7 @@ double calculateError(double measured[], double known[], int size)
 
 // Verifică dacă energia prezisă se află în apropiere de una dintre energiile cunoscute
 // Verifică dacă energia prezisă se află în apropiere de una dintre energiile cunoscute
-bool checkPredictedEnergies(double predictedEnergy, double knownEnergies[], int size)
-{
-    double minError = std::numeric_limits<double>::max();
-
-    for (int i = 0; i < size; ++i)
-    {
-        if (fabs(predictedEnergy - knownEnergies[i]) < minError)
-        {
-            minError = fabs(predictedEnergy - knownEnergies[i]);
-            // cout<<"energyKnown"<<knownEnergies[i]<<endl;
-            // cout<<"predictedEnergy"<<predictedEnergy<<endl;
-            // cout<<"minError"<<minError<<endl;
-        }
-    }
-
-    return minError < 10.0;
-}
-void outputDiferences(double knownEnergies[], int size, int peaks[], int peakCount)
+void outputDiferences(double knownEnergies[], int size, double peaks[], int peakCount)
 {
     for (int i = 0; i < peakCount; ++i)
     {
@@ -286,58 +269,104 @@ void outputDiferences(double knownEnergies[], int size, int peaks[], int peakCou
     }
     cout << "---------------------------------" << endl;
 }
-void calibratePeaks(float peaks[], int peakCount, double knownEnergies[], int size, float &M, float &B)
+bool checkPredictedEnergies(double predictedEnergy, double knownEnergies[], int size, float errorAdmised)
 {
-    double bestM = 0.0;
+    double minError = std::numeric_limits<double>::max();
+
+    for (int i = 0; i < size; ++i)
+    {
+        double error = fabs(predictedEnergy - knownEnergies[i]);
+        if (error < minError)
+        {
+            minError = error;
+            // std::cout << "energyKnown: " << knownEnergies[i] << std::endl;
+            // std::cout << "predictedEnergy: " << predictedEnergy << std::endl;
+            // std::cout << "minError: " << minError << std::endl;
+        }
+    }
+
+    return minError < errorAdmised;
+}
+void makePerfectCalibration(float errorAdmised, double peaks[], int peakCount, double knownEnergies[], int size, double &M, double &B)
+{
     double bestB = 0.0;
     int bestCorrelation = 0;
-    // outputDiferences(knownEnergies, size, peaks, peakCount);
-    //  Iterăm prin fiecare valoare posibilă pentru panta (m)
-    for (double m = 0.1; m <= 10.0; m += 0.01)
-    {
-        for (double n = 0.0; n <= 5.0; n += 0.1)
+    // outputDifferences(knownEnergies, size, peaks, peakCount);
+
+        for (double n = -errorAdmised; n <= errorAdmised; n += 0.001)
         {
             int correlations = 0;
 
-            // Încercăm diferite valori pentru fiecare peak
             for (int i = 0; i < peakCount; ++i)
             {
-                // Calculăm energia prezisă pentru panta curentă (m) și intercept-ul (n) curent
-                double predictedEnergy = m * peaks[i] + n;
+                double predictedEnergy = M * peaks[i] + (B+ n);
 
-                // Verificăm dacă energia prezisă se potrivește cu una dintre energiile cunoscute
-                if (checkPredictedEnergies(predictedEnergy, knownEnergies, size))
+                if (checkPredictedEnergies(predictedEnergy, knownEnergies, size, 0.05))
                 {
                     ++correlations;
                 }
             }
 
-            // Actualizăm cea mai bună corelație găsită până acum
             if (correlations > bestCorrelation)
             {
                 bestCorrelation = correlations;
-                bestM = m; // Actualizăm panta pentru cea mai bună corelație
-                bestB = n; // Actualizăm intercept-ul pentru cea mai bună corelație
-            }
-
-            // Dacă am găsit deja toate corelațiile posibile, întrerupem bucla
-            if (bestCorrelation == peakCount)
-            {
-                break;
+                bestB = n;
             }
         }
+    //makePerfectCalibration(3, peaks, peakCount, knownEnergies, size, bestM, bestB);
+    //std::cout << "bestCorrelation: " << bestCorrelation << std::endl;
+    B = B + bestB;
+}
+void calibratePeaks(double peaks[], int peakCount, double knownEnergies[], int size, float &M, float &B)
+{
+    double bestM = 0.0;
+    double bestB = 0.0;
+    int bestCorrelation = 0;
+    // outputDifferences(knownEnergies, size, peaks, peakCount);
 
-        // Dacă am găsit deja toate corelațiile posibile, întrerupem bucla
-        if (bestCorrelation == peakCount)
+    for (double m = 0.01; m <= 5.0; m += 0.01)
+    {
+        for (double n = 0.0; n <= 15.0; n += 0.1)
         {
-            break;
+            int correlations = 0;
+
+            for (int i = 0; i < peakCount; ++i)
+            {
+                double predictedEnergy = m * peaks[i] + n;
+
+                if (checkPredictedEnergies(predictedEnergy, knownEnergies, size, 3))
+                {
+                    ++correlations;
+                }
+            }
+
+            if (correlations > bestCorrelation)
+            {
+                bestCorrelation = correlations;
+                bestM = m;
+                bestB = n;
+            }
+
+            // Uncomment the following line if you want to stop early
+            // if (bestCorrelation == peakCount)
+            // {
+            //     break;
+            // }
         }
+
+        // Uncomment the following line if you want to stop early
+        // if (bestCorrelation == peakCount)
+        // {
+        //    break;
+        // }
     }
+    makePerfectCalibration(3, peaks, peakCount, knownEnergies, size, bestM, bestB);
+    std::cout << "bestCorrelation: " << bestCorrelation << std::endl;
     M = bestM;
-    B = bestB; 
+    B = bestB;
 
     // Afișăm rezultatele
-    //std::cout << "Best m: " << bestM << ", Best b: " << bestB << ", Best Correlation: " << bestCorrelation << std::endl;
+    // std::cout << "Best m: " << bestM << ", Best b: " << bestB << ", Best Correlation: " << bestCorrelation << std::endl;
 }
 bool checkConditions(float peakPosition, float Xmax, float Xmin, float FWHMmax, TF1 *gaus)
 {
@@ -396,7 +425,7 @@ void task1(int number_of_peaks, const char *file_path, double *energyArray, int 
             continue;
         }
 
-        float peaks[number_of_peaks];
+        double peaks[number_of_peaks];
         TF1 *gaus[number_of_peaks];
         TH1D *tempHist = (TH1D *)hist1D->Clone();
         for (int peak = 0; peak < number_of_peaks; peak++) {
