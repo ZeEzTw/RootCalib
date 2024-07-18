@@ -42,22 +42,39 @@ float calculateAreaOfGaussian(TF1 *gaussian)
     return area;
 }
 
-float areaPeak(TF1 *gaussian, TH1D *hist, int peakBin)
-{
-    // float peakArea = calculateAreaOfGaussian(gaussian);
-    // float backgroundArea = extractBackgroundAreaForGaussian(hist, peakBin, gaussian);
-    // float area = peakArea - backgroundArea;
-    // cout << "area: " << area << endl;
-    return gaussian->Integral(gaussian->GetParameter(1) - 2 * gaussian->GetParameter(2), gaussian->GetParameter(1) + 2 * gaussian->GetParameter(2));
-}
+float areaPeak(TF1 *gaussian, TH1D *hist, int peakBin) {
+    double mean = gaussian->GetParameter(1);
+    double sigma = gaussian->GetParameter(2);
+    double leftLimit = mean - 2 * sigma;
+    double rightLimit = mean + 2 * sigma;
 
+    // Calculează aria sub gausiană în intervalul [leftLimit, rightLimit]
+    double peakArea = gaussian->Integral(leftLimit, rightLimit);
+
+    // Estimează aria fundalului în același interval
+    // Se asumă că fundalul este modelat de termenii [3] și [4]*x din funcția gausiană
+    TF1 background("background", "[0] + [1]*x", leftLimit, rightLimit);
+    background.SetParameters(gaussian->GetParameter(3), gaussian->GetParameter(4));
+    double backgroundArea = background.Integral(leftLimit, rightLimit);
+
+    // Calcularea ariei vârfului eliminând contribuția fundalului
+    double area = peakArea - backgroundArea;
+
+    return area;
+}
 float calculateResolution(TF1 *gaussian)
 {
+    // Parametrul sigma (lățimea standard) al gaussienei
     float sigma = gaussian->GetParameter(2);
+    // Parametrul mean (media) al gaussienei
     float mean = gaussian->GetParameter(1);
-    float resolution = sigma / mean;
+    // Calcularea FWHM
+    float FWHM = 2.3548 * sigma;
+    // Calcularea rezoluției
+    float resolution = FWHM / mean;
     return resolution;
 }
+
 void findStartOfPeak(TH1D *hist, int maxBin, TF1 *gaussian, double &leftLimitPosition, double &rightLimitPosition)
 {
     double mean = gaussian->GetParameter(1);
@@ -145,7 +162,7 @@ float findPeak(TH1D *hist, int numBins, TH1D *mainHist, int peak, TF1 *gaus[])
     return gaus[peak]->GetParameter(1);
 }
 
-void printInFileJson(ofstream &file, int column, int peak, int peak_position, float area, float resolution)
+void printInFileJson(ofstream &file, int column, int peak, float peak_position, float area, float resolution)
 {
     file << "{" << endl;
     file << "  \"Column\": " << column << "," << endl;
@@ -269,7 +286,7 @@ void outputDiferences(double knownEnergies[], int size, int peaks[], int peakCou
     }
     cout << "---------------------------------" << endl;
 }
-void calibratePeaks(float peaks[], int peakCount, double knownEnergies[], int size)
+void calibratePeaks(float peaks[], int peakCount, double knownEnergies[], int size, float &M, float &B)
 {
     double bestM = 0.0;
     double bestB = 0.0;
@@ -316,6 +333,8 @@ void calibratePeaks(float peaks[], int peakCount, double knownEnergies[], int si
             break;
         }
     }
+    M = bestM;
+    B = bestB; 
 
     // Afișăm rezultatele
     //std::cout << "Best m: " << bestM << ", Best b: " << bestB << ", Best Correlation: " << bestCorrelation << std::endl;
@@ -325,7 +344,6 @@ bool checkConditions(float peakPosition, float Xmax, float Xmin, float FWHMmax, 
     bool condition1 = true;
     bool condition2 = true;
     double FWHM = 2.3548 * gaus->GetParameter(2);
-    cout<<"FWHM"<<FWHM<<endl;
     if (peakPosition > Xmax || peakPosition < Xmin)
     {
         condition1 = false;
@@ -337,71 +355,94 @@ bool checkConditions(float peakPosition, float Xmax, float Xmin, float FWHMmax, 
     //std::cout << "For peak " << peakPosition << ": condition1 " << condition1 << " condition2 " << condition2 << std::endl;
     return condition1 && condition2;
 }
+void applyXCalibration(float m, float b, TH1D *originalHist, TH1D *&calibratedHist) {
+    int numBinsOriginal = originalHist->GetNbinsX();
+    int numBinsCalibrated = calibratedHist->GetNbinsX();
 
-void task1(int number_of_peaks, const char *file_path, double *energyArray, int size, float Xmax, float Xmin, float FWHMmax)
-{
+    // Iterează prin fiecare bin al histogramei calibrate
+    for (int bin_calibrated = 1; bin_calibrated <= numBinsCalibrated; ++bin_calibrated) {
+        // Calculează centrul binului recalibrat
+        double binCenter_calibrated = calibratedHist->GetXaxis()->GetBinCenter(bin_calibrated);
+
+        // Calculează poziția corespunzătoare pe axa x originală folosind formula de recalibrare inversă
+        double binCenter_original = (binCenter_calibrated - b) / m;
+
+        // Găsește binul corespunzător în histrograma originală folosind interpolarea liniară
+        int bin_original = originalHist->GetXaxis()->FindBin(binCenter_original);
+
+        // Adaugă conținutul binului original la binul recalibrat, utilizând metoda de interpolare
+        double content_original = originalHist->GetBinContent(bin_original);
+        double content_residual = originalHist->GetBinContent(bin_original + 1);
+        double fraction = (binCenter_original - originalHist->GetXaxis()->GetBinLowEdge(bin_original)) / originalHist->GetXaxis()->GetBinWidth(bin_original);
+        double interpolated_content = content_original + fraction * (content_residual - content_original);
+        calibratedHist->SetBinContent(bin_calibrated, interpolated_content);
+    }
+}
+
+void task1(int number_of_peaks, const char *file_path, double *energyArray, int size, float Xmax, float Xmin, float FWHMmax) {
     std::ofstream file("data.json");
     TFile *fr = new TFile(file_path, "READ");
-    TFile *outputFile = new TFile("output.root", "RECREATE");
+    TFile *outputFileHistograms = new TFile("histogramsWithPeaks.root", "RECREATE");
+    TFile *outputFileCalibrated = new TFile("calibratedHistograms.root", "RECREATE");
 
     TH2F *h1;
     fr->GetObject("mDelila_raw", h1);
     int number_of_columns = h1->GetNbinsX();
 
-    for (int column = 1; column <= number_of_columns; column++)
-    {
+    for (int column = 1; column <= number_of_columns; column++) {
         TH1D *hist1D = h1->ProjectionY(Form("hist1D_col%d", column), column, column);
-        if (hist1D->GetMean() < 5)
-        {
+        if (hist1D->GetMean() < 5) {
             delete hist1D;
             continue;
         }
 
-        TCanvas *colCanvas = new TCanvas(Form("canvas_col%d", column), Form("canvas_col%d", column), 800, 600);
-
         float peaks[number_of_peaks];
         TF1 *gaus[number_of_peaks];
         TH1D *tempHist = (TH1D *)hist1D->Clone();
-        for (int peak = 0; peak < number_of_peaks; peak++)
-        {
+        for (int peak = 0; peak < number_of_peaks; peak++) {
             float peak_position = findPeak(tempHist, hist1D->GetNbinsX(), hist1D, peak, gaus);
-            if (checkConditions(peak_position, Xmax, Xmin, FWHMmax, gaus[peak]))
-            {
-                cout << "peak_position" << peak_position << endl;
+            if (checkConditions(peak_position, Xmax, Xmin, FWHMmax, gaus[peak])) {
                 peaks[peak] = peak_position;
                 hist1D->Fit(gaus[peak], "RQ+");
 
+                // Printează în fișierul JSON
                 printInFileJson(file, column, peak, peak_position, areaPeak(gaus[peak], hist1D, peak_position), calculateResolution(gaus[peak]));
-            }
-            else
-            {
-                if (gaus[peak] != nullptr)
-                {
-                    hist1D->GetListOfFunctions()->Remove(gaus[peak]); // Eliminăm gaussianul de pe histogramă
-                    delete gaus[peak];                                // Eliberăm memoria alocată pentru gaussiană
+            } else {
+                if (gaus[peak] != nullptr) {
+                    hist1D->GetListOfFunctions()->Remove(gaus[peak]);
+                    delete gaus[peak];
                     gaus[peak] = nullptr;
                 }
             }
         }
-        colCanvas->cd();
-        hist1D->Draw();
-        colCanvas->Update();
-        colCanvas->Write();
+        float M, N;
+        calibratePeaks(peaks, number_of_peaks, energyArray, size, M, N);
+        cout<<endl<<"M"<<M<<endl;
+        cout<<"N"<<N<<endl;
+        // Creează histograma calibrată pentru coloana curentă
+        TH1D *calibratedHist = new TH1D(Form("calibrated_col%d", column), Form("calibrated_col%d", column), hist1D->GetNbinsX(), hist1D->GetXaxis()->GetXmin(), hist1D->GetXaxis()->GetXmax());
+        applyXCalibration(M, N, hist1D, calibratedHist);
+
+        // Resetarea statisticilor și salvarea în fișierul corespunzător
+        calibratedHist->ResetStats();
+        outputFileHistograms->cd();
+        hist1D->Write();
+        outputFileCalibrated->cd();
+        calibratedHist->Write();
 
         delete hist1D;
-        delete colCanvas;
-
-        calibratePeaks(peaks, number_of_peaks, energyArray, size);
+        delete calibratedHist;
     }
 
-    outputFile->Close();
+    outputFileHistograms->Close();
+    outputFileCalibrated->Close();
     fr->Close();
     file.close();
 
-    delete outputFile;
+    delete outputFileHistograms;
+    delete outputFileCalibrated;
     delete fr;
 }
-
 int main(int argc, char **argv)
 {
     if (argc < 6)

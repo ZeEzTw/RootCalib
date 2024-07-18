@@ -33,3 +33,4 @@ void printToFile(std::ofstream &file, double *energyArray, int size) {
     }
 }
 
+
