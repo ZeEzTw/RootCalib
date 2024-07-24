@@ -48,20 +48,52 @@ float areaPeak(TF1 *gaussian, TH1D *hist, int peakBin) {
     double leftLimit = mean - 2 * sigma;
     double rightLimit = mean + 2 * sigma;
 
+    // Calculăm înălțimile la limitele stânga și dreapta
+    double leftHeight = hist->GetBinContent(hist->FindBin(leftLimit - 5));
+    double rightHeight = hist->GetBinContent(hist->FindBin(rightLimit + 5));
+    double backgroundHeight = (leftHeight + rightHeight) / 2;
+
     // Calculează aria sub gausiană în intervalul [leftLimit, rightLimit]
     double peakArea = gaussian->Integral(leftLimit, rightLimit);
 
     // Estimează aria fundalului în același interval
-    // Se asumă că fundalul este modelat de termenii [3] și [4]*x din funcția gausiană
+    // Fundalul este modelat ca o linie dreaptă cu înălțimea backgroundHeight
     TF1 background("background", "[0] + [1]*x", leftLimit, rightLimit);
-    background.SetParameters(gaussian->GetParameter(3), gaussian->GetParameter(4));
+   //background.SetParameters(backgroundHeight, 0);
     double backgroundArea = background.Integral(leftLimit, rightLimit);
 
     // Calcularea ariei vârfului eliminând contribuția fundalului
     double area = peakArea - backgroundArea;
 
+    // Crează un fișier ROOT pentru salvare
+    /*TFile *file = TFile::Open("output.root", "UPDATE"); // Folosește "UPDATE" pentru a adăuga la fișierul existent
+
+    // Generează un nume unic pentru canvas folosind timestamp
+    std::time_t now = std::time(nullptr);
+    std::string canvasName = "canvas_" + std::to_string(now);
+    std::string canvasTitle = "Canvas_" + std::to_string(now);
+
+    // Crează un canvas pentru a desena histogramă și funcția de fundal
+    TCanvas *canvas = new TCanvas(canvasName.c_str(), canvasTitle.c_str(), 800, 600);
+    hist->Draw();
+    gaussian->SetLineColor(kGreen);
+    gaussian->Draw("same");
+    background.SetLineColor(kBlue);
+    background.Draw("same");
+
+    // Salvează canvasul în fișierul ROOT
+    canvas->Write(canvasName.c_str());
+
+    // Închide fișierul ROOT
+    file->Close();
+
+    // Curăță resursele
+    delete canvas;
+    delete file;
+    */
     return area;
 }
+
 float calculateResolution(TF1 *gaussian)
 {
     // Parametrul sigma (lățimea standard) al gaussienei
@@ -154,8 +186,12 @@ float findPeak(TH1D *hist, int numBins, TH1D *mainHist, int peak, TF1 *gaus[])
     }
 
     float maxPeakX = mainHist->GetXaxis()->GetBinCenter(maxBin);
-    gaus[peak] = new TF1(Form("gausFit_%d", peak), "[0]*exp(-0.5*((x-[1])/[2])**2) + [3] + ([4]*x)", maxPeakX - 10, maxPeakX + 10);
-    gaus[peak]->SetParameters(maxPeakY, maxPeakX, 0.1, 0.0, 0.0); // Setarea parametrilor funcției gaussian
+    gaus[peak] = new TF1(Form("gausFit_%d", peak), "[0]*exp(-0.5*((x-[1])/[2])**2) + [3] + ([4]*x) + ([5]*x*x)", maxPeakX - 10, maxPeakX + 10);
+    gaus[peak]->SetParameters(maxPeakY, maxPeakX, 1.0, 0.0, 0.0, 0.0); // Ajustare inițială a parametrilor
+    /*
+    gaus[peak]->SetParLimits(0, 0, 2*maxPeakY); // Limite pentru amplitudinea peak-ului
+    gaus[peak]->SetParLimits(1, maxPeakX - 5, maxPeakX + 5); // Limite pentru centrul peak-ului
+    */gaus[peak]->SetParLimits(2, 0.1, 10.0); // Limite pentru deviația standard
     hist->Fit(gaus[peak], "RQ+");
     eliminatePeak(hist, maxBin, gaus[peak]);
     //<<"peak"<<gaus[peak]->GetParameter(1)<<endl;
@@ -287,53 +323,55 @@ bool checkPredictedEnergies(double predictedEnergy, double knownEnergies[], int 
 
     return minError < errorAdmised;
 }
-void makePerfectCalibration(float errorAdmised, double peaks[], int peakCount, double knownEnergies[], int size, double &M, double &B)
+double refineCalibration(double peaks[], int peakCount, double knownEnergies[], int size, double &M, double &B)
 {
-    double bestB = 0.0;
-    int bestCorrelation = 0;
-    // outputDifferences(knownEnergies, size, peaks, peakCount);
+    double meanError = 0.0;
 
-        for (double n = -errorAdmised; n <= errorAdmised; n += 0.001)
+    for (int j = 0; j < peakCount; ++j)
+    {
+        double predictedEnergy = M * peaks[j] + B;
+        double minError = std::numeric_limits<double>::max();
+
+        for (int i = 0; i < size; ++i)
         {
-            int correlations = 0;
-
-            for (int i = 0; i < peakCount; ++i)
+            double error = fabs(predictedEnergy - knownEnergies[i]);
+            if (error < minError)
             {
-                double predictedEnergy = M * peaks[i] + (B+ n);
-
-                if (checkPredictedEnergies(predictedEnergy, knownEnergies, size, 0.05))
-                {
-                    ++correlations;
-                }
-            }
-
-            if (correlations > bestCorrelation)
-            {
-                bestCorrelation = correlations;
-                bestB = n;
+                minError = error;
             }
         }
-    //makePerfectCalibration(3, peaks, peakCount, knownEnergies, size, bestM, bestB);
-    //std::cout << "bestCorrelation: " << bestCorrelation << std::endl;
-    B = B + bestB;
+
+        meanError += minError;
+    }
+
+    meanError /= peakCount;
+
+    // Aici ar trebui să facem ajustările necesare la M și B
+    // de exemplu:
+    // M = M - scaleFactor * meanError;
+    // B = B - scaleFactor * meanError;
+
+    // În funcție de aplicația ta, ajustează parametrii într-un mod adecvat
+    // pentru a obține o calibrare mai precisă.
+
+    return meanError;
 }
-void calibratePeaks(double peaks[], int peakCount, double knownEnergies[], int size, float &M, float &B)
+
+void calibratePeaks(double peaks[], int peakCount, double knownEnergies[], int size, double &M, double &B)
 {
     double bestM = 0.0;
     double bestB = 0.0;
     int bestCorrelation = 0;
     // outputDifferences(knownEnergies, size, peaks, peakCount);
-
     for (double m = 0.01; m <= 5.0; m += 0.01)
     {
         for (double n = 0.0; n <= 15.0; n += 0.1)
         {
             int correlations = 0;
-
             for (int i = 0; i < peakCount; ++i)
             {
                 double predictedEnergy = m * peaks[i] + n;
-
+                
                 if (checkPredictedEnergies(predictedEnergy, knownEnergies, size, 3))
                 {
                     ++correlations;
@@ -360,10 +398,12 @@ void calibratePeaks(double peaks[], int peakCount, double knownEnergies[], int s
         //    break;
         // }
     }
-    makePerfectCalibration(3, peaks, peakCount, knownEnergies, size, bestM, bestB);
+
     std::cout << "bestCorrelation: " << bestCorrelation << std::endl;
+    double scale = refineCalibration(peaks, peakCount, knownEnergies, size, bestM, bestB);
+cout<<"Scale"<<scale;;
     M = bestM;
-    B = bestB;
+    B = scale;
 
     // Afișăm rezultatele
     // std::cout << "Best m: " << bestM << ", Best b: " << bestB << ", Best Correlation: " << bestCorrelation << std::endl;
@@ -444,7 +484,7 @@ void task1(int number_of_peaks, const char *file_path, double *energyArray, int 
                 }
             }
         }
-        float M, N;
+        double M, N;
         calibratePeaks(peaks, number_of_peaks, energyArray, size, M, N);
         cout<<endl<<"M"<<M<<endl;
         cout<<"N"<<N<<endl;
