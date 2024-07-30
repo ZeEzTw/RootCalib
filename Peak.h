@@ -16,7 +16,7 @@ private:
     float leftLimit, rightLimit;
 
 public:
-     Peak(TF1 *gausPeak, TH1D *hist);   // Constructor
+    Peak(TF1 *gausPeak, TH1D *hist);   // Constructor
     // Constructor with TF1 parameter
     Peak(TF1 *gausPeak);
 

@@ -11,6 +11,7 @@
 #include <TFile.h>
 #include <TCanvas.h>
 #include <TLatex.h> // Include corect pentru TLatex
+
 class Histogram {
 private:
     int xMin, xMax;
