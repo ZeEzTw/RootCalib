@@ -16,7 +16,7 @@ private:
     float leftLimit, rightLimit;
 
 public:
-    Peak(TF1 *gausPeak, TH1D *hist);   // Constructor
+    Peak(TF1 *gausPeak, TH1D *hist); // Constructor
     // Constructor with TF1 parameter
     Peak(TF1 *gausPeak);
 
@@ -48,10 +48,10 @@ public:
     TF1 *getGaussianFunction() const;
     double getFWHM() const;
     double getMean() const;
-    void areaPeak(TH1D *hist);  // Calculare aria peak-ului
+    void areaPeak(TH1D *hist); // Calculare aria peak-ului
     float calculateResolution() const;
     void findStartOfPeak(TH1D *hist, int maxBin, double &leftLimitPosition, double &rightLimitPosition);
 };
 
 #endif // PEAK_H
-// sa fac functia sa se poata redefinii un peak, adica sa mearga sa zica peak 6 e de fapt la pozitia asta, sa mearga acolo si sa faca fitul
+       // sa fac functia sa se poata redefinii un peak, adica sa mearga sa zica peak 6 e de fapt la pozitia asta, sa mearga acolo si sa faca fitul

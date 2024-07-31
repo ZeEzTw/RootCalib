@@ -11,8 +11,9 @@
 #include <TFile.h>
 #include <TCanvas.h>
 #include <TLatex.h> // Include corect pentru TLatex
-
-class Histogram {
+#include <string>
+class Histogram
+{
 private:
     int xMin, xMax;
     int maxFWHM;
@@ -25,28 +26,32 @@ private:
     int peakCount;
 
     // Funcții private
-    void eliminatePeak(const Peak& peak);
-    TF1* createGaussianFit(int maxBin);
+    void eliminatePeak(const Peak &peak);
+    TF1 *createGaussianFit(int maxBin);
     int findMaxBin();
     void detectAndFitPeaks();
     bool checkPredictedEnergies(double predictedEnergy, const double knownEnergies[], int size, float errorAdmitted) const;
     double refineCalibration(const double knownEnergies[], int size) const;
-    void findStartOfPeak(Peak& peak);
+    void findStartOfPeak(Peak &peak);
     void initializeCalibratedHist();
     double getInterpolatedContent(int bin_original, double binCenter_original) const;
+
 public:
     // Constructori și Destructor
     Histogram(int xMin, int xMax, int maxFWHM, int numberOfPeaks, TH1D *mainHist);
+    Histogram(const Histogram &histogram);
     ~Histogram();
-
+    Histogram &operator=(const Histogram &histogram);
     // Funcții publice
     void findPeaks();
-    bool checkConditions(const Peak& peak) const;
+    bool checkConditions(const Peak &peak) const;
     void outputPeaksDataJson(std::ofstream &file);
     void applyXCalibration();
     void calibratePeaks(const double knownEnergies[], int size);
-    void printHistogramWithPeaksRoot(TFile *outputFile) const;
+    void changePeak(int peakNumber, double newPosition);
+    void printHistogramWithPeaksRoot(TFile *outputFile);
     void printCalibratedHistogramRoot(TFile *outputFile) const;
+    std::string returnNameOfHistogram() const;
 };
 
 #endif // HISTOGRAM_H

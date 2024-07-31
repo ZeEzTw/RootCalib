@@ -1,0 +1,3108 @@
+{
+	"peaks": [
+{
+	"position": 91.9006,
+	"amplitude": 108243,
+	"sigma": 0.797756,
+	"area": 216961,
+	"leftLimit": 89.5073,
+	"rightLimit": 94.2938
+},
+{
+	"position": 262.228,
+	"amplitude": 39524,
+	"sigma": 0.81278,
+	"area": 80741.8,
+	"leftLimit": 259.79,
+	"rightLimit": 264.667
+},
+{
+	"position": 186.008,
+	"amplitude": 17549.2,
+	"sigma": 0.795472,
+	"area": 35240.8,
+	"leftLimit": 183.622,
+	"rightLimit": 188.394
+},
+{
+	"position": 594.869,
+	"amplitude": 6850.9,
+	"sigma": 0.839869,
+	"area": 14528.3,
+	"leftLimit": 592.349,
+	"rightLimit": 597.389
+},
+{
+	"position": 735.929,
+	"amplitude": 5800.41,
+	"sigma": 0.887092,
+	"area": 12836.8,
+	"leftLimit": 733.268,
+	"rightLimit": 738.591
+},
+{
+	"position": 1075.95,
+	"amplitude": 5183.65,
+	"sigma": 0.964179,
+	"area": 12492,
+	"leftLimit": 1073.06,
+	"rightLimit": 1078.85
+},
+{
+	"position": 849.249,
+	"amplitude": 4539.69,
+	"sigma": 0.922479,
+	"area": 10488.3,
+	"leftLimit": 846.481,
+	"rightLimit": 852.016
+},
+{
+	"position": 338.441,
+	"amplitude": 3310.64,
+	"sigma": 0.82531,
+	"area": 6818.5,
+	"leftLimit": 335.965,
+	"rightLimit": 340.917
+},
+{
+	"position": 829.254,
+	"amplitude": 3296.37,
+	"sigma": 1.01015,
+	"area": 8539.66,
+	"leftLimit": 826.223,
+	"rightLimit": 832.284
+},
+{
+	"position": 313.317,
+	"amplitude": 2552.59,
+	"sigma": 0.853304,
+	"area": 5703.2,
+	"leftLimit": 310.757,
+	"rightLimit": 315.877
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 92.8439,
+	"amplitude": 97418.7,
+	"sigma": 0.748675,
+	"area": 182327,
+	"leftLimit": 90.5979,
+	"rightLimit": 95.0899
+},
+{
+	"position": 262.573,
+	"amplitude": 39292.2,
+	"sigma": 0.775287,
+	"area": 76066.3,
+	"leftLimit": 260.248,
+	"rightLimit": 264.899
+},
+{
+	"position": 186.338,
+	"amplitude": 17442.4,
+	"sigma": 0.756288,
+	"area": 33032.9,
+	"leftLimit": 184.069,
+	"rightLimit": 188.607
+},
+{
+	"position": 595.534,
+	"amplitude": 6703.75,
+	"sigma": 0.817547,
+	"area": 13651.1,
+	"leftLimit": 593.081,
+	"rightLimit": 597.987
+},
+{
+	"position": 737.069,
+	"amplitude": 5605.04,
+	"sigma": 0.876803,
+	"area": 12254.6,
+	"leftLimit": 734.439,
+	"rightLimit": 739.7
+},
+{
+	"position": 1077.05,
+	"amplitude": 5100.03,
+	"sigma": 0.93573,
+	"area": 11905.2,
+	"leftLimit": 1074.24,
+	"rightLimit": 1079.86
+},
+{
+	"position": 850.332,
+	"amplitude": 4457.39,
+	"sigma": 0.902029,
+	"area": 10018.1,
+	"leftLimit": 847.626,
+	"rightLimit": 853.039
+},
+{
+	"position": 338.96,
+	"amplitude": 3225.73,
+	"sigma": 0.798821,
+	"area": 6482.69,
+	"leftLimit": 336.564,
+	"rightLimit": 341.357
+},
+{
+	"position": 830.323,
+	"amplitude": 3189.15,
+	"sigma": 0.968279,
+	"area": 7837.26,
+	"leftLimit": 827.418,
+	"rightLimit": 833.228
+},
+{
+	"position": 313.822,
+	"amplitude": 2463.55,
+	"sigma": 0.764324,
+	"area": 4804.14,
+	"leftLimit": 311.529,
+	"rightLimit": 316.115
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 92.2559,
+	"amplitude": 77885.3,
+	"sigma": 0.804115,
+	"area": 158111,
+	"leftLimit": 89.8436,
+	"rightLimit": 94.6683
+},
+{
+	"position": 261.989,
+	"amplitude": 33566.5,
+	"sigma": 0.837983,
+	"area": 70612.7,
+	"leftLimit": 259.475,
+	"rightLimit": 264.503
+},
+{
+	"position": 186.019,
+	"amplitude": 15417.3,
+	"sigma": 0.809469,
+	"area": 30929.7,
+	"leftLimit": 183.59,
+	"rightLimit": 188.447
+},
+{
+	"position": 735.009,
+	"amplitude": 4840.2,
+	"sigma": 0.925313,
+	"area": 11216.6,
+	"leftLimit": 732.233,
+	"rightLimit": 737.785
+},
+{
+	"position": 593.749,
+	"amplitude": 5431.36,
+	"sigma": 0.905866,
+	"area": 12415.5,
+	"leftLimit": 591.031,
+	"rightLimit": 596.466
+},
+{
+	"position": 1073.99,
+	"amplitude": 4249.96,
+	"sigma": 0.981313,
+	"area": 10435,
+	"leftLimit": 1071.05,
+	"rightLimit": 1076.94
+},
+{
+	"position": 847.934,
+	"amplitude": 3782.71,
+	"sigma": 0.969363,
+	"area": 9159.85,
+	"leftLimit": 845.026,
+	"rightLimit": 850.842
+},
+{
+	"position": 337.973,
+	"amplitude": 2775.03,
+	"sigma": 0.852737,
+	"area": 6301.36,
+	"leftLimit": 335.414,
+	"rightLimit": 340.531
+},
+{
+	"position": 828.066,
+	"amplitude": 2727.98,
+	"sigma": 1.05031,
+	"area": 7337.91,
+	"leftLimit": 824.915,
+	"rightLimit": 831.217
+},
+{
+	"position": 312.976,
+	"amplitude": 2263.7,
+	"sigma": 0.831605,
+	"area": 4941.13,
+	"leftLimit": 310.481,
+	"rightLimit": 315.471
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 96.4281,
+	"amplitude": 122608,
+	"sigma": 0.748114,
+	"area": 230759,
+	"leftLimit": 94.1838,
+	"rightLimit": 98.6725
+},
+{
+	"position": 272.924,
+	"amplitude": 43542.4,
+	"sigma": 0.775944,
+	"area": 84562.8,
+	"leftLimit": 270.596,
+	"rightLimit": 275.252
+},
+{
+	"position": 193.87,
+	"amplitude": 19462.5,
+	"sigma": 0.761696,
+	"area": 36934.1,
+	"leftLimit": 191.584,
+	"rightLimit": 196.155
+},
+{
+	"position": 617.949,
+	"amplitude": 7207.64,
+	"sigma": 0.836263,
+	"area": 15122.1,
+	"leftLimit": 615.44,
+	"rightLimit": 620.458
+},
+{
+	"position": 765.159,
+	"amplitude": 6063.83,
+	"sigma": 0.871816,
+	"area": 13287.6,
+	"leftLimit": 762.543,
+	"rightLimit": 767.774
+},
+{
+	"position": 1117.56,
+	"amplitude": 5390.23,
+	"sigma": 0.938612,
+	"area": 12614.1,
+	"leftLimit": 1114.74,
+	"rightLimit": 1120.38
+},
+{
+	"position": 882.575,
+	"amplitude": 4782.45,
+	"sigma": 0.892475,
+	"area": 10717.3,
+	"leftLimit": 879.898,
+	"rightLimit": 885.253
+},
+{
+	"position": 351.977,
+	"amplitude": 3612.06,
+	"sigma": 0.811376,
+	"area": 7375.12,
+	"leftLimit": 349.543,
+	"rightLimit": 354.411
+},
+{
+	"position": 325.918,
+	"amplitude": 2891.06,
+	"sigma": 0.763249,
+	"area": 5776.13,
+	"leftLimit": 323.628,
+	"rightLimit": 328.208
+},
+{
+	"position": 861.85,
+	"amplitude": 3422.13,
+	"sigma": 0.976412,
+	"area": 8504.16,
+	"leftLimit": 858.921,
+	"rightLimit": 864.779
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 265.298,
+	"amplitude": 9958.23,
+	"sigma": 0.832431,
+	"area": 20551.4,
+	"leftLimit": 262.801,
+	"rightLimit": 267.796
+},
+{
+	"position": 1087.15,
+	"amplitude": 3987.31,
+	"sigma": 0.973061,
+	"area": 9676.09,
+	"leftLimit": 1084.23,
+	"rightLimit": 1090.07
+},
+{
+	"position": 744.207,
+	"amplitude": 3590.09,
+	"sigma": 0.895199,
+	"area": 8046.17,
+	"leftLimit": 741.521,
+	"rightLimit": 746.893
+},
+{
+	"position": 601.004,
+	"amplitude": 3563.51,
+	"sigma": 0.878503,
+	"area": 7913.89,
+	"leftLimit": 598.369,
+	"rightLimit": 603.64
+},
+{
+	"position": 858.469,
+	"amplitude": 3037.29,
+	"sigma": 0.938613,
+	"area": 7158.98,
+	"leftLimit": 855.653,
+	"rightLimit": 861.284
+},
+{
+	"position": 188.408,
+	"amplitude": 2664.15,
+	"sigma": 0.770334,
+	"area": 5185.36,
+	"leftLimit": 186.097,
+	"rightLimit": 190.719
+},
+{
+	"position": 838.309,
+	"amplitude": 2180.41,
+	"sigma": 1.02687,
+	"area": 5652.45,
+	"leftLimit": 835.228,
+	"rightLimit": 841.389
+},
+{
+	"position": 93.5897,
+	"amplitude": 1986.52,
+	"sigma": 0.766091,
+	"area": 3784.3,
+	"leftLimit": 91.2914,
+	"rightLimit": 95.8879
+},
+{
+	"position": 669.494,
+	"amplitude": 1154.98,
+	"sigma": 0.847174,
+	"area": 2514.68,
+	"leftLimit": 666.952,
+	"rightLimit": 672.035
+},
+{
+	"position": 342.201,
+	"amplitude": 1066.97,
+	"sigma": 0.880009,
+	"area": 2403.1,
+	"leftLimit": 339.561,
+	"rightLimit": 344.841
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 251.628,
+	"amplitude": 6037.6,
+	"sigma": 1.06347,
+	"area": 16446.1,
+	"leftLimit": 248.437,
+	"rightLimit": 254.818
+},
+{
+	"position": 1037.53,
+	"amplitude": 2747.3,
+	"sigma": 1.20742,
+	"area": 8279.52,
+	"leftLimit": 1033.91,
+	"rightLimit": 1041.16
+},
+{
+	"position": 573.277,
+	"amplitude": 2249.29,
+	"sigma": 1.13751,
+	"area": 6613.56,
+	"leftLimit": 569.865,
+	"rightLimit": 576.69
+},
+{
+	"position": 709.937,
+	"amplitude": 2478.06,
+	"sigma": 1.12558,
+	"area": 6858.55,
+	"leftLimit": 706.56,
+	"rightLimit": 713.313
+},
+{
+	"position": 819.237,
+	"amplitude": 2027.12,
+	"sigma": 1.1775,
+	"area": 5870.56,
+	"leftLimit": 815.704,
+	"rightLimit": 822.769
+},
+{
+	"position": 179.882,
+	"amplitude": 1471.46,
+	"sigma": 1.09212,
+	"area": 4007.2,
+	"leftLimit": 176.606,
+	"rightLimit": 183.159
+},
+{
+	"position": 800.169,
+	"amplitude": 1477.66,
+	"sigma": 1.38655,
+	"area": 5177.3,
+	"leftLimit": 796.01,
+	"rightLimit": 804.329
+},
+{
+	"position": 638.596,
+	"amplitude": 756.549,
+	"sigma": 1.08033,
+	"area": 2134.83,
+	"leftLimit": 635.355,
+	"rightLimit": 641.837
+},
+{
+	"position": 10.2329,
+	"amplitude": 5337.05,
+	"sigma": 5.17675,
+	"area": -239918,
+	"leftLimit": -5.29735,
+	"rightLimit": 25.7631
+},
+{
+	"position": 326.8,
+	"amplitude": 618.884,
+	"sigma": 1.17128,
+	"area": 1777.66,
+	"leftLimit": 323.286,
+	"rightLimit": 330.314
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 264.807,
+	"amplitude": 15926.9,
+	"sigma": 0.88239,
+	"area": 35186.4,
+	"leftLimit": 262.16,
+	"rightLimit": 267.454
+},
+{
+	"position": 93.136,
+	"amplitude": 10892.6,
+	"sigma": 0.863237,
+	"area": 24284.8,
+	"leftLimit": 90.5463,
+	"rightLimit": 95.7258
+},
+{
+	"position": 187.98,
+	"amplitude": 5168.1,
+	"sigma": 0.871374,
+	"area": 11140.1,
+	"leftLimit": 185.366,
+	"rightLimit": 190.595
+},
+{
+	"position": 742.37,
+	"amplitude": 4490.97,
+	"sigma": 0.941896,
+	"area": 10582.6,
+	"leftLimit": 739.545,
+	"rightLimit": 745.196
+},
+{
+	"position": 599.54,
+	"amplitude": 4615.41,
+	"sigma": 0.924816,
+	"area": 10710.1,
+	"leftLimit": 596.765,
+	"rightLimit": 602.314
+},
+{
+	"position": 1084.64,
+	"amplitude": 4764.54,
+	"sigma": 1.00279,
+	"area": 11935.2,
+	"leftLimit": 1081.64,
+	"rightLimit": 1087.65
+},
+{
+	"position": 856.45,
+	"amplitude": 3657.24,
+	"sigma": 0.995909,
+	"area": 9001.93,
+	"leftLimit": 853.463,
+	"rightLimit": 859.438
+},
+{
+	"position": 836.346,
+	"amplitude": 2675.61,
+	"sigma": 1.06427,
+	"area": 7196.56,
+	"leftLimit": 833.153,
+	"rightLimit": 839.539
+},
+{
+	"position": 341.493,
+	"amplitude": 1607.98,
+	"sigma": 0.89074,
+	"area": 3508.32,
+	"leftLimit": 338.821,
+	"rightLimit": 344.165
+},
+{
+	"position": 316.183,
+	"amplitude": 1307.14,
+	"sigma": 0.8476,
+	"area": 3005.71,
+	"leftLimit": 313.64,
+	"rightLimit": 318.726
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 262.147,
+	"amplitude": 8507.26,
+	"sigma": 1.09029,
+	"area": 23165.1,
+	"leftLimit": 258.877,
+	"rightLimit": 265.418
+},
+{
+	"position": 1077.87,
+	"amplitude": 3428.98,
+	"sigma": 1.20857,
+	"area": 10362,
+	"leftLimit": 1074.24,
+	"rightLimit": 1081.49
+},
+{
+	"position": 737.552,
+	"amplitude": 3030.9,
+	"sigma": 1.1559,
+	"area": 8802.87,
+	"leftLimit": 734.085,
+	"rightLimit": 741.02
+},
+{
+	"position": 595.901,
+	"amplitude": 2986.38,
+	"sigma": 1.11253,
+	"area": 8395.18,
+	"leftLimit": 592.563,
+	"rightLimit": 599.239
+},
+{
+	"position": 850.447,
+	"amplitude": 2590.68,
+	"sigma": 1.1795,
+	"area": 7407.32,
+	"leftLimit": 846.909,
+	"rightLimit": 853.986
+},
+{
+	"position": 185.734,
+	"amplitude": 2357.5,
+	"sigma": 1.09938,
+	"area": 6581.55,
+	"leftLimit": 182.436,
+	"rightLimit": 189.032
+},
+{
+	"position": 830.639,
+	"amplitude": 1819.3,
+	"sigma": 1.35881,
+	"area": 6336.01,
+	"leftLimit": 826.563,
+	"rightLimit": 834.716
+},
+{
+	"position": 92.3915,
+	"amplitude": 1543.54,
+	"sigma": 1.12609,
+	"area": 3819.65,
+	"leftLimit": 89.0133,
+	"rightLimit": 95.7698
+},
+{
+	"position": 663.659,
+	"amplitude": 905.701,
+	"sigma": 1.10301,
+	"area": 2656.53,
+	"leftLimit": 660.35,
+	"rightLimit": 666.968
+},
+{
+	"position": 338.702,
+	"amplitude": 934.579,
+	"sigma": 1.07708,
+	"area": 2559.82,
+	"leftLimit": 335.471,
+	"rightLimit": 341.934
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 92.3649,
+	"amplitude": 254670,
+	"sigma": 0.840847,
+	"area": 554626,
+	"leftLimit": 89.8424,
+	"rightLimit": 94.8875
+},
+{
+	"position": 263.707,
+	"amplitude": 265172,
+	"sigma": 0.84361,
+	"area": 566204,
+	"leftLimit": 261.176,
+	"rightLimit": 266.238
+},
+{
+	"position": 187.624,
+	"amplitude": 93813.9,
+	"sigma": 0.809873,
+	"area": 192516,
+	"leftLimit": 185.195,
+	"rightLimit": 190.054
+},
+{
+	"position": 596.221,
+	"amplitude": 70345.5,
+	"sigma": 0.902718,
+	"area": 162853,
+	"leftLimit": 593.513,
+	"rightLimit": 598.93
+},
+{
+	"position": 738.1,
+	"amplitude": 66115.4,
+	"sigma": 0.962227,
+	"area": 164579,
+	"leftLimit": 735.213,
+	"rightLimit": 740.987
+},
+{
+	"position": 1078.85,
+	"amplitude": 70820.2,
+	"sigma": 1.0558,
+	"area": 184807,
+	"leftLimit": 1075.69,
+	"rightLimit": 1082.02
+},
+{
+	"position": 852.156,
+	"amplitude": 56039.3,
+	"sigma": 1.01489,
+	"area": 141939,
+	"leftLimit": 849.111,
+	"rightLimit": 855.2
+},
+{
+	"position": 832.089,
+	"amplitude": 39767.7,
+	"sigma": 1.15277,
+	"area": 116756,
+	"leftLimit": 828.631,
+	"rightLimit": 835.547
+},
+{
+	"position": 339.914,
+	"amplitude": 26346.9,
+	"sigma": 0.846639,
+	"area": 56898.6,
+	"leftLimit": 337.374,
+	"rightLimit": 342.454
+},
+{
+	"position": 663.898,
+	"amplitude": 21069.6,
+	"sigma": 0.91465,
+	"area": 50931.8,
+	"leftLimit": 661.154,
+	"rightLimit": 666.642
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 96.4396,
+	"amplitude": 100564,
+	"sigma": 0.827385,
+	"area": 208571,
+	"leftLimit": 93.9575,
+	"rightLimit": 98.9218
+},
+{
+	"position": 274.363,
+	"amplitude": 36740.3,
+	"sigma": 0.856006,
+	"area": 78628.4,
+	"leftLimit": 271.795,
+	"rightLimit": 276.931
+},
+{
+	"position": 194.95,
+	"amplitude": 16720.6,
+	"sigma": 0.825988,
+	"area": 34477.8,
+	"leftLimit": 192.472,
+	"rightLimit": 197.428
+},
+{
+	"position": 620.677,
+	"amplitude": 6249.01,
+	"sigma": 0.907993,
+	"area": 14367,
+	"leftLimit": 617.953,
+	"rightLimit": 623.401
+},
+{
+	"position": 768.589,
+	"amplitude": 5470.96,
+	"sigma": 0.928374,
+	"area": 12635,
+	"leftLimit": 765.803,
+	"rightLimit": 771.374
+},
+{
+	"position": 1122.8,
+	"amplitude": 4896.03,
+	"sigma": 0.984632,
+	"area": 12026.8,
+	"leftLimit": 1119.84,
+	"rightLimit": 1125.75
+},
+{
+	"position": 886.863,
+	"amplitude": 4270.7,
+	"sigma": 0.947357,
+	"area": 10121.1,
+	"leftLimit": 884.021,
+	"rightLimit": 889.705
+},
+{
+	"position": 866.034,
+	"amplitude": 3118.27,
+	"sigma": 1.04115,
+	"area": 8252.01,
+	"leftLimit": 862.911,
+	"rightLimit": 869.157
+},
+{
+	"position": 353.78,
+	"amplitude": 3078.87,
+	"sigma": 0.882049,
+	"area": 6857.01,
+	"leftLimit": 351.134,
+	"rightLimit": 356.426
+},
+{
+	"position": 327.651,
+	"amplitude": 2457.08,
+	"sigma": 0.832731,
+	"area": 5027.72,
+	"leftLimit": 325.153,
+	"rightLimit": 330.149
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 95.4656,
+	"amplitude": 115973,
+	"sigma": 0.753951,
+	"area": 219957,
+	"leftLimit": 93.2038,
+	"rightLimit": 97.7275
+},
+{
+	"position": 270.38,
+	"amplitude": 43091.5,
+	"sigma": 0.774479,
+	"area": 83467,
+	"leftLimit": 268.057,
+	"rightLimit": 272.704
+},
+{
+	"position": 191.994,
+	"amplitude": 19412.7,
+	"sigma": 0.764251,
+	"area": 37538.3,
+	"leftLimit": 189.702,
+	"rightLimit": 194.287
+},
+{
+	"position": 612.63,
+	"amplitude": 7150.59,
+	"sigma": 0.831719,
+	"area": 15082.2,
+	"leftLimit": 610.135,
+	"rightLimit": 615.125
+},
+{
+	"position": 758.347,
+	"amplitude": 6185.23,
+	"sigma": 0.860255,
+	"area": 13398.6,
+	"leftLimit": 755.767,
+	"rightLimit": 760.928
+},
+{
+	"position": 1107.95,
+	"amplitude": 5497.44,
+	"sigma": 0.92903,
+	"area": 12752.8,
+	"leftLimit": 1105.16,
+	"rightLimit": 1110.73
+},
+{
+	"position": 874.857,
+	"amplitude": 4850.6,
+	"sigma": 0.881158,
+	"area": 10752.2,
+	"leftLimit": 872.214,
+	"rightLimit": 877.501
+},
+{
+	"position": 348.847,
+	"amplitude": 3699.89,
+	"sigma": 0.766707,
+	"area": 7283.22,
+	"leftLimit": 346.547,
+	"rightLimit": 351.147
+},
+{
+	"position": 854.266,
+	"amplitude": 3496.51,
+	"sigma": 0.93986,
+	"area": 8292.85,
+	"leftLimit": 851.446,
+	"rightLimit": 857.085
+},
+{
+	"position": 322.985,
+	"amplitude": 2864.4,
+	"sigma": 0.757941,
+	"area": 5602.53,
+	"leftLimit": 320.711,
+	"rightLimit": 325.259
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 95.4731,
+	"amplitude": 94363.3,
+	"sigma": 0.815691,
+	"area": 194303,
+	"leftLimit": 93.0261,
+	"rightLimit": 97.9202
+},
+{
+	"position": 271.353,
+	"amplitude": 34463.9,
+	"sigma": 0.840367,
+	"area": 73009.2,
+	"leftLimit": 268.832,
+	"rightLimit": 273.874
+},
+{
+	"position": 192.389,
+	"amplitude": 15655.7,
+	"sigma": 0.830248,
+	"area": 32802.8,
+	"leftLimit": 189.899,
+	"rightLimit": 194.88
+},
+{
+	"position": 615.522,
+	"amplitude": 5659.75,
+	"sigma": 0.892687,
+	"area": 12769.7,
+	"leftLimit": 612.844,
+	"rightLimit": 618.2
+},
+{
+	"position": 761.656,
+	"amplitude": 5013.07,
+	"sigma": 0.919318,
+	"area": 11554.7,
+	"leftLimit": 758.898,
+	"rightLimit": 764.414
+},
+{
+	"position": 1113.5,
+	"amplitude": 4315.32,
+	"sigma": 0.998949,
+	"area": 10778.1,
+	"leftLimit": 1110.51,
+	"rightLimit": 1116.5
+},
+{
+	"position": 878.958,
+	"amplitude": 3825.75,
+	"sigma": 0.957173,
+	"area": 9220,
+	"leftLimit": 876.087,
+	"rightLimit": 881.83
+},
+{
+	"position": 350.301,
+	"amplitude": 2896.3,
+	"sigma": 0.868719,
+	"area": 6306.12,
+	"leftLimit": 347.695,
+	"rightLimit": 352.907
+},
+{
+	"position": 858.248,
+	"amplitude": 2779.08,
+	"sigma": 1.03404,
+	"area": 7410.18,
+	"leftLimit": 855.146,
+	"rightLimit": 861.35
+},
+{
+	"position": 324.248,
+	"amplitude": 2264.93,
+	"sigma": 0.827686,
+	"area": 4678.58,
+	"leftLimit": 321.765,
+	"rightLimit": 326.731
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 94.5606,
+	"amplitude": 102799,
+	"sigma": 0.75325,
+	"area": 194867,
+	"leftLimit": 92.3008,
+	"rightLimit": 96.8204
+},
+{
+	"position": 268.45,
+	"amplitude": 41003.9,
+	"sigma": 0.782859,
+	"area": 80401.2,
+	"leftLimit": 266.102,
+	"rightLimit": 270.799
+},
+{
+	"position": 190.523,
+	"amplitude": 18280.6,
+	"sigma": 0.761186,
+	"area": 34520.8,
+	"leftLimit": 188.24,
+	"rightLimit": 192.807
+},
+{
+	"position": 608.874,
+	"amplitude": 6945.49,
+	"sigma": 0.830286,
+	"area": 14679.6,
+	"leftLimit": 606.383,
+	"rightLimit": 611.365
+},
+{
+	"position": 753.459,
+	"amplitude": 5935.41,
+	"sigma": 0.872964,
+	"area": 12886.1,
+	"leftLimit": 750.84,
+	"rightLimit": 756.078
+},
+{
+	"position": 1101.42,
+	"amplitude": 5381.79,
+	"sigma": 0.925016,
+	"area": 12428.9,
+	"leftLimit": 1098.64,
+	"rightLimit": 1104.19
+},
+{
+	"position": 869.468,
+	"amplitude": 4644.71,
+	"sigma": 0.88887,
+	"area": 10351.5,
+	"leftLimit": 866.801,
+	"rightLimit": 872.135
+},
+{
+	"position": 848.996,
+	"amplitude": 3395.2,
+	"sigma": 0.967849,
+	"area": 8379.54,
+	"leftLimit": 846.093,
+	"rightLimit": 851.9
+},
+{
+	"position": 346.666,
+	"amplitude": 3344.23,
+	"sigma": 0.817321,
+	"area": 6861.38,
+	"leftLimit": 344.214,
+	"rightLimit": 349.117
+},
+{
+	"position": 320.949,
+	"amplitude": 2620.48,
+	"sigma": 0.76886,
+	"area": 5226.61,
+	"leftLimit": 318.643,
+	"rightLimit": 323.256
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 264.673,
+	"amplitude": 9631.75,
+	"sigma": 0.86485,
+	"area": 20464.6,
+	"leftLimit": 262.078,
+	"rightLimit": 267.267
+},
+{
+	"position": 1084.82,
+	"amplitude": 4030.43,
+	"sigma": 0.977638,
+	"area": 9833.14,
+	"leftLimit": 1081.89,
+	"rightLimit": 1087.75
+},
+{
+	"position": 742.463,
+	"amplitude": 3562.86,
+	"sigma": 0.911078,
+	"area": 8082.94,
+	"leftLimit": 739.73,
+	"rightLimit": 745.196
+},
+{
+	"position": 599.745,
+	"amplitude": 3525.84,
+	"sigma": 0.90842,
+	"area": 8049.67,
+	"leftLimit": 597.019,
+	"rightLimit": 602.47
+},
+{
+	"position": 188.027,
+	"amplitude": 2488.96,
+	"sigma": 0.842211,
+	"area": 5232.9,
+	"leftLimit": 185.5,
+	"rightLimit": 190.553
+},
+{
+	"position": 856.687,
+	"amplitude": 3026.48,
+	"sigma": 0.944979,
+	"area": 7140.54,
+	"leftLimit": 853.852,
+	"rightLimit": 859.522
+},
+{
+	"position": 836.584,
+	"amplitude": 2112.97,
+	"sigma": 1.06019,
+	"area": 5719.95,
+	"leftLimit": 833.403,
+	"rightLimit": 839.765
+},
+{
+	"position": 93.4326,
+	"amplitude": 1513.91,
+	"sigma": 0.803202,
+	"area": 2971.24,
+	"leftLimit": 91.0229,
+	"rightLimit": 95.8422
+},
+{
+	"position": 667.915,
+	"amplitude": 1102.18,
+	"sigma": 0.896192,
+	"area": 2509.17,
+	"leftLimit": 665.226,
+	"rightLimit": 670.603
+},
+{
+	"position": 341.564,
+	"amplitude": 1041.4,
+	"sigma": 0.878006,
+	"area": 2203.75,
+	"leftLimit": 338.93,
+	"rightLimit": 344.198
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 271.129,
+	"amplitude": 9590.27,
+	"sigma": 0.870068,
+	"area": 20866.2,
+	"leftLimit": 268.519,
+	"rightLimit": 273.74
+},
+{
+	"position": 1112.46,
+	"amplitude": 3894.6,
+	"sigma": 1.01163,
+	"area": 9819.96,
+	"leftLimit": 1109.42,
+	"rightLimit": 1115.49
+},
+{
+	"position": 615.144,
+	"amplitude": 3398.57,
+	"sigma": 0.917449,
+	"area": 7682.09,
+	"leftLimit": 612.392,
+	"rightLimit": 617.897
+},
+{
+	"position": 761.028,
+	"amplitude": 3422.38,
+	"sigma": 0.934597,
+	"area": 8009.61,
+	"leftLimit": 758.225,
+	"rightLimit": 763.832
+},
+{
+	"position": 877.928,
+	"amplitude": 2938.7,
+	"sigma": 0.965954,
+	"area": 7086.87,
+	"leftLimit": 875.03,
+	"rightLimit": 880.825
+},
+{
+	"position": 192.399,
+	"amplitude": 2478.59,
+	"sigma": 0.840445,
+	"area": 5247.59,
+	"leftLimit": 189.878,
+	"rightLimit": 194.921
+},
+{
+	"position": 857.286,
+	"amplitude": 2044.12,
+	"sigma": 1.09338,
+	"area": 5651.62,
+	"leftLimit": 854.006,
+	"rightLimit": 860.566
+},
+{
+	"position": 95.6683,
+	"amplitude": 1296.6,
+	"sigma": 0.634862,
+	"area": 2125.69,
+	"leftLimit": 93.7637,
+	"rightLimit": 97.5729
+},
+{
+	"position": 684.903,
+	"amplitude": 1113.17,
+	"sigma": 0.929515,
+	"area": 2652.55,
+	"leftLimit": 682.114,
+	"rightLimit": 687.691
+},
+{
+	"position": 349.752,
+	"amplitude": 1133.86,
+	"sigma": 0.899421,
+	"area": 2314.44,
+	"leftLimit": 347.054,
+	"rightLimit": 352.451
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 274.799,
+	"amplitude": 17361.3,
+	"sigma": 0.961149,
+	"area": 42176.3,
+	"leftLimit": 271.915,
+	"rightLimit": 277.682
+},
+{
+	"position": 96.7582,
+	"amplitude": 13665.3,
+	"sigma": 0.955926,
+	"area": 33792.8,
+	"leftLimit": 93.8905,
+	"rightLimit": 99.626
+},
+{
+	"position": 195.157,
+	"amplitude": 5725.59,
+	"sigma": 0.958001,
+	"area": 13456.2,
+	"leftLimit": 192.283,
+	"rightLimit": 198.031
+},
+{
+	"position": 771.265,
+	"amplitude": 4688.67,
+	"sigma": 1.03075,
+	"area": 12172.2,
+	"leftLimit": 768.173,
+	"rightLimit": 774.357
+},
+{
+	"position": 622.98,
+	"amplitude": 4770.85,
+	"sigma": 1.02409,
+	"area": 12334.2,
+	"leftLimit": 619.907,
+	"rightLimit": 626.052
+},
+{
+	"position": 1126.83,
+	"amplitude": 4965.88,
+	"sigma": 1.08912,
+	"area": 13516.1,
+	"leftLimit": 1123.56,
+	"rightLimit": 1130.1
+},
+{
+	"position": 889.613,
+	"amplitude": 3841.13,
+	"sigma": 1.07102,
+	"area": 10389.7,
+	"leftLimit": 886.4,
+	"rightLimit": 892.826
+},
+{
+	"position": 868.817,
+	"amplitude": 2722.15,
+	"sigma": 1.19786,
+	"area": 8210.85,
+	"leftLimit": 865.223,
+	"rightLimit": 872.411
+},
+{
+	"position": 354.545,
+	"amplitude": 1776.06,
+	"sigma": 0.951848,
+	"area": 4282.79,
+	"leftLimit": 351.689,
+	"rightLimit": 357.4
+},
+{
+	"position": 693.785,
+	"amplitude": 1388.67,
+	"sigma": 1.02235,
+	"area": 3474.04,
+	"leftLimit": 690.718,
+	"rightLimit": 696.852
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 265.719,
+	"amplitude": 7129.82,
+	"sigma": 1.03628,
+	"area": 18464,
+	"leftLimit": 262.61,
+	"rightLimit": 268.828
+},
+{
+	"position": 1088.85,
+	"amplitude": 3146.69,
+	"sigma": 1.1491,
+	"area": 9001.93,
+	"leftLimit": 1085.4,
+	"rightLimit": 1092.29
+},
+{
+	"position": 745.301,
+	"amplitude": 2660.11,
+	"sigma": 1.10391,
+	"area": 7339.73,
+	"leftLimit": 741.989,
+	"rightLimit": 748.613
+},
+{
+	"position": 601.954,
+	"amplitude": 2666.11,
+	"sigma": 1.05414,
+	"area": 7055.17,
+	"leftLimit": 598.792,
+	"rightLimit": 605.117
+},
+{
+	"position": 859.812,
+	"amplitude": 2307.29,
+	"sigma": 1.14122,
+	"area": 6457.58,
+	"leftLimit": 856.388,
+	"rightLimit": 863.235
+},
+{
+	"position": 188.743,
+	"amplitude": 1883.78,
+	"sigma": 1.01565,
+	"area": 5165.99,
+	"leftLimit": 185.696,
+	"rightLimit": 191.79
+},
+{
+	"position": 839.732,
+	"amplitude": 1583.6,
+	"sigma": 1.36409,
+	"area": 5486.18,
+	"leftLimit": 835.639,
+	"rightLimit": 843.824
+},
+{
+	"position": 670.413,
+	"amplitude": 833.451,
+	"sigma": 1.09275,
+	"area": 2398.87,
+	"leftLimit": 667.135,
+	"rightLimit": 673.691
+},
+{
+	"position": 93.5807,
+	"amplitude": 945.164,
+	"sigma": 1.08837,
+	"area": 2667.6,
+	"leftLimit": 90.3156,
+	"rightLimit": 96.8459
+},
+{
+	"position": 317.468,
+	"amplitude": 622.498,
+	"sigma": 0.972565,
+	"area": 1652.12,
+	"leftLimit": 314.55,
+	"rightLimit": 320.385
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 95.6114,
+	"amplitude": 325102,
+	"sigma": 0.782052,
+	"area": 658107,
+	"leftLimit": 93.2653,
+	"rightLimit": 97.9576
+},
+{
+	"position": 271.452,
+	"amplitude": 273484,
+	"sigma": 0.811888,
+	"area": 567258,
+	"leftLimit": 269.016,
+	"rightLimit": 273.888
+},
+{
+	"position": 192.756,
+	"amplitude": 98829.8,
+	"sigma": 0.76576,
+	"area": 192846,
+	"leftLimit": 190.459,
+	"rightLimit": 195.053
+},
+{
+	"position": 615.198,
+	"amplitude": 73429.6,
+	"sigma": 0.885113,
+	"area": 167588,
+	"leftLimit": 612.543,
+	"rightLimit": 617.854
+},
+{
+	"position": 1112.84,
+	"amplitude": 71321.2,
+	"sigma": 1.06641,
+	"area": 186944,
+	"leftLimit": 1109.64,
+	"rightLimit": 1116.04
+},
+{
+	"position": 761.686,
+	"amplitude": 69612.1,
+	"sigma": 0.926608,
+	"area": 166062,
+	"leftLimit": 758.906,
+	"rightLimit": 764.466
+},
+{
+	"position": 878.666,
+	"amplitude": 57106.3,
+	"sigma": 1.00323,
+	"area": 142584,
+	"leftLimit": 875.656,
+	"rightLimit": 881.675
+},
+{
+	"position": 858.044,
+	"amplitude": 40651.7,
+	"sigma": 1.12567,
+	"area": 114646,
+	"leftLimit": 854.667,
+	"rightLimit": 861.421
+},
+{
+	"position": 350.195,
+	"amplitude": 27240.4,
+	"sigma": 0.814609,
+	"area": 57263.4,
+	"leftLimit": 347.751,
+	"rightLimit": 352.638
+},
+{
+	"position": 685.199,
+	"amplitude": 21955.5,
+	"sigma": 0.885068,
+	"area": 50615.6,
+	"leftLimit": 682.544,
+	"rightLimit": 687.854
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 94.9473,
+	"amplitude": 129618,
+	"sigma": 0.830549,
+	"area": 270070,
+	"leftLimit": 92.4557,
+	"rightLimit": 97.439
+},
+{
+	"position": 269.922,
+	"amplitude": 42402,
+	"sigma": 0.848987,
+	"area": 90416.4,
+	"leftLimit": 267.375,
+	"rightLimit": 272.469
+},
+{
+	"position": 191.503,
+	"amplitude": 19555.3,
+	"sigma": 0.836448,
+	"area": 41079.5,
+	"leftLimit": 188.994,
+	"rightLimit": 194.012
+},
+{
+	"position": 611.117,
+	"amplitude": 7138.2,
+	"sigma": 0.895904,
+	"area": 16149.3,
+	"leftLimit": 608.429,
+	"rightLimit": 613.804
+},
+{
+	"position": 756.381,
+	"amplitude": 6102.81,
+	"sigma": 0.923756,
+	"area": 14134.4,
+	"leftLimit": 753.61,
+	"rightLimit": 759.153
+},
+{
+	"position": 1105.47,
+	"amplitude": 5595.06,
+	"sigma": 0.991163,
+	"area": 13863.1,
+	"leftLimit": 1102.5,
+	"rightLimit": 1108.44
+},
+{
+	"position": 872.925,
+	"amplitude": 4896.15,
+	"sigma": 0.951796,
+	"area": 11649.5,
+	"leftLimit": 870.07,
+	"rightLimit": 875.781
+},
+{
+	"position": 348.167,
+	"amplitude": 3508.34,
+	"sigma": 0.879922,
+	"area": 7746.23,
+	"leftLimit": 345.527,
+	"rightLimit": 350.807
+},
+{
+	"position": 852.371,
+	"amplitude": 3607.15,
+	"sigma": 0.97676,
+	"area": 8912.76,
+	"leftLimit": 849.441,
+	"rightLimit": 855.302
+},
+{
+	"position": 322.368,
+	"amplitude": 2727.78,
+	"sigma": 0.858651,
+	"area": 6028.06,
+	"leftLimit": 319.792,
+	"rightLimit": 324.944
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 95.3531,
+	"amplitude": 125048,
+	"sigma": 0.753082,
+	"area": 236233,
+	"leftLimit": 93.0938,
+	"rightLimit": 97.6123
+},
+{
+	"position": 270.799,
+	"amplitude": 44576.9,
+	"sigma": 0.783982,
+	"area": 87535.7,
+	"leftLimit": 268.447,
+	"rightLimit": 273.151
+},
+{
+	"position": 192.24,
+	"amplitude": 20515.3,
+	"sigma": 0.75421,
+	"area": 38347.4,
+	"leftLimit": 189.978,
+	"rightLimit": 194.503
+},
+{
+	"position": 613.421,
+	"amplitude": 7292.57,
+	"sigma": 0.852362,
+	"area": 15701.1,
+	"leftLimit": 610.864,
+	"rightLimit": 615.978
+},
+{
+	"position": 759.487,
+	"amplitude": 6313.58,
+	"sigma": 0.874901,
+	"area": 13780.2,
+	"leftLimit": 756.862,
+	"rightLimit": 762.112
+},
+{
+	"position": 1109.46,
+	"amplitude": 5631.2,
+	"sigma": 0.951515,
+	"area": 13370,
+	"leftLimit": 1106.61,
+	"rightLimit": 1112.31
+},
+{
+	"position": 876.298,
+	"amplitude": 4869.78,
+	"sigma": 0.911307,
+	"area": 11221.1,
+	"leftLimit": 873.564,
+	"rightLimit": 879.032
+},
+{
+	"position": 349.076,
+	"amplitude": 3686.9,
+	"sigma": 0.801854,
+	"area": 7601.54,
+	"leftLimit": 346.67,
+	"rightLimit": 351.482
+},
+{
+	"position": 323.24,
+	"amplitude": 2989.13,
+	"sigma": 0.762392,
+	"area": 5844.45,
+	"leftLimit": 320.953,
+	"rightLimit": 325.527
+},
+{
+	"position": 855.686,
+	"amplitude": 3702.84,
+	"sigma": 0.946089,
+	"area": 8989.67,
+	"leftLimit": 852.848,
+	"rightLimit": 858.525
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 91.6383,
+	"amplitude": 80928,
+	"sigma": 0.791637,
+	"area": 162216,
+	"leftLimit": 89.2634,
+	"rightLimit": 94.0132
+},
+{
+	"position": 260.17,
+	"amplitude": 33126,
+	"sigma": 0.815717,
+	"area": 67920.1,
+	"leftLimit": 257.723,
+	"rightLimit": 262.617
+},
+{
+	"position": 184.772,
+	"amplitude": 14970.8,
+	"sigma": 0.79381,
+	"area": 29388.2,
+	"leftLimit": 182.39,
+	"rightLimit": 187.153
+},
+{
+	"position": 588.26,
+	"amplitude": 5566.59,
+	"sigma": 0.872883,
+	"area": 12302,
+	"leftLimit": 585.641,
+	"rightLimit": 590.878
+},
+{
+	"position": 728.579,
+	"amplitude": 4914.06,
+	"sigma": 0.896469,
+	"area": 10916,
+	"leftLimit": 725.889,
+	"rightLimit": 731.268
+},
+{
+	"position": 1064.23,
+	"amplitude": 4371.59,
+	"sigma": 0.962833,
+	"area": 10535.4,
+	"leftLimit": 1061.34,
+	"rightLimit": 1067.12
+},
+{
+	"position": 840.575,
+	"amplitude": 3907.83,
+	"sigma": 0.916876,
+	"area": 9027.84,
+	"leftLimit": 837.824,
+	"rightLimit": 843.326
+},
+{
+	"position": 335.238,
+	"amplitude": 2734.32,
+	"sigma": 0.802809,
+	"area": 5441.12,
+	"leftLimit": 332.83,
+	"rightLimit": 337.647
+},
+{
+	"position": 820.855,
+	"amplitude": 2733.55,
+	"sigma": 1.03691,
+	"area": 7209.42,
+	"leftLimit": 817.744,
+	"rightLimit": 823.965
+},
+{
+	"position": 310.531,
+	"amplitude": 2182.4,
+	"sigma": 0.8095,
+	"area": 4525.91,
+	"leftLimit": 308.103,
+	"rightLimit": 312.96
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 93.5454,
+	"amplitude": 119651,
+	"sigma": 0.734431,
+	"area": 221295,
+	"leftLimit": 91.3421,
+	"rightLimit": 95.7487
+},
+{
+	"position": 266.067,
+	"amplitude": 45996.7,
+	"sigma": 0.753116,
+	"area": 86808.4,
+	"leftLimit": 263.808,
+	"rightLimit": 268.326
+},
+{
+	"position": 189.011,
+	"amplitude": 20249.2,
+	"sigma": 0.748234,
+	"area": 37579.1,
+	"leftLimit": 186.766,
+	"rightLimit": 191.256
+},
+{
+	"position": 745.145,
+	"amplitude": 6560.32,
+	"sigma": 0.849604,
+	"area": 13999.8,
+	"leftLimit": 742.596,
+	"rightLimit": 747.693
+},
+{
+	"position": 601.68,
+	"amplitude": 7645.01,
+	"sigma": 0.811506,
+	"area": 15479.9,
+	"leftLimit": 599.245,
+	"rightLimit": 604.114
+},
+{
+	"position": 1088.51,
+	"amplitude": 6009.35,
+	"sigma": 0.909135,
+	"area": 13632.7,
+	"leftLimit": 1085.78,
+	"rightLimit": 1091.23
+},
+{
+	"position": 859.831,
+	"amplitude": 5119.25,
+	"sigma": 0.87197,
+	"area": 11214.7,
+	"leftLimit": 857.215,
+	"rightLimit": 862.447
+},
+{
+	"position": 342.98,
+	"amplitude": 3881.45,
+	"sigma": 0.755987,
+	"area": 7253,
+	"leftLimit": 340.712,
+	"rightLimit": 345.248
+},
+{
+	"position": 839.595,
+	"amplitude": 3840.01,
+	"sigma": 0.914417,
+	"area": 8904.5,
+	"leftLimit": 836.852,
+	"rightLimit": 842.338
+},
+{
+	"position": 317.618,
+	"amplitude": 3034.63,
+	"sigma": 0.765477,
+	"area": 5790.9,
+	"leftLimit": 315.322,
+	"rightLimit": 319.915
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 267.861,
+	"amplitude": 10598.8,
+	"sigma": 0.93504,
+	"area": 24701.9,
+	"leftLimit": 265.056,
+	"rightLimit": 270.666
+},
+{
+	"position": 94.1909,
+	"amplitude": 4510.47,
+	"sigma": 0.879318,
+	"area": 9816.18,
+	"leftLimit": 91.553,
+	"rightLimit": 96.8289
+},
+{
+	"position": 1097.43,
+	"amplitude": 4004.12,
+	"sigma": 1.04404,
+	"area": 10406,
+	"leftLimit": 1094.3,
+	"rightLimit": 1100.56
+},
+{
+	"position": 751.054,
+	"amplitude": 3627.56,
+	"sigma": 0.998442,
+	"area": 9171.68,
+	"leftLimit": 748.059,
+	"rightLimit": 754.049
+},
+{
+	"position": 189.964,
+	"amplitude": 3002.94,
+	"sigma": 0.92555,
+	"area": 6552.76,
+	"leftLimit": 187.187,
+	"rightLimit": 192.741
+},
+{
+	"position": 606.658,
+	"amplitude": 3321.35,
+	"sigma": 1.00699,
+	"area": 8425.94,
+	"leftLimit": 603.637,
+	"rightLimit": 609.679
+},
+{
+	"position": 866.625,
+	"amplitude": 2994.23,
+	"sigma": 1.03261,
+	"area": 7679.39,
+	"leftLimit": 863.527,
+	"rightLimit": 869.722
+},
+{
+	"position": 846.315,
+	"amplitude": 2136.38,
+	"sigma": 1.15207,
+	"area": 6336.99,
+	"leftLimit": 842.859,
+	"rightLimit": 849.771
+},
+{
+	"position": 345.477,
+	"amplitude": 1167.62,
+	"sigma": 0.918305,
+	"area": 2428.57,
+	"leftLimit": 342.722,
+	"rightLimit": 348.232
+},
+{
+	"position": 675.58,
+	"amplitude": 1051.74,
+	"sigma": 0.980673,
+	"area": 2658.1,
+	"leftLimit": 672.638,
+	"rightLimit": 678.522
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 256.343,
+	"amplitude": 11086.8,
+	"sigma": 0.887313,
+	"area": 24451.9,
+	"leftLimit": 253.681,
+	"rightLimit": 259.005
+},
+{
+	"position": 89.9606,
+	"amplitude": 4433.89,
+	"sigma": 0.843343,
+	"area": 9379.84,
+	"leftLimit": 87.4306,
+	"rightLimit": 92.4906
+},
+{
+	"position": 1049.28,
+	"amplitude": 4177.63,
+	"sigma": 0.987361,
+	"area": 10302.4,
+	"leftLimit": 1046.31,
+	"rightLimit": 1052.24
+},
+{
+	"position": 580.065,
+	"amplitude": 3623.08,
+	"sigma": 0.919172,
+	"area": 8330.63,
+	"leftLimit": 577.308,
+	"rightLimit": 582.823
+},
+{
+	"position": 717.992,
+	"amplitude": 3595.46,
+	"sigma": 0.945253,
+	"area": 8582.06,
+	"leftLimit": 715.156,
+	"rightLimit": 720.828
+},
+{
+	"position": 181.631,
+	"amplitude": 3291.82,
+	"sigma": 0.847968,
+	"area": 6901.27,
+	"leftLimit": 179.087,
+	"rightLimit": 184.175
+},
+{
+	"position": 828.642,
+	"amplitude": 3096.64,
+	"sigma": 0.955225,
+	"area": 7416.04,
+	"leftLimit": 825.777,
+	"rightLimit": 831.508
+},
+{
+	"position": 809.176,
+	"amplitude": 2212.06,
+	"sigma": 1.08238,
+	"area": 6090.49,
+	"leftLimit": 805.928,
+	"rightLimit": 812.423
+},
+{
+	"position": 645.926,
+	"amplitude": 1184.2,
+	"sigma": 0.917694,
+	"area": 2845.63,
+	"leftLimit": 643.173,
+	"rightLimit": 648.679
+},
+{
+	"position": 330.627,
+	"amplitude": 1155.12,
+	"sigma": 0.919261,
+	"area": 2748.05,
+	"leftLimit": 327.869,
+	"rightLimit": 333.385
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 262.61,
+	"amplitude": 8961.81,
+	"sigma": 0.940698,
+	"area": 21251.3,
+	"leftLimit": 259.788,
+	"rightLimit": 265.432
+},
+{
+	"position": 1074.61,
+	"amplitude": 3916.66,
+	"sigma": 1.0591,
+	"area": 10366.4,
+	"leftLimit": 1071.43,
+	"rightLimit": 1077.79
+},
+{
+	"position": 594.326,
+	"amplitude": 3223.89,
+	"sigma": 0.999876,
+	"area": 8085.42,
+	"leftLimit": 591.326,
+	"rightLimit": 597.325
+},
+{
+	"position": 735.571,
+	"amplitude": 3371.72,
+	"sigma": 1.0008,
+	"area": 8514.02,
+	"leftLimit": 732.569,
+	"rightLimit": 738.574
+},
+{
+	"position": 848.561,
+	"amplitude": 2821.96,
+	"sigma": 1.04653,
+	"area": 7451.05,
+	"leftLimit": 845.422,
+	"rightLimit": 851.701
+},
+{
+	"position": 186.665,
+	"amplitude": 2469.42,
+	"sigma": 0.904204,
+	"area": 5491.35,
+	"leftLimit": 183.953,
+	"rightLimit": 189.378
+},
+{
+	"position": 828.708,
+	"amplitude": 1851.12,
+	"sigma": 1.22778,
+	"area": 5691.3,
+	"leftLimit": 825.025,
+	"rightLimit": 832.392
+},
+{
+	"position": 92.8181,
+	"amplitude": 1348.89,
+	"sigma": 0.921028,
+	"area": 3601.1,
+	"leftLimit": 90.055,
+	"rightLimit": 95.5811
+},
+{
+	"position": 338.66,
+	"amplitude": 974.379,
+	"sigma": 0.985344,
+	"area": 2251.31,
+	"leftLimit": 335.704,
+	"rightLimit": 341.616
+},
+{
+	"position": 661.858,
+	"amplitude": 924.38,
+	"sigma": 1.09514,
+	"area": 2427.66,
+	"leftLimit": 658.573,
+	"rightLimit": 665.144
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 264.789,
+	"amplitude": 6989.18,
+	"sigma": 1.12638,
+	"area": 19631.2,
+	"leftLimit": 261.41,
+	"rightLimit": 268.168
+},
+{
+	"position": 1090.75,
+	"amplitude": 3181.28,
+	"sigma": 1.21416,
+	"area": 9657.78,
+	"leftLimit": 1087.11,
+	"rightLimit": 1094.39
+},
+{
+	"position": 603.157,
+	"amplitude": 2571.13,
+	"sigma": 1.16657,
+	"area": 7662.23,
+	"leftLimit": 599.657,
+	"rightLimit": 606.657
+},
+{
+	"position": 746.955,
+	"amplitude": 2675.33,
+	"sigma": 1.19249,
+	"area": 8084.05,
+	"leftLimit": 743.378,
+	"rightLimit": 750.533
+},
+{
+	"position": 860.693,
+	"amplitude": 2334.55,
+	"sigma": 1.20654,
+	"area": 6980.21,
+	"leftLimit": 857.074,
+	"rightLimit": 864.313
+},
+{
+	"position": 187.245,
+	"amplitude": 1780.73,
+	"sigma": 1.14429,
+	"area": 5112.46,
+	"leftLimit": 183.812,
+	"rightLimit": 190.678
+},
+{
+	"position": 840.777,
+	"amplitude": 1585.95,
+	"sigma": 1.47801,
+	"area": 6030.9,
+	"leftLimit": 836.342,
+	"rightLimit": 845.211
+},
+{
+	"position": 93.7519,
+	"amplitude": 890.347,
+	"sigma": 0.9638,
+	"area": 2247.33,
+	"leftLimit": 90.8605,
+	"rightLimit": 96.6433
+},
+{
+	"position": 671.827,
+	"amplitude": 837.571,
+	"sigma": 1.13959,
+	"area": 2537.51,
+	"leftLimit": 668.408,
+	"rightLimit": 675.246
+},
+{
+	"position": 342.606,
+	"amplitude": 714.182,
+	"sigma": 1.22749,
+	"area": 2339.05,
+	"leftLimit": 338.923,
+	"rightLimit": 346.288
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 94.4425,
+	"amplitude": 299555,
+	"sigma": 0.775479,
+	"area": 588542,
+	"leftLimit": 92.1161,
+	"rightLimit": 96.769
+},
+{
+	"position": 268.608,
+	"amplitude": 275076,
+	"sigma": 0.792764,
+	"area": 562210,
+	"leftLimit": 266.229,
+	"rightLimit": 270.986
+},
+{
+	"position": 190.695,
+	"amplitude": 102247,
+	"sigma": 0.745442,
+	"area": 195458,
+	"leftLimit": 188.459,
+	"rightLimit": 192.931
+},
+{
+	"position": 1103.04,
+	"amplitude": 72274.6,
+	"sigma": 1.0596,
+	"area": 188750,
+	"leftLimit": 1099.86,
+	"rightLimit": 1106.22
+},
+{
+	"position": 609.592,
+	"amplitude": 73939.6,
+	"sigma": 0.87051,
+	"area": 166416,
+	"leftLimit": 606.98,
+	"rightLimit": 612.203
+},
+{
+	"position": 754.626,
+	"amplitude": 70595.9,
+	"sigma": 0.898267,
+	"area": 164263,
+	"leftLimit": 751.932,
+	"rightLimit": 757.321
+},
+{
+	"position": 870.588,
+	"amplitude": 56983.3,
+	"sigma": 0.993074,
+	"area": 140607,
+	"leftLimit": 867.609,
+	"rightLimit": 873.567
+},
+{
+	"position": 850.096,
+	"amplitude": 41084.8,
+	"sigma": 1.0974,
+	"area": 113534,
+	"leftLimit": 846.804,
+	"rightLimit": 853.388
+},
+{
+	"position": 347.05,
+	"amplitude": 27533.3,
+	"sigma": 0.787299,
+	"area": 55324.1,
+	"leftLimit": 344.688,
+	"rightLimit": 349.412
+},
+{
+	"position": 321.093,
+	"amplitude": 20390.2,
+	"sigma": 0.770166,
+	"area": 41004.5,
+	"leftLimit": 318.783,
+	"rightLimit": 323.404
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 92.0495,
+	"amplitude": 139785,
+	"sigma": 0.809357,
+	"area": 283651,
+	"leftLimit": 89.6215,
+	"rightLimit": 94.4776
+},
+{
+	"position": 261.692,
+	"amplitude": 44676.9,
+	"sigma": 0.828448,
+	"area": 93002,
+	"leftLimit": 259.207,
+	"rightLimit": 264.177
+},
+{
+	"position": 185.9,
+	"amplitude": 20589.8,
+	"sigma": 0.80936,
+	"area": 41281,
+	"leftLimit": 183.472,
+	"rightLimit": 188.328
+},
+{
+	"position": 592.76,
+	"amplitude": 7559.82,
+	"sigma": 0.868423,
+	"area": 16523.8,
+	"leftLimit": 590.155,
+	"rightLimit": 595.365
+},
+{
+	"position": 1072.22,
+	"amplitude": 5906,
+	"sigma": 0.953376,
+	"area": 14042.3,
+	"leftLimit": 1069.36,
+	"rightLimit": 1075.08
+},
+{
+	"position": 733.887,
+	"amplitude": 6472.43,
+	"sigma": 0.906306,
+	"area": 14716.5,
+	"leftLimit": 731.169,
+	"rightLimit": 736.606
+},
+{
+	"position": 846.705,
+	"amplitude": 5094.28,
+	"sigma": 0.92534,
+	"area": 11679,
+	"leftLimit": 843.929,
+	"rightLimit": 849.481
+},
+{
+	"position": 337.61,
+	"amplitude": 3839.26,
+	"sigma": 0.839591,
+	"area": 8051.49,
+	"leftLimit": 335.091,
+	"rightLimit": 340.129
+},
+{
+	"position": 826.835,
+	"amplitude": 3606.95,
+	"sigma": 1.04229,
+	"area": 9413.74,
+	"leftLimit": 823.708,
+	"rightLimit": 829.962
+},
+{
+	"position": 312.524,
+	"amplitude": 5619.58,
+	"sigma": 0.390751,
+	"area": 5613.08,
+	"leftLimit": 311.352,
+	"rightLimit": 313.696
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 93.2726,
+	"amplitude": 119250,
+	"sigma": 0.732532,
+	"area": 220030,
+	"leftLimit": 91.0751,
+	"rightLimit": 95.4702
+},
+{
+	"position": 265.168,
+	"amplitude": 44705.4,
+	"sigma": 0.768856,
+	"area": 86390.2,
+	"leftLimit": 262.861,
+	"rightLimit": 267.475
+},
+{
+	"position": 188.192,
+	"amplitude": 20308.1,
+	"sigma": 0.750026,
+	"area": 38110.7,
+	"leftLimit": 185.942,
+	"rightLimit": 190.442
+},
+{
+	"position": 600.857,
+	"amplitude": 7412.12,
+	"sigma": 0.831121,
+	"area": 15598.6,
+	"leftLimit": 598.364,
+	"rightLimit": 603.351
+},
+{
+	"position": 743.859,
+	"amplitude": 6217.59,
+	"sigma": 0.883531,
+	"area": 13685.9,
+	"leftLimit": 741.209,
+	"rightLimit": 746.51
+},
+{
+	"position": 1086.89,
+	"amplitude": 5540.69,
+	"sigma": 0.964059,
+	"area": 13343.4,
+	"leftLimit": 1084,
+	"rightLimit": 1089.79
+},
+{
+	"position": 858.228,
+	"amplitude": 4856.43,
+	"sigma": 0.914143,
+	"area": 11100.2,
+	"leftLimit": 855.486,
+	"rightLimit": 860.971
+},
+{
+	"position": 342.209,
+	"amplitude": 3771.01,
+	"sigma": 0.773901,
+	"area": 7297.12,
+	"leftLimit": 339.887,
+	"rightLimit": 344.531
+},
+{
+	"position": 838.039,
+	"amplitude": 3461.32,
+	"sigma": 1.00028,
+	"area": 8798.77,
+	"leftLimit": 835.038,
+	"rightLimit": 841.04
+},
+{
+	"position": 316.793,
+	"amplitude": 2871.2,
+	"sigma": 0.766156,
+	"area": 5447.57,
+	"leftLimit": 314.494,
+	"rightLimit": 319.091
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 93.6726,
+	"amplitude": 71809.8,
+	"sigma": 0.791854,
+	"area": 144699,
+	"leftLimit": 91.2971,
+	"rightLimit": 96.0482
+},
+{
+	"position": 267.439,
+	"amplitude": 33422.2,
+	"sigma": 0.823972,
+	"area": 69414.4,
+	"leftLimit": 264.967,
+	"rightLimit": 269.911
+},
+{
+	"position": 189.818,
+	"amplitude": 14713.2,
+	"sigma": 0.806714,
+	"area": 29875.7,
+	"leftLimit": 187.397,
+	"rightLimit": 192.238
+},
+{
+	"position": 606.106,
+	"amplitude": 5749.29,
+	"sigma": 0.871741,
+	"area": 12696.8,
+	"leftLimit": 603.491,
+	"rightLimit": 608.721
+},
+{
+	"position": 750.005,
+	"amplitude": 4946.54,
+	"sigma": 0.921368,
+	"area": 11234.1,
+	"leftLimit": 747.241,
+	"rightLimit": 752.769
+},
+{
+	"position": 1096.46,
+	"amplitude": 4470.99,
+	"sigma": 0.981952,
+	"area": 10938.1,
+	"leftLimit": 1093.51,
+	"rightLimit": 1099.4
+},
+{
+	"position": 865.647,
+	"amplitude": 3847.68,
+	"sigma": 0.953457,
+	"area": 9177.2,
+	"leftLimit": 862.787,
+	"rightLimit": 868.508
+},
+{
+	"position": 345.118,
+	"amplitude": 2755.04,
+	"sigma": 0.842405,
+	"area": 5922.59,
+	"leftLimit": 342.591,
+	"rightLimit": 347.645
+},
+{
+	"position": 845.249,
+	"amplitude": 2820.13,
+	"sigma": 1.01951,
+	"area": 7297.25,
+	"leftLimit": 842.191,
+	"rightLimit": 848.308
+},
+{
+	"position": 319.519,
+	"amplitude": 2248.26,
+	"sigma": 0.851195,
+	"area": 4803.75,
+	"leftLimit": 316.965,
+	"rightLimit": 322.073
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 92.4247,
+	"amplitude": 127630,
+	"sigma": 0.755552,
+	"area": 243659,
+	"leftLimit": 90.158,
+	"rightLimit": 94.6914
+},
+{
+	"position": 264.411,
+	"amplitude": 46973.2,
+	"sigma": 0.770424,
+	"area": 90536.7,
+	"leftLimit": 262.1,
+	"rightLimit": 266.722
+},
+{
+	"position": 188.123,
+	"amplitude": 21273.7,
+	"sigma": 0.755551,
+	"area": 40095,
+	"leftLimit": 185.856,
+	"rightLimit": 190.39
+},
+{
+	"position": 597.074,
+	"amplitude": 7899.71,
+	"sigma": 0.814003,
+	"area": 16243.6,
+	"leftLimit": 594.632,
+	"rightLimit": 599.516
+},
+{
+	"position": 739.178,
+	"amplitude": 6573.27,
+	"sigma": 0.880457,
+	"area": 14553.2,
+	"leftLimit": 736.537,
+	"rightLimit": 741.82
+},
+{
+	"position": 1080.39,
+	"amplitude": 5975.76,
+	"sigma": 0.932804,
+	"area": 13895.3,
+	"leftLimit": 1077.59,
+	"rightLimit": 1083.18
+},
+{
+	"position": 853.558,
+	"amplitude": 5305.29,
+	"sigma": 0.888517,
+	"area": 11877.6,
+	"leftLimit": 850.892,
+	"rightLimit": 856.223
+},
+{
+	"position": 833.412,
+	"amplitude": 3811.25,
+	"sigma": 0.944618,
+	"area": 9271.17,
+	"leftLimit": 830.578,
+	"rightLimit": 836.246
+},
+{
+	"position": 340.595,
+	"amplitude": 3963.23,
+	"sigma": 0.761987,
+	"area": 7641.98,
+	"leftLimit": 338.309,
+	"rightLimit": 342.881
+},
+{
+	"position": 315.537,
+	"amplitude": 3071.23,
+	"sigma": 0.768225,
+	"area": 6033.66,
+	"leftLimit": 313.232,
+	"rightLimit": 317.841
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 267.672,
+	"amplitude": 12260.8,
+	"sigma": 0.876597,
+	"area": 26816.3,
+	"leftLimit": 265.042,
+	"rightLimit": 270.302
+},
+{
+	"position": 94.2842,
+	"amplitude": 5432.07,
+	"sigma": 0.861693,
+	"area": 12358.7,
+	"leftLimit": 91.6991,
+	"rightLimit": 96.8693
+},
+{
+	"position": 1096.06,
+	"amplitude": 4368.89,
+	"sigma": 0.997511,
+	"area": 10871.8,
+	"leftLimit": 1093.07,
+	"rightLimit": 1099.05
+},
+{
+	"position": 750.154,
+	"amplitude": 3933.54,
+	"sigma": 0.93943,
+	"area": 9321.73,
+	"leftLimit": 747.336,
+	"rightLimit": 752.972
+},
+{
+	"position": 605.957,
+	"amplitude": 3950.24,
+	"sigma": 0.895882,
+	"area": 8928.4,
+	"leftLimit": 603.27,
+	"rightLimit": 608.645
+},
+{
+	"position": 190.083,
+	"amplitude": 3607.79,
+	"sigma": 0.852219,
+	"area": 7687.3,
+	"leftLimit": 187.526,
+	"rightLimit": 192.64
+},
+{
+	"position": 865.607,
+	"amplitude": 3350.1,
+	"sigma": 0.96268,
+	"area": 7992.7,
+	"leftLimit": 862.719,
+	"rightLimit": 868.495
+},
+{
+	"position": 845.184,
+	"amplitude": 2412.64,
+	"sigma": 1.02983,
+	"area": 6354.31,
+	"leftLimit": 842.095,
+	"rightLimit": 848.274
+},
+{
+	"position": 345.239,
+	"amplitude": 1328.16,
+	"sigma": 0.868387,
+	"area": 2888.77,
+	"leftLimit": 342.634,
+	"rightLimit": 347.844
+},
+{
+	"position": 674.823,
+	"amplitude": 1168.76,
+	"sigma": 0.939797,
+	"area": 2697.11,
+	"leftLimit": 672.004,
+	"rightLimit": 677.643
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 261.337,
+	"amplitude": 9201.14,
+	"sigma": 0.842315,
+	"area": 19492.8,
+	"leftLimit": 258.81,
+	"rightLimit": 263.864
+},
+{
+	"position": 1075.76,
+	"amplitude": 3695.81,
+	"sigma": 1.00066,
+	"area": 9235.35,
+	"leftLimit": 1072.75,
+	"rightLimit": 1078.76
+},
+{
+	"position": 735.643,
+	"amplitude": 3354.31,
+	"sigma": 0.900775,
+	"area": 7467.1,
+	"leftLimit": 732.941,
+	"rightLimit": 738.346
+},
+{
+	"position": 594.593,
+	"amplitude": 3181.03,
+	"sigma": 0.912918,
+	"area": 7249.46,
+	"leftLimit": 591.854,
+	"rightLimit": 597.332
+},
+{
+	"position": 848.598,
+	"amplitude": 2792.14,
+	"sigma": 0.951826,
+	"area": 6671.92,
+	"leftLimit": 845.742,
+	"rightLimit": 851.453
+},
+{
+	"position": 184.753,
+	"amplitude": 2465.61,
+	"sigma": 0.819532,
+	"area": 4863.2,
+	"leftLimit": 182.294,
+	"rightLimit": 187.211
+},
+{
+	"position": 828.597,
+	"amplitude": 2005.65,
+	"sigma": 1.02996,
+	"area": 5399.15,
+	"leftLimit": 825.507,
+	"rightLimit": 831.687
+},
+{
+	"position": 91.3436,
+	"amplitude": 1688.71,
+	"sigma": 0.788753,
+	"area": 3581.03,
+	"leftLimit": 88.9773,
+	"rightLimit": 93.7099
+},
+{
+	"position": 338.054,
+	"amplitude": 970.766,
+	"sigma": 0.859009,
+	"area": 2233.55,
+	"leftLimit": 335.477,
+	"rightLimit": 340.631
+},
+{
+	"position": 661.925,
+	"amplitude": 1024.81,
+	"sigma": 0.942144,
+	"area": 2381.96,
+	"leftLimit": 659.099,
+	"rightLimit": 664.752
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 269.076,
+	"amplitude": 9109.98,
+	"sigma": 0.871002,
+	"area": 19878.1,
+	"leftLimit": 266.463,
+	"rightLimit": 271.689
+},
+{
+	"position": 1102.92,
+	"amplitude": 3844.35,
+	"sigma": 1.01105,
+	"area": 9683.3,
+	"leftLimit": 1099.89,
+	"rightLimit": 1105.95
+},
+{
+	"position": 754.957,
+	"amplitude": 3327.58,
+	"sigma": 0.947164,
+	"area": 7874.17,
+	"leftLimit": 752.115,
+	"rightLimit": 757.798
+},
+{
+	"position": 609.697,
+	"amplitude": 3351.78,
+	"sigma": 0.927654,
+	"area": 7842.42,
+	"leftLimit": 606.914,
+	"rightLimit": 612.48
+},
+{
+	"position": 870.892,
+	"amplitude": 2850.85,
+	"sigma": 0.998551,
+	"area": 7095.66,
+	"leftLimit": 867.896,
+	"rightLimit": 873.888
+},
+{
+	"position": 191.205,
+	"amplitude": 2290.46,
+	"sigma": 0.901036,
+	"area": 5024.08,
+	"leftLimit": 188.502,
+	"rightLimit": 193.909
+},
+{
+	"position": 850.479,
+	"amplitude": 2014.03,
+	"sigma": 1.07768,
+	"area": 5583.55,
+	"leftLimit": 847.246,
+	"rightLimit": 853.712
+},
+{
+	"position": 347.009,
+	"amplitude": 988.074,
+	"sigma": 0.914966,
+	"area": 2342.03,
+	"leftLimit": 344.264,
+	"rightLimit": 349.754
+},
+{
+	"position": 679.089,
+	"amplitude": 983.301,
+	"sigma": 0.981251,
+	"area": 2472.41,
+	"leftLimit": 676.145,
+	"rightLimit": 682.032
+},
+{
+	"position": 321.33,
+	"amplitude": 758.975,
+	"sigma": 0.828905,
+	"area": 1551.27,
+	"leftLimit": 318.843,
+	"rightLimit": 323.817
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 273.338,
+	"amplitude": 9194.66,
+	"sigma": 1.12649,
+	"area": 25926.5,
+	"leftLimit": 269.959,
+	"rightLimit": 276.718
+},
+{
+	"position": 1121.18,
+	"amplitude": 3617.35,
+	"sigma": 1.2197,
+	"area": 10997.3,
+	"leftLimit": 1117.52,
+	"rightLimit": 1124.84
+},
+{
+	"position": 766.971,
+	"amplitude": 3118.39,
+	"sigma": 1.17011,
+	"area": 9109.92,
+	"leftLimit": 763.461,
+	"rightLimit": 770.481
+},
+{
+	"position": 619.709,
+	"amplitude": 3133.49,
+	"sigma": 1.13189,
+	"area": 8705.2,
+	"leftLimit": 616.314,
+	"rightLimit": 623.105
+},
+{
+	"position": 193.862,
+	"amplitude": 2746.87,
+	"sigma": 1.08545,
+	"area": 7287.77,
+	"leftLimit": 190.605,
+	"rightLimit": 197.118
+},
+{
+	"position": 884.77,
+	"amplitude": 2742.66,
+	"sigma": 1.19051,
+	"area": 8093.71,
+	"leftLimit": 881.199,
+	"rightLimit": 888.342
+},
+{
+	"position": 96.1516,
+	"amplitude": 2014.33,
+	"sigma": 1.05498,
+	"area": 5831.69,
+	"leftLimit": 92.9866,
+	"rightLimit": 99.3165
+},
+{
+	"position": 864.066,
+	"amplitude": 1939.84,
+	"sigma": 1.33639,
+	"area": 6612.53,
+	"leftLimit": 860.056,
+	"rightLimit": 868.075
+},
+{
+	"position": 353.37,
+	"amplitude": 1060.9,
+	"sigma": 1.07134,
+	"area": 2780.25,
+	"leftLimit": 350.156,
+	"rightLimit": 356.584
+},
+{
+	"position": 690.07,
+	"amplitude": 990.294,
+	"sigma": 1.12607,
+	"area": 2938.8,
+	"leftLimit": 686.692,
+	"rightLimit": 693.448
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 97.1265,
+	"amplitude": 413656,
+	"sigma": 0.781922,
+	"area": 839513,
+	"leftLimit": 94.7807,
+	"rightLimit": 99.4722
+},
+{
+	"position": 276.386,
+	"amplitude": 275922,
+	"sigma": 0.820172,
+	"area": 582245,
+	"leftLimit": 273.925,
+	"rightLimit": 278.846
+},
+{
+	"position": 196.334,
+	"amplitude": 98833.5,
+	"sigma": 0.794849,
+	"area": 200195,
+	"leftLimit": 193.95,
+	"rightLimit": 198.719
+},
+{
+	"position": 626.955,
+	"amplitude": 72493.4,
+	"sigma": 0.914863,
+	"area": 172204,
+	"leftLimit": 624.21,
+	"rightLimit": 629.7
+},
+{
+	"position": 776.2,
+	"amplitude": 69370.6,
+	"sigma": 0.939842,
+	"area": 169810,
+	"leftLimit": 773.38,
+	"rightLimit": 779.019
+},
+{
+	"position": 1134.43,
+	"amplitude": 71043.8,
+	"sigma": 1.10774,
+	"area": 194586,
+	"leftLimit": 1131.1,
+	"rightLimit": 1137.75
+},
+{
+	"position": 895.558,
+	"amplitude": 56352.2,
+	"sigma": 1.03731,
+	"area": 146601,
+	"leftLimit": 892.446,
+	"rightLimit": 898.67
+},
+{
+	"position": 874.488,
+	"amplitude": 40077.9,
+	"sigma": 1.16512,
+	"area": 118416,
+	"leftLimit": 870.993,
+	"rightLimit": 877.984
+},
+{
+	"position": 356.824,
+	"amplitude": 27041.7,
+	"sigma": 0.824238,
+	"area": 58453.7,
+	"leftLimit": 354.351,
+	"rightLimit": 359.296
+},
+{
+	"position": 698.282,
+	"amplitude": 21968,
+	"sigma": 0.907423,
+	"area": 51667.2,
+	"leftLimit": 695.56,
+	"rightLimit": 701.005
+}
+	]
+}
+{
+	"peaks": [
+{
+	"position": 992.557,
+	"amplitude": 456.865,
+	"sigma": 0.923672,
+	"area": 986.703,
+	"leftLimit": 989.786,
+	"rightLimit": 995.328
+},
+{
+	"position": 262.228,
+	"amplitude": 39524,
+	"sigma": 0.81278,
+	"area": 80741.8,
+	"leftLimit": 259.79,
+	"rightLimit": 264.667
+},
+{
+	"position": 186.008,
+	"amplitude": 17549.2,
+	"sigma": 0.795472,
+	"area": 35240.8,
+	"leftLimit": 183.622,
+	"rightLimit": 188.394
+},
+{
+	"position": 594.869,
+	"amplitude": 6850.9,
+	"sigma": 0.839869,
+	"area": 14528.3,
+	"leftLimit": 592.349,
+	"rightLimit": 597.389
+},
+{
+	"position": 735.929,
+	"amplitude": 5800.41,
+	"sigma": 0.887092,
+	"area": 12836.8,
+	"leftLimit": 733.268,
+	"rightLimit": 738.591
+},
+{
+	"position": 1075.95,
+	"amplitude": 5183.65,
+	"sigma": 0.964179,
+	"area": 12492,
+	"leftLimit": 1073.06,
+	"rightLimit": 1078.85
+},
+{
+	"position": 849.249,
+	"amplitude": 4539.69,
+	"sigma": 0.922479,
+	"area": 10488.3,
+	"leftLimit": 846.481,
+	"rightLimit": 852.016
+},
+{
+	"position": 338.441,
+	"amplitude": 3310.64,
+	"sigma": 0.82531,
+	"area": 6818.5,
+	"leftLimit": 335.965,
+	"rightLimit": 340.917
+},
+{
+	"position": 829.254,
+	"amplitude": 3296.37,
+	"sigma": 1.01015,
+	"area": 8539.66,
+	"leftLimit": 826.223,
+	"rightLimit": 832.284
+},
+{
+	"position": 313.317,
+	"amplitude": 2552.59,
+	"sigma": 0.853304,
+	"area": 5703.2,
+	"leftLimit": 310.757,
+	"rightLimit": 315.877
+}
+	]
+}

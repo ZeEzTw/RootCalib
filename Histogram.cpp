@@ -14,6 +14,8 @@ Histogram::Histogram(int xMin, int xMax, int maxFWHM, int numberOfPeaks, TH1D *m
     if (mainHist != nullptr)
     {
         this->tempHist = (TH1D *)mainHist->Clone(); // Clonăm histogramă pentru procesare ulterioară
+        this->calibratedHist = (TH1D *)mainHist->Clone(); // Clonăm histogramă pentru procesare ulterioară
+
     }
     else
     {
@@ -23,6 +25,10 @@ Histogram::Histogram(int xMin, int xMax, int maxFWHM, int numberOfPeaks, TH1D *m
 
 Histogram::~Histogram()
 {
+    /*if(mainHist != nullptr)
+    {
+        delete mainHist;
+    }
     if (tempHist != nullptr)
     {
         delete tempHist;
@@ -31,7 +37,46 @@ Histogram::~Histogram()
     {
         delete calibratedHist;
     }
+    */
 }
+Histogram::Histogram(const Histogram &histogram)
+{
+    xMin = histogram.xMin;
+    xMax = histogram.xMax;
+    maxFWHM = histogram.maxFWHM;
+    numberOfPeaks = histogram.numberOfPeaks;
+    mainHist = histogram.mainHist;
+    tempHist = histogram.tempHist;
+    calibratedHist = histogram.calibratedHist;
+    m = histogram.m;
+    b = histogram.b;
+    peaks = histogram.peaks;
+    peakCount = histogram.peakCount;
+}
+// În Histogram.cpp
+Histogram& Histogram::operator=(const Histogram& histogram)
+{
+    if (this == &histogram)
+    {
+        return *this;
+    }
+
+    xMin = histogram.xMin;
+    xMax = histogram.xMax;
+    maxFWHM = histogram.maxFWHM;
+    numberOfPeaks = histogram.numberOfPeaks;
+    mainHist = histogram.mainHist;
+    tempHist = histogram.tempHist;
+    calibratedHist = histogram.calibratedHist;
+    m = histogram.m;
+    b = histogram.b;
+    peaks = histogram.peaks;
+    peakCount = histogram.peakCount;
+
+    return *this;
+}
+
+
 void Histogram::findPeaks()
 {
     for (int i = 0; i < numberOfPeaks; i++)
@@ -230,7 +275,7 @@ void Histogram::applyXCalibration()
 
         if (bin_original < 1 || bin_original >= numBinsOriginal)
         {
-            std::cerr << "Error: Bin index out of range. Bin index: " << bin_original << std::endl;
+            //std::cerr << "Error: Bin index out of range. Bin index: " << bin_original << std::endl;
             continue;
         }
 
@@ -238,6 +283,7 @@ void Histogram::applyXCalibration()
         calibratedHist->SetBinContent(bin_calibrated, interpolated_content);
     }
 }
+
 
 /*void Histogram::applyXCalibration()
 {
@@ -276,26 +322,80 @@ void Histogram::applyXCalibration()
     }
 }*/
 
-void Histogram::printHistogramWithPeaksRoot(TFile *outputFile) const
+void Histogram::changePeak(int peakNumber, double newPosition)
+{
+    // Verificăm dacă numărul peak-ului este valid
+    if (peakNumber < 0 || peakNumber >= peaks.size())
+    {
+        std::cerr << "Error: Invalid peak number." << std::endl;
+        return;
+    }
+
+    // Creăm un fit gaussian cu noua poziție
+    TF1 *gaus = createGaussianFit(newPosition);
+    if (gaus == nullptr)
+    {
+        std::cerr << "Error: Failed to create Gaussian fit." << std::endl;
+        return;
+    }
+
+    // Aplicăm fit-ul pe histogramă
+    tempHist->Fit(gaus, "RQ");
+
+    // Eliminăm peak-ul existent
+    eliminatePeak(peaks[peakNumber]);
+
+    // Adăugăm noul peak
+    peaks[peakNumber] = {gaus, mainHist};
+    std::cout<<"Peak number: "<<peakNumber<<std::endl;
+    std::cout<<"Peak position: "<<peaks[peakNumber].getPosition()<<std::endl;
+    // Verificăm condițiile pentru noul peak
+    if (!checkConditions(peaks[peakNumber]))
+    {
+        // Eliminăm peak-ul dacă condițiile nu sunt îndeplinite
+        peaks.erase(peaks.begin() + peakNumber);
+        delete gaus; // Curățăm obiectul TF1 pentru a preveni scurgerile de memorie
+        return;
+    }
+
+    // Dacă peak-ul este valid, nu mai trebuie să ștergem `gaus`
+    // deoarece `peaks[peakNumber]` va gestiona viața sa.
+}
+
+
+void Histogram::printHistogramWithPeaksRoot(TFile *outputFile)
 {
     if (!outputFile || outputFile->IsZombie())
     {
         std::cerr << "Error: Could not open file for writing" << std::endl;
         return;
     }
+
     outputFile->cd();
+    
+    // Resetăm histogramul pentru a elimina ajustările anterioare
+    mainHist->GetListOfFunctions()->Clear();
+
+    // Recalculăm și ajustăm histogramul cu noi funcții gaussiene
     for (int i = 0; i < peaks.size(); ++i)
     {
-        TF1 *gaussianFunction = peaks[i].getGaussianFunction();
+        double newPosition = peaks[i].getPosition();
+        TF1 *gaussianFunction = createGaussianFit(newPosition); // Funcție care creează noua ajustare gaussiană
         if (gaussianFunction)
         {
+            //peaks[i].setGaussianFunction(gaussianFunction); // Asumând că există această metodă în clasă
+
+            // Adăugăm funcția de ajustare la histogramă
             gaussianFunction->SetName(Form("gaussian_%d", i));
             gaussianFunction->SetTitle(Form("Gaussian %d", i));
             mainHist->Fit(gaussianFunction, "RQ+");
         }
     }
+
     mainHist->Write();
 }
+
+
 void Histogram::printCalibratedHistogramRoot(TFile *outputFile) const
 {
     if (!outputFile || outputFile->IsZombie())
@@ -354,4 +454,8 @@ void Histogram::findStartOfPeak(Peak &peak)
     }
 
     goodGaus++;
+}
+
+std::string Histogram::returnNameOfHistogram() const {
+    return mainHist->GetName(); // Dacă mainHist->GetName() returnează std::string
 }
