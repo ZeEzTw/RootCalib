@@ -22,6 +22,7 @@ private:
     TH1D *tempHist;
     TH1D *calibratedHist;
     float m, b;
+    unsigned int peakMatchCount;
     std::vector<Peak> peaks;
     int peakCount;
 
@@ -52,6 +53,7 @@ public:
     void printHistogramWithPeaksRoot(TFile *outputFile);
     void printCalibratedHistogramRoot(TFile *outputFile) const;
     std::string returnNameOfHistogram() const;
+    unsigned int getpeakMatchCount() const;
 };
 
 #endif // HISTOGRAM_H

@@ -43,7 +43,10 @@ void UserInterface::askAboutPeaks(std::vector<Histogram> &histograms, std::ofstr
         std::cin >> answer;
     }
 }
-
+void UserInterface::showCalibrationInfo(const Histogram &histogram)
+{
+    std::cout << "   matched peaks: " << histogram.getpeakMatchCount() << std::endl;
+}
 /*void UserInterface::askAboutCalibrationAndSources(std::vector<Histogram> &histograms, sortEnergy &energys)
 {
     std::cout << "Do you want to calibrate the histograms? (Y/N)" << std::endl;

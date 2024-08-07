@@ -233,6 +233,7 @@ void Histogram::calibratePeaks(const double knownEnergies[], int size)
             }
         }
     }
+    peakMatchCount = bestCorrelation;
     refineCalibration(knownEnergies, size);
 }
 void Histogram::initializeCalibratedHist()
@@ -458,4 +459,9 @@ void Histogram::findStartOfPeak(Peak &peak)
 
 std::string Histogram::returnNameOfHistogram() const {
     return mainHist->GetName(); // Dacă mainHist->GetName() returnează std::string
+}
+
+unsigned int Histogram::getpeakMatchCount() const
+{
+    return peakMatchCount;
 }

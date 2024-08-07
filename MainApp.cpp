@@ -5,6 +5,8 @@
 #include <fstream>
 #include <TFile.h>
 #include <TH2F.h>
+#include <TH1D.h>
+#include <TError.h> // Include pentru gErrorIgnoreLevel 
 // Function to open ROOT files and JSON output file
 void openFiles(const char *inputFilePath, TFile *&inputFile, TFile *&outputFileHistograms, TFile *&outputFileCalibrated, std::ofstream &jsonFile)
 {
@@ -29,7 +31,7 @@ void closeFiles(TFile *inputFile, TFile *outputFileHistograms, TFile *outputFile
 
 // Function to process a single 1D histogram
 // Function to process a single 1D histogram
-void processHistogram(TH1D *hist1D, int number_of_peaks, double *energyArray, int size, std::vector<Histogram> &histograms, float Xmin, float Xmax, float FWHMmax, std::ofstream &jsonFile, TFile *outputFileHistograms, TFile *outputFileCalibrated)
+void processHistogram(TH1D *hist1D, int number_of_peaks, double *energyArray, int size, std::vector<Histogram> &histograms, float Xmin, float Xmax, float FWHMmax, std::ofstream &jsonFile, TFile *outputFileHistograms, TFile *outputFileCalibrated, UserInterface &ui)
 {
     if (!hist1D)
     {
@@ -45,6 +47,7 @@ void processHistogram(TH1D *hist1D, int number_of_peaks, double *energyArray, in
     hist.findPeaks();
     hist.calibratePeaks(energyArray, size);
     hist.applyXCalibration();
+    ui.showCalibrationInfo(hist);
     hist.outputPeaksDataJson(jsonFile);
     hist.printHistogramWithPeaksRoot(outputFileHistograms);
     hist.printCalibratedHistogramRoot(outputFileCalibrated);
@@ -73,7 +76,7 @@ void process2FHistogram(TH2F *h2, int number_of_peaks, double *energyArray, int 
         TH1D *hist1D = h2->ProjectionY(Form("hist1D_col%d", column), column, column);
         if (hist1D)
         {
-            processHistogram(hist1D, number_of_peaks, energyArray, size, histograms, Xmin, Xmax, FWHMmax, jsonFile, outputFileHistograms, outputFileCalibrated);
+            processHistogram(hist1D, number_of_peaks, energyArray, size, histograms, Xmin, Xmax, FWHMmax, jsonFile, outputFileHistograms, outputFileCalibrated, ui);
         }
         else
         {
@@ -88,7 +91,7 @@ void process2FHistogram(TH2F *h2, int number_of_peaks, double *energyArray, int 
 // Function to handle the main task of processing histograms
 void processHistogramsTask(int number_of_peaks, const std::string &file_path, sortEnergy &energyProcessor, float Xmin, float Xmax, float FWHMmax)
 {
-    TFile *inputFile = nullptr;
+  TFile *inputFile = nullptr;
     TFile *outputFileHistograms = nullptr;
     TFile *outputFileCalibrated = nullptr;
     std::ofstream jsonFile;
@@ -106,12 +109,12 @@ void processHistogramsTask(int number_of_peaks, const std::string &file_path, so
     }
 
     openFiles(file_path.c_str(), inputFile, outputFileHistograms, outputFileCalibrated, jsonFile);
-
+ 
     if (inputFile)
     {
         TH2F *h2 = nullptr;
         inputFile->GetObject("mDelila_raw", h2);
-
+        
         if (h2)
         {
             process2FHistogram(h2, number_of_peaks, energyArray, size, ui, Xmin, Xmax, FWHMmax, jsonFile, outputFileHistograms, outputFileCalibrated);
@@ -132,10 +135,12 @@ void processHistogramsTask(int number_of_peaks, const std::string &file_path, so
     // delete[] energyArray;
 }
 
+
 // Function to sort the energy data from a file
 
 int main(int argc, char *argv[])
 {
+    gErrorIgnoreLevel = kError;
     if (argc < 7)
     {
         std::cerr << "Usage: " << argv[0] << " <number_of_peaks> <histogram_file_path> <energy_file_path> <Xmin> <Xmax> <FWHMmax>" << std::endl;
