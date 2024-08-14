@@ -123,13 +123,46 @@ TF1 *Peak::getGaussianFunction() const
 {
     return gaus;
 }
-
+void Peak::setArea(double a)
+{
+    area = a;
+}
+double Peak::getArea() const
+{
+    return area;
+}
+void Peak::setLeftLimit(float left)
+{
+    leftLimit = left;
+}
+float Peak::getLeftLimit() const
+{
+    return leftLimit;
+}
+void Peak::setRightLimit(float right)
+{
+    rightLimit = right;
+}
+float Peak::getRightLimit() const
+{
+    return rightLimit;
+}
 void Peak::areaPeak(TH1D *hist)
 {
     double leftHeight = hist->GetBinContent(hist->FindBin(leftLimit - 3));
     double rightHeight = hist->GetBinContent(hist->FindBin(rightLimit + 3));
+    if (leftHeight < 0.9 * rightHeight)
+    {
+        leftHeight = rightHeight;
+    }
+    else if (rightHeight < 0.9 * leftHeight)
+    {
+        rightHeight = leftHeight;
+    }
+
     double backgroundHeight = (leftHeight + rightHeight) / 2;
     double width = abs(rightLimit - leftLimit);
+
     // Calculează aria sub gausiană în intervalul [leftLimit, rightLimit]
     double peakArea = gaus->Integral(leftLimit, rightLimit);
     double backgroundArea = backgroundHeight * width;

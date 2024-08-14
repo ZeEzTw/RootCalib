@@ -25,7 +25,7 @@ private:
     unsigned int peakMatchCount;
     std::vector<Peak> peaks;
     int peakCount;
-
+    std::string sourceName;
     // Funcții private
     void eliminatePeak(const Peak &peak);
     TF1 *createGaussianFit(int maxBin);
@@ -39,7 +39,7 @@ private:
 
 public:
     // Constructori și Destructor
-    Histogram(int xMin, int xMax, int maxFWHM, int numberOfPeaks, TH1D *mainHist);
+    Histogram(int xMin, int xMax, int maxFWHM, int numberOfPeaks, TH1D *mainHist, std::string sourceName);
     Histogram(const Histogram &histogram);
     ~Histogram();
     Histogram &operator=(const Histogram &histogram);
@@ -52,7 +52,7 @@ public:
     void changePeak(int peakNumber, double newPosition);
     void printHistogramWithPeaksRoot(TFile *outputFile);
     void printCalibratedHistogramRoot(TFile *outputFile) const;
-    std::string returnNameOfHistogram() const;
+    const char* returnNameOfHistogram() const;
     unsigned int getpeakMatchCount() const;
 };
 

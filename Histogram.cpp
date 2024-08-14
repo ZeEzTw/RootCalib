@@ -7,8 +7,8 @@ long int iterations = 0;
 long int goodGaus = 0;
 long int badGaus = 0;
 
-Histogram::Histogram(int xMin, int xMax, int maxFWHM, int numberOfPeaks, TH1D *mainHist)
-    : xMin(xMin), xMax(xMax), maxFWHM(maxFWHM), numberOfPeaks(numberOfPeaks), mainHist(mainHist), tempHist(nullptr), calibratedHist(nullptr), peakCount(0), m(0), b(0)
+Histogram::Histogram(int xMin, int xMax, int maxFWHM, int numberOfPeaks, TH1D *mainHist, std::string sourceName) 
+: xMin(xMin), xMax(xMax), maxFWHM(maxFWHM), numberOfPeaks(numberOfPeaks), mainHist(mainHist), tempHist(nullptr), calibratedHist(nullptr), peakCount(0), m(0), b(0), sourceName(sourceName), peakMatchCount(0)
 {
 
     if (mainHist != nullptr)
@@ -21,60 +21,61 @@ Histogram::Histogram(int xMin, int xMax, int maxFWHM, int numberOfPeaks, TH1D *m
     {
         std::cerr << "Warning: mainHist is null in Histogram constructor" << std::endl;
     }
+
 }
 
 Histogram::~Histogram()
 {
-    /*if(mainHist != nullptr)
-    {
-        delete mainHist;
-    }
-    if (tempHist != nullptr)
+    /*if (tempHist)
     {
         delete tempHist;
     }
-    if (calibratedHist != nullptr)
+    if (calibratedHist)
     {
         delete calibratedHist;
-    }
-    */
+    }*/
 }
-Histogram::Histogram(const Histogram &histogram)
-{
+Histogram::Histogram(const Histogram &histogram) {
     xMin = histogram.xMin;
     xMax = histogram.xMax;
     maxFWHM = histogram.maxFWHM;
     numberOfPeaks = histogram.numberOfPeaks;
-    mainHist = histogram.mainHist;
-    tempHist = histogram.tempHist;
-    calibratedHist = histogram.calibratedHist;
     m = histogram.m;
     b = histogram.b;
-    peaks = histogram.peaks;
     peakCount = histogram.peakCount;
+    sourceName = histogram.sourceName;
+    peakMatchCount = histogram.peakMatchCount;
+    peaks = histogram.peaks;
+
+    mainHist = (histogram.mainHist) ? new TH1D(*histogram.mainHist) : nullptr;
+    tempHist = (histogram.tempHist) ? new TH1D(*histogram.tempHist) : nullptr;
+    calibratedHist = (histogram.calibratedHist) ? new TH1D(*histogram.calibratedHist) : nullptr;
 }
-// În Histogram.cpp
-Histogram& Histogram::operator=(const Histogram& histogram)
-{
-    if (this == &histogram)
-    {
-        return *this;
+
+Histogram& Histogram::operator=(const Histogram &histogram) {
+    if (this != &histogram) {
+        xMin = histogram.xMin;
+        xMax = histogram.xMax;
+        maxFWHM = histogram.maxFWHM;
+        numberOfPeaks = histogram.numberOfPeaks;
+        m = histogram.m;
+        b = histogram.b;
+        peakCount = histogram.peakCount;
+        sourceName = histogram.sourceName;
+        peakMatchCount = histogram.peakMatchCount;
+        peaks = histogram.peaks;
+
+        if (mainHist) delete mainHist;
+        if (tempHist) delete tempHist;
+        if (calibratedHist) delete calibratedHist;
+
+        mainHist = (histogram.mainHist) ? new TH1D(*histogram.mainHist) : nullptr;
+        tempHist = (histogram.tempHist) ? new TH1D(*histogram.tempHist) : nullptr;
+        calibratedHist = (histogram.calibratedHist) ? new TH1D(*histogram.calibratedHist) : nullptr;
     }
-
-    xMin = histogram.xMin;
-    xMax = histogram.xMax;
-    maxFWHM = histogram.maxFWHM;
-    numberOfPeaks = histogram.numberOfPeaks;
-    mainHist = histogram.mainHist;
-    tempHist = histogram.tempHist;
-    calibratedHist = histogram.calibratedHist;
-    m = histogram.m;
-    b = histogram.b;
-    peaks = histogram.peaks;
-    peakCount = histogram.peakCount;
-
     return *this;
 }
+
 
 
 void Histogram::findPeaks()
@@ -408,29 +409,41 @@ void Histogram::printCalibratedHistogramRoot(TFile *outputFile) const
     calibratedHist->Write();
 }
 
-void Histogram::outputPeaksDataJson(std::ofstream &file)
+void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
 {
-    if (!file.is_open())
-    {
-        std::cerr << "Error: File not open for writing" << std::endl;
-        return;
-    }
-
-    file << "{\n";
-    file << "\t\"peaks\": [\n";
+    jsonFile << "{\n";
+    jsonFile << "\t\"Source\": " << sourceName << ",\n";     // Numele sursei
+    jsonFile << "\t\"Histogram\": " << mainHist->GetName() << ",\n";  // Numele histogramei
+    jsonFile << "\t\"NumberOfPeaks\": " << peaks.size() << ",\n";
+    jsonFile << "\t\"Peaks\": [\n";
 
     for (size_t i = 0; i < peaks.size(); ++i)
     {
-        peaks[i].outputDataJson(file);
+        jsonFile << "\t{\n";
+        jsonFile << "\t\t\"Number_Peak\": " << i + 1 << ",\n";  // Numărul fiecărui vârf
+        jsonFile << "\t\t\"position\": " << peaks[i].getPosition() << ",\n";
+        jsonFile << "\t\t\"amplitude\": " << peaks[i].getAmplitude() << ",\n";
+        jsonFile << "\t\t\"sigma\": " << peaks[i].getSigma() << ",\n";
+        jsonFile << "\t\t\"area\": " << peaks[i].getArea() << ",\n";
+        jsonFile << "\t\t\"leftLimit\": " << peaks[i].getLeftLimit() << ",\n";
+        jsonFile << "\t\t\"rightLimit\": " << peaks[i].getRightLimit() << "\n";
+
         if (i < peaks.size() - 1)
         {
-            file << ",\n";
+            jsonFile << "\t},\n";
+        }
+        else
+        {
+            jsonFile << "\t}\n";
         }
     }
 
-    file << "\n\t]\n";
-    file << "}\n";
+    jsonFile << "\t]\n";
+    jsonFile << "}\n";
 }
+
+
+
 
 void Histogram::findStartOfPeak(Peak &peak)
 {
@@ -457,8 +470,12 @@ void Histogram::findStartOfPeak(Peak &peak)
     goodGaus++;
 }
 
-std::string Histogram::returnNameOfHistogram() const {
-    return mainHist->GetName(); // Dacă mainHist->GetName() returnează std::string
+const char* Histogram::returnNameOfHistogram() const {
+    if (mainHist) {
+        return mainHist->GetName();
+    } else {
+        return "Invalid histogram";
+    }
 }
 
 unsigned int Histogram::getpeakMatchCount() const

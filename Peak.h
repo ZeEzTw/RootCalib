@@ -43,6 +43,16 @@ public:
 
     void setSigma(double sig);
     double getSigma() const;
+
+    void setArea(double a);
+    double getArea() const;
+
+    void setLeftLimit(float left);
+    float getLeftLimit() const;
+
+    void setRightLimit(float right);
+    float getRightLimit() const;
+
     void outputDataJson(std::ofstream &file) const; // Declarare funcție
     void createGaussianFunction();
     TF1 *getGaussianFunction() const;

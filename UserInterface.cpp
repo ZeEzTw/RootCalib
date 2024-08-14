@@ -11,38 +11,47 @@ void UserInterface::askAboutPeaks(std::vector<Histogram> &histograms, std::ofstr
         std::cout << "Available histograms:" << std::endl;
         for (int i = 0; i < histograms.size(); i++)
         {
-            std::cout << i << ". " << histograms[i].returnNameOfHistogram() << std::endl;
+            const char *histName = histograms[i].returnNameOfHistogram();
+            if (histName && std::strlen(histName) > 0)
+            {
+                std::cout << i << ". " << histName << std::endl;
+            }
+            else
+            {
+                std::cout << i << ". Invalid histogram" << std::endl;
+            }
         }
-    }
 
-    while (answer == 'Y' || answer == 'y')
-    {
-        std::cout << "In which histogram is the peak?" << std::endl;
-        int histogramNumber;
-        std::cin >> histogramNumber;
-
-        if (histogramNumber < 0 || histogramNumber >= histograms.size())
+        while (answer == 'Y' || answer == 'y')
         {
-            std::cerr << "Invalid histogram number!" << std::endl;
-            continue;
+            std::cout << "In which histogram is the peak?" << std::endl;
+            int histogramNumber;
+            std::cin >> histogramNumber;
+
+            if (histogramNumber < 0 || histogramNumber >= histograms.size())
+            {
+                std::cerr << "Invalid histogram number!" << std::endl;
+                continue;
+            }
+
+            std::cout << "What is the number of the peak?" << std::endl;
+            int peakNumber;
+            std::cin >> peakNumber;
+
+            std::cout << "What is the new position of the peak?" << std::endl;
+            double newPosition;
+            std::cin >> newPosition;
+
+            histograms[histogramNumber].changePeak(peakNumber, newPosition);
+            histograms[histogramNumber].outputPeaksDataJson(jsonFile);
+            histograms[histogramNumber].printHistogramWithPeaksRoot(outputFileHistograms);
+
+            std::cout << "Do you want to change another peak? (Y/N)" << std::endl;
+            std::cin >> answer;
         }
-
-        std::cout << "What is the number of the peak?" << std::endl;
-        int peakNumber;
-        std::cin >> peakNumber;
-
-        std::cout << "What is the new position of the peak?" << std::endl;
-        double newPosition;
-        std::cin >> newPosition;
-
-        histograms[histogramNumber].changePeak(peakNumber, newPosition);
-        histograms[histogramNumber].outputPeaksDataJson(jsonFile);
-        histograms[histogramNumber].printHistogramWithPeaksRoot(outputFileHistograms);
-
-        std::cout << "Do you want to change another peak? (Y/N)" << std::endl;
-        std::cin >> answer;
     }
 }
+
 void UserInterface::showCalibrationInfo(const Histogram &histogram)
 {
     std::cout << "   matched peaks: " << histogram.getpeakMatchCount() << std::endl;
