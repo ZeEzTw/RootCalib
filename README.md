@@ -29,7 +29,7 @@ This project provides tools for extracting and analyzing peaks from ROOT histogr
         // Additional peaks...
     ]
 }
-
+```
 Extra Features
 
 After processing, the program offers the option to adjust peaks:
