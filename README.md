@@ -26,9 +26,7 @@ This project provides tools for extracting and analyzing peaks from ROOT histogr
             "leftLimit": 89.5073,
             "rightLimit": 94.2938
         },
-```
-        // Additional peaks...
-```
+       "// Additional peaks..."
     ]
 }
 ```
