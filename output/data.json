@@ -1,0 +1,2590 @@
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col102",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.31,
+	"Calibration Factor b": 0,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 91.9006,
+			"FWHM": 1.87856,
+			"area": 191502
+		},
+		{
+			"Number_Peak": 2,
+			"position": 262.228,
+			"FWHM": 1.91393,
+			"area": 77169.4
+		},
+		{
+			"Number_Peak": 3,
+			"position": 186.008,
+			"FWHM": 1.87318,
+			"area": 30858.1
+		},
+		{
+			"Number_Peak": 4,
+			"position": 594.869,
+			"FWHM": 1.97772,
+			"area": 13810.6
+		},
+		{
+			"Number_Peak": 5,
+			"position": 735.929,
+			"FWHM": 2.08892,
+			"area": 12711.1
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1075.95,
+			"FWHM": 2.27045,
+			"area": 12122.3
+		},
+		{
+			"Number_Peak": 7,
+			"position": 849.249,
+			"FWHM": 2.17225,
+			"area": 10182
+		},
+		{
+			"Number_Peak": 8,
+			"position": 338.441,
+			"FWHM": 1.94344,
+			"area": 6614.57
+		},
+		{
+			"Number_Peak": 9,
+			"position": 829.254,
+			"FWHM": 2.37869,
+			"area": 6904.32
+		},
+		{
+			"Number_Peak": 10,
+			"position": 313.317,
+			"FWHM": 2.00936,
+			"area": 4909.09
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col103",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.3,
+	"Calibration Factor b": 4.9,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 92.8439,
+			"FWHM": 1.76298,
+			"area": 167019
+		},
+		{
+			"Number_Peak": 2,
+			"position": 262.573,
+			"FWHM": 1.82565,
+			"area": 74328.4
+		},
+		{
+			"Number_Peak": 3,
+			"position": 186.338,
+			"FWHM": 1.78091,
+			"area": 32487.5
+		},
+		{
+			"Number_Peak": 4,
+			"position": 595.534,
+			"FWHM": 1.92516,
+			"area": 13370.7
+		},
+		{
+			"Number_Peak": 5,
+			"position": 737.069,
+			"FWHM": 2.0647,
+			"area": 12267.4
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1077.05,
+			"FWHM": 2.20346,
+			"area": 11677.9
+		},
+		{
+			"Number_Peak": 7,
+			"position": 850.332,
+			"FWHM": 2.1241,
+			"area": 9365.22
+		},
+		{
+			"Number_Peak": 8,
+			"position": 338.96,
+			"FWHM": 1.88106,
+			"area": 5768.16
+		},
+		{
+			"Number_Peak": 9,
+			"position": 830.323,
+			"FWHM": 2.2801,
+			"area": 6332.53
+		},
+		{
+			"Number_Peak": 10,
+			"position": 313.822,
+			"FWHM": 1.79983,
+			"area": 4262.68
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col104",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.31,
+	"Calibration Factor b": 0,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 92.2559,
+			"FWHM": 1.89353,
+			"area": 151547
+		},
+		{
+			"Number_Peak": 2,
+			"position": 261.989,
+			"FWHM": 1.97328,
+			"area": 69641.8
+		},
+		{
+			"Number_Peak": 3,
+			"position": 186.019,
+			"FWHM": 1.90614,
+			"area": 27374.5
+		},
+		{
+			"Number_Peak": 4,
+			"position": 735.009,
+			"FWHM": 2.17893,
+			"area": 10788.5
+		},
+		{
+			"Number_Peak": 5,
+			"position": 593.749,
+			"FWHM": 2.13313,
+			"area": 11462.9
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1073.99,
+			"FWHM": 2.3108,
+			"area": 10062.1
+		},
+		{
+			"Number_Peak": 7,
+			"position": 847.934,
+			"FWHM": 2.28266,
+			"area": 8739.13
+		},
+		{
+			"Number_Peak": 8,
+			"position": 337.973,
+			"FWHM": 2.00803,
+			"area": 5791.58
+		},
+		{
+			"Number_Peak": 9,
+			"position": 828.066,
+			"FWHM": 2.47327,
+			"area": 5833.81
+		},
+		{
+			"Number_Peak": 10,
+			"position": 312.976,
+			"FWHM": 1.95826,
+			"area": 4327.9
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col105",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.26,
+	"Calibration Factor b": 0,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 96.4281,
+			"FWHM": 1.76166,
+			"area": 225973
+		},
+		{
+			"Number_Peak": 2,
+			"position": 272.924,
+			"FWHM": 1.82719,
+			"area": 76353.4
+		},
+		{
+			"Number_Peak": 3,
+			"position": 193.87,
+			"FWHM": 1.79364,
+			"area": 33835.7
+		},
+		{
+			"Number_Peak": 4,
+			"position": 617.949,
+			"FWHM": 1.96923,
+			"area": 14184.8
+		},
+		{
+			"Number_Peak": 5,
+			"position": 765.159,
+			"FWHM": 2.05295,
+			"area": 12393.9
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1117.56,
+			"FWHM": 2.21024,
+			"area": 11650.8
+		},
+		{
+			"Number_Peak": 7,
+			"position": 882.575,
+			"FWHM": 2.1016,
+			"area": 9912.48
+		},
+		{
+			"Number_Peak": 8,
+			"position": 351.977,
+			"FWHM": 1.91063,
+			"area": 6398.71
+		},
+		{
+			"Number_Peak": 9,
+			"position": 325.918,
+			"FWHM": 1.7973,
+			"area": 5146.43
+		},
+		{
+			"Number_Peak": 10,
+			"position": 861.85,
+			"FWHM": 2.29925,
+			"area": 6666.93
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col106",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.29,
+	"Calibration Factor b": 2.6,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 265.298,
+			"FWHM": 1.96021,
+			"area": 19789.6
+		},
+		{
+			"Number_Peak": 2,
+			"position": 1087.15,
+			"FWHM": 2.29136,
+			"area": 9436.23
+		},
+		{
+			"Number_Peak": 3,
+			"position": 744.207,
+			"FWHM": 2.10802,
+			"area": 7350.33
+		},
+		{
+			"Number_Peak": 4,
+			"position": 601.004,
+			"FWHM": 2.0687,
+			"area": 7829.8
+		},
+		{
+			"Number_Peak": 5,
+			"position": 858.469,
+			"FWHM": 2.21025,
+			"area": 6520.64
+		},
+		{
+			"Number_Peak": 6,
+			"position": 188.408,
+			"FWHM": 1.81398,
+			"area": 5221.12
+		},
+		{
+			"Number_Peak": 7,
+			"position": 838.309,
+			"FWHM": 2.41807,
+			"area": 4639.89
+		},
+		{
+			"Number_Peak": 8,
+			"position": 93.5897,
+			"FWHM": 1.80399,
+			"area": 3766.29
+		},
+		{
+			"Number_Peak": 9,
+			"position": 669.494,
+			"FWHM": 1.99492,
+			"area": 2365.13
+		},
+		{
+			"Number_Peak": 10,
+			"position": 342.201,
+			"FWHM": 2.07224,
+			"area": 2132.91
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col107",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.12,
+	"Calibration Factor b": 11.5,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 251.628,
+			"FWHM": 2.50425,
+			"area": 15635.4
+		},
+		{
+			"Number_Peak": 2,
+			"position": 1037.53,
+			"FWHM": 2.84324,
+			"area": 7887.93
+		},
+		{
+			"Number_Peak": 3,
+			"position": 573.277,
+			"FWHM": 2.67861,
+			"area": 6170.96
+		},
+		{
+			"Number_Peak": 4,
+			"position": 709.937,
+			"FWHM": 2.65053,
+			"area": 6521.74
+		},
+		{
+			"Number_Peak": 5,
+			"position": 819.237,
+			"FWHM": 2.77278,
+			"area": 5612.27
+		},
+		{
+			"Number_Peak": 6,
+			"position": 179.882,
+			"FWHM": 2.57173,
+			"area": 3767.01
+		},
+		{
+			"Number_Peak": 7,
+			"position": 800.169,
+			"FWHM": 3.26504,
+			"area": 4547.55
+		},
+		{
+			"Number_Peak": 8,
+			"position": 638.596,
+			"FWHM": 2.54396,
+			"area": 1955.95
+		},
+		{
+			"Number_Peak": 9,
+			"position": 10.2329,
+			"FWHM": 12.1902,
+			"area": -4077.28
+		},
+		{
+			"Number_Peak": 10,
+			"position": 326.8,
+			"FWHM": 2.75814,
+			"area": 1726.13
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col108",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.3,
+	"Calibration Factor b": 0,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 264.807,
+			"FWHM": 2.07785,
+			"area": 32338.1
+		},
+		{
+			"Number_Peak": 2,
+			"position": 93.136,
+			"FWHM": 2.03275,
+			"area": 21785.3
+		},
+		{
+			"Number_Peak": 3,
+			"position": 187.98,
+			"FWHM": 2.05191,
+			"area": 11506.1
+		},
+		{
+			"Number_Peak": 4,
+			"position": 742.37,
+			"FWHM": 2.21798,
+			"area": 9787.35
+		},
+		{
+			"Number_Peak": 5,
+			"position": 599.54,
+			"FWHM": 2.17776,
+			"area": 10005.2
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1084.64,
+			"FWHM": 2.36138,
+			"area": 11347.4
+		},
+		{
+			"Number_Peak": 7,
+			"position": 856.45,
+			"FWHM": 2.34517,
+			"area": 8582.64
+		},
+		{
+			"Number_Peak": 8,
+			"position": 836.346,
+			"FWHM": 2.50615,
+			"area": 6217.6
+		},
+		{
+			"Number_Peak": 9,
+			"position": 341.493,
+			"FWHM": 2.09751,
+			"area": 3365.32
+		},
+		{
+			"Number_Peak": 10,
+			"position": 316.183,
+			"FWHM": 1.99593,
+			"area": 2727.74
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col109",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.3,
+	"Calibration Factor b": 3.8,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 262.147,
+			"FWHM": 2.56742,
+			"area": 21806.6
+		},
+		{
+			"Number_Peak": 2,
+			"position": 1077.87,
+			"FWHM": 2.84593,
+			"area": 9809.47
+		},
+		{
+			"Number_Peak": 3,
+			"position": 737.552,
+			"FWHM": 2.72191,
+			"area": 8410.12
+		},
+		{
+			"Number_Peak": 4,
+			"position": 595.901,
+			"FWHM": 2.61979,
+			"area": 7828.28
+		},
+		{
+			"Number_Peak": 5,
+			"position": 850.447,
+			"FWHM": 2.77748,
+			"area": 7322.76
+		},
+		{
+			"Number_Peak": 6,
+			"position": 185.734,
+			"FWHM": 2.58883,
+			"area": 6306.28
+		},
+		{
+			"Number_Peak": 7,
+			"position": 830.639,
+			"FWHM": 3.19973,
+			"area": 5924.78
+		},
+		{
+			"Number_Peak": 8,
+			"position": 92.3915,
+			"FWHM": 2.65171,
+			"area": 4739.81
+		},
+		{
+			"Number_Peak": 9,
+			"position": 663.659,
+			"FWHM": 2.59737,
+			"area": 2449.78
+		},
+		{
+			"Number_Peak": 10,
+			"position": 338.702,
+			"FWHM": 2.53631,
+			"area": 2434.23
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col110",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.3,
+	"Calibration Factor b": 2.6,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 92.3649,
+			"FWHM": 1.98003,
+			"area": 490471
+		},
+		{
+			"Number_Peak": 2,
+			"position": 263.707,
+			"FWHM": 1.98653,
+			"area": 528664
+		},
+		{
+			"Number_Peak": 3,
+			"position": 187.624,
+			"FWHM": 1.90709,
+			"area": 183835
+		},
+		{
+			"Number_Peak": 4,
+			"position": 596.221,
+			"FWHM": 2.12572,
+			"area": 143342
+		},
+		{
+			"Number_Peak": 5,
+			"position": 738.1,
+			"FWHM": 2.26585,
+			"area": 151447
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1078.85,
+			"FWHM": 2.4862,
+			"area": 170321
+		},
+		{
+			"Number_Peak": 7,
+			"position": 852.156,
+			"FWHM": 2.38987,
+			"area": 131264
+		},
+		{
+			"Number_Peak": 8,
+			"position": 832.089,
+			"FWHM": 2.71454,
+			"area": 99636
+		},
+		{
+			"Number_Peak": 9,
+			"position": 339.914,
+			"FWHM": 1.99367,
+			"area": 52021.3
+		},
+		{
+			"Number_Peak": 10,
+			"position": 663.898,
+			"FWHM": 2.15382,
+			"area": 46940.5
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col112",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.25,
+	"Calibration Factor b": 1.6,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 96.4396,
+			"FWHM": 1.94833,
+			"area": 200826
+		},
+		{
+			"Number_Peak": 2,
+			"position": 274.363,
+			"FWHM": 2.01572,
+			"area": 75311.7
+		},
+		{
+			"Number_Peak": 3,
+			"position": 194.95,
+			"FWHM": 1.94504,
+			"area": 32666.1
+		},
+		{
+			"Number_Peak": 4,
+			"position": 620.677,
+			"FWHM": 2.13814,
+			"area": 13254.3
+		},
+		{
+			"Number_Peak": 5,
+			"position": 768.589,
+			"FWHM": 2.18613,
+			"area": 11774.5
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1122.8,
+			"FWHM": 2.31861,
+			"area": 11655.1
+		},
+		{
+			"Number_Peak": 7,
+			"position": 886.863,
+			"FWHM": 2.23084,
+			"area": 9812.13
+		},
+		{
+			"Number_Peak": 8,
+			"position": 866.034,
+			"FWHM": 2.4517,
+			"area": 6624.82
+		},
+		{
+			"Number_Peak": 9,
+			"position": 353.78,
+			"FWHM": 2.07705,
+			"area": 6248.41
+		},
+		{
+			"Number_Peak": 10,
+			"position": 327.651,
+			"FWHM": 1.96092,
+			"area": 4996.17
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col113",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.27,
+	"Calibration Factor b": 0,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 95.4656,
+			"FWHM": 1.7754,
+			"area": 215170
+		},
+		{
+			"Number_Peak": 2,
+			"position": 270.38,
+			"FWHM": 1.82374,
+			"area": 81731.3
+		},
+		{
+			"Number_Peak": 3,
+			"position": 191.994,
+			"FWHM": 1.79966,
+			"area": 33874.5
+		},
+		{
+			"Number_Peak": 4,
+			"position": 612.63,
+			"FWHM": 1.95853,
+			"area": 14388.8
+		},
+		{
+			"Number_Peak": 5,
+			"position": 758.347,
+			"FWHM": 2.02573,
+			"area": 12627.8
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1107.95,
+			"FWHM": 2.18768,
+			"area": 12506.8
+		},
+		{
+			"Number_Peak": 7,
+			"position": 874.857,
+			"FWHM": 2.07495,
+			"area": 10367
+		},
+		{
+			"Number_Peak": 8,
+			"position": 348.847,
+			"FWHM": 1.80544,
+			"area": 6388.98
+		},
+		{
+			"Number_Peak": 9,
+			"position": 854.266,
+			"FWHM": 2.21318,
+			"area": 6788.77
+		},
+		{
+			"Number_Peak": 10,
+			"position": 322.985,
+			"FWHM": 1.7848,
+			"area": 4864.31
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col114",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.26,
+	"Calibration Factor b": 2.1,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 95.4731,
+			"FWHM": 1.92079,
+			"area": 186729
+		},
+		{
+			"Number_Peak": 2,
+			"position": 271.353,
+			"FWHM": 1.9789,
+			"area": 69448.8
+		},
+		{
+			"Number_Peak": 3,
+			"position": 192.389,
+			"FWHM": 1.95507,
+			"area": 31193
+		},
+		{
+			"Number_Peak": 4,
+			"position": 615.522,
+			"FWHM": 2.1021,
+			"area": 11964.3
+		},
+		{
+			"Number_Peak": 5,
+			"position": 761.656,
+			"FWHM": 2.16481,
+			"area": 10598
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1113.5,
+			"FWHM": 2.35233,
+			"area": 9604.02
+		},
+		{
+			"Number_Peak": 7,
+			"position": 878.958,
+			"FWHM": 2.25395,
+			"area": 8787.17
+		},
+		{
+			"Number_Peak": 8,
+			"position": 350.301,
+			"FWHM": 2.04566,
+			"area": 5914.96
+		},
+		{
+			"Number_Peak": 9,
+			"position": 858.248,
+			"FWHM": 2.43496,
+			"area": 5862.36
+		},
+		{
+			"Number_Peak": 10,
+			"position": 324.248,
+			"FWHM": 1.94904,
+			"area": 4431.3
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col115",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.28,
+	"Calibration Factor b": 0,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 94.5606,
+			"FWHM": 1.77375,
+			"area": 190300
+		},
+		{
+			"Number_Peak": 2,
+			"position": 268.45,
+			"FWHM": 1.84348,
+			"area": 78448.1
+		},
+		{
+			"Number_Peak": 3,
+			"position": 190.523,
+			"FWHM": 1.79244,
+			"area": 34435.6
+		},
+		{
+			"Number_Peak": 4,
+			"position": 608.874,
+			"FWHM": 1.95516,
+			"area": 13589.6
+		},
+		{
+			"Number_Peak": 5,
+			"position": 753.459,
+			"FWHM": 2.05566,
+			"area": 12324.4
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1101.42,
+			"FWHM": 2.17823,
+			"area": 11586.9
+		},
+		{
+			"Number_Peak": 7,
+			"position": 869.468,
+			"FWHM": 2.09311,
+			"area": 9708.24
+		},
+		{
+			"Number_Peak": 8,
+			"position": 848.996,
+			"FWHM": 2.27909,
+			"area": 6635.39
+		},
+		{
+			"Number_Peak": 9,
+			"position": 346.666,
+			"FWHM": 1.92463,
+			"area": 6669.87
+		},
+		{
+			"Number_Peak": 10,
+			"position": 320.949,
+			"FWHM": 1.81051,
+			"area": 4660.85
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col116",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.3,
+	"Calibration Factor b": 0,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 264.673,
+			"FWHM": 2.03655,
+			"area": 20021.9
+		},
+		{
+			"Number_Peak": 2,
+			"position": 1084.82,
+			"FWHM": 2.30214,
+			"area": 9543.06
+		},
+		{
+			"Number_Peak": 3,
+			"position": 742.463,
+			"FWHM": 2.14541,
+			"area": 7466.04
+		},
+		{
+			"Number_Peak": 4,
+			"position": 599.745,
+			"FWHM": 2.13915,
+			"area": 7459.46
+		},
+		{
+			"Number_Peak": 5,
+			"position": 188.027,
+			"FWHM": 1.98324,
+			"area": 4967.71
+		},
+		{
+			"Number_Peak": 6,
+			"position": 856.687,
+			"FWHM": 2.22524,
+			"area": 6800.36
+		},
+		{
+			"Number_Peak": 7,
+			"position": 836.584,
+			"FWHM": 2.49654,
+			"area": 4703.09
+		},
+		{
+			"Number_Peak": 8,
+			"position": 93.4326,
+			"FWHM": 1.89138,
+			"area": 2696.87
+		},
+		{
+			"Number_Peak": 9,
+			"position": 667.915,
+			"FWHM": 2.11035,
+			"area": 2368.67
+		},
+		{
+			"Number_Peak": 10,
+			"position": 341.564,
+			"FWHM": 2.06753,
+			"area": 2266.8
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col117",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.26,
+	"Calibration Factor b": 3.4,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 271.129,
+			"FWHM": 2.04884,
+			"area": 19483.6
+		},
+		{
+			"Number_Peak": 2,
+			"position": 1112.46,
+			"FWHM": 2.38218,
+			"area": 9216.12
+		},
+		{
+			"Number_Peak": 3,
+			"position": 615.144,
+			"FWHM": 2.16041,
+			"area": 7755.5
+		},
+		{
+			"Number_Peak": 4,
+			"position": 761.028,
+			"FWHM": 2.20079,
+			"area": 7849.18
+		},
+		{
+			"Number_Peak": 5,
+			"position": 877.928,
+			"FWHM": 2.27463,
+			"area": 6864.07
+		},
+		{
+			"Number_Peak": 6,
+			"position": 192.399,
+			"FWHM": 1.97908,
+			"area": 5324.34
+		},
+		{
+			"Number_Peak": 7,
+			"position": 857.286,
+			"FWHM": 2.5747,
+			"area": 4952.81
+		},
+		{
+			"Number_Peak": 8,
+			"position": 95.6683,
+			"FWHM": 1.49497,
+			"area": 2171.14
+		},
+		{
+			"Number_Peak": 9,
+			"position": 684.903,
+			"FWHM": 2.18882,
+			"area": 2658.06
+		},
+		{
+			"Number_Peak": 10,
+			"position": 349.752,
+			"FWHM": 2.11796,
+			"area": 2347.51
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col118",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.25,
+	"Calibration Factor b": 0,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 274.799,
+			"FWHM": 2.26331,
+			"area": 40654.2
+		},
+		{
+			"Number_Peak": 2,
+			"position": 96.7582,
+			"FWHM": 2.25101,
+			"area": 31233.5
+		},
+		{
+			"Number_Peak": 3,
+			"position": 195.157,
+			"FWHM": 2.2559,
+			"area": 13349.3
+		},
+		{
+			"Number_Peak": 4,
+			"position": 771.265,
+			"FWHM": 2.4272,
+			"area": 11322.8
+		},
+		{
+			"Number_Peak": 5,
+			"position": 622.98,
+			"FWHM": 2.41152,
+			"area": 11676.1
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1126.83,
+			"FWHM": 2.56467,
+			"area": 12666.6
+		},
+		{
+			"Number_Peak": 7,
+			"position": 889.613,
+			"FWHM": 2.52204,
+			"area": 10109.9
+		},
+		{
+			"Number_Peak": 8,
+			"position": 868.817,
+			"FWHM": 2.82071,
+			"area": 6757.38
+		},
+		{
+			"Number_Peak": 9,
+			"position": 354.545,
+			"FWHM": 2.24141,
+			"area": 3657.95
+		},
+		{
+			"Number_Peak": 10,
+			"position": 693.785,
+			"FWHM": 2.40743,
+			"area": 3410.03
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col119",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.29,
+	"Calibration Factor b": 0.5,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 265.719,
+			"FWHM": 2.44023,
+			"area": 17667.3
+		},
+		{
+			"Number_Peak": 2,
+			"position": 1088.85,
+			"FWHM": 2.7059,
+			"area": 8639.01
+		},
+		{
+			"Number_Peak": 3,
+			"position": 745.301,
+			"FWHM": 2.5995,
+			"area": 7096.25
+		},
+		{
+			"Number_Peak": 4,
+			"position": 601.954,
+			"FWHM": 2.4823,
+			"area": 6801.84
+		},
+		{
+			"Number_Peak": 5,
+			"position": 859.812,
+			"FWHM": 2.68733,
+			"area": 6399.36
+		},
+		{
+			"Number_Peak": 6,
+			"position": 188.743,
+			"FWHM": 2.39166,
+			"area": 4620.59
+		},
+		{
+			"Number_Peak": 7,
+			"position": 839.732,
+			"FWHM": 3.21215,
+			"area": 5112.03
+		},
+		{
+			"Number_Peak": 8,
+			"position": 670.413,
+			"FWHM": 2.5732,
+			"area": 2231.65
+		},
+		{
+			"Number_Peak": 9,
+			"position": 93.5807,
+			"FWHM": 2.5629,
+			"area": 2653.92
+		},
+		{
+			"Number_Peak": 10,
+			"position": 317.468,
+			"FWHM": 2.2902,
+			"area": 1378.76
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col120",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.26,
+	"Calibration Factor b": 2.9,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 95.6114,
+			"FWHM": 1.84158,
+			"area": 609629
+		},
+		{
+			"Number_Peak": 2,
+			"position": 271.452,
+			"FWHM": 1.91183,
+			"area": 528471
+		},
+		{
+			"Number_Peak": 3,
+			"position": 192.756,
+			"FWHM": 1.80321,
+			"area": 185734
+		},
+		{
+			"Number_Peak": 4,
+			"position": 615.198,
+			"FWHM": 2.08426,
+			"area": 146501
+		},
+		{
+			"Number_Peak": 5,
+			"position": 1112.84,
+			"FWHM": 2.51117,
+			"area": 170096
+		},
+		{
+			"Number_Peak": 6,
+			"position": 761.686,
+			"FWHM": 2.18198,
+			"area": 146163
+		},
+		{
+			"Number_Peak": 7,
+			"position": 878.666,
+			"FWHM": 2.36239,
+			"area": 128766
+		},
+		{
+			"Number_Peak": 8,
+			"position": 858.044,
+			"FWHM": 2.65074,
+			"area": 86160.6
+		},
+		{
+			"Number_Peak": 9,
+			"position": 350.195,
+			"FWHM": 1.91824,
+			"area": 51486
+		},
+		{
+			"Number_Peak": 10,
+			"position": 685.199,
+			"FWHM": 2.08416,
+			"area": 43856.9
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col122",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.27,
+	"Calibration Factor b": 1.1,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 94.9473,
+			"FWHM": 1.95578,
+			"area": 250387
+		},
+		{
+			"Number_Peak": 2,
+			"position": 269.922,
+			"FWHM": 1.9992,
+			"area": 83764.4
+		},
+		{
+			"Number_Peak": 3,
+			"position": 191.503,
+			"FWHM": 1.96967,
+			"area": 39701.5
+		},
+		{
+			"Number_Peak": 4,
+			"position": 611.117,
+			"FWHM": 2.10968,
+			"area": 15806.7
+		},
+		{
+			"Number_Peak": 5,
+			"position": 756.381,
+			"FWHM": 2.17526,
+			"area": 12934
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1105.47,
+			"FWHM": 2.33399,
+			"area": 13137.9
+		},
+		{
+			"Number_Peak": 7,
+			"position": 872.925,
+			"FWHM": 2.24129,
+			"area": 11262.7
+		},
+		{
+			"Number_Peak": 8,
+			"position": 348.167,
+			"FWHM": 2.07204,
+			"area": 7229
+		},
+		{
+			"Number_Peak": 9,
+			"position": 852.371,
+			"FWHM": 2.30007,
+			"area": 7445.61
+		},
+		{
+			"Number_Peak": 10,
+			"position": 322.368,
+			"FWHM": 2.02195,
+			"area": 5488.69
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col123",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.27,
+	"Calibration Factor b": 0,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 95.3531,
+			"FWHM": 1.77336,
+			"area": 231189
+		},
+		{
+			"Number_Peak": 2,
+			"position": 270.799,
+			"FWHM": 1.84612,
+			"area": 84320.2
+		},
+		{
+			"Number_Peak": 3,
+			"position": 192.24,
+			"FWHM": 1.77601,
+			"area": 37803.8
+		},
+		{
+			"Number_Peak": 4,
+			"position": 613.421,
+			"FWHM": 2.00714,
+			"area": 15038.6
+		},
+		{
+			"Number_Peak": 5,
+			"position": 759.487,
+			"FWHM": 2.06022,
+			"area": 13018.9
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1109.46,
+			"FWHM": 2.24063,
+			"area": 12332.4
+		},
+		{
+			"Number_Peak": 7,
+			"position": 876.298,
+			"FWHM": 2.14595,
+			"area": 10177
+		},
+		{
+			"Number_Peak": 8,
+			"position": 349.076,
+			"FWHM": 1.88821,
+			"area": 6598.74
+		},
+		{
+			"Number_Peak": 9,
+			"position": 323.24,
+			"FWHM": 1.79528,
+			"area": 5388.04
+		},
+		{
+			"Number_Peak": 10,
+			"position": 855.686,
+			"FWHM": 2.22785,
+			"area": 7280.84
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col124",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.32,
+	"Calibration Factor b": 0.3,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 91.6383,
+			"FWHM": 1.86415,
+			"area": 155242
+		},
+		{
+			"Number_Peak": 2,
+			"position": 260.17,
+			"FWHM": 1.92085,
+			"area": 64571.5
+		},
+		{
+			"Number_Peak": 3,
+			"position": 184.772,
+			"FWHM": 1.86926,
+			"area": 28424.8
+		},
+		{
+			"Number_Peak": 4,
+			"position": 588.26,
+			"FWHM": 2.05547,
+			"area": 11407.1
+		},
+		{
+			"Number_Peak": 5,
+			"position": 728.579,
+			"FWHM": 2.11101,
+			"area": 10428.8
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1064.23,
+			"FWHM": 2.26728,
+			"area": 10116.4
+		},
+		{
+			"Number_Peak": 7,
+			"position": 840.575,
+			"FWHM": 2.15906,
+			"area": 8288.16
+		},
+		{
+			"Number_Peak": 8,
+			"position": 335.238,
+			"FWHM": 1.89046,
+			"area": 5283.68
+		},
+		{
+			"Number_Peak": 9,
+			"position": 820.855,
+			"FWHM": 2.44173,
+			"area": 5688.21
+		},
+		{
+			"Number_Peak": 10,
+			"position": 310.531,
+			"FWHM": 1.90621,
+			"area": 4386.47
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col125",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.29,
+	"Calibration Factor b": 0.9,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 93.5454,
+			"FWHM": 1.72944,
+			"area": 216251
+		},
+		{
+			"Number_Peak": 2,
+			"position": 266.067,
+			"FWHM": 1.77344,
+			"area": 79718.5
+		},
+		{
+			"Number_Peak": 3,
+			"position": 189.011,
+			"FWHM": 1.76194,
+			"area": 34729.5
+		},
+		{
+			"Number_Peak": 4,
+			"position": 745.145,
+			"FWHM": 2.00065,
+			"area": 13161.9
+		},
+		{
+			"Number_Peak": 5,
+			"position": 601.68,
+			"FWHM": 1.91093,
+			"area": 15148.6
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1088.51,
+			"FWHM": 2.14083,
+			"area": 12723.7
+		},
+		{
+			"Number_Peak": 7,
+			"position": 859.831,
+			"FWHM": 2.05332,
+			"area": 10465.6
+		},
+		{
+			"Number_Peak": 8,
+			"position": 342.98,
+			"FWHM": 1.7802,
+			"area": 6881.8
+		},
+		{
+			"Number_Peak": 9,
+			"position": 839.595,
+			"FWHM": 2.15327,
+			"area": 7336.35
+		},
+		{
+			"Number_Peak": 10,
+			"position": 317.618,
+			"FWHM": 1.80255,
+			"area": 5714.85
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col126",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.28,
+	"Calibration Factor b": 0.4,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 267.861,
+			"FWHM": 2.20183,
+			"area": 24445.3
+		},
+		{
+			"Number_Peak": 2,
+			"position": 94.1909,
+			"FWHM": 2.07062,
+			"area": 9556.75
+		},
+		{
+			"Number_Peak": 3,
+			"position": 1097.43,
+			"FWHM": 2.4585,
+			"area": 10324.4
+		},
+		{
+			"Number_Peak": 4,
+			"position": 751.054,
+			"FWHM": 2.35113,
+			"area": 8729.18
+		},
+		{
+			"Number_Peak": 5,
+			"position": 189.964,
+			"FWHM": 2.17948,
+			"area": 6822.76
+		},
+		{
+			"Number_Peak": 6,
+			"position": 606.658,
+			"FWHM": 2.37125,
+			"area": 7960.77
+		},
+		{
+			"Number_Peak": 7,
+			"position": 866.625,
+			"FWHM": 2.43159,
+			"area": 7199.61
+		},
+		{
+			"Number_Peak": 8,
+			"position": 846.315,
+			"FWHM": 2.7129,
+			"area": 5204.37
+		},
+		{
+			"Number_Peak": 9,
+			"position": 345.477,
+			"FWHM": 2.16242,
+			"area": 2624.65
+		},
+		{
+			"Number_Peak": 10,
+			"position": 675.58,
+			"FWHM": 2.30929,
+			"area": 2446
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col127",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.34,
+	"Calibration Factor b": 0,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 256.343,
+			"FWHM": 2.08944,
+			"area": 23151.9
+		},
+		{
+			"Number_Peak": 2,
+			"position": 89.9606,
+			"FWHM": 1.9859,
+			"area": 9024.41
+		},
+		{
+			"Number_Peak": 3,
+			"position": 1049.28,
+			"FWHM": 2.32504,
+			"area": 9914.8
+		},
+		{
+			"Number_Peak": 4,
+			"position": 580.065,
+			"FWHM": 2.16447,
+			"area": 8157.21
+		},
+		{
+			"Number_Peak": 5,
+			"position": 717.992,
+			"FWHM": 2.22588,
+			"area": 8384.82
+		},
+		{
+			"Number_Peak": 6,
+			"position": 181.631,
+			"FWHM": 1.99679,
+			"area": 6578.15
+		},
+		{
+			"Number_Peak": 7,
+			"position": 828.642,
+			"FWHM": 2.24936,
+			"area": 7146.22
+		},
+		{
+			"Number_Peak": 8,
+			"position": 809.176,
+			"FWHM": 2.54878,
+			"area": 4885.29
+		},
+		{
+			"Number_Peak": 9,
+			"position": 645.926,
+			"FWHM": 2.16099,
+			"area": 2679.1
+		},
+		{
+			"Number_Peak": 10,
+			"position": 330.627,
+			"FWHM": 2.16468,
+			"area": 2141.71
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col128",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.31,
+	"Calibration Factor b": 0,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 262.61,
+			"FWHM": 2.21515,
+			"area": 19440.3
+		},
+		{
+			"Number_Peak": 2,
+			"position": 1074.61,
+			"FWHM": 2.49397,
+			"area": 10201.1
+		},
+		{
+			"Number_Peak": 3,
+			"position": 594.326,
+			"FWHM": 2.35451,
+			"area": 7748.88
+		},
+		{
+			"Number_Peak": 4,
+			"position": 735.571,
+			"FWHM": 2.35668,
+			"area": 7982.98
+		},
+		{
+			"Number_Peak": 5,
+			"position": 848.561,
+			"FWHM": 2.46436,
+			"area": 7197.52
+		},
+		{
+			"Number_Peak": 6,
+			"position": 186.665,
+			"FWHM": 2.12922,
+			"area": 4946.67
+		},
+		{
+			"Number_Peak": 7,
+			"position": 828.708,
+			"FWHM": 2.89118,
+			"area": 4695.46
+		},
+		{
+			"Number_Peak": 8,
+			"position": 92.8181,
+			"FWHM": 2.16884,
+			"area": 3011.55
+		},
+		{
+			"Number_Peak": 9,
+			"position": 338.66,
+			"FWHM": 2.32029,
+			"area": 2247.62
+		},
+		{
+			"Number_Peak": 10,
+			"position": 661.858,
+			"FWHM": 2.57883,
+			"area": 2377.63
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col129",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.29,
+	"Calibration Factor b": 0,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 264.789,
+			"FWHM": 2.65239,
+			"area": 19475
+		},
+		{
+			"Number_Peak": 2,
+			"position": 1090.75,
+			"FWHM": 2.8591,
+			"area": 9124.25
+		},
+		{
+			"Number_Peak": 3,
+			"position": 603.157,
+			"FWHM": 2.74705,
+			"area": 7214.44
+		},
+		{
+			"Number_Peak": 4,
+			"position": 746.955,
+			"FWHM": 2.80808,
+			"area": 7636.29
+		},
+		{
+			"Number_Peak": 5,
+			"position": 860.693,
+			"FWHM": 2.84115,
+			"area": 6694.35
+		},
+		{
+			"Number_Peak": 6,
+			"position": 187.245,
+			"FWHM": 2.69459,
+			"area": 5158.06
+		},
+		{
+			"Number_Peak": 7,
+			"position": 840.777,
+			"FWHM": 3.48043,
+			"area": 5253.12
+		},
+		{
+			"Number_Peak": 8,
+			"position": 93.7519,
+			"FWHM": 2.26956,
+			"area": 2229.31
+		},
+		{
+			"Number_Peak": 9,
+			"position": 671.827,
+			"FWHM": 2.6835,
+			"area": 2319.3
+		},
+		{
+			"Number_Peak": 10,
+			"position": 342.606,
+			"FWHM": 2.89049,
+			"area": 2091.05
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col130",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.27,
+	"Calibration Factor b": 4.2,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 94.4425,
+			"FWHM": 1.8261,
+			"area": 545036
+		},
+		{
+			"Number_Peak": 2,
+			"position": 268.608,
+			"FWHM": 1.8668,
+			"area": 517619
+		},
+		{
+			"Number_Peak": 3,
+			"position": 190.695,
+			"FWHM": 1.75537,
+			"area": 187128
+		},
+		{
+			"Number_Peak": 4,
+			"position": 1103.04,
+			"FWHM": 2.49514,
+			"area": 171821
+		},
+		{
+			"Number_Peak": 5,
+			"position": 609.592,
+			"FWHM": 2.04988,
+			"area": 148344
+		},
+		{
+			"Number_Peak": 6,
+			"position": 754.626,
+			"FWHM": 2.11524,
+			"area": 145627
+		},
+		{
+			"Number_Peak": 7,
+			"position": 870.588,
+			"FWHM": 2.33849,
+			"area": 126088
+		},
+		{
+			"Number_Peak": 8,
+			"position": 850.096,
+			"FWHM": 2.58416,
+			"area": 84049.4
+		},
+		{
+			"Number_Peak": 9,
+			"position": 347.05,
+			"FWHM": 1.85393,
+			"area": 47039.8
+		},
+		{
+			"Number_Peak": 10,
+			"position": 321.093,
+			"FWHM": 1.81359,
+			"area": 34820.5
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col132",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.31,
+	"Calibration Factor b": 0.5,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 92.0495,
+			"FWHM": 1.90587,
+			"area": 247577
+		},
+		{
+			"Number_Peak": 2,
+			"position": 261.692,
+			"FWHM": 1.95083,
+			"area": 89046
+		},
+		{
+			"Number_Peak": 3,
+			"position": 185.9,
+			"FWHM": 1.90588,
+			"area": 39269.9
+		},
+		{
+			"Number_Peak": 4,
+			"position": 592.76,
+			"FWHM": 2.04496,
+			"area": 15632.8
+		},
+		{
+			"Number_Peak": 5,
+			"position": 1072.22,
+			"FWHM": 2.24501,
+			"area": 13634.4
+		},
+		{
+			"Number_Peak": 6,
+			"position": 733.887,
+			"FWHM": 2.13417,
+			"area": 14258.9
+		},
+		{
+			"Number_Peak": 7,
+			"position": 846.705,
+			"FWHM": 2.17899,
+			"area": 10689.8
+		},
+		{
+			"Number_Peak": 8,
+			"position": 337.61,
+			"FWHM": 1.97707,
+			"area": 7882.11
+		},
+		{
+			"Number_Peak": 9,
+			"position": 826.835,
+			"FWHM": 2.45438,
+			"area": 7583.64
+		},
+		{
+			"Number_Peak": 10,
+			"position": 312.524,
+			"FWHM": 0.92014,
+			"area": 3940.22
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col133",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.29,
+	"Calibration Factor b": 3,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 93.2726,
+			"FWHM": 1.72497,
+			"area": 197376
+		},
+		{
+			"Number_Peak": 2,
+			"position": 265.168,
+			"FWHM": 1.8105,
+			"area": 77432.4
+		},
+		{
+			"Number_Peak": 3,
+			"position": 188.192,
+			"FWHM": 1.76616,
+			"area": 34791.4
+		},
+		{
+			"Number_Peak": 4,
+			"position": 600.857,
+			"FWHM": 1.95712,
+			"area": 14617
+		},
+		{
+			"Number_Peak": 5,
+			"position": 743.859,
+			"FWHM": 2.08054,
+			"area": 13375.1
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1086.89,
+			"FWHM": 2.27017,
+			"area": 12927.1
+		},
+		{
+			"Number_Peak": 7,
+			"position": 858.228,
+			"FWHM": 2.15262,
+			"area": 10864.7
+		},
+		{
+			"Number_Peak": 8,
+			"position": 342.209,
+			"FWHM": 1.82238,
+			"area": 7055.4
+		},
+		{
+			"Number_Peak": 9,
+			"position": 838.039,
+			"FWHM": 2.35546,
+			"area": 6845.34
+		},
+		{
+			"Number_Peak": 10,
+			"position": 316.793,
+			"FWHM": 1.80414,
+			"area": 5360.09
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col134",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.28,
+	"Calibration Factor b": 1.6,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 93.6726,
+			"FWHM": 1.86466,
+			"area": 137623
+		},
+		{
+			"Number_Peak": 2,
+			"position": 267.439,
+			"FWHM": 1.94029,
+			"area": 66476.2
+		},
+		{
+			"Number_Peak": 3,
+			"position": 189.818,
+			"FWHM": 1.89965,
+			"area": 28229.3
+		},
+		{
+			"Number_Peak": 4,
+			"position": 606.106,
+			"FWHM": 2.05278,
+			"area": 12254.9
+		},
+		{
+			"Number_Peak": 5,
+			"position": 750.005,
+			"FWHM": 2.16964,
+			"area": 11057.5
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1096.46,
+			"FWHM": 2.3123,
+			"area": 9863.46
+		},
+		{
+			"Number_Peak": 7,
+			"position": 865.647,
+			"FWHM": 2.2452,
+			"area": 8724.67
+		},
+		{
+			"Number_Peak": 8,
+			"position": 345.118,
+			"FWHM": 1.98369,
+			"area": 5570.97
+		},
+		{
+			"Number_Peak": 9,
+			"position": 845.249,
+			"FWHM": 2.40074,
+			"area": 5892.73
+		},
+		{
+			"Number_Peak": 10,
+			"position": 319.519,
+			"FWHM": 2.00439,
+			"area": 4616.64
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col135",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.3,
+	"Calibration Factor b": 0.6,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 92.4247,
+			"FWHM": 1.77917,
+			"area": 235365
+		},
+		{
+			"Number_Peak": 2,
+			"position": 264.411,
+			"FWHM": 1.8142,
+			"area": 88646.2
+		},
+		{
+			"Number_Peak": 3,
+			"position": 188.123,
+			"FWHM": 1.77917,
+			"area": 36962.1
+		},
+		{
+			"Number_Peak": 4,
+			"position": 597.074,
+			"FWHM": 1.91681,
+			"area": 15290.7
+		},
+		{
+			"Number_Peak": 5,
+			"position": 739.178,
+			"FWHM": 2.0733,
+			"area": 13396.8
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1080.39,
+			"FWHM": 2.19657,
+			"area": 12841.3
+		},
+		{
+			"Number_Peak": 7,
+			"position": 853.558,
+			"FWHM": 2.09228,
+			"area": 11040.4
+		},
+		{
+			"Number_Peak": 8,
+			"position": 833.412,
+			"FWHM": 2.22439,
+			"area": 7143.82
+		},
+		{
+			"Number_Peak": 9,
+			"position": 340.595,
+			"FWHM": 1.79433,
+			"area": 7378.38
+		},
+		{
+			"Number_Peak": 10,
+			"position": 315.537,
+			"FWHM": 1.80902,
+			"area": 6017.05
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col136",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.28,
+	"Calibration Factor b": 2.1,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 267.672,
+			"FWHM": 2.06421,
+			"area": 25438.6
+		},
+		{
+			"Number_Peak": 2,
+			"position": 94.2842,
+			"FWHM": 2.02912,
+			"area": 11318.8
+		},
+		{
+			"Number_Peak": 3,
+			"position": 1096.06,
+			"FWHM": 2.34894,
+			"area": 10557.7
+		},
+		{
+			"Number_Peak": 4,
+			"position": 750.154,
+			"FWHM": 2.21217,
+			"area": 9000.64
+		},
+		{
+			"Number_Peak": 5,
+			"position": 605.957,
+			"FWHM": 2.10962,
+			"area": 8823.45
+		},
+		{
+			"Number_Peak": 6,
+			"position": 190.083,
+			"FWHM": 2.0068,
+			"area": 7340.66
+		},
+		{
+			"Number_Peak": 7,
+			"position": 865.607,
+			"FWHM": 2.26692,
+			"area": 7332
+		},
+		{
+			"Number_Peak": 8,
+			"position": 845.184,
+			"FWHM": 2.42504,
+			"area": 5083.38
+		},
+		{
+			"Number_Peak": 9,
+			"position": 345.239,
+			"FWHM": 2.04488,
+			"area": 2732.37
+		},
+		{
+			"Number_Peak": 10,
+			"position": 674.823,
+			"FWHM": 2.21304,
+			"area": 2615.63
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col137",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.3,
+	"Calibration Factor b": 6.6,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 261.337,
+			"FWHM": 1.98348,
+			"area": 18872.9
+		},
+		{
+			"Number_Peak": 2,
+			"position": 1075.76,
+			"FWHM": 2.35635,
+			"area": 8848.35
+		},
+		{
+			"Number_Peak": 3,
+			"position": 735.643,
+			"FWHM": 2.12114,
+			"area": 6917.68
+		},
+		{
+			"Number_Peak": 4,
+			"position": 594.593,
+			"FWHM": 2.14974,
+			"area": 6626.2
+		},
+		{
+			"Number_Peak": 5,
+			"position": 848.598,
+			"FWHM": 2.24136,
+			"area": 6079.03
+		},
+		{
+			"Number_Peak": 6,
+			"position": 184.753,
+			"FWHM": 1.92983,
+			"area": 4832.74
+		},
+		{
+			"Number_Peak": 7,
+			"position": 828.597,
+			"FWHM": 2.42534,
+			"area": 4169.29
+		},
+		{
+			"Number_Peak": 8,
+			"position": 91.3436,
+			"FWHM": 1.85736,
+			"area": 3429.67
+		},
+		{
+			"Number_Peak": 9,
+			"position": 338.054,
+			"FWHM": 2.02279,
+			"area": 2056.65
+		},
+		{
+			"Number_Peak": 10,
+			"position": 661.925,
+			"FWHM": 2.21856,
+			"area": 2277.47
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col138",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.05,
+	"Calibration Factor b": 13.4,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 269.076,
+			"FWHM": 2.05103,
+			"area": 19389.5
+		},
+		{
+			"Number_Peak": 2,
+			"position": 1102.92,
+			"FWHM": 2.38083,
+			"area": 9291.21
+		},
+		{
+			"Number_Peak": 3,
+			"position": 754.957,
+			"FWHM": 2.23038,
+			"area": 7740.85
+		},
+		{
+			"Number_Peak": 4,
+			"position": 609.697,
+			"FWHM": 2.18444,
+			"area": 7256.34
+		},
+		{
+			"Number_Peak": 5,
+			"position": 870.892,
+			"FWHM": 2.35139,
+			"area": 6846.96
+		},
+		{
+			"Number_Peak": 6,
+			"position": 191.205,
+			"FWHM": 2.12176,
+			"area": 4682.69
+		},
+		{
+			"Number_Peak": 7,
+			"position": 850.479,
+			"FWHM": 2.53773,
+			"area": 4808.77
+		},
+		{
+			"Number_Peak": 8,
+			"position": 347.009,
+			"FWHM": 2.15456,
+			"area": 2237.58
+		},
+		{
+			"Number_Peak": 9,
+			"position": 679.089,
+			"FWHM": 2.31065,
+			"area": 2174.24
+		},
+		{
+			"Number_Peak": 10,
+			"position": 321.33,
+			"FWHM": 1.95191,
+			"area": 1543.46
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col139",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.25,
+	"Calibration Factor b": 3.6,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 273.338,
+			"FWHM": 2.65265,
+			"area": 25400
+		},
+		{
+			"Number_Peak": 2,
+			"position": 1121.18,
+			"FWHM": 2.87215,
+			"area": 10411.7
+		},
+		{
+			"Number_Peak": 3,
+			"position": 766.971,
+			"FWHM": 2.75539,
+			"area": 8611.88
+		},
+		{
+			"Number_Peak": 4,
+			"position": 619.709,
+			"FWHM": 2.66537,
+			"area": 8728.81
+		},
+		{
+			"Number_Peak": 5,
+			"position": 193.862,
+			"FWHM": 2.55601,
+			"area": 7255.75
+		},
+		{
+			"Number_Peak": 6,
+			"position": 884.77,
+			"FWHM": 2.80341,
+			"area": 7773.51
+		},
+		{
+			"Number_Peak": 7,
+			"position": 96.1516,
+			"FWHM": 2.48426,
+			"area": 5259.08
+		},
+		{
+			"Number_Peak": 8,
+			"position": 864.066,
+			"FWHM": 3.14693,
+			"area": 5881.25
+		},
+		{
+			"Number_Peak": 9,
+			"position": 353.37,
+			"FWHM": 2.5228,
+			"area": 2952.99
+		},
+		{
+			"Number_Peak": 10,
+			"position": 690.07,
+			"FWHM": 2.65167,
+			"area": 2727.2
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col140",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 1,
+	"Calibration Factor m": 1.24,
+	"Calibration Factor b": 0,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 97.1265,
+			"FWHM": 1.84127,
+			"area": 703563
+		},
+		{
+			"Number_Peak": 2,
+			"position": 276.386,
+			"FWHM": 1.93134,
+			"area": 534162
+		},
+		{
+			"Number_Peak": 3,
+			"position": 196.334,
+			"FWHM": 1.87171,
+			"area": 186472
+		},
+		{
+			"Number_Peak": 4,
+			"position": 626.955,
+			"FWHM": 2.15432,
+			"area": 160393
+		},
+		{
+			"Number_Peak": 5,
+			"position": 776.2,
+			"FWHM": 2.21314,
+			"area": 157982
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1134.43,
+			"FWHM": 2.60852,
+			"area": 181479
+		},
+		{
+			"Number_Peak": 7,
+			"position": 895.558,
+			"FWHM": 2.44266,
+			"area": 138652
+		},
+		{
+			"Number_Peak": 8,
+			"position": 874.488,
+			"FWHM": 2.74364,
+			"area": 92178.9
+		},
+		{
+			"Number_Peak": 9,
+			"position": 356.824,
+			"FWHM": 1.94091,
+			"area": 53241.5
+		},
+		{
+			"Number_Peak": 10,
+			"position": 698.282,
+			"FWHM": 2.1368,
+			"area": 44695.1
+		}
+	]
+}
+{
+	"Source": "Europium",
+	"Histogram": "hist1D_col102",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 33702007,
+	"Calibration Factor m": 1.31,
+	"Calibration Factor b": 0,
+	"Peaks": [
+		{
+			"Number_Peak": 1,
+			"position": 803.524,
+			"FWHM": 6.6867,
+			"area": -117.923
+		},
+		{
+			"Number_Peak": 2,
+			"position": 262.228,
+			"FWHM": 1.91393,
+			"area": 77169.4
+		},
+		{
+			"Number_Peak": 3,
+			"position": 186.008,
+			"FWHM": 1.87318,
+			"area": 30858.1
+		},
+		{
+			"Number_Peak": 4,
+			"position": 594.869,
+			"FWHM": 1.97772,
+			"area": 13810.6
+		},
+		{
+			"Number_Peak": 5,
+			"position": 735.929,
+			"FWHM": 2.08892,
+			"area": 12711.1
+		},
+		{
+			"Number_Peak": 6,
+			"position": 1075.95,
+			"FWHM": 2.27045,
+			"area": 12122.3
+		},
+		{
+			"Number_Peak": 7,
+			"position": 849.249,
+			"FWHM": 2.17225,
+			"area": 10182
+		},
+		{
+			"Number_Peak": 8,
+			"position": 338.441,
+			"FWHM": 1.94344,
+			"area": 6614.57
+		},
+		{
+			"Number_Peak": 9,
+			"position": 829.254,
+			"FWHM": 2.37869,
+			"area": 6904.32
+		},
+		{
+			"Number_Peak": 10,
+			"position": 313.317,
+			"FWHM": 2.00936,
+			"area": 4909.09
+		}
+	]
+}

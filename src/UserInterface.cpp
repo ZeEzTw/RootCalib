@@ -1,4 +1,4 @@
-#include "UserInterface.h"
+#include "../include/UserInterface.h"
 
 void UserInterface::askAboutPeaks(std::vector<Histogram> &histograms, std::ofstream &jsonFile, TFile *outputFileHistograms, TFile *outputFileCalibrated)
 {
@@ -27,7 +27,7 @@ void UserInterface::askAboutPeaks(std::vector<Histogram> &histograms, std::ofstr
             std::cout << "In which histogram is the peak?" << std::endl;
             int histogramNumber;
             std::cin >> histogramNumber;
-
+ 
             if (histogramNumber < 0 || histogramNumber >= histograms.size())
             {
                 std::cerr << "Invalid histogram number!" << std::endl;
@@ -93,11 +93,11 @@ void UserInterface::showCalibrationInfo(const Histogram &histogram)
 
 double *UserInterface::askAboutSource(sortEnergy &energys, int &size)
 {
-    std::vector<double *> selectedEnergyArrays; // Vector pentru a stoca pointerii la array-urile de energie selectate
-    std::vector<int> arraySizes;                // Vector pentru a stoca dimensiunile fiecărui array de energie
+    std::vector<double *> selectedEnergyArrays;
+    std::vector<int> arraySizes; 
 
     bool addMoreSources = true;
-    int totalSize = 0; // Variabilă pentru a acumula dimensiunea totală
+    int totalSize = 0;
 
     while (addMoreSources)
     {
@@ -110,44 +110,37 @@ double *UserInterface::askAboutSource(sortEnergy &energys, int &size)
         int sourceNumber;
         std::cin >> sourceNumber;
 
-        // Verificăm validitatea sursei
         if (sourceNumber < 0 || sourceNumber >= energys.getSize())
         {
             std::cerr << "Invalid source number!" << std::endl;
-            continue; // Reîncepe bucla pentru a cere o altă sursă
+            continue; 
         }
 
-        // Obținem pointerul la array-ul de energie și dimensiunea acestuia
         double *energyArray = energys.getEnergyArray(sourceNumber);
-        int arraySize = energys.getEnergyArraySize(sourceNumber); // Obținem dimensiunea specifică a array-ului
+        int arraySize = energys.getEnergyArraySize(sourceNumber); 
 
         if (energyArray != nullptr)
         {
             selectedEnergyArrays.push_back(energyArray);
             arraySizes.push_back(arraySize);
-            totalSize += arraySize; // Acumulăm dimensiunea totală
+            totalSize += arraySize;
         }
 
-        // Întrebăm utilizatorul dacă dorește să adauge o altă sursă
         std::cout << "Do you want to add more sources? (Y/N)" << std::endl;
         char answer;
         std::cin >> answer;
         addMoreSources = (answer == 'Y' || answer == 'y');
     }
 
-    // Creăm un array unic pentru a conține toate array-urile de energie
     double *combinedEnergyArray = new double[totalSize];
 
-    // Copiem toate valorile în `combinedEnergyArray`
     int index = 0;
     for (size_t i = 0; i < selectedEnergyArrays.size(); ++i)
     {
         int arraySize = arraySizes[i];
         std::copy(selectedEnergyArrays[i], selectedEnergyArrays[i] + arraySize, combinedEnergyArray + index);
-        index += arraySize; // Avansăm indexul pentru array-ul combinat
+        index += arraySize; 
     }
-
-    size = totalSize; // Actualizăm dimensiunea totală
-
-    return combinedEnergyArray; // Returnăm pointerul către array-ul combinat
+    size = totalSize; 
+    return combinedEnergyArray;
 }

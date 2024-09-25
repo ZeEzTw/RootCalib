@@ -5,7 +5,7 @@ This project provides tools for extracting and analyzing peaks from ROOT histogr
 ## Features
 
 - **Peak Extraction**: Identifies the top peaks in histograms from ROOT files.
-- **Filtering**: Filters peaks based on Xmin, Xmax, and FWHMmax.
+- **Filtering**: Filters peaks based on Xmin, Xmax, MinAmplitude, MaxAmplitude, and FWHMmax.
 - **Calibration**: Calibrates each histogram individually using specified sources.
 - **File Output**: Saves the histogram with peaks, the calibrated histogram, and detailed data in a JSON file.
 
@@ -18,52 +18,74 @@ This project provides tools for extracting and analyzing peaks from ROOT histogr
     "NumberOfPeaks": 10,
     "Peaks": [
         {
-            "Number_Peak": 1,
-            "position": 91.9006,
-            "amplitude": 108243,
-            "sigma": 0.797756,
-            "area": 191502,
-            "leftLimit": 89.5073,
-            "rightLimit": 94.2938
-        },
-       "// Additional peaks..."
+            "Number_Peak": 2,
+            "position": 262.228,
+            "FWHM": 1.91393,
+            "area": 77169.4        
+        }
     ]
+    "// Additional peaks..."
 }
 ```
-Extra Features
+## Extra Features
 
 After processing, the program offers the option to adjust peaks:
 
-    Adjust Peak Position: You can change the position of any specified peak (e.g., move peak 5 to position 500).
-    Update JSON: The data.json file is updated with the new peak positions, while preserving the old data.
-    Redraw Histograms: A new spectrum is generated with the updated peak positions, while previous histograms are preserved.
+   - Adjust Peak Position: You can change the position of any specified peak (e.g., move peak 5 to position 500).
+   - Update JSON: The data.json file is updated with the new peak positions, while preserving the old data.
+   - Redraw Histograms: A new spectrum is generated with the updated peak positions, while previous histograms are preserved.
 
 This feature allows you to refine peak positions or calibrate histograms with different sets of peaks.
+Is just an example to show the capability of extension with the code arhitecture.
 
 
-Installation and Usage
+## Installation and Usage
 Clone Repository
 
-Clone the repository using: git clone https://github.com/ZeEzTw/Eli-Europiu.git
+- Clone the repository using:
+
+```git clone https://github.com/ZeEzTw/Eli-Europiu.git```
 
 
-Compilation
-Compile the code with: g++ MainApp.cpp Histogram.cpp Peak.cpp sortEnergy.cpp UserInterface.cpp $(root-config --glibs --cflags --libs) -o task
+# Compilation
+Compile the code with: ```g++ src/*.cpp -Iinclude $(root-config --glibs --cflags --libs) -o task```
 
 
-Running the Program
-Run the application with: ./task <number_of_peaks> <source_name> <histogram_file_path> <energy_file_path> <Xmin> <Xmax> <FWHMmax>
-Example: ./task 10 Europium data.root energy.txt 10.0 1500.0 20
+# Running the Program
+ - 1.To activate User Interface, run it with the following example command:
 
-Argument Explanation
+```./taskD 10 Europium data/data.root mDelila_raw data/energy.txt 10.0 1500.0 20 0 100000000 "/home/andrei/Europiu2/output"```
 
-    <number_of_peaks>: Number of peaks to identify.
-    <source_name>: Name of the source for calibration.
-    <histogram_file_path>: Path to the ROOT file containing the histogram.
-    <energy_file_path>: Path to the energy data file.
-    <Xmin>: Minimum X limit for peak identification.
-    <Xmax>: Maximum X limit for peak identification.
-    <FWHMmax>: Maximum FWHM for filtering peaks.
+ - 2.To run without User Interface, use this example command:
 
+```./taskD 10 Europium data/data.root mDelila_raw data/energy.txt 10.0 1500.0 20 0 100000000 "/home/andrei/Europiu2/output"```
+
+- Run the application with: 
+
+```./task <number_of_peaks> <source_name> <histogram_file_path> <TH2histogram_name> <energy_file_path> <Xmin> <Xmax> <FWHMmax> <MinAmplitude> <MaxAmplitude> <save_path> <sources> <sources>```
+
+# Arguments
+
+soruces can be puted as much as needed.
+
+- <number_of_peaks>: Number of peaks to identify.
+- <source_name>: Name of the source for calibration.
+- <histogram_file_path>: Path to the ROOT file containing the histogram.
+- <TH2histogram_name>: Name of the 2D histogram in the ROOT file.
+- <energy_file_path>: Path to the energy data file.
+- <Xmin>: Minimum X limit for peak identification.
+- <Xmax>: Maximum X limit for peak identification.
+- <FWHMmax>: Maximum Full Width at Half Maximum (FWHM) for filtering peaks.
+- <MinAmplitude>: Minimum amplitude for peak detection.
+- <MaxAmplitude>: Maximum amplitude for peak detection.
+- <save_path>: Path where the results will be saved.
+
+## Error Codes:
+
+    0: Program finished successfully.
+    1: Too few arguments to run.
+    2: Source names for calibration are not valid (check spelling).
+    3: Input file is not valid, or it cannot be opened (check spelling).
+    4: TH2F histogram with data is not valid (check spelling).
 
 

@@ -1,19 +1,17 @@
-#include "sortEnergy.h"
+#include "../include/sortEnergy.h"
 #include <iostream>
 #include <sstream>
 #include <algorithm>
 
-// Constructor: inițializează matricea de energie dintr-un fișier JSON
 sortEnergy::sortEnergy(const std::string &filename)
 {
     readFromTxt(filename);
-    sortEnergyArray(); // Sortăm array-ul de energie
+    sortEnergyArray();
 }
 
-// Destructor: eliberează resursele
 sortEnergy::~sortEnergy()
 {
-    // Destructor implicit va curăța vectorii
+    // Destructor implicit
 }
 
 // Citește și parsează fișierul JSON simplificat
@@ -107,10 +105,8 @@ void sortEnergy::readFromTxt(const std::string &filename)
 
     while (std::getline(file, line))
     {
-        // Verifică dacă linia este un nume de sursă (nu conține numere)
         if (line.find_first_not_of("0123456789. ") != std::string::npos)
         {
-            // Dacă există o sursă curentă, o adaugă la liste
             if (!currentSource.empty())
             {
                 sources.push_back(currentSource);
@@ -121,7 +117,6 @@ void sortEnergy::readFromTxt(const std::string &filename)
         }
         else
         {
-            // Încearcă să convertească linia într-un număr
             try
             {
                 double energy = std::stod(line);
@@ -133,8 +128,6 @@ void sortEnergy::readFromTxt(const std::string &filename)
             }
         }
     }
-
-    // Adaugă ultima sursă și lista de energii dacă există
     if (!currentSource.empty())
     {
         sources.push_back(currentSource);
@@ -143,7 +136,18 @@ void sortEnergy::readFromTxt(const std::string &filename)
 
     file.close();
 }
-// Sortează matricea de energie în ordine descrescătoare
+int sortEnergy::isSourceValid(const std::string &source)
+{
+    for (size_t i = 0; i < sources.size(); ++i)
+    {
+        if (sources[i] == source)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 void sortEnergy::sortEnergyArray()
 {
     for (auto &row : energyMatrix)
@@ -170,7 +174,7 @@ int sortEnergy::getEnergyArraySize(int index) const
     }
     return energyMatrix[index].size();
 }
-// Scrie matricea de energie sortată într-un fișier
+
 void sortEnergy::printToFile(std::ofstream &file) const
 {
     for (size_t i = 0; i < sources.size(); ++i)
@@ -190,4 +194,62 @@ void sortEnergy::printSources() const
     {
         std::cout << i << ". " << sources[i] << std::endl;
     }
+}
+
+void sortEnergy::chooseSources(int argc, char *argv[])
+{
+    bool dublicated = false;
+    for (int i = 12; i < argc; i++)
+    {
+        dublicated = false;
+        for (int j = 0; j < requestedSources.size(); j++)
+        {
+            if (requestedSources[j] == argv[i])
+            {
+                dublicated = true;
+            }
+        }
+        if (!dublicated)
+        {
+            requestedSources.push_back(argv[i]);
+        }
+    }
+}
+
+double *sortEnergy::createSourceArray(int &size)
+{
+    std::vector<double *> selectedEnergyArrays;
+    std::vector<int> arraySizes;
+    int totalSize = 0;
+
+    for (const auto &source : requestedSources)
+    {
+        int index = isSourceValid(source);
+        if (index != -1)
+        {
+            int energyArraySize = getEnergyArraySize(index);
+            if (energyArraySize > 0)
+            {
+                double *currentEnergyArray = getEnergyArray(index);
+                selectedEnergyArrays.push_back(currentEnergyArray);
+                arraySizes.push_back(energyArraySize);
+                totalSize += energyArraySize;
+            }
+        }
+        else
+        {
+            std::cerr << "Invalid source name: " << source << std::endl;
+            return nullptr;
+        }
+    }
+    double *combinedEnergyArray = new double[totalSize];
+    int index = 0;
+    for (size_t i = 0; i < selectedEnergyArrays.size(); ++i)
+    {
+        int arraySize = arraySizes[i];
+        std::copy(selectedEnergyArrays[i], selectedEnergyArrays[i] + arraySize, combinedEnergyArray + index);
+        index += arraySize;
+    }
+    size = totalSize;
+    return combinedEnergyArray;
 }

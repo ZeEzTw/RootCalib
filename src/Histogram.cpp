@@ -1,4 +1,4 @@
-#include "Histogram.h"
+#include "../include/Histogram.h"
 
 // Variabile globale
 float MaxDistance = 10;
@@ -7,21 +7,18 @@ long int iterations = 0;
 long int goodGaus = 0;
 long int badGaus = 0;
 
-Histogram::Histogram(int xMin, int xMax, int maxFWHM, int numberOfPeaks, TH1D *mainHist, std::string sourceName) 
-: xMin(xMin), xMax(xMax), maxFWHM(maxFWHM), numberOfPeaks(numberOfPeaks), mainHist(mainHist), tempHist(nullptr), calibratedHist(nullptr), peakCount(0), m(0), b(0), sourceName(sourceName), peakMatchCount(0)
+Histogram::Histogram(int xMin, int xMax, int maxFWHM, float minAmplitude, float maxAmplitude, int numberOfPeaks, TH1D *mainHist, std::string sourceName)
+    : xMin(xMin), xMax(xMax), maxFWHM(maxFWHM), minAmplitude(minAmplitude), maxAmplitude(maxAmplitude), numberOfPeaks(numberOfPeaks), mainHist(mainHist), tempHist(nullptr), calibratedHist(nullptr), peakCount(0), m(0), b(0), sourceName(sourceName), peakMatchCount(0)
 {
-
     if (mainHist != nullptr)
     {
-        this->tempHist = (TH1D *)mainHist->Clone(); // Clonăm histogramă pentru procesare ulterioară
-        this->calibratedHist = (TH1D *)mainHist->Clone(); // Clonăm histogramă pentru procesare ulterioară
-
+        this->tempHist = (TH1D *)mainHist->Clone();
+        this->calibratedHist = (TH1D *)mainHist->Clone();
     }
     else
     {
         std::cerr << "Warning: mainHist is null in Histogram constructor" << std::endl;
     }
-
 }
 
 Histogram::~Histogram()
@@ -35,9 +32,12 @@ Histogram::~Histogram()
         delete calibratedHist;
     }*/
 }
-Histogram::Histogram(const Histogram &histogram) {
+Histogram::Histogram(const Histogram &histogram)
+{
     xMin = histogram.xMin;
     xMax = histogram.xMax;
+    maxAmplitude = histogram.maxAmplitude;
+    minAmplitude = histogram.minAmplitude;
     maxFWHM = histogram.maxFWHM;
     numberOfPeaks = histogram.numberOfPeaks;
     m = histogram.m;
@@ -52,10 +52,20 @@ Histogram::Histogram(const Histogram &histogram) {
     calibratedHist = (histogram.calibratedHist) ? new TH1D(*histogram.calibratedHist) : nullptr;
 }
 
-Histogram& Histogram::operator=(const Histogram &histogram) {
-    if (this != &histogram) {
+Histogram &Histogram::operator=(const Histogram &histogram)
+{
+    if (this != &histogram)
+    {
+        // Release old resources
+        delete mainHist;
+        delete tempHist;
+        delete calibratedHist;
+
+        // Copy values
         xMin = histogram.xMin;
         xMax = histogram.xMax;
+        maxAmplitude = histogram.maxAmplitude;
+        minAmplitude = histogram.minAmplitude;
         maxFWHM = histogram.maxFWHM;
         numberOfPeaks = histogram.numberOfPeaks;
         m = histogram.m;
@@ -65,18 +75,13 @@ Histogram& Histogram::operator=(const Histogram &histogram) {
         peakMatchCount = histogram.peakMatchCount;
         peaks = histogram.peaks;
 
-        if (mainHist) delete mainHist;
-        if (tempHist) delete tempHist;
-        if (calibratedHist) delete calibratedHist;
-
+        // Allocate new resources
         mainHist = (histogram.mainHist) ? new TH1D(*histogram.mainHist) : nullptr;
         tempHist = (histogram.tempHist) ? new TH1D(*histogram.tempHist) : nullptr;
         calibratedHist = (histogram.calibratedHist) ? new TH1D(*histogram.calibratedHist) : nullptr;
     }
     return *this;
 }
-
-
 
 void Histogram::findPeaks()
 {
@@ -92,7 +97,7 @@ void Histogram::eliminatePeak(const Peak &peak)
     int leftLimit = static_cast<int>(mean - 3 * sigma);
     int rightLimit = static_cast<int>(mean + 3 * sigma);
 
-    // Asigurăm că limitele sunt în interiorul histogramului
+    // Asigurăm că limitele sunt în interiorul histogramei
     if (leftLimit < 1)
         leftLimit = 1;
     if (rightLimit > tempHist->GetNbinsX())
@@ -102,6 +107,7 @@ void Histogram::eliminatePeak(const Peak &peak)
         tempHist->SetBinContent(i, 0);
     }
 }
+
 bool Histogram::checkConditions(const Peak &peak) const
 {
     double FWHM = peak.getFWHM();
@@ -109,16 +115,18 @@ bool Histogram::checkConditions(const Peak &peak) const
 
     bool condition1 = peakPosition <= xMax && peakPosition >= xMin;
     bool condition2 = FWHM <= maxFWHM;
+    bool condition3 = peak.getAmplitude() > minAmplitude && peak.getAmplitude() < maxAmplitude;
 
-    return condition1 && condition2;
+    return condition1 && condition2 && condition3;
 }
+
 TF1 *Histogram::createGaussianFit(int maxBin)
 {
     float maxPeakX = mainHist->GetXaxis()->GetBinCenter(maxBin);
     // is good to use [0]*exp(-0.5*((x-[1])/[2])**2) + [3] + ([4]*x) to fit the gaussian
     TF1 *gaus = new TF1(Form("gausFit_%d", peakCount), "[0]*exp(-0.5*((x-[1])/[2])**2) + [3] + ([4]*x) + ([5]*x*x)", maxPeakX - 10, maxPeakX + 10);
-    gaus->SetParameters(tempHist->GetBinContent(maxBin), maxPeakX, 1.0, 0.0, 0.0, 0.0); // Initial parameter adjustments
-    gaus->SetParLimits(2, 0.1, 10.0);                                                   // Limits for standard deviation
+    gaus->SetParameters(tempHist->GetBinContent(maxBin), maxPeakX, 1.0, 0.0, 0.0, 0.0);
+    gaus->SetParLimits(2, 0.1, 10.0);
     return gaus;
 }
 
@@ -236,7 +244,55 @@ void Histogram::calibratePeaks(const double knownEnergies[], int size)
     }
     peakMatchCount = bestCorrelation;
     refineCalibration(knownEnergies, size);
+    polinomDegree = 1;
 }
+// The function that determinates the degree of the polynomial
+// Not done yet
+/*#include <TGraph.h>
+int Histogram::getTheDegreeOfPolynomial() const
+{
+    std::vector<double> xValues;
+    std::vector<double> yValues;
+    for (int i = 0; i < numberOfPeaks; i++)
+    {
+        std::cout<<"Peak number: "<<i<<std::endl;
+        xValues.push_back(peaks[i].getPosition());
+        std::cout << "Peak position: " << peaks[i].getPosition() << std::endl;
+        yValues.push_back(peaks[i].getAmplitude());
+        std::cout << "Peak amplitude: " << peaks[i].getAmplitude() << std::endl;
+    }
+
+    // Create a TGraph to hold the data points
+    TGraph *graph = new TGraph(xValues.size(), xValues.data(), yValues.data());
+
+    int bestDegree = 0;
+    double bestR2 = -1;
+    double bestChi2 = 1e10;
+
+    for (int degree = 1; degree <= 4; ++degree)
+    {
+        TF1 *fitFunction = new TF1("fitFunction", ("pol" + std::to_string(degree)).c_str(), xValues.front(), xValues.back());
+        graph->Fit(fitFunction, "Q");
+
+        double chi2 = fitFunction->GetChisquare();
+        int ndf = fitFunction->GetNDF();
+        double r2 = 1 - (chi2 / ndf);
+
+        std::cout << "Degree: " << degree << ", R^2: " << r2 << ", Chi2: " << chi2 << std::endl;
+        if (r2 > bestR2)
+        {
+            bestR2 = r2;
+            bestDegree = degree;
+            bestChi2 = chi2;
+        }
+
+        delete fitFunction;
+    }
+    delete graph;
+    std::cout << "Best polynomial degree: " << bestDegree << " with R^2: " << bestR2 << ", Chi2: " << bestChi2 << std::endl;
+    return bestDegree;
+}
+*/
 void Histogram::initializeCalibratedHist()
 {
     if (mainHist == nullptr)
@@ -277,7 +333,7 @@ void Histogram::applyXCalibration()
 
         if (bin_original < 1 || bin_original >= numBinsOriginal)
         {
-            //std::cerr << "Error: Bin index out of range. Bin index: " << bin_original << std::endl;
+            // std::cerr << "Error: Bin index out of range. Bin index: " << bin_original << std::endl;
             continue;
         }
 
@@ -285,7 +341,6 @@ void Histogram::applyXCalibration()
         calibratedHist->SetBinContent(bin_calibrated, interpolated_content);
     }
 }
-
 
 /*void Histogram::applyXCalibration()
 {
@@ -349,8 +404,8 @@ void Histogram::changePeak(int peakNumber, double newPosition)
 
     // Adăugăm noul peak
     peaks[peakNumber] = {gaus, mainHist};
-    std::cout<<"Peak number: "<<peakNumber<<std::endl;
-    std::cout<<"Peak position: "<<peaks[peakNumber].getPosition()<<std::endl;
+    std::cout << "Peak number: " << peakNumber << std::endl;
+    std::cout << "Peak position: " << peaks[peakNumber].getPosition() << std::endl;
     // Verificăm condițiile pentru noul peak
     if (!checkConditions(peaks[peakNumber]))
     {
@@ -364,7 +419,6 @@ void Histogram::changePeak(int peakNumber, double newPosition)
     // deoarece `peaks[peakNumber]` va gestiona viața sa.
 }
 
-
 void Histogram::printHistogramWithPeaksRoot(TFile *outputFile)
 {
     if (!outputFile || outputFile->IsZombie())
@@ -374,7 +428,7 @@ void Histogram::printHistogramWithPeaksRoot(TFile *outputFile)
     }
 
     outputFile->cd();
-    
+
     // Resetăm histogramul pentru a elimina ajustările anterioare
     mainHist->GetListOfFunctions()->Clear();
 
@@ -385,7 +439,7 @@ void Histogram::printHistogramWithPeaksRoot(TFile *outputFile)
         TF1 *gaussianFunction = createGaussianFit(newPosition); // Funcție care creează noua ajustare gaussiană
         if (gaussianFunction)
         {
-            //peaks[i].setGaussianFunction(gaussianFunction); // Asumând că există această metodă în clasă
+            // peaks[i].setGaussianFunction(gaussianFunction); // Asumând că există această metodă în clasă
 
             // Adăugăm funcția de ajustare la histogramă
             gaussianFunction->SetName(Form("gaussian_%d", i));
@@ -396,7 +450,6 @@ void Histogram::printHistogramWithPeaksRoot(TFile *outputFile)
 
     mainHist->Write();
 }
-
 
 void Histogram::printCalibratedHistogramRoot(TFile *outputFile) const
 {
@@ -412,38 +465,39 @@ void Histogram::printCalibratedHistogramRoot(TFile *outputFile) const
 void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
 {
     jsonFile << "{\n";
-    jsonFile << "\t\"Source\": " << sourceName << ",\n";     // Numele sursei
-    jsonFile << "\t\"Histogram\": " << mainHist->GetName() << ",\n";  // Numele histogramei
+    jsonFile << "\t\"Source\": \"" << sourceName << "\",\n";
+    jsonFile << "\t\"Histogram\": \"" << mainHist->GetName() << "\",\n";
     jsonFile << "\t\"NumberOfPeaks\": " << peaks.size() << ",\n";
+    jsonFile << "\t\"Calibration Degree\": " << polinomDegree << ",\n";
+    jsonFile << "\t\"Calibration Factor m\": " << m << ",\n";
+    jsonFile << "\t\"Calibration Factor b\": " << b << ",\n";
     jsonFile << "\t\"Peaks\": [\n";
 
     for (size_t i = 0; i < peaks.size(); ++i)
     {
-        jsonFile << "\t{\n";
-        jsonFile << "\t\t\"Number_Peak\": " << i + 1 << ",\n";  // Numărul fiecărui vârf
-        jsonFile << "\t\t\"position\": " << peaks[i].getPosition() << ",\n";
-        jsonFile << "\t\t\"amplitude\": " << peaks[i].getAmplitude() << ",\n";
-        jsonFile << "\t\t\"sigma\": " << peaks[i].getSigma() << ",\n";
-        jsonFile << "\t\t\"area\": " << peaks[i].getArea() << ",\n";
-        jsonFile << "\t\t\"leftLimit\": " << peaks[i].getLeftLimit() << ",\n";
-        jsonFile << "\t\t\"rightLimit\": " << peaks[i].getRightLimit() << "\n";
+        jsonFile << "\t\t{\n";
+        jsonFile << "\t\t\t\"Number_Peak\": " << i + 1 << ",\n";
+        jsonFile << "\t\t\t\"position\": " << peaks[i].getPosition() << ",\n";
+        jsonFile << "\t\t\t\"FWHM\": " << peaks[i].getFWHM() << ",\n";
+        jsonFile << "\t\t\t\"area\": " << peaks[i].getArea() << "\n";
+        // jsonFile << "\t\t\t\"amplitude\": " << peaks[i].getAmplitude() << ",\n";
+        // jsonFile << "\t\t\t\"sigma\": " << peaks[i].getSigma() << ",\n";
+        // jsonFile << "\t\t\t\"leftLimit\": " << peaks[i].getLeftLimit() << ",\n";
+        // jsonFile << "\t\t\t\"rightLimit\": " << peaks[i].getRightLimit() << "\n";
 
         if (i < peaks.size() - 1)
         {
-            jsonFile << "\t},\n";
+            jsonFile << "\t\t},\n"; // Virgula dacă nu e ultimul element
         }
         else
         {
-            jsonFile << "\t}\n";
+            jsonFile << "\t\t}\n"; // Fără virgulă la ultimul element
         }
     }
 
     jsonFile << "\t]\n";
     jsonFile << "}\n";
 }
-
-
-
 
 void Histogram::findStartOfPeak(Peak &peak)
 {
@@ -470,10 +524,14 @@ void Histogram::findStartOfPeak(Peak &peak)
     goodGaus++;
 }
 
-const char* Histogram::returnNameOfHistogram() const {
-    if (mainHist) {
+const char *Histogram::returnNameOfHistogram() const
+{
+    if (mainHist)
+    {
         return mainHist->GetName();
-    } else {
+    }
+    else
+    {
         return "Invalid histogram";
     }
 }
@@ -481,4 +539,14 @@ const char* Histogram::returnNameOfHistogram() const {
 unsigned int Histogram::getpeakMatchCount() const
 {
     return peakMatchCount;
+}
+
+TH1D *Histogram::getCalibratedHist() const
+{
+    return calibratedHist;
+}
+
+TH1D *Histogram::getMainHist() const
+{
+    return mainHist;
 }

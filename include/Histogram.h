@@ -10,18 +10,21 @@
 #include <limits>
 #include <TFile.h>
 #include <TCanvas.h>
-#include <TLatex.h> // Include corect pentru TLatex
+#include <TLatex.h>
 #include <string>
 class Histogram
 {
 private:
     int xMin, xMax;
     int maxFWHM;
+    float minAmplitude;
+    float maxAmplitude;
     int numberOfPeaks;
     TH1D *mainHist;
     TH1D *tempHist;
     TH1D *calibratedHist;
     float m, b;
+    int polinomDegree;
     unsigned int peakMatchCount;
     std::vector<Peak> peaks;
     int peakCount;
@@ -36,10 +39,11 @@ private:
     void findStartOfPeak(Peak &peak);
     void initializeCalibratedHist();
     double getInterpolatedContent(int bin_original, double binCenter_original) const;
+    int getTheDegreeOfPolynomial() const;
 
 public:
     // Constructori și Destructor
-    Histogram(int xMin, int xMax, int maxFWHM, int numberOfPeaks, TH1D *mainHist, std::string sourceName);
+    Histogram(int xMin, int xMax, int maxFWHM, float minAmplitude, float maxAmplitude, int numberOfPeaks, TH1D *mainHist, std::string sourceName);
     Histogram(const Histogram &histogram);
     ~Histogram();
     Histogram &operator=(const Histogram &histogram);
@@ -52,8 +56,10 @@ public:
     void changePeak(int peakNumber, double newPosition);
     void printHistogramWithPeaksRoot(TFile *outputFile);
     void printCalibratedHistogramRoot(TFile *outputFile) const;
-    const char* returnNameOfHistogram() const;
+    const char *returnNameOfHistogram() const;
     unsigned int getpeakMatchCount() const;
+    TH1D *getCalibratedHist() const;
+    TH1D *getMainHist() const;
 };
 
 #endif // HISTOGRAM_H

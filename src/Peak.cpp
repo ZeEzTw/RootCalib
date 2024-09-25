@@ -1,4 +1,4 @@
-#include "Peak.h"
+#include "../include/Peak.h"
 #include <TF1.h>
 #include <TH1D.h>
 #include <cmath>
@@ -11,7 +11,7 @@ Peak::Peak(TF1 *gausPeak, TH1D *hist)
 {
     if (gausPeak)
     {
-        gaus = new TF1(*gausPeak); // Allocate and copy the function
+        gaus = new TF1(*gausPeak);
         if (gaus)
         {
             position = gaus->GetParameter(1);
@@ -19,7 +19,7 @@ Peak::Peak(TF1 *gausPeak, TH1D *hist)
             sigma = gaus->GetParameter(2);
             leftLimit = position - 3 * sigma;
             rightLimit = position + 3 * sigma;
-            areaPeak(hist); // Assuming this is a member function that calculates the area
+            areaPeak(hist);
         }
     }
 }
@@ -147,27 +147,48 @@ float Peak::getRightLimit() const
 {
     return rightLimit;
 }
+/*void Peak::areaPeak(TH1D *hist)
+{
+    // Assume backgroundModel has been fitted elsewhere and provides background at each bin
+    TF1 *backgroundModel = ...; // This should be defined based on your background fitting
+    
+    double peakArea = 0.0;
+
+    // Loop over bins within the peak region
+    for (int bin = hist->FindBin(leftLimit); bin <= hist->FindBin(rightLimit); ++bin) {
+        double binContent = hist->GetBinContent(bin);
+        double binCenter = hist->GetBinCenter(bin);
+        double background = backgroundModel->Eval(binCenter);
+
+        peakArea += (binContent - background) * hist->GetBinWidth(bin);
+    }
+
+    area = peakArea;
+}*/
 void Peak::areaPeak(TH1D *hist)
 {
-    double leftHeight = hist->GetBinContent(hist->FindBin(leftLimit - 3));
-    double rightHeight = hist->GetBinContent(hist->FindBin(rightLimit + 3));
-    if (leftHeight < 0.9 * rightHeight)
-    {
-        leftHeight = rightHeight;
+    int leftBin = hist->FindBin(leftLimit);
+    int rightBin = hist->FindBin(rightLimit);
+
+    double leftHeight = hist->GetBinContent(leftBin);
+    double rightHeight = hist->GetBinContent(rightBin);
+
+    double peakArea = 0.0;
+    double backgroundArea = 0.0;
+
+    for (int bin = leftBin; bin <= rightBin; ++bin) {
+        double binCenter = hist->GetBinCenter(bin);
+        double binWidth = hist->GetBinWidth(bin);
+        double binContent = hist->GetBinContent(bin);
+
+        double background = leftHeight + (rightHeight - leftHeight) * 
+                            (binCenter - leftLimit) / (rightLimit - leftLimit);
+        
+        peakArea += (binContent * binWidth);
+
+        backgroundArea += (background * binWidth);
     }
-    else if (rightHeight < 0.9 * leftHeight)
-    {
-        rightHeight = leftHeight;
-    }
 
-    double backgroundHeight = (leftHeight + rightHeight) / 2;
-    double width = abs(rightLimit - leftLimit);
-
-    // Calculează aria sub gausiană în intervalul [leftLimit, rightLimit]
-    double peakArea = gaus->Integral(leftLimit, rightLimit);
-    double backgroundArea = backgroundHeight * width;
-
-    // Calcularea ariei vârfului eliminând contribuția fundalului
     area = peakArea - backgroundArea;
 }
 
@@ -192,7 +213,6 @@ void Peak::findStartOfPeak(TH1D *hist, int maxBin, double &leftLimitPosition, do
         left = right;
     }
 
-    // Definirea limitelor MinDistance și MaxDistance
     double MinDistance = 1.0;  // Exemplar
     double MaxDistance = 10.0; // Exemplar
 

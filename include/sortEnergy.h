@@ -6,6 +6,7 @@ class sortEnergy
 {
     std::vector<std::vector<double>> energyMatrix; // Matrice de energie
     std::vector<std::string> sources;              // Numele surselor
+    std::vector<std::string> requestedSources;     // Numele surselor cerute
 
 public:
     sortEnergy(const std::string &filename);
@@ -16,8 +17,13 @@ public:
     void printSources() const;
     int getSize() const { return sources.size(); }
     int getEnergyArraySize(int index) const;
-    double *getEnergyArray(int index); // Declarația corectă a metodei
+    double *getEnergyArray(int index);
     void readFromTxt(const std::string &sourceLine);
+    int isSourceValid(const std::string &source);
+    void chooseSources(int argc, char *argv[]);
+    double *createSourceArray(int &size);
+
+
 
 private:
     // void parseJsonFile(const std::string &filename);

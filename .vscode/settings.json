@@ -45,6 +45,13 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "test.C": "cpp",
+        "verify.C": "cpp",
+        "test2.C": "cpp",
+        "determine_dij.C": "cpp",
+        "mean_dij.C": "cpp",
+        "view_hE.C": "cpp",
+        "verify_andrei.C": "cpp"
     }
 }

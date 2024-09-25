@@ -53,12 +53,12 @@ public:
     void setRightLimit(float right);
     float getRightLimit() const;
 
-    void outputDataJson(std::ofstream &file) const; // Declarare funcție
+    void outputDataJson(std::ofstream &file) const;
     void createGaussianFunction();
     TF1 *getGaussianFunction() const;
     double getFWHM() const;
     double getMean() const;
-    void areaPeak(TH1D *hist); // Calculare aria peak-ului
+    void areaPeak(TH1D *hist);
     float calculateResolution() const;
     void findStartOfPeak(TH1D *hist, int maxBin, double &leftLimitPosition, double &rightLimitPosition);
 };
