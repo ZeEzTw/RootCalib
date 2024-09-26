@@ -46,6 +46,18 @@ Clone the repository using:
 
     git clone https://github.com/ZeEzTw/Eli-Europiu.git
 
+#Use Makefile
+Compile the Code
+
+    make
+
+Run the Code
+
+    make run
+
+Clean Up Compilation Files
+
+    make clean
 
 # Compilation
 Compile the code with:
@@ -60,7 +72,7 @@ Compile the code with:
 
  - 2.To run without User Interface, use this example command:
 
-        ./task 10 Europium data/data.root mDelila_raw data/energy.txt 10.0 1500.0 20 0 10000000 output/ Eurpoiu-152
+        ./task 10 Europium data/data.root mDelila_raw data/energy.txt 10.0 1500.0 20 0 10000000 output/ Europiu-152
 
 - Run the application with: 
 
