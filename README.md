@@ -46,7 +46,7 @@ Clone the repository using:
 
     git clone https://github.com/ZeEzTw/Eli-Europiu.git
 
-#Use Makefile
+## Use Makefile
 Compile the Code
 
     make
@@ -59,7 +59,7 @@ Clean Up Compilation Files
 
     make clean
 
-# Compilation
+#Compilation
 Compile the code with:
 
     g++ src/*.cpp -Iinclude $(root-config --glibs --cflags --libs) -o task
