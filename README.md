@@ -20,11 +20,11 @@ This project provides tools for extracting and analyzing peaks from ROOT histogr
 	"Calibration Degree": 4,
 	"Calibration Factor m": 1.31,
 	"Calibration Factor b": 0,
-    "Peaks": [
+    	"Peaks": [
         {
-			"position": 91.9006,
-			"FWHM": 1.87856,
-			"area": 191502      
+		"position": 91.9006,
+		"FWHM": 1.87856,
+		"area": 191502      
         }
     ]
     "// Additional peaks..."
