@@ -7,8 +7,8 @@ long int iterations = 0;
 long int goodGaus = 0;
 long int badGaus = 0;
 
-Histogram::Histogram(int xMin, int xMax, int maxFWHM, float minAmplitude, float maxAmplitude, int numberOfPeaks, TH1D *mainHist, std::string sourceName)
-    : xMin(xMin), xMax(xMax), maxFWHM(maxFWHM), minAmplitude(minAmplitude), maxAmplitude(maxAmplitude), numberOfPeaks(numberOfPeaks), mainHist(mainHist), tempHist(nullptr), calibratedHist(nullptr), peakCount(0), m(0), b(0), sourceName(sourceName), peakMatchCount(0)
+Histogram::Histogram(int xMin, int xMax, int maxFWHM, float minAmplitude, float maxAmplitude, int numberOfPeaks, TH1D *mainHist, const std::string &TH2histogram_name, std::string sourceName)
+    : xMin(xMin), xMax(xMax), maxFWHM(maxFWHM), minAmplitude(minAmplitude), maxAmplitude(maxAmplitude), numberOfPeaks(numberOfPeaks), mainHist(mainHist), tempHist(nullptr), calibratedHist(nullptr), peakCount(0), m(0), b(0), TH2histogram_name(TH2histogram_name), sourceName(sourceName), peakMatchCount(0)
 {
     if (mainHist != nullptr)
     {
@@ -20,6 +20,7 @@ Histogram::Histogram(int xMin, int xMax, int maxFWHM, float minAmplitude, float 
         std::cerr << "Warning: mainHist is null in Histogram constructor" << std::endl;
     }
 }
+
 
 Histogram::~Histogram()
 {
@@ -43,6 +44,7 @@ Histogram::Histogram(const Histogram &histogram)
     m = histogram.m;
     b = histogram.b;
     peakCount = histogram.peakCount;
+    TH2histogram_name = histogram.TH2histogram_name; // Corrected
     sourceName = histogram.sourceName;
     peakMatchCount = histogram.peakMatchCount;
     peaks = histogram.peaks;
@@ -51,6 +53,7 @@ Histogram::Histogram(const Histogram &histogram)
     tempHist = (histogram.tempHist) ? new TH1D(*histogram.tempHist) : nullptr;
     calibratedHist = (histogram.calibratedHist) ? new TH1D(*histogram.calibratedHist) : nullptr;
 }
+
 
 Histogram &Histogram::operator=(const Histogram &histogram)
 {
@@ -71,6 +74,7 @@ Histogram &Histogram::operator=(const Histogram &histogram)
         m = histogram.m;
         b = histogram.b;
         peakCount = histogram.peakCount;
+        TH2histogram_name = histogram.TH2histogram_name; // Corrected
         sourceName = histogram.sourceName;
         peakMatchCount = histogram.peakMatchCount;
         peaks = histogram.peaks;
@@ -82,6 +86,7 @@ Histogram &Histogram::operator=(const Histogram &histogram)
     }
     return *this;
 }
+
 
 void Histogram::findPeaks()
 {
@@ -248,51 +253,61 @@ void Histogram::calibratePeaks(const double knownEnergies[], int size)
 }
 // The function that determinates the degree of the polynomial
 // Not done yet
-/*#include <TGraph.h>
+
 int Histogram::getTheDegreeOfPolynomial() const
 {
+    if (numberOfPeaks == 0)
+    {
+        std::cerr << "No peaks available for fitting!" << std::endl;
+        return -1;
+    }
     std::vector<double> xValues;
     std::vector<double> yValues;
+
     for (int i = 0; i < numberOfPeaks; i++)
     {
-        std::cout<<"Peak number: "<<i<<std::endl;
-        xValues.push_back(peaks[i].getPosition());
-        std::cout << "Peak position: " << peaks[i].getPosition() << std::endl;
-        yValues.push_back(peaks[i].getAmplitude());
-        std::cout << "Peak amplitude: " << peaks[i].getAmplitude() << std::endl;
+        std::cout << "Peak number: " << i << std::endl;
+        double peakPosition = peaks[i].getPosition();
+        double peakAmplitude = peaks[i].getAmplitude();
+        xValues.push_back(peakPosition);
+        yValues.push_back(peakAmplitude);
+        //std::cout << "Peak position: " << peakPosition << ", amplitude: " << peakAmplitude << std::endl;
     }
-
-    // Create a TGraph to hold the data points
-    TGraph *graph = new TGraph(xValues.size(), xValues.data(), yValues.data());
+    TGraph graph(xValues.size(), xValues.data(), yValues.data());
 
     int bestDegree = 0;
-    double bestR2 = -1;
-    double bestChi2 = 1e10;
+    double bestR2 = -1  * pow(10, 10);
+    double lowestChi2 = 1e10;
 
-    for (int degree = 1; degree <= 4; ++degree)
+    for (int degree = 1; degree <= 5; ++degree)
     {
-        TF1 *fitFunction = new TF1("fitFunction", ("pol" + std::to_string(degree)).c_str(), xValues.front(), xValues.back());
-        graph->Fit(fitFunction, "Q");
+        TF1 fitFunction("fitFunction", ("pol" + std::to_string(degree)).c_str(), xValues.front(), xValues.back());
 
-        double chi2 = fitFunction->GetChisquare();
-        int ndf = fitFunction->GetNDF();
-        double r2 = 1 - (chi2 / ndf);
+        graph.Fit(&fitFunction, "Q");
 
-        std::cout << "Degree: " << degree << ", R^2: " << r2 << ", Chi2: " << chi2 << std::endl;
+        double chi2 = fitFunction.GetChisquare();
+        int ndf = fitFunction.GetNDF();
+        double r2 = 1 - (chi2 / (ndf > 0 ? ndf : 1));
+
+        //std::cout << "Degree: " << degree << ", R^2: " << r2 << ", Chi2: " << chi2 << std::endl;
+
+        //std::cout<<"R2: "<<r2<<" BestR2: "<<bestR2<<std::endl;
+        //std::cout << (r2 > bestR2) << std::endl;
+        //std::cout<<"//////"<<std::endl;
         if (r2 > bestR2)
         {
             bestR2 = r2;
             bestDegree = degree;
-            bestChi2 = chi2;
+            lowestChi2 = chi2;
         }
-
-        delete fitFunction;
     }
-    delete graph;
-    std::cout << "Best polynomial degree: " << bestDegree << " with R^2: " << bestR2 << ", Chi2: " << bestChi2 << std::endl;
+
+    //std::cout << "Best polynomial degree: " << bestDegree << " with R^2: " << bestR2 << ", Chi2: " << lowestChi2 << std::endl;
+
     return bestDegree;
 }
-*/
+
+
 void Histogram::initializeCalibratedHist()
 {
     if (mainHist == nullptr)
@@ -467,8 +482,9 @@ void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
     jsonFile << "{\n";
     jsonFile << "\t\"Source\": \"" << sourceName << "\",\n";
     jsonFile << "\t\"Histogram\": \"" << mainHist->GetName() << "\",\n";
+    jsonFile << "\t\"TH2Source_FileName\": \"" << TH2histogram_name << "\",\n";
     jsonFile << "\t\"NumberOfPeaks\": " << peaks.size() << ",\n";
-    jsonFile << "\t\"Calibration Degree\": " << polinomDegree << ",\n";
+    jsonFile << "\t\"Calibration Degree\": " << getTheDegreeOfPolynomial()/*polinomDegree*/ << ",\n";
     jsonFile << "\t\"Calibration Factor m\": " << m << ",\n";
     jsonFile << "\t\"Calibration Factor b\": " << b << ",\n";
     jsonFile << "\t\"Peaks\": [\n";

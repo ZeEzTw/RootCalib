@@ -1,8 +1,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col102",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 4,
 	"Calibration Factor m": 1.31,
 	"Calibration Factor b": 0,
 	"Peaks": [
@@ -71,8 +72,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col103",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 4,
 	"Calibration Factor m": 1.3,
 	"Calibration Factor b": 4.9,
 	"Peaks": [
@@ -141,8 +143,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col104",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 4,
 	"Calibration Factor m": 1.31,
 	"Calibration Factor b": 0,
 	"Peaks": [
@@ -211,8 +214,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col105",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 4,
 	"Calibration Factor m": 1.26,
 	"Calibration Factor b": 0,
 	"Peaks": [
@@ -281,6 +285,7 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col106",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Factor m": 1.29,
@@ -351,8 +356,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col107",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 2,
 	"Calibration Factor m": 1.12,
 	"Calibration Factor b": 11.5,
 	"Peaks": [
@@ -421,6 +427,7 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col108",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Factor m": 1.3,
@@ -491,6 +498,7 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col109",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Factor m": 1.3,
@@ -561,8 +569,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col110",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 2,
 	"Calibration Factor m": 1.3,
 	"Calibration Factor b": 2.6,
 	"Peaks": [
@@ -631,8 +640,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col112",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 4,
 	"Calibration Factor m": 1.25,
 	"Calibration Factor b": 1.6,
 	"Peaks": [
@@ -701,8 +711,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col113",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 4,
 	"Calibration Factor m": 1.27,
 	"Calibration Factor b": 0,
 	"Peaks": [
@@ -771,8 +782,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col114",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 4,
 	"Calibration Factor m": 1.26,
 	"Calibration Factor b": 2.1,
 	"Peaks": [
@@ -841,8 +853,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col115",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 4,
 	"Calibration Factor m": 1.28,
 	"Calibration Factor b": 0,
 	"Peaks": [
@@ -911,6 +924,7 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col116",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Factor m": 1.3,
@@ -981,6 +995,7 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col117",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Factor m": 1.26,
@@ -1051,8 +1066,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col118",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 2,
 	"Calibration Factor m": 1.25,
 	"Calibration Factor b": 0,
 	"Peaks": [
@@ -1121,6 +1137,7 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col119",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Factor m": 1.29,
@@ -1191,8 +1208,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col120",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 2,
 	"Calibration Factor m": 1.26,
 	"Calibration Factor b": 2.9,
 	"Peaks": [
@@ -1261,8 +1279,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col122",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 4,
 	"Calibration Factor m": 1.27,
 	"Calibration Factor b": 1.1,
 	"Peaks": [
@@ -1331,8 +1350,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col123",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 4,
 	"Calibration Factor m": 1.27,
 	"Calibration Factor b": 0,
 	"Peaks": [
@@ -1401,8 +1421,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col124",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 4,
 	"Calibration Factor m": 1.32,
 	"Calibration Factor b": 0.3,
 	"Peaks": [
@@ -1471,8 +1492,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col125",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 4,
 	"Calibration Factor m": 1.29,
 	"Calibration Factor b": 0.9,
 	"Peaks": [
@@ -1541,6 +1563,7 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col126",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Factor m": 1.28,
@@ -1611,6 +1634,7 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col127",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Factor m": 1.34,
@@ -1681,6 +1705,7 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col128",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Factor m": 1.31,
@@ -1751,6 +1776,7 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col129",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Factor m": 1.29,
@@ -1821,8 +1847,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col130",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 3,
 	"Calibration Factor m": 1.27,
 	"Calibration Factor b": 4.2,
 	"Peaks": [
@@ -1891,8 +1918,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col132",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 5,
 	"Calibration Factor m": 1.31,
 	"Calibration Factor b": 0.5,
 	"Peaks": [
@@ -1961,8 +1989,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col133",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 4,
 	"Calibration Factor m": 1.29,
 	"Calibration Factor b": 3,
 	"Peaks": [
@@ -2031,8 +2060,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col134",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 4,
 	"Calibration Factor m": 1.28,
 	"Calibration Factor b": 1.6,
 	"Peaks": [
@@ -2101,8 +2131,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col135",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 4,
 	"Calibration Factor m": 1.3,
 	"Calibration Factor b": 0.6,
 	"Peaks": [
@@ -2171,6 +2202,7 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col136",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Factor m": 1.28,
@@ -2241,6 +2273,7 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col137",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Factor m": 1.3,
@@ -2311,6 +2344,7 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col138",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Factor m": 1.05,
@@ -2381,6 +2415,7 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col139",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Factor m": 1.25,
@@ -2451,8 +2486,9 @@
 {
 	"Source": "Europium",
 	"Histogram": "hist1D_col140",
+	"TH2Source_FileName": "mDelila_raw",
 	"NumberOfPeaks": 10,
-	"Calibration Degree": 1,
+	"Calibration Degree": 3,
 	"Calibration Factor m": 1.24,
 	"Calibration Factor b": 0,
 	"Peaks": [
@@ -2502,89 +2538,4 @@
 			"Number_Peak": 8,
 			"position": 874.488,
 			"FWHM": 2.74364,
-			"area": 92178.9
-		},
-		{
-			"Number_Peak": 9,
-			"position": 356.824,
-			"FWHM": 1.94091,
-			"area": 53241.5
-		},
-		{
-			"Number_Peak": 10,
-			"position": 698.282,
-			"FWHM": 2.1368,
-			"area": 44695.1
-		}
-	]
-}
-{
-	"Source": "Europium",
-	"Histogram": "hist1D_col102",
-	"NumberOfPeaks": 10,
-	"Calibration Degree": 33702007,
-	"Calibration Factor m": 1.31,
-	"Calibration Factor b": 0,
-	"Peaks": [
-		{
-			"Number_Peak": 1,
-			"position": 803.524,
-			"FWHM": 6.6867,
-			"area": -117.923
-		},
-		{
-			"Number_Peak": 2,
-			"position": 262.228,
-			"FWHM": 1.91393,
-			"area": 77169.4
-		},
-		{
-			"Number_Peak": 3,
-			"position": 186.008,
-			"FWHM": 1.87318,
-			"area": 30858.1
-		},
-		{
-			"Number_Peak": 4,
-			"position": 594.869,
-			"FWHM": 1.97772,
-			"area": 13810.6
-		},
-		{
-			"Number_Peak": 5,
-			"position": 735.929,
-			"FWHM": 2.08892,
-			"area": 12711.1
-		},
-		{
-			"Number_Peak": 6,
-			"position": 1075.95,
-			"FWHM": 2.27045,
-			"area": 12122.3
-		},
-		{
-			"Number_Peak": 7,
-			"position": 849.249,
-			"FWHM": 2.17225,
-			"area": 10182
-		},
-		{
-			"Number_Peak": 8,
-			"position": 338.441,
-			"FWHM": 1.94344,
-			"area": 6614.57
-		},
-		{
-			"Number_Peak": 9,
-			"position": 829.254,
-			"FWHM": 2.37869,
-			"area": 6904.32
-		},
-		{
-			"Number_Peak": 10,
-			"position": 313.317,
-			"FWHM": 2.00936,
-			"area": 4909.09
-		}
-	]
-}
+			"area": 

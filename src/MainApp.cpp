@@ -83,7 +83,7 @@ void convertHistogramsToTH2(const std::vector<Histogram> &histograms, TH2F *inpu
     }
 }
 
-void processHistogram(TH1D *hist1D, const std::string &sourceName, int number_of_peaks, double *energyArray, int size, std::vector<Histogram> &histograms, float Xmin, float Xmax, float FWHMmax, float MinAmplitude, float MaxAmplitude, std::ofstream &jsonFile, TFile *outputFileHistograms, TFile *outputFileCalibrated, UserInterface &ui, bool userInterfaceStatus)
+void processHistogram(TH1D *hist1D, const std::string &sourceName, int number_of_peaks, double *energyArray, int size, std::vector<Histogram> &histograms, float Xmin, float Xmax, float FWHMmax, float MinAmplitude, float MaxAmplitude, const std::string &TH2histogram_name, std::ofstream &jsonFile, TFile *outputFileHistograms, TFile *outputFileCalibrated, UserInterface &ui, bool userInterfaceStatus)
 {
     if (!hist1D || hist1D->GetMean() < 5)
     {
@@ -91,7 +91,7 @@ void processHistogram(TH1D *hist1D, const std::string &sourceName, int number_of
         return;
     }
 
-    Histogram hist(Xmin, Xmax, FWHMmax, MinAmplitude, MaxAmplitude, number_of_peaks, hist1D, sourceName);
+    Histogram hist(Xmin, Xmax, FWHMmax, MinAmplitude, MaxAmplitude, number_of_peaks, hist1D, TH2histogram_name, sourceName);
     hist.findPeaks();
     hist.calibratePeaks(energyArray, size);
     hist.applyXCalibration();
@@ -109,7 +109,7 @@ void processHistogram(TH1D *hist1D, const std::string &sourceName, int number_of
     delete hist1D;
 }
 
-void process2DHistogram(TH2F *h2, const std::string &sourceName, int number_of_peaks, double *energyArray, int size, UserInterface &ui, float Xmin, float Xmax, float FWHMmax, float MinAmplitude, float MaxAmplitude, std::ofstream &jsonFile, TFile *outputFileHistograms, TFile *outputFileCalibrated, TFile *outputFileTH2, bool userInterfaceStatus)
+void process2DHistogram(TH2F *h2, const std::string &sourceName, int number_of_peaks, double *energyArray, int size, UserInterface &ui, float Xmin, float Xmax, float FWHMmax, float MinAmplitude, float MaxAmplitude, const std::string &TH2histogram_name, std::ofstream &jsonFile, TFile *outputFileHistograms, TFile *outputFileCalibrated, TFile *outputFileTH2, bool userInterfaceStatus)
 {
     if (!h2)
     {
@@ -125,7 +125,7 @@ void process2DHistogram(TH2F *h2, const std::string &sourceName, int number_of_p
         TH1D *hist1D = h2->ProjectionY(Form("hist1D_col%d", column), column, column);
         if (hist1D)
         {
-            processHistogram(hist1D, sourceName, number_of_peaks, energyArray, size, histograms, Xmin, Xmax, FWHMmax, MinAmplitude, MaxAmplitude, jsonFile, outputFileHistograms, outputFileCalibrated, ui, userInterfaceStatus);
+            processHistogram(hist1D, sourceName, number_of_peaks, energyArray, size, histograms, Xmin, Xmax, FWHMmax, MinAmplitude, MaxAmplitude, TH2histogram_name, jsonFile, outputFileHistograms, outputFileCalibrated, ui, userInterfaceStatus);
         }
     }
 
@@ -180,7 +180,7 @@ void processHistogramsTask(int number_of_peaks, const std::string &sourceName, c
             }
         }
 
-        process2DHistogram(h2, sourceName, number_of_peaks, energyArray, size, ui, Xmin, Xmax, FWHMmax, MinAmplitude, MaxAmplitude, jsonFile, outputFileHistograms, outputFileCalibrated, outputFileTH2, userInterfaceStatus);
+        process2DHistogram(h2, sourceName, number_of_peaks, energyArray, size, ui, Xmin, Xmax, FWHMmax, MinAmplitude, MaxAmplitude, TH2histogram_name, jsonFile, outputFileHistograms, outputFileCalibrated, outputFileTH2, userInterfaceStatus);
         delete[] energyArray;
     }
     else

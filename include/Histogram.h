@@ -12,6 +12,7 @@
 #include <TCanvas.h>
 #include <TLatex.h>
 #include <string>
+#include <TGraph.h>
 class Histogram
 {
 private:
@@ -28,6 +29,7 @@ private:
     unsigned int peakMatchCount;
     std::vector<Peak> peaks;
     int peakCount;
+    std::string TH2histogram_name;
     std::string sourceName;
     // Funcții private
     void eliminatePeak(const Peak &peak);
@@ -43,7 +45,7 @@ private:
 
 public:
     // Constructori și Destructor
-    Histogram(int xMin, int xMax, int maxFWHM, float minAmplitude, float maxAmplitude, int numberOfPeaks, TH1D *mainHist, std::string sourceName);
+    Histogram(int xMin, int xMax, int maxFWHM, float minAmplitude, float maxAmplitude, int numberOfPeaks, TH1D *mainHist, const std::string &TH2histogram_name, std::string sourceName);
     Histogram(const Histogram &histogram);
     ~Histogram();
     Histogram &operator=(const Histogram &histogram);
