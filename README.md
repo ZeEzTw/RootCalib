@@ -42,27 +42,29 @@ Is just an example to show the capability of extension with the code arhitecture
 ## Installation and Usage
 Clone Repository
 
-- Clone the repository using:
+Clone the repository using:
 
-```git clone https://github.com/ZeEzTw/Eli-Europiu.git```
+    git clone https://github.com/ZeEzTw/Eli-Europiu.git
 
 
 # Compilation
-Compile the code with: ```g++ src/*.cpp -Iinclude $(root-config --glibs --cflags --libs) -o task```
+Compile the code with:
+
+    g++ src/*.cpp -Iinclude $(root-config --glibs --cflags --libs) -o task
 
 
 # Running the Program
  - 1.To activate User Interface, run it with the following example command:
 
-```./taskD 10 Europium data/data.root mDelila_raw data/energy.txt 10.0 1500.0 20 0 100000000 "/home/andrei/Europiu2/output"```
+        ./task 10 Europium data/data.root mDelila_raw data/energy.txt 10.0 1500.0 20 0 10000000 output/
 
  - 2.To run without User Interface, use this example command:
 
-```./taskD 10 Europium data/data.root mDelila_raw data/energy.txt 10.0 1500.0 20 0 100000000 "/home/andrei/Europiu2/output"```
+        ./task 10 Europium data/data.root mDelila_raw data/energy.txt 10.0 1500.0 20 0 10000000 output/ Eurpoiu-152
 
 - Run the application with: 
 
-```./task <number_of_peaks> <source_name> <histogram_file_path> <TH2histogram_name> <energy_file_path> <Xmin> <Xmax> <FWHMmax> <MinAmplitude> <MaxAmplitude> <save_path> <sources> <sources>```
+        ./task <number_of_peaks> <source_name> <histogram_file_path> <TH2histogram_name> <energy_file_path> <Xmin> <Xmax> <FWHMmax> <MinAmplitude> <MaxAmplitude> <save_path> <sources>
 
 # Arguments
 
@@ -87,5 +89,6 @@ soruces can be puted as much as needed.
     2: Source names for calibration are not valid (check spelling).
     3: Input file is not valid, or it cannot be opened (check spelling).
     4: TH2F histogram with data is not valid (check spelling).
+
 
 

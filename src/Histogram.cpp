@@ -266,7 +266,7 @@ int Histogram::getTheDegreeOfPolynomial() const
 
     for (int i = 0; i < numberOfPeaks; i++)
     {
-        std::cout << "Peak number: " << i << std::endl;
+        //std::cout << "Peak number: " << i << std::endl;
         double peakPosition = peaks[i].getPosition();
         double peakAmplitude = peaks[i].getAmplitude();
         xValues.push_back(peakPosition);
@@ -492,7 +492,7 @@ void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
     for (size_t i = 0; i < peaks.size(); ++i)
     {
         jsonFile << "\t\t{\n";
-        jsonFile << "\t\t\t\"Number_Peak\": " << i + 1 << ",\n";
+        //jsonFile << "\t\t\t\"Number_Peak\": " << i + 1 << ",\n";
         jsonFile << "\t\t\t\"position\": " << peaks[i].getPosition() << ",\n";
         jsonFile << "\t\t\t\"FWHM\": " << peaks[i].getFWHM() << ",\n";
         jsonFile << "\t\t\t\"area\": " << peaks[i].getArea() << "\n";
