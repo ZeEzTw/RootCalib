@@ -13,15 +13,18 @@ This project provides tools for extracting and analyzing peaks from ROOT histogr
 
 ```json
 {
-    "Source": "Europium",
-    "Histogram": "hist1D_col102",
-    "NumberOfPeaks": 10,
+	"Source": "Europium",
+	"Histogram": "hist1D_col102",
+	"TH2Source_FileName": "mDelila_raw",
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 4,
+	"Calibration Factor m": 1.31,
+	"Calibration Factor b": 0,
     "Peaks": [
         {
-            "Number_Peak": 2,
-            "position": 262.228,
-            "FWHM": 1.91393,
-            "area": 77169.4        
+			"position": 91.9006,
+			"FWHM": 1.87856,
+			"area": 191502      
         }
     ]
     "// Additional peaks..."
