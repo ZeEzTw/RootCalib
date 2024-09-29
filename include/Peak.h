@@ -9,6 +9,7 @@ class Peak
 {
 private:
     double position;
+    double associatedPosition;
     TF1 *gaus;
     double amplitude;
     double sigma;
@@ -37,6 +38,9 @@ public:
 
     void setPosition(double pos);
     double getPosition() const;
+
+    void setAssociatedPosition(double pos);
+    double getAssociatedPosition() const;
 
     void setAmplitude(double amp);
     double getAmplitude() const;

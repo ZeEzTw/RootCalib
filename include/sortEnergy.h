@@ -4,9 +4,11 @@
 #include <algorithm>
 class sortEnergy
 {
-    std::vector<std::vector<double>> energyMatrix; // Matrice de energie
-    std::vector<std::string> sources;              // Numele surselor
-    std::vector<std::string> requestedSources;     // Numele surselor cerute
+    std::vector<std::vector<double>> energyMatrix;      // Matrice de energie
+    std::vector<std::vector<double>> probabilityMatrix; // Matrice de probabilitate
+    std::vector<std::string> sources;                   // Numele surselor
+    std::vector<int> numberOfPeaks;                     // Numărul de vârfuri
+    std::vector<std::string> requestedSources;          // Numele surselor cerute
 
 public:
     sortEnergy(const std::string &filename);
@@ -22,8 +24,7 @@ public:
     int isSourceValid(const std::string &source);
     void chooseSources(int argc, char *argv[]);
     double *createSourceArray(int &size);
-
-
+    void parseJsonFile(const std::string &filename);
 
 private:
     // void parseJsonFile(const std::string &filename);

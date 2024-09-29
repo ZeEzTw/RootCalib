@@ -7,7 +7,7 @@
 using namespace std;
 
 Peak::Peak(TF1 *gausPeak, TH1D *hist)
-    : position(0), gaus(nullptr), amplitude(0), sigma(0), area(0), leftLimit(0), rightLimit(0)
+    : position(0), associatedPosition(0), gaus(nullptr), amplitude(0), sigma(0), area(0), leftLimit(0), rightLimit(0)
 {
     if (gausPeak)
     {
@@ -25,7 +25,7 @@ Peak::Peak(TF1 *gausPeak, TH1D *hist)
 }
 
 Peak::Peak(const Peak &other)
-    : position(other.position), amplitude(other.amplitude), sigma(other.sigma), area(other.area),
+    : position(other.position), associatedPosition(other.associatedPosition), amplitude(other.amplitude), sigma(other.sigma), area(other.area),
       leftLimit(other.leftLimit), rightLimit(other.rightLimit)
 {
     gaus = other.gaus ? new TF1(*other.gaus) : nullptr;
@@ -37,6 +37,7 @@ Peak &Peak::operator=(const Peak &other)
     {
         position = other.position;
         amplitude = other.amplitude;
+        associatedPosition = other.associatedPosition;
         sigma = other.sigma;
         area = other.area;
         leftLimit = other.leftLimit;
@@ -49,7 +50,7 @@ Peak &Peak::operator=(const Peak &other)
 }
 
 Peak::Peak(Peak &&other) noexcept
-    : position(other.position), gaus(other.gaus), amplitude(other.amplitude), sigma(other.sigma),
+    : position(other.position), associatedPosition(other.associatedPosition), gaus(other.gaus), amplitude(other.amplitude), sigma(other.sigma),
       area(other.area), leftLimit(other.leftLimit), rightLimit(other.rightLimit)
 {
     other.gaus = nullptr;
@@ -60,6 +61,7 @@ Peak &Peak::operator=(Peak &&other) noexcept
     if (this != &other)
     {
         position = other.position;
+        associatedPosition = other.associatedPosition;
         amplitude = other.amplitude;
         sigma = other.sigma;
         area = other.area;
@@ -85,6 +87,16 @@ void Peak::setPosition(double pos)
 double Peak::getPosition() const
 {
     return position;
+}
+
+void Peak::setAssociatedPosition(double pos)
+{
+    associatedPosition = pos;
+}
+
+double Peak::getAssociatedPosition() const
+{
+    return associatedPosition;
 }
 
 void Peak::setAmplitude(double amp)
@@ -151,7 +163,7 @@ float Peak::getRightLimit() const
 {
     // Assume backgroundModel has been fitted elsewhere and provides background at each bin
     TF1 *backgroundModel = ...; // This should be defined based on your background fitting
-    
+
     double peakArea = 0.0;
 
     // Loop over bins within the peak region
@@ -176,14 +188,15 @@ void Peak::areaPeak(TH1D *hist)
     double peakArea = 0.0;
     double backgroundArea = 0.0;
 
-    for (int bin = leftBin; bin <= rightBin; ++bin) {
+    for (int bin = leftBin; bin <= rightBin; ++bin)
+    {
         double binCenter = hist->GetBinCenter(bin);
         double binWidth = hist->GetBinWidth(bin);
         double binContent = hist->GetBinContent(bin);
 
-        double background = leftHeight + (rightHeight - leftHeight) * 
-                            (binCenter - leftLimit) / (rightLimit - leftLimit);
-        
+        double background = leftHeight + (rightHeight - leftHeight) *
+                                             (binCenter - leftLimit) / (rightLimit - leftLimit);
+
         peakArea += (binContent * binWidth);
 
         backgroundArea += (background * binWidth);

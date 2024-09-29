@@ -9,7 +9,17 @@
 #include <TError.h> // Include pentru gErrorIgnoreLevel
 
 // Function to open ROOT files and JSON output file
-void openFiles(const char *inputFilePath, TFile *&inputFile, TFile *&outputFileHistograms, TFile *&outputFileCalibrated, std::ofstream &jsonFile, TFile *&outputFileTH2, const std::string &savePath)
+std::string removeFileExtension(const std::string &filePath)
+{
+    size_t lastDot = filePath.find_last_of('.');
+    if (lastDot != std::string::npos)
+    {
+        return filePath.substr(0, lastDot);
+    }
+    return filePath;
+}
+
+void openFiles(const char *inputFilePath, TFile *&inputFile, TFile *&outputFileHistograms, TFile *&outputFileCalibrated, std::ofstream &jsonFile, TFile *&outputFileTH2, const std::string &savePath, const std::string &histogramFilePath)
 {
     inputFile = new TFile(inputFilePath, "READ");
     std::string saveDirectory = savePath;
@@ -21,7 +31,22 @@ void openFiles(const char *inputFilePath, TFile *&inputFile, TFile *&outputFileH
     outputFileHistograms = new TFile((saveDirectory + "histogramsWithPeaks.root").c_str(), "RECREATE");
     outputFileCalibrated = new TFile((saveDirectory + "calibratedHistograms.root").c_str(), "RECREATE");
     outputFileTH2 = new TFile((saveDirectory + "combinedHistogram.root").c_str(), "RECREATE");
-    jsonFile.open((saveDirectory + "data.json").c_str());
+    std::string fileName = histogramFilePath;
+
+    // Înlăturăm extensia dacă există
+    fileName = removeFileExtension(fileName);
+    for (char &ch : fileName)
+    {
+        if (ch == '/' || ch == '\\')
+        {
+            ch = '_';
+        }
+    }
+    // Construim calea completă pentru fișierul JSON
+    std::string jsonFilePath = saveDirectory + fileName + ".json";
+    //std::cout << "JSON file path: " << jsonFilePath << std::endl;
+
+    jsonFile.open((jsonFilePath).c_str());
 }
 
 // Function to close ROOT files and JSON output file
@@ -37,7 +62,7 @@ void closeFiles(TFile *inputFile, TFile *outputFileHistograms, TFile *outputFile
     delete inputFile;
 }
 // Function to process all columns in a 2D histogram
-void convertHistogramsToTH2(const std::vector<Histogram> &histograms, TH2F *inputTH2, TFile *outputFileTH2, int xOffset = 102)
+void convertHistogramsToTH2(const std::vector<Histogram> &histograms, TH2F *inputTH2, TFile *outputFileTH2)
 {
     if (histograms.empty() || !inputTH2)
     {
@@ -60,7 +85,7 @@ void convertHistogramsToTH2(const std::vector<Histogram> &histograms, TH2F *inpu
             for (int binY = 1; binY <= hist1D->GetNbinsX(); ++binY)
             {
                 double content = hist1D->GetBinContent(binY);
-                int xBinIndex = i + 1 + xOffset;
+                int xBinIndex = i + 1;
 
                 if (xBinIndex <= number_of_columns && binY <= number_of_binsY)
                 {
@@ -88,6 +113,7 @@ void processHistogram(TH1D *hist1D, const std::string &sourceName, int number_of
     if (!hist1D || hist1D->GetMean() < 5)
     {
         delete hist1D;
+        histograms.emplace_back();
         return;
     }
 
@@ -120,7 +146,7 @@ void process2DHistogram(TH2F *h2, const std::string &sourceName, int number_of_p
     std::vector<Histogram> histograms;
     int number_of_columns = h2->GetNbinsX();
     TH2F *coppiedTh2 = (TH2F *)h2->Clone("coppiedTh2");
-    for (int column = 1; column <= number_of_columns; ++column)
+    for (int column = 0; column <= number_of_columns; ++column)
     {
         TH1D *hist1D = h2->ProjectionY(Form("hist1D_col%d", column), column, column);
         if (hist1D)
@@ -137,7 +163,7 @@ void process2DHistogram(TH2F *h2, const std::string &sourceName, int number_of_p
     }
 }
 
-void processHistogramsTask(int number_of_peaks, const std::string &sourceName, const std::string &filePath, const std::string &TH2histogram_name, sortEnergy &energyProcessor, float Xmin, float Xmax, float FWHMmax, float MinAmplitude, float MaxAmplitude, std::string savePath, bool userInterfaceStatus)
+void processHistogramsTask(int number_of_peaks, const std::string &sourceName, const std::string &filePath, const std::string &TH2histogram_name, sortEnergy &energyProcessor, float Xmin, float Xmax, float FWHMmax, float MinAmplitude, float MaxAmplitude, std::string savePath, std::string histogramFilePath, bool userInterfaceStatus)
 {
     TFile *inputFile = nullptr;
     TFile *outputFileHistograms = nullptr;
@@ -145,7 +171,7 @@ void processHistogramsTask(int number_of_peaks, const std::string &sourceName, c
     TFile *outputFileTH2 = nullptr;
     std::ofstream jsonFile;
 
-    openFiles(filePath.c_str(), inputFile, outputFileHistograms, outputFileCalibrated, jsonFile, outputFileTH2, savePath);
+    openFiles(filePath.c_str(), inputFile, outputFileHistograms, outputFileCalibrated, jsonFile, outputFileTH2, savePath, histogramFilePath);
 
     if (!inputFile)
     {
@@ -219,12 +245,13 @@ int main(int argc, char *argv[])
     if (argc > 12)
     {
         energyProcessor.chooseSources(argc, argv);
-        processHistogramsTask(number_of_peaks, sourceName, histogramFilePath, TH2histogram_name, energyProcessor, Xmin, Xmax, FWHMmax, MinAmplitude, MaxAmplitude, savePath, false);
+        processHistogramsTask(number_of_peaks, sourceName, histogramFilePath, TH2histogram_name, energyProcessor, Xmin, Xmax, FWHMmax, MinAmplitude, MaxAmplitude, savePath, histogramFilePath, false);
     }
     else
     {
-        processHistogramsTask(number_of_peaks, sourceName, histogramFilePath, TH2histogram_name, energyProcessor, Xmin, Xmax, FWHMmax, MinAmplitude, MaxAmplitude, savePath, true);
+        processHistogramsTask(number_of_peaks, sourceName, histogramFilePath, TH2histogram_name, energyProcessor, Xmin, Xmax, FWHMmax, MinAmplitude, MaxAmplitude, savePath, histogramFilePath, true);
     }
+
     std::cerr << "0" << std::endl;
     return 0;
 }

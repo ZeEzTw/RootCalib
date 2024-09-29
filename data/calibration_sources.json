@@ -1,0 +1,144 @@
+{
+    "sources": [
+        {
+            "name": "Co-60",
+            "numberOfPeaks": 2,
+            "peaks": [
+                {
+                    "value": 1173.2,
+                    "probability": 0.9
+                },
+                {
+                    "value": 1332.5,
+                    "probability": 0.75
+                }
+            ]
+        },
+        {
+            "name": "Eu-152",
+            "numberOfPeaks": 10,
+            "Peaks": [
+                {
+                    "Energy_keV": 121.78,
+                    "Probability": 28.41
+                },
+                {
+                    "Energy_keV": 244.70,
+                    "Probability": 7.55
+                },
+                {
+                    "Energy_keV": 344.28,
+                    "Probability": 26.59
+                },
+                {
+                    "Energy_keV": 411.12,
+                    "Probability": 2.23
+                },
+                {
+                    "Energy_keV": 443.96,
+                    "Probability": 3.13
+                },
+                {
+                    "Energy_keV": 586.29,
+                    "Probability": 12.95
+                },
+                {
+                    "Energy_keV": 778.90,
+                    "Probability": 12.96
+                },
+                {
+                    "Energy_keV": 867.38,
+                    "Probability": 4.23
+                },
+                {
+                    "Energy_keV": 964.06,
+                    "Probability": 14.61
+                },
+                {
+                    "Energy_keV": 1085.87,
+                    "Probability": 10.18
+                },
+                {
+                    "Energy_keV": 1112.08,
+                    "Probability": 13.61
+                },
+                {
+                    "Energy_keV": 1212.95,
+                    "Probability": 1.23
+                },
+                {
+                    "Energy_keV": 1299.14,
+                    "Probability": 1.63
+                },
+                {
+                    "Energy_keV": 1408.01,
+                    "Probability": 20.87
+                },
+                {
+                    "Energy_keV": 1506.53,
+                    "Probability": 1.26
+                },
+                {
+                    "Energy_keV": 1528.16,
+                    "Probability": 0.75
+                },
+                {
+                    "Energy_keV": 1547.41,
+                    "Probability": 0.64
+                },
+                {
+                    "Energy_keV": 1550.88,
+                    "Probability": 0.44
+                },
+                {
+                    "Energy_keV": 1559.95,
+                    "Probability": 0.51
+                },
+                {
+                    "Energy_keV": 1588.19,
+                    "Probability": 0.37
+                },
+                {
+                    "Energy_keV": 1609.66,
+                    "Probability": 0.33
+                },
+                {
+                    "Energy_keV": 1634.68,
+                    "Probability": 0.29
+                },
+                {
+                    "Energy_keV": 1672.15,
+                    "Probability": 0.24
+                },
+                {
+                    "Energy_keV": 1694.99,
+                    "Probability": 0.21
+                },
+                {
+                    "Energy_keV": 1715.91,
+                    "Probability": 0.19
+                },
+                {
+                    "Energy_keV": 1734.98,
+                    "Probability": 0.18
+                },
+                {
+                    "Energy_keV": 1769.78,
+                    "Probability": 0.15
+                },
+                {
+                    "Energy_keV": 1792.33,
+                    "Probability": 0.12
+                },
+                {
+                    "Energy_keV": 1823.86,
+                    "Probability": 0.10
+                },
+                {
+                    "Energy_keV": 1851.88,
+                    "Probability": 0.09
+                }
+            ]
+        }
+    ]
+}

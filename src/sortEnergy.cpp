@@ -5,8 +5,15 @@
 
 sortEnergy::sortEnergy(const std::string &filename)
 {
-    readFromTxt(filename);
-    sortEnergyArray();
+    // readFromTxt(filename);
+    parseJsonFile(filename);
+
+    std::ofstream outputFile("output.txt"); // Create an ofstream object
+    if (outputFile.is_open()) {
+        printToFile(outputFile);
+        //printSources();
+    }
+    // sortEnergyArray();
 }
 
 sortEnergy::~sortEnergy()
@@ -253,3 +260,76 @@ double *sortEnergy::createSourceArray(int &size)
     size = totalSize;
     return combinedEnergyArray;
 }
+
+void sortEnergy::parseJsonFile(const std::string &filename)
+{
+    std::ifstream file(filename);
+    if (!file.is_open())
+    {
+        std::cerr << "Could not open file: " << filename << std::endl;
+        return;
+    }
+
+    std::string line;
+    std::string currentSource;
+    int peakCount = 0;
+
+    while (std::getline(file, line))
+    {
+        // Îndepărtăm spațiile și caracterele inutile
+        line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
+
+        // Căutăm sursa
+        if (line.find("name") != std::string::npos)
+        {
+            currentSource = line.substr(line.find(":") + 1);
+            sources.push_back(currentSource);
+        }
+
+        // Căutăm numărul de vârfuri
+        if (line.find("numberOfPeaks") != std::string::npos)
+        {
+            peakCount = std::stoi(line.substr(line.find(":") + 1));
+            numberOfPeaks.push_back(peakCount);
+        }
+
+        // Căutăm vârfurile
+        if (line.find("peaks") != std::string::npos || line.find("Peaks") != std::string::npos)
+        {
+            std::vector<double> energies;
+            std::vector<double> probabilities;
+
+            // Continuăm citirea până la finalul vârfurilor
+            while (std::getline(file, line) && line.find("]") == std::string::npos)
+            {
+                if (line.find("value") != std::string::npos || line.find("Energy_keV") != std::string::npos)
+                {
+                    double energy = std::stod(line.substr(line.find(":") + 1));
+                    energies.push_back(energy);
+                }
+                else
+                {
+                    continue;
+                }
+                std::getline(file, line);
+                if (line.find("probability") != std::string::npos || line.find("Probability") != std::string::npos)
+                {
+                    double probability = std::stod(line.substr(line.find(":") + 1));
+                    probabilities.push_back(probability);
+                }
+                else
+                {
+                    continue;
+                }
+            }
+
+            // Adăugăm energiile și probabilitățile în matrice
+            energyMatrix.push_back(energies);
+            probabilityMatrix.push_back(probabilities);
+        }
+    }
+
+    file.close();
+} 
+
+

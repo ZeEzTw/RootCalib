@@ -35,16 +35,19 @@ private:
     void eliminatePeak(const Peak &peak);
     TF1 *createGaussianFit(int maxBin);
     int findMaxBin();
-    void detectAndFitPeaks();
-    bool checkPredictedEnergies(double predictedEnergy, const double knownEnergies[], int size, float errorAdmitted) const;
+    int detectAndFitPeaks();
+    bool checkPredictedEnergies(double predictedEnergy, const double knownEnergies[], int size, float errorAdmitted, double &valueAssociatedWith) const;
     double refineCalibration(const double knownEnergies[], int size) const;
+    double refineCalibrationM();
+    double refineCalibrationB();
     void findStartOfPeak(Peak &peak);
     void initializeCalibratedHist();
     double getInterpolatedContent(int bin_original, double binCenter_original) const;
     int getTheDegreeOfPolynomial() const;
-
+    std::string getMainHistName() const;
 public:
     // Constructori și Destructor
+    Histogram();
     Histogram(int xMin, int xMax, int maxFWHM, float minAmplitude, float maxAmplitude, int numberOfPeaks, TH1D *mainHist, const std::string &TH2histogram_name, std::string sourceName);
     Histogram(const Histogram &histogram);
     ~Histogram();
