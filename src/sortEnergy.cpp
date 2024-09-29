@@ -9,9 +9,10 @@ sortEnergy::sortEnergy(const std::string &filename)
     parseJsonFile(filename);
 
     std::ofstream outputFile("output.txt"); // Create an ofstream object
-    if (outputFile.is_open()) {
-        printToFile(outputFile);
-        //printSources();
+    if (outputFile.is_open())
+    {
+        //printToFile(outputFile);
+        // printSources();
     }
     // sortEnergyArray();
 }
@@ -147,6 +148,7 @@ int sortEnergy::isSourceValid(const std::string &source)
 {
     for (size_t i = 0; i < sources.size(); ++i)
     {
+        std::cout << sources[i] << std::endl;
         if (sources[i] == source)
         {
             return i;
@@ -223,6 +225,38 @@ void sortEnergy::chooseSources(int argc, char *argv[])
     }
 }
 
+void sortEnergy::chooseSources(int startPosition, int argc, char *argv[])
+{
+    bool dublicated = false;
+    for (int i = startPosition; i < argc; i++)
+    {
+        dublicated = false;
+        for (int j = 0; j < requestedSources.size(); j++)
+        {
+            if (requestedSources[j] == argv[i])
+            {
+                dublicated = true;
+            }
+        }
+        if (!dublicated)
+        {
+            requestedSources.push_back(argv[i]);
+        }
+    }
+}
+
+int sortEnergy::getNumberOfPeaks() const
+{
+    int totalPeaks = 0;
+    int count = 0;
+    for (const auto &source : requestedSources)
+    {
+        totalPeaks += numberOfPeaks[count];
+        count++;
+    }
+    return totalPeaks;
+}
+
 double *sortEnergy::createSourceArray(int &size)
 {
     std::vector<double *> selectedEnergyArrays;
@@ -260,7 +294,13 @@ double *sortEnergy::createSourceArray(int &size)
     size = totalSize;
     return combinedEnergyArray;
 }
-
+std::string sortEnergy::cleanSourceName(const std::string &sourceName)
+{
+    // Regex pattern to match quotes and commas
+    std::regex pattern("[\",]");
+    // Replace all matches of the pattern with an empty string
+    return std::regex_replace(sourceName, pattern, "");
+}
 void sortEnergy::parseJsonFile(const std::string &filename)
 {
     std::ifstream file(filename);
@@ -283,6 +323,7 @@ void sortEnergy::parseJsonFile(const std::string &filename)
         if (line.find("name") != std::string::npos)
         {
             currentSource = line.substr(line.find(":") + 1);
+            currentSource = cleanSourceName(currentSource);
             sources.push_back(currentSource);
         }
 
@@ -330,6 +371,4 @@ void sortEnergy::parseJsonFile(const std::string &filename)
     }
 
     file.close();
-} 
-
-
+}

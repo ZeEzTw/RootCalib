@@ -98,7 +98,6 @@ double *UserInterface::askAboutSource(sortEnergy &energys, int &size)
 
     bool addMoreSources = true;
     int totalSize = 0;
-
     while (addMoreSources)
     {
         // Afișăm sursele disponibile

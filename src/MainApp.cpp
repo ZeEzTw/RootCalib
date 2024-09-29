@@ -1,6 +1,7 @@
 #include "../include/Histogram.h"
 #include "../include/Peak.h"
 #include "../include/UserInterface.h"
+#include "../include/ArgumentsManager.h"
 #include <iostream>
 #include <fstream>
 #include <TFile.h>
@@ -108,7 +109,7 @@ void convertHistogramsToTH2(const std::vector<Histogram> &histograms, TH2F *inpu
     }
 }
 
-void processHistogram(TH1D *hist1D, const std::string &sourceName, int number_of_peaks, double *energyArray, int size, std::vector<Histogram> &histograms, float Xmin, float Xmax, float FWHMmax, float MinAmplitude, float MaxAmplitude, const std::string &TH2histogram_name, std::ofstream &jsonFile, TFile *outputFileHistograms, TFile *outputFileCalibrated, UserInterface &ui, bool userInterfaceStatus)
+void processHistogram(ArgumentsManager &arguments, TH1D *hist1D, double *energyArray, int size, std::vector<Histogram> &histograms, std::ofstream &jsonFile, TFile *outputFileHistograms, TFile *outputFileCalibrated, UserInterface &ui)
 {
     if (!hist1D || hist1D->GetMean() < 5)
     {
@@ -117,7 +118,7 @@ void processHistogram(TH1D *hist1D, const std::string &sourceName, int number_of
         return;
     }
 
-    Histogram hist(Xmin, Xmax, FWHMmax, MinAmplitude, MaxAmplitude, number_of_peaks, hist1D, TH2histogram_name, sourceName);
+    Histogram hist(arguments.getXmin(), arguments.getXmax(), arguments.getFWHMmax(), arguments.getMinAmplitude(), arguments.getMaxAmplitude(), arguments.getNumberOfPeaks(), hist1D, arguments.getHistogramName(), arguments.getSourcesName());
     hist.findPeaks();
     hist.calibratePeaks(energyArray, size);
     hist.applyXCalibration();
@@ -126,7 +127,7 @@ void processHistogram(TH1D *hist1D, const std::string &sourceName, int number_of
     hist.printCalibratedHistogramRoot(outputFileCalibrated);
     histograms.push_back(hist);
 
-    if (userInterfaceStatus)
+    if (arguments.isUserInterfaceEnabled())
     {
         ui.showCalibrationInfo(hist);
         std::cout << "Histograms processed: " << histograms.size() << std::endl;
@@ -135,7 +136,7 @@ void processHistogram(TH1D *hist1D, const std::string &sourceName, int number_of
     delete hist1D;
 }
 
-void process2DHistogram(TH2F *h2, const std::string &sourceName, int number_of_peaks, double *energyArray, int size, UserInterface &ui, float Xmin, float Xmax, float FWHMmax, float MinAmplitude, float MaxAmplitude, const std::string &TH2histogram_name, std::ofstream &jsonFile, TFile *outputFileHistograms, TFile *outputFileCalibrated, TFile *outputFileTH2, bool userInterfaceStatus)
+void process2DHistogram(ArgumentsManager &arguments, TH2F *h2, double *energyArray, int size, UserInterface &ui, std::ofstream &jsonFile, TFile *outputFileHistograms, TFile *outputFileCalibrated, TFile *outputFileTH2)
 {
     if (!h2)
     {
@@ -151,19 +152,19 @@ void process2DHistogram(TH2F *h2, const std::string &sourceName, int number_of_p
         TH1D *hist1D = h2->ProjectionY(Form("hist1D_col%d", column), column, column);
         if (hist1D)
         {
-            processHistogram(hist1D, sourceName, number_of_peaks, energyArray, size, histograms, Xmin, Xmax, FWHMmax, MinAmplitude, MaxAmplitude, TH2histogram_name, jsonFile, outputFileHistograms, outputFileCalibrated, ui, userInterfaceStatus);
+            processHistogram(arguments, hist1D, energyArray, size, histograms, jsonFile, outputFileHistograms, outputFileCalibrated, ui);
         }
     }
 
     convertHistogramsToTH2(histograms, h2, outputFileTH2);
 
-    if (userInterfaceStatus)
+    if (arguments.isUserInterfaceEnabled())
     {
         ui.askAboutPeaks(histograms, jsonFile, outputFileHistograms, outputFileCalibrated);
     }
 }
 
-void processHistogramsTask(int number_of_peaks, const std::string &sourceName, const std::string &filePath, const std::string &TH2histogram_name, sortEnergy &energyProcessor, float Xmin, float Xmax, float FWHMmax, float MinAmplitude, float MaxAmplitude, std::string savePath, std::string histogramFilePath, bool userInterfaceStatus)
+void processHistogramsTask(ArgumentsManager &arguments)
 {
     TFile *inputFile = nullptr;
     TFile *outputFileHistograms = nullptr;
@@ -171,8 +172,7 @@ void processHistogramsTask(int number_of_peaks, const std::string &sourceName, c
     TFile *outputFileTH2 = nullptr;
     std::ofstream jsonFile;
 
-    openFiles(filePath.c_str(), inputFile, outputFileHistograms, outputFileCalibrated, jsonFile, outputFileTH2, savePath, histogramFilePath);
-
+    openFiles(arguments.getHistogramFilePath().c_str(), inputFile, outputFileHistograms, outputFileCalibrated, jsonFile, outputFileTH2, arguments.getSavePath(), arguments.getHistogramFilePath());
     if (!inputFile)
     {
         std::cerr << "3" << std::endl;
@@ -180,7 +180,7 @@ void processHistogramsTask(int number_of_peaks, const std::string &sourceName, c
     }
 
     TH2F *h2 = nullptr;
-    inputFile->GetObject(TH2histogram_name.c_str(), h2);
+    inputFile->GetObject(arguments.getHistogramName().c_str(), h2);
 
     if (h2)
     {
@@ -188,8 +188,9 @@ void processHistogramsTask(int number_of_peaks, const std::string &sourceName, c
         int size = 0;
         UserInterface ui;
 
-        if (userInterfaceStatus)
+        if (arguments.isUserInterfaceEnabled())
         {
+            sortEnergy energyProcessor = arguments.getEnergyProcessor();
             energyArray = ui.askAboutSource(energyProcessor, size);
             if (!energyArray)
             {
@@ -199,19 +200,18 @@ void processHistogramsTask(int number_of_peaks, const std::string &sourceName, c
         }
         else
         {
-            energyArray = energyProcessor.createSourceArray(size);
+            energyArray = arguments.getEnergyProcessor().createSourceArray(size);
             if (!energyArray)
             {
                 std::cerr << "2" << std::endl;
             }
         }
-
-        process2DHistogram(h2, sourceName, number_of_peaks, energyArray, size, ui, Xmin, Xmax, FWHMmax, MinAmplitude, MaxAmplitude, TH2histogram_name, jsonFile, outputFileHistograms, outputFileCalibrated, outputFileTH2, userInterfaceStatus);
+        process2DHistogram(arguments, h2, energyArray, size, ui, jsonFile, outputFileHistograms, outputFileCalibrated, outputFileTH2);
         delete[] energyArray;
     }
     else
     {
-        std::cerr << "Error: 2D histogram '" << TH2histogram_name << "' not found in the input file." << std::endl;
+        std::cerr << "Error: 2D histogram '" << arguments.getHistogramName() << "' not found in the input file." << std::endl;
     }
 
     closeFiles(inputFile, outputFileHistograms, outputFileCalibrated, jsonFile);
@@ -221,7 +221,7 @@ int main(int argc, char *argv[])
 {
     gErrorIgnoreLevel = kError;
 
-    if (argc < 12)
+    /*if (argc < 12)
     {
         std::cerr << "Usage: " << argv[0] << " <number_of_peaks> <source_name> <histogram_file_path> <TH2histogram_name> <energy_file_path> <Xmin> <Xmax> <FWHMmax> <MinAmplitude> <MaxAmplitude> <save_path> <sources> " << std::endl;
         std::cerr << "1" << std::endl;
@@ -239,18 +239,17 @@ int main(int argc, char *argv[])
     float MinAmplitude = std::stof(argv[9]);
     float MaxAmplitude = std::stof(argv[10]);
     std::string savePath = argv[11];
-
-    sortEnergy energyProcessor(energyFilePath);
-
-    if (argc > 12)
-    {
-        energyProcessor.chooseSources(argc, argv);
-        processHistogramsTask(number_of_peaks, sourceName, histogramFilePath, TH2histogram_name, energyProcessor, Xmin, Xmax, FWHMmax, MinAmplitude, MaxAmplitude, savePath, histogramFilePath, false);
-    }
-    else
-    {
-        processHistogramsTask(number_of_peaks, sourceName, histogramFilePath, TH2histogram_name, energyProcessor, Xmin, Xmax, FWHMmax, MinAmplitude, MaxAmplitude, savePath, histogramFilePath, true);
-    }
+    */
+    ArgumentsManager argumentsManager(argc, argv);
+    // argumentsManager.printAllArguments();
+    // if (argc > 12)
+    //{
+    processHistogramsTask(argumentsManager);
+    //}
+    // else
+    //{
+    // processHistogramsTask(number_of_peaks, sourceName, histogramFilePath, TH2histogram_name, energyProcessor, Xmin, Xmax, FWHMmax, MinAmplitude, MaxAmplitude, savePath, histogramFilePath, true);
+    //}
 
     std::cerr << "0" << std::endl;
     return 0;

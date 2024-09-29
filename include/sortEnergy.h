@@ -1,7 +1,9 @@
+#pragma once
 #include <vector>
 #include <string>
 #include <fstream>
 #include <algorithm>
+#include <regex>
 class sortEnergy
 {
     std::vector<std::vector<double>> energyMatrix;      // Matrice de energie
@@ -22,9 +24,13 @@ public:
     double *getEnergyArray(int index);
     void readFromTxt(const std::string &sourceLine);
     int isSourceValid(const std::string &source);
+    std::string cleanSourceName(const std::string &sourceName);
     void chooseSources(int argc, char *argv[]);
+    void chooseSources(int startPosition, int argc, char *argv[]);
+    int getNumberOfPeaks() const;
     double *createSourceArray(int &size);
     void parseJsonFile(const std::string &filename);
+    const std::vector<std::string>& getRequestedSources() const { return requestedSources; }
 
 private:
     // void parseJsonFile(const std::string &filename);

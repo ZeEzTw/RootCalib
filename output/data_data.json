@@ -1,0 +1,2920 @@
+{
+	"Source": "Eu-152",
+	"Histogram": "102",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 18,
+	"Calibration Degree": 5,
+	"Calibration Data": [
+		1.3073,
+		1.59458
+	],
+	"Peaks": [
+		{
+			"position": 91.9006,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.87856,
+			"area": 191502
+		},
+		{
+			"position": 262.228,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.91393,
+			"area": 77169.4
+		},
+		{
+			"position": 186.008,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.87318,
+			"area": 30858.1
+		},
+		{
+			"position": 594.869,
+			"AssociatedPosition": 778.9,
+			"FWHM": 1.97772,
+			"area": 13810.6
+		},
+		{
+			"position": 735.929,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.08892,
+			"area": 12711.1
+		},
+		{
+			"position": 1075.95,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.27045,
+			"area": 12122.3
+		},
+		{
+			"position": 849.249,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.17225,
+			"area": 10182
+		},
+		{
+			"position": 338.441,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.94344,
+			"area": 6614.57
+		},
+		{
+			"position": 829.254,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.37869,
+			"area": 6904.32
+		},
+		{
+			"position": 313.317,
+			"AssociatedPosition": 411.12,
+			"FWHM": 2.00936,
+			"area": 4909.09
+		},
+		{
+			"position": 662.226,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.15275,
+			"area": 4309.16
+		},
+		{
+			"position": 280.159,
+			"AssociatedPosition": 0,
+			"FWHM": 1.91472,
+			"area": 2270.79
+		},
+		{
+			"position": 225.258,
+			"AssociatedPosition": 0,
+			"FWHM": 1.71166,
+			"area": 1284.82
+		},
+		{
+			"position": 526.072,
+			"AssociatedPosition": 0,
+			"FWHM": 1.80261,
+			"area": 917.213
+		},
+		{
+			"position": 992.559,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.16741,
+			"area": 960.682
+		},
+		{
+			"position": 447.382,
+			"AssociatedPosition": 586.29,
+			"FWHM": 1.39632,
+			"area": 524.165
+		},
+		{
+			"position": 926.504,
+			"AssociatedPosition": 1212.95,
+			"FWHM": 2.22061,
+			"area": 846.963
+		},
+		{
+			"position": 372.579,
+			"AssociatedPosition": 0,
+			"FWHM": 1.69737,
+			"area": 702.502
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "103",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 19,
+	"Calibration Degree": 5,
+	"Calibration Data": [
+		1.3055,
+		1.58865
+	],
+	"Peaks": [
+		{
+			"position": 92.8439,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.76298,
+			"area": 167019
+		},
+		{
+			"position": 262.573,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.82565,
+			"area": 74328.4
+		},
+		{
+			"position": 186.338,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.78091,
+			"area": 32487.5
+		},
+		{
+			"position": 595.534,
+			"AssociatedPosition": 778.9,
+			"FWHM": 1.92516,
+			"area": 13370.7
+		},
+		{
+			"position": 737.069,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.0647,
+			"area": 12267.4
+		},
+		{
+			"position": 1077.05,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.20346,
+			"area": 11677.9
+		},
+		{
+			"position": 850.332,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.1241,
+			"area": 9365.22
+		},
+		{
+			"position": 338.96,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.88106,
+			"area": 5768.16
+		},
+		{
+			"position": 830.323,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.2801,
+			"area": 6332.53
+		},
+		{
+			"position": 313.822,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.79983,
+			"area": 4262.68
+		},
+		{
+			"position": 663.324,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.04481,
+			"area": 3901.93
+		},
+		{
+			"position": 280.602,
+			"AssociatedPosition": 0,
+			"FWHM": 1.8841,
+			"area": 2103.42
+		},
+		{
+			"position": 225.647,
+			"AssociatedPosition": 0,
+			"FWHM": 1.58481,
+			"area": 1294.57
+		},
+		{
+			"position": 526.312,
+			"AssociatedPosition": 0,
+			"FWHM": 1.94416,
+			"area": 1047.63
+		},
+		{
+			"position": 373.131,
+			"AssociatedPosition": 0,
+			"FWHM": 1.71088,
+			"area": 700.465
+		},
+		{
+			"position": 147.322,
+			"AssociatedPosition": 0,
+			"FWHM": 5.08062,
+			"area": 1375.55
+		},
+		{
+			"position": 993.663,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.06271,
+			"area": 892.215
+		},
+		{
+			"position": 927.626,
+			"AssociatedPosition": 1212.95,
+			"FWHM": 1.92435,
+			"area": 852.857
+		},
+		{
+			"position": 431.057,
+			"AssociatedPosition": 0,
+			"FWHM": 2.45807,
+			"area": 1030.51
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "104",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 14,
+	"Calibration Degree": 5,
+	"Calibration Data": [
+		1.3092,
+		1.53826
+	],
+	"Peaks": [
+		{
+			"position": 92.2559,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.89353,
+			"area": 151547
+		},
+		{
+			"position": 261.989,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.97328,
+			"area": 69641.8
+		},
+		{
+			"position": 186.019,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.90614,
+			"area": 27374.5
+		},
+		{
+			"position": 735.009,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.17893,
+			"area": 10788.5
+		},
+		{
+			"position": 593.749,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.13313,
+			"area": 11462.9
+		},
+		{
+			"position": 1073.99,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.3108,
+			"area": 10062.1
+		},
+		{
+			"position": 847.934,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.28266,
+			"area": 8739.13
+		},
+		{
+			"position": 337.973,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.00803,
+			"area": 5791.58
+		},
+		{
+			"position": 828.066,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.47327,
+			"area": 5833.81
+		},
+		{
+			"position": 312.976,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.95826,
+			"area": 4327.9
+		},
+		{
+			"position": 661.308,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.12088,
+			"area": 3419.7
+		},
+		{
+			"position": 279.889,
+			"AssociatedPosition": 0,
+			"FWHM": 1.93875,
+			"area": 2079.22
+		},
+		{
+			"position": 225.006,
+			"AssociatedPosition": 0,
+			"FWHM": 2.05168,
+			"area": 1322.88
+		},
+		{
+			"position": 522.804,
+			"AssociatedPosition": 0,
+			"FWHM": 13.3025,
+			"area": 2223.79
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "105",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 14,
+	"Calibration Degree": 5,
+	"Calibration Data": [
+		1.2582,
+		1.20343
+	],
+	"Peaks": [
+		{
+			"position": 96.4281,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.76166,
+			"area": 225973
+		},
+		{
+			"position": 272.924,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.82719,
+			"area": 76353.4
+		},
+		{
+			"position": 193.87,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.79364,
+			"area": 33835.7
+		},
+		{
+			"position": 617.949,
+			"AssociatedPosition": 778.9,
+			"FWHM": 1.96923,
+			"area": 14184.8
+		},
+		{
+			"position": 765.159,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.05295,
+			"area": 12393.9
+		},
+		{
+			"position": 1117.56,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.21024,
+			"area": 11650.8
+		},
+		{
+			"position": 882.575,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.1016,
+			"area": 9912.48
+		},
+		{
+			"position": 351.977,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.91063,
+			"area": 6398.71
+		},
+		{
+			"position": 325.918,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.7973,
+			"area": 5146.43
+		},
+		{
+			"position": 861.85,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.29925,
+			"area": 6666.93
+		},
+		{
+			"position": 688.408,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.1287,
+			"area": 4063.55
+		},
+		{
+			"position": 291.561,
+			"AssociatedPosition": 0,
+			"FWHM": 1.86693,
+			"area": 2422.8
+		},
+		{
+			"position": 234.553,
+			"AssociatedPosition": 0,
+			"FWHM": 1.75981,
+			"area": 1816.64
+		},
+		{
+			"position": 546.178,
+			"AssociatedPosition": 0,
+			"FWHM": 2.01954,
+			"area": 1228.28
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "106",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 17,
+	"Calibration Degree": 0,
+	"Calibration Data": [
+		1.2933,
+		1.51102
+	],
+	"Peaks": [
+		{
+			"position": 265.298,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.96021,
+			"area": 19789.6
+		},
+		{
+			"position": 1087.15,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.29136,
+			"area": 9436.23
+		},
+		{
+			"position": 744.207,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.10802,
+			"area": 7350.33
+		},
+		{
+			"position": 601.004,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.0687,
+			"area": 7829.8
+		},
+		{
+			"position": 858.469,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.21025,
+			"area": 6520.64
+		},
+		{
+			"position": 188.408,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.81398,
+			"area": 5221.12
+		},
+		{
+			"position": 838.309,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.41807,
+			"area": 4639.89
+		},
+		{
+			"position": 93.5897,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.80399,
+			"area": 3766.29
+		},
+		{
+			"position": 669.494,
+			"AssociatedPosition": 867.38,
+			"FWHM": 1.99492,
+			"area": 2365.13
+		},
+		{
+			"position": 342.201,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.07224,
+			"area": 2132.91
+		},
+		{
+			"position": 316.892,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.87059,
+			"area": 1599.64
+		},
+		{
+			"position": 71.1261,
+			"AssociatedPosition": 0,
+			"FWHM": 17.4563,
+			"area": 8749.45
+		},
+		{
+			"position": 135.486,
+			"AssociatedPosition": 0,
+			"FWHM": 0.388308,
+			"area": 3.20117
+		},
+		{
+			"position": 132.994,
+			"AssociatedPosition": 0,
+			"FWHM": 4.52932,
+			"area": 300.983
+		},
+		{
+			"position": 1003.02,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.20361,
+			"area": 734.646
+		},
+		{
+			"position": 531.362,
+			"AssociatedPosition": 0,
+			"FWHM": 1.81471,
+			"area": 555.289
+		},
+		{
+			"position": 936.427,
+			"AssociatedPosition": 1212.95,
+			"FWHM": 2.28238,
+			"area": 736.925
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "107",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 15,
+	"Calibration Degree": 2,
+	"Calibration Data": [
+		1.3554,
+		1.49461
+	],
+	"Peaks": [
+		{
+			"position": 251.628,
+			"AssociatedPosition": 0,
+			"FWHM": 2.50425,
+			"area": 15635.4
+		},
+		{
+			"position": 1037.53,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.84324,
+			"area": 7887.93
+		},
+		{
+			"position": 573.277,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.67861,
+			"area": 6170.96
+		},
+		{
+			"position": 709.937,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.65053,
+			"area": 6521.74
+		},
+		{
+			"position": 819.237,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.77278,
+			"area": 5612.27
+		},
+		{
+			"position": 179.882,
+			"AssociatedPosition": 244.7,
+			"FWHM": 2.57173,
+			"area": 3767.01
+		},
+		{
+			"position": 800.169,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 3.26504,
+			"area": 4547.55
+		},
+		{
+			"position": 638.596,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.54396,
+			"area": 1955.95
+		},
+		{
+			"position": 326.8,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.75814,
+			"area": 1726.13
+		},
+		{
+			"position": 302.569,
+			"AssociatedPosition": 411.12,
+			"FWHM": 2.52424,
+			"area": 1292.92
+		},
+		{
+			"position": 111.546,
+			"AssociatedPosition": 0,
+			"FWHM": 18.2905,
+			"area": 12265
+		},
+		{
+			"position": 957.517,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.6102,
+			"area": 718.897
+		},
+		{
+			"position": 216.928,
+			"AssociatedPosition": 0,
+			"FWHM": 4.24341,
+			"area": 1088.65
+		},
+		{
+			"position": 893.474,
+			"AssociatedPosition": 1212.95,
+			"FWHM": 2.86418,
+			"area": 599.421
+		},
+		{
+			"position": 370.994,
+			"AssociatedPosition": 0,
+			"FWHM": 23.5478,
+			"area": 286.829
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "108",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 18,
+	"Calibration Degree": 5,
+	"Calibration Data": [
+		1.2963,
+		1.53952
+	],
+	"Peaks": [
+		{
+			"position": 264.807,
+			"AssociatedPosition": 344.28,
+			"FWHM": 2.07785,
+			"area": 32338.1
+		},
+		{
+			"position": 93.136,
+			"AssociatedPosition": 121.78,
+			"FWHM": 2.03275,
+			"area": 21785.3
+		},
+		{
+			"position": 187.98,
+			"AssociatedPosition": 244.7,
+			"FWHM": 2.05191,
+			"area": 11506.1
+		},
+		{
+			"position": 742.37,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.21798,
+			"area": 9787.35
+		},
+		{
+			"position": 599.54,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.17776,
+			"area": 10005.2
+		},
+		{
+			"position": 1084.64,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.36138,
+			"area": 11347.4
+		},
+		{
+			"position": 856.45,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.34517,
+			"area": 8582.64
+		},
+		{
+			"position": 836.346,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.50615,
+			"area": 6217.6
+		},
+		{
+			"position": 341.493,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.09751,
+			"area": 3365.32
+		},
+		{
+			"position": 316.183,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.99593,
+			"area": 2727.74
+		},
+		{
+			"position": 667.751,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.20825,
+			"area": 3208.42
+		},
+		{
+			"position": 282.985,
+			"AssociatedPosition": 0,
+			"FWHM": 2.32542,
+			"area": 1119.81
+		},
+		{
+			"position": 934.209,
+			"AssociatedPosition": 1212.95,
+			"FWHM": 2.11147,
+			"area": 840.847
+		},
+		{
+			"position": 530.091,
+			"AssociatedPosition": 0,
+			"FWHM": 1.78201,
+			"area": 625.2
+		},
+		{
+			"position": 227.47,
+			"AssociatedPosition": 0,
+			"FWHM": 1.62989,
+			"area": 584.64
+		},
+		{
+			"position": 1000.78,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.41086,
+			"area": 982.547
+		},
+		{
+			"position": 451.204,
+			"AssociatedPosition": 586.29,
+			"FWHM": 2.74306,
+			"area": 346.653
+		},
+		{
+			"position": 110.493,
+			"AssociatedPosition": 0,
+			"FWHM": 4.18165,
+			"area": 831.402
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "109",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 18,
+	"Calibration Degree": 1,
+	"Calibration Data": [
+		1.3068,
+		0.812993
+	],
+	"Peaks": [
+		{
+			"position": 262.147,
+			"AssociatedPosition": 344.28,
+			"FWHM": 2.56742,
+			"area": 21806.6
+		},
+		{
+			"position": 1077.87,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.84593,
+			"area": 9809.47
+		},
+		{
+			"position": 737.552,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.72191,
+			"area": 8410.12
+		},
+		{
+			"position": 595.901,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.61979,
+			"area": 7828.28
+		},
+		{
+			"position": 850.447,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.77748,
+			"area": 7322.76
+		},
+		{
+			"position": 185.734,
+			"AssociatedPosition": 244.7,
+			"FWHM": 2.58883,
+			"area": 6306.28
+		},
+		{
+			"position": 830.639,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 3.19973,
+			"area": 5924.78
+		},
+		{
+			"position": 92.3915,
+			"AssociatedPosition": 121.78,
+			"FWHM": 2.65171,
+			"area": 4739.81
+		},
+		{
+			"position": 663.659,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.59737,
+			"area": 2449.78
+		},
+		{
+			"position": 338.702,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.53631,
+			"area": 2434.23
+		},
+		{
+			"position": 313.462,
+			"AssociatedPosition": 411.12,
+			"FWHM": 2.76712,
+			"area": 1757.74
+		},
+		{
+			"position": 140.201,
+			"AssociatedPosition": 0,
+			"FWHM": 0.608775,
+			"area": 117.578
+		},
+		{
+			"position": 139.694,
+			"AssociatedPosition": 0,
+			"FWHM": 1.27611,
+			"area": 57.4222
+		},
+		{
+			"position": 138.662,
+			"AssociatedPosition": 0,
+			"FWHM": 23.5463,
+			"area": 17114.9
+		},
+		{
+			"position": 994.16,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.86318,
+			"area": 724.339
+		},
+		{
+			"position": 99.4422,
+			"AssociatedPosition": 0,
+			"FWHM": 0.777572,
+			"area": 318.699
+		},
+		{
+			"position": 280.69,
+			"AssociatedPosition": 0,
+			"FWHM": 2.57311,
+			"area": 550.791
+		},
+		{
+			"position": 225.381,
+			"AssociatedPosition": 0,
+			"FWHM": 2.05771,
+			"area": 610.812
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "110",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 15,
+	"Calibration Degree": 5,
+	"Calibration Data": [
+		1.3035,
+		1.26235
+	],
+	"Peaks": [
+		{
+			"position": 92.3649,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.98003,
+			"area": 490471
+		},
+		{
+			"position": 263.707,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.98653,
+			"area": 528664
+		},
+		{
+			"position": 187.624,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.90709,
+			"area": 183835
+		},
+		{
+			"position": 596.221,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.12572,
+			"area": 143342
+		},
+		{
+			"position": 738.1,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.26585,
+			"area": 151447
+		},
+		{
+			"position": 1078.85,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.4862,
+			"area": 170321
+		},
+		{
+			"position": 852.156,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.38987,
+			"area": 131264
+		},
+		{
+			"position": 832.089,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.71454,
+			"area": 99636
+		},
+		{
+			"position": 339.914,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.99367,
+			"area": 52021.3
+		},
+		{
+			"position": 663.898,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.15382,
+			"area": 46940.5
+		},
+		{
+			"position": 314.818,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.90925,
+			"area": 38314.9
+		},
+		{
+			"position": 281.686,
+			"AssociatedPosition": 0,
+			"FWHM": 1.95821,
+			"area": 16355
+		},
+		{
+			"position": 527.233,
+			"AssociatedPosition": 0,
+			"FWHM": 2.09972,
+			"area": 10387.1
+		},
+		{
+			"position": 995.519,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.37653,
+			"area": 13942.6
+		},
+		{
+			"position": 929.521,
+			"AssociatedPosition": 1212.95,
+			"FWHM": 2.29055,
+			"area": 12305.5
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "112",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 16,
+	"Calibration Degree": 0,
+	"Calibration Data": [
+		1.2523,
+		1.30241
+	],
+	"Peaks": [
+		{
+			"position": 96.4396,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.94833,
+			"area": 200826
+		},
+		{
+			"position": 274.363,
+			"AssociatedPosition": 344.28,
+			"FWHM": 2.01572,
+			"area": 75311.7
+		},
+		{
+			"position": 194.95,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.94504,
+			"area": 32666.1
+		},
+		{
+			"position": 620.677,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.13814,
+			"area": 13254.3
+		},
+		{
+			"position": 768.589,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.18613,
+			"area": 11774.5
+		},
+		{
+			"position": 1122.8,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.31861,
+			"area": 11655.1
+		},
+		{
+			"position": 886.863,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.23084,
+			"area": 9812.13
+		},
+		{
+			"position": 866.034,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.4517,
+			"area": 6624.82
+		},
+		{
+			"position": 353.78,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.07705,
+			"area": 6248.41
+		},
+		{
+			"position": 327.651,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.96092,
+			"area": 4996.17
+		},
+		{
+			"position": 691.231,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.12216,
+			"area": 3967.27
+		},
+		{
+			"position": 293.056,
+			"AssociatedPosition": 0,
+			"FWHM": 2.07168,
+			"area": 2240.57
+		},
+		{
+			"position": 235.794,
+			"AssociatedPosition": 0,
+			"FWHM": 1.73068,
+			"area": 1500.76
+		},
+		{
+			"position": 389.172,
+			"AssociatedPosition": 0,
+			"FWHM": 1.9634,
+			"area": 838.77
+		},
+		{
+			"position": 1035.83,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.13381,
+			"area": 960.354
+		},
+		{
+			"position": 548.849,
+			"AssociatedPosition": 0,
+			"FWHM": 2.01162,
+			"area": 1019.04
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "113",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 17,
+	"Calibration Degree": 5,
+	"Calibration Data": [
+		1.2691,
+		1.46034
+	],
+	"Peaks": [
+		{
+			"position": 95.4656,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.7754,
+			"area": 215170
+		},
+		{
+			"position": 270.38,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.82374,
+			"area": 81731.3
+		},
+		{
+			"position": 191.994,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.79966,
+			"area": 33874.5
+		},
+		{
+			"position": 612.63,
+			"AssociatedPosition": 778.9,
+			"FWHM": 1.95853,
+			"area": 14388.8
+		},
+		{
+			"position": 758.347,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.02573,
+			"area": 12627.8
+		},
+		{
+			"position": 1107.95,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.18768,
+			"area": 12506.8
+		},
+		{
+			"position": 874.857,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.07495,
+			"area": 10367
+		},
+		{
+			"position": 348.847,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.80544,
+			"area": 6388.98
+		},
+		{
+			"position": 854.266,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.21318,
+			"area": 6788.77
+		},
+		{
+			"position": 322.985,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.7848,
+			"area": 4864.31
+		},
+		{
+			"position": 682.339,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.00106,
+			"area": 4026.38
+		},
+		{
+			"position": 288.87,
+			"AssociatedPosition": 0,
+			"FWHM": 1.73818,
+			"area": 2241.41
+		},
+		{
+			"position": 232.418,
+			"AssociatedPosition": 0,
+			"FWHM": 1.72422,
+			"area": 1689.7
+		},
+		{
+			"position": 541.552,
+			"AssociatedPosition": 0,
+			"FWHM": 1.65371,
+			"area": 1005.31
+		},
+		{
+			"position": 443.281,
+			"AssociatedPosition": 0,
+			"FWHM": 1.44699,
+			"area": 613.3
+		},
+		{
+			"position": 954.246,
+			"AssociatedPosition": 1212.95,
+			"FWHM": 2.00315,
+			"area": 954.373
+		},
+		{
+			"position": 1022.18,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.12064,
+			"area": 1113.67
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "114",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 17,
+	"Calibration Degree": 5,
+	"Calibration Data": [
+		1.2632,
+		1.56758
+	],
+	"Peaks": [
+		{
+			"position": 95.4731,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.92079,
+			"area": 186729
+		},
+		{
+			"position": 271.353,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.9789,
+			"area": 69448.8
+		},
+		{
+			"position": 192.389,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.95507,
+			"area": 31193
+		},
+		{
+			"position": 615.522,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.1021,
+			"area": 11964.3
+		},
+		{
+			"position": 761.656,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.16481,
+			"area": 10598
+		},
+		{
+			"position": 1113.5,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.35233,
+			"area": 9604.02
+		},
+		{
+			"position": 878.958,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.25395,
+			"area": 8787.17
+		},
+		{
+			"position": 350.301,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.04566,
+			"area": 5914.96
+		},
+		{
+			"position": 858.248,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.43496,
+			"area": 5862.36
+		},
+		{
+			"position": 324.248,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.94904,
+			"area": 4431.3
+		},
+		{
+			"position": 685.272,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.16999,
+			"area": 3616.03
+		},
+		{
+			"position": 289.978,
+			"AssociatedPosition": 0,
+			"FWHM": 2.2272,
+			"area": 2443.42
+		},
+		{
+			"position": 233.01,
+			"AssociatedPosition": 0,
+			"FWHM": 1.96044,
+			"area": 1528.12
+		},
+		{
+			"position": 1027.29,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.28872,
+			"area": 868.256
+		},
+		{
+			"position": 544.173,
+			"AssociatedPosition": 0,
+			"FWHM": 2.09179,
+			"area": 916.95
+		},
+		{
+			"position": 191.236,
+			"AssociatedPosition": 0,
+			"FWHM": 2.417,
+			"area": 24884.4
+		},
+		{
+			"position": 191.29,
+			"AssociatedPosition": 0,
+			"FWHM": 2.48701,
+			"area": 24991.7
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "115",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 14,
+	"Calibration Degree": 0,
+	"Calibration Data": [
+		1.2769,
+		1.54168
+	],
+	"Peaks": [
+		{
+			"position": 94.5606,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.77375,
+			"area": 190300
+		},
+		{
+			"position": 268.45,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.84348,
+			"area": 78448.1
+		},
+		{
+			"position": 190.523,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.79244,
+			"area": 34435.6
+		},
+		{
+			"position": 608.874,
+			"AssociatedPosition": 778.9,
+			"FWHM": 1.95516,
+			"area": 13589.6
+		},
+		{
+			"position": 753.459,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.05566,
+			"area": 12324.4
+		},
+		{
+			"position": 1101.42,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.17823,
+			"area": 11586.9
+		},
+		{
+			"position": 869.468,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.09311,
+			"area": 9708.24
+		},
+		{
+			"position": 848.996,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.27909,
+			"area": 6635.39
+		},
+		{
+			"position": 346.666,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.92463,
+			"area": 6669.87
+		},
+		{
+			"position": 320.949,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.81051,
+			"area": 4660.85
+		},
+		{
+			"position": 677.91,
+			"AssociatedPosition": 867.38,
+			"FWHM": 1.9982,
+			"area": 3881.29
+		},
+		{
+			"position": 286.864,
+			"AssociatedPosition": 0,
+			"FWHM": 1.9403,
+			"area": 2476.09
+		},
+		{
+			"position": 230.542,
+			"AssociatedPosition": 0,
+			"FWHM": 1.68498,
+			"area": 1795.01
+		},
+		{
+			"position": 538.287,
+			"AssociatedPosition": 0,
+			"FWHM": 1.72452,
+			"area": 1010
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "116",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 16,
+	"Calibration Degree": 2,
+	"Calibration Data": [
+		1.2961,
+		1.48209
+	],
+	"Peaks": [
+		{
+			"position": 264.673,
+			"AssociatedPosition": 344.28,
+			"FWHM": 2.03655,
+			"area": 20021.9
+		},
+		{
+			"position": 1084.82,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.30214,
+			"area": 9543.06
+		},
+		{
+			"position": 742.463,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.14541,
+			"area": 7466.04
+		},
+		{
+			"position": 599.745,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.13915,
+			"area": 7459.46
+		},
+		{
+			"position": 188.027,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.98324,
+			"area": 4967.71
+		},
+		{
+			"position": 856.687,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.22524,
+			"area": 6800.36
+		},
+		{
+			"position": 836.584,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.49654,
+			"area": 4703.09
+		},
+		{
+			"position": 93.4326,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.89138,
+			"area": 2696.87
+		},
+		{
+			"position": 667.915,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.11035,
+			"area": 2368.67
+		},
+		{
+			"position": 341.564,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.06753,
+			"area": 2266.8
+		},
+		{
+			"position": 316.383,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.97929,
+			"area": 1637.06
+		},
+		{
+			"position": 163.073,
+			"AssociatedPosition": 0,
+			"FWHM": 23.548,
+			"area": 11123.9
+		},
+		{
+			"position": 1000.86,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.30889,
+			"area": 820.63
+		},
+		{
+			"position": 282.752,
+			"AssociatedPosition": 0,
+			"FWHM": 1.81119,
+			"area": 603.119
+		},
+		{
+			"position": 934.446,
+			"AssociatedPosition": 1212.95,
+			"FWHM": 2.1445,
+			"area": 685.588
+		},
+		{
+			"position": 1124.98,
+			"AssociatedPosition": 0,
+			"FWHM": 3.32058,
+			"area": 775.731
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "117",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 20,
+	"Calibration Degree": 1,
+	"Calibration Data": [
+		1.2645,
+		1.51501
+	],
+	"Peaks": [
+		{
+			"position": 271.129,
+			"AssociatedPosition": 344.28,
+			"FWHM": 2.04884,
+			"area": 19483.6
+		},
+		{
+			"position": 1112.46,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.38218,
+			"area": 9216.12
+		},
+		{
+			"position": 615.144,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.16041,
+			"area": 7755.5
+		},
+		{
+			"position": 761.028,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.20079,
+			"area": 7849.18
+		},
+		{
+			"position": 877.928,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.27463,
+			"area": 6864.07
+		},
+		{
+			"position": 192.399,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.97908,
+			"area": 5324.34
+		},
+		{
+			"position": 857.286,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.5747,
+			"area": 4952.81
+		},
+		{
+			"position": 95.6683,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.49497,
+			"area": 2171.14
+		},
+		{
+			"position": 684.903,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.18882,
+			"area": 2658.06
+		},
+		{
+			"position": 349.752,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.11796,
+			"area": 2347.51
+		},
+		{
+			"position": 323.743,
+			"AssociatedPosition": 411.12,
+			"FWHM": 2.19827,
+			"area": 1646.06
+		},
+		{
+			"position": 117.11,
+			"AssociatedPosition": 0,
+			"FWHM": 3.75288,
+			"area": 889.033
+		},
+		{
+			"position": 289.564,
+			"AssociatedPosition": 0,
+			"FWHM": 1.59806,
+			"area": 607.704
+		},
+		{
+			"position": 1026.14,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.31174,
+			"area": 733.638
+		},
+		{
+			"position": 233.761,
+			"AssociatedPosition": 0,
+			"FWHM": 3.61811,
+			"area": 583.03
+		},
+		{
+			"position": 957.792,
+			"AssociatedPosition": 1212.95,
+			"FWHM": 2.31856,
+			"area": 715.984
+		},
+		{
+			"position": 174.496,
+			"AssociatedPosition": 0,
+			"FWHM": 8.92516,
+			"area": 1599.96
+		},
+		{
+			"position": 543.655,
+			"AssociatedPosition": 0,
+			"FWHM": 1.71015,
+			"area": 558.223
+		},
+		{
+			"position": 444.686,
+			"AssociatedPosition": 0,
+			"FWHM": 2.33457,
+			"area": 341.964
+		},
+		{
+			"position": 215.578,
+			"AssociatedPosition": 0,
+			"FWHM": 4.58982,
+			"area": 759.046
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "118",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 17,
+	"Calibration Degree": 5,
+	"Calibration Data": [
+		1.248,
+		1.52513
+	],
+	"Peaks": [
+		{
+			"position": 274.799,
+			"AssociatedPosition": 344.28,
+			"FWHM": 2.26331,
+			"area": 40654.2
+		},
+		{
+			"position": 96.7582,
+			"AssociatedPosition": 121.78,
+			"FWHM": 2.25101,
+			"area": 31233.5
+		},
+		{
+			"position": 195.157,
+			"AssociatedPosition": 244.7,
+			"FWHM": 2.2559,
+			"area": 13349.3
+		},
+		{
+			"position": 771.265,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.4272,
+			"area": 11322.8
+		},
+		{
+			"position": 622.98,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.41152,
+			"area": 11676.1
+		},
+		{
+			"position": 1126.83,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.56467,
+			"area": 12666.6
+		},
+		{
+			"position": 889.613,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.52204,
+			"area": 10109.9
+		},
+		{
+			"position": 868.817,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.82071,
+			"area": 6757.38
+		},
+		{
+			"position": 354.545,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.24141,
+			"area": 3657.95
+		},
+		{
+			"position": 693.785,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.40743,
+			"area": 3410.03
+		},
+		{
+			"position": 328.326,
+			"AssociatedPosition": 411.12,
+			"FWHM": 2.1737,
+			"area": 2884.24
+		},
+		{
+			"position": 293.736,
+			"AssociatedPosition": 0,
+			"FWHM": 2.44752,
+			"area": 1349.82
+		},
+		{
+			"position": 970.343,
+			"AssociatedPosition": 1212.95,
+			"FWHM": 2.50432,
+			"area": 990.211
+		},
+		{
+			"position": 1039.57,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.45489,
+			"area": 1088.34
+		},
+		{
+			"position": 236.655,
+			"AssociatedPosition": 0,
+			"FWHM": 1.84164,
+			"area": 616.195
+		},
+		{
+			"position": 550.906,
+			"AssociatedPosition": 0,
+			"FWHM": 2.034,
+			"area": 823.843
+		},
+		{
+			"position": 468.472,
+			"AssociatedPosition": 586.29,
+			"FWHM": 2.198,
+			"area": 455.673
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "119",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 17,
+	"Calibration Degree": 1,
+	"Calibration Data": [
+		1.2914,
+		1.41049
+	],
+	"Peaks": [
+		{
+			"position": 265.719,
+			"AssociatedPosition": 344.28,
+			"FWHM": 2.44023,
+			"area": 17667.3
+		},
+		{
+			"position": 1088.85,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.7059,
+			"area": 8639.01
+		},
+		{
+			"position": 745.301,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.5995,
+			"area": 7096.25
+		},
+		{
+			"position": 601.954,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.4823,
+			"area": 6801.84
+		},
+		{
+			"position": 859.812,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.68733,
+			"area": 6399.36
+		},
+		{
+			"position": 188.743,
+			"AssociatedPosition": 244.7,
+			"FWHM": 2.39166,
+			"area": 4620.59
+		},
+		{
+			"position": 839.732,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 3.21215,
+			"area": 5112.03
+		},
+		{
+			"position": 670.413,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.5732,
+			"area": 2231.65
+		},
+		{
+			"position": 93.5807,
+			"AssociatedPosition": 121.78,
+			"FWHM": 2.5629,
+			"area": 2653.92
+		},
+		{
+			"position": 317.468,
+			"AssociatedPosition": 411.12,
+			"FWHM": 2.2902,
+			"area": 1378.76
+		},
+		{
+			"position": 342.943,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.74425,
+			"area": 2199.33
+		},
+		{
+			"position": 284.025,
+			"AssociatedPosition": 0,
+			"FWHM": 1.99563,
+			"area": 759.839
+		},
+		{
+			"position": 1004.5,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.66511,
+			"area": 656.897
+		},
+		{
+			"position": 165.791,
+			"AssociatedPosition": 0,
+			"FWHM": 3.50758,
+			"area": 980.705
+		},
+		{
+			"position": 137.14,
+			"AssociatedPosition": 0,
+			"FWHM": 22.8518,
+			"area": 15435.7
+		},
+		{
+			"position": 228.589,
+			"AssociatedPosition": 0,
+			"FWHM": 2.26935,
+			"area": 394.318
+		},
+		{
+			"position": 532.116,
+			"AssociatedPosition": 0,
+			"FWHM": 1.86893,
+			"area": 402.91
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "120",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 12,
+	"Calibration Degree": 0,
+	"Calibration Data": [
+		1.2635,
+		1.52915
+	],
+	"Peaks": [
+		{
+			"position": 95.6114,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.84158,
+			"area": 609629
+		},
+		{
+			"position": 271.452,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.91183,
+			"area": 528471
+		},
+		{
+			"position": 192.756,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.80321,
+			"area": 185734
+		},
+		{
+			"position": 615.198,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.08426,
+			"area": 146501
+		},
+		{
+			"position": 1112.84,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.51117,
+			"area": 170096
+		},
+		{
+			"position": 761.686,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.18198,
+			"area": 146163
+		},
+		{
+			"position": 878.666,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.36239,
+			"area": 128766
+		},
+		{
+			"position": 858.044,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.65074,
+			"area": 86160.6
+		},
+		{
+			"position": 350.195,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.91824,
+			"area": 51486
+		},
+		{
+			"position": 685.199,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.08416,
+			"area": 43856.9
+		},
+		{
+			"position": 324.236,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.88524,
+			"area": 37629.6
+		},
+		{
+			"position": 290.01,
+			"AssociatedPosition": 0,
+			"FWHM": 1.91527,
+			"area": 15117
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "122",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 21,
+	"Calibration Degree": 5,
+	"Calibration Data": [
+		1.272,
+		1.49185
+	],
+	"Peaks": [
+		{
+			"position": 94.9473,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.95578,
+			"area": 250387
+		},
+		{
+			"position": 269.922,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.9992,
+			"area": 83764.4
+		},
+		{
+			"position": 191.503,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.96967,
+			"area": 39701.5
+		},
+		{
+			"position": 611.117,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.10968,
+			"area": 15806.7
+		},
+		{
+			"position": 756.381,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.17526,
+			"area": 12934
+		},
+		{
+			"position": 1105.47,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.33399,
+			"area": 13137.9
+		},
+		{
+			"position": 872.925,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.24129,
+			"area": 11262.7
+		},
+		{
+			"position": 348.167,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.07204,
+			"area": 7229
+		},
+		{
+			"position": 852.371,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.30007,
+			"area": 7445.61
+		},
+		{
+			"position": 322.368,
+			"AssociatedPosition": 411.12,
+			"FWHM": 2.02195,
+			"area": 5488.69
+		},
+		{
+			"position": 680.521,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.30855,
+			"area": 4198.53
+		},
+		{
+			"position": 288.356,
+			"AssociatedPosition": 0,
+			"FWHM": 1.91034,
+			"area": 2537.22
+		},
+		{
+			"position": 231.959,
+			"AssociatedPosition": 0,
+			"FWHM": 2.13405,
+			"area": 1768.99
+		},
+		{
+			"position": 540.307,
+			"AssociatedPosition": 0,
+			"FWHM": 1.64146,
+			"area": 876.019
+		},
+		{
+			"position": 459.69,
+			"AssociatedPosition": 586.29,
+			"FWHM": 2.29227,
+			"area": 921.682
+		},
+		{
+			"position": 149.516,
+			"AssociatedPosition": 0,
+			"FWHM": 8.0911,
+			"area": 1802.72
+		},
+		{
+			"position": 952.165,
+			"AssociatedPosition": 1212.95,
+			"FWHM": 2.23874,
+			"area": 1057.89
+		},
+		{
+			"position": 1019.9,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.3019,
+			"area": 1024.83
+		},
+		{
+			"position": 383.149,
+			"AssociatedPosition": 0,
+			"FWHM": 2.01895,
+			"area": 717.362
+		},
+		{
+			"position": 444.04,
+			"AssociatedPosition": 0,
+			"FWHM": 4.45443,
+			"area": 1777.27
+		},
+		{
+			"position": 165.645,
+			"AssociatedPosition": 0,
+			"FWHM": 3.86923,
+			"area": 845.342
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "123",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 15,
+	"Calibration Degree": 0,
+	"Calibration Data": [
+		1.2673,
+		1.43182
+	],
+	"Peaks": [
+		{
+			"position": 95.3531,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.77336,
+			"area": 231189
+		},
+		{
+			"position": 270.799,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.84612,
+			"area": 84320.2
+		},
+		{
+			"position": 192.24,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.77601,
+			"area": 37803.8
+		},
+		{
+			"position": 613.421,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.00714,
+			"area": 15038.6
+		},
+		{
+			"position": 759.487,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.06022,
+			"area": 13018.9
+		},
+		{
+			"position": 1109.46,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.24063,
+			"area": 12332.4
+		},
+		{
+			"position": 876.298,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.14595,
+			"area": 10177
+		},
+		{
+			"position": 349.076,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.88821,
+			"area": 6598.74
+		},
+		{
+			"position": 323.24,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.79528,
+			"area": 5388.04
+		},
+		{
+			"position": 855.686,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.22785,
+			"area": 7280.84
+		},
+		{
+			"position": 683.236,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.065,
+			"area": 4240.96
+		},
+		{
+			"position": 289.253,
+			"AssociatedPosition": 0,
+			"FWHM": 1.81992,
+			"area": 2587.44
+		},
+		{
+			"position": 232.782,
+			"AssociatedPosition": 0,
+			"FWHM": 1.70101,
+			"area": 1415.62
+		},
+		{
+			"position": 542.026,
+			"AssociatedPosition": 0,
+			"FWHM": 1.65575,
+			"area": 982.805
+		},
+		{
+			"position": 384.352,
+			"AssociatedPosition": 0,
+			"FWHM": 1.94464,
+			"area": 1107.43
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "124",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 15,
+	"Calibration Degree": 0,
+	"Calibration Data": [
+		1.3212,
+		1.24742
+	],
+	"Peaks": [
+		{
+			"position": 91.6383,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.86415,
+			"area": 155242
+		},
+		{
+			"position": 260.17,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.92085,
+			"area": 64571.5
+		},
+		{
+			"position": 184.772,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.86926,
+			"area": 28424.8
+		},
+		{
+			"position": 588.26,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.05547,
+			"area": 11407.1
+		},
+		{
+			"position": 728.579,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.11101,
+			"area": 10428.8
+		},
+		{
+			"position": 1064.23,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.26728,
+			"area": 10116.4
+		},
+		{
+			"position": 840.575,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.15906,
+			"area": 8288.16
+		},
+		{
+			"position": 335.238,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.89046,
+			"area": 5283.68
+		},
+		{
+			"position": 820.855,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.44173,
+			"area": 5688.21
+		},
+		{
+			"position": 310.531,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.90621,
+			"area": 4386.47
+		},
+		{
+			"position": 655.301,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.18536,
+			"area": 3296.15
+		},
+		{
+			"position": 278.077,
+			"AssociatedPosition": 0,
+			"FWHM": 1.76004,
+			"area": 1712.08
+		},
+		{
+			"position": 223.396,
+			"AssociatedPosition": 0,
+			"FWHM": 1.70189,
+			"area": 1266.4
+		},
+		{
+			"position": 426.255,
+			"AssociatedPosition": 0,
+			"FWHM": 2.48498,
+			"area": 1015.2
+		},
+		{
+			"position": 982.032,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.2171,
+			"area": 874.599
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "125",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 15,
+	"Calibration Degree": 0,
+	"Calibration Data": [
+		1.2917,
+		1.29348
+	],
+	"Peaks": [
+		{
+			"position": 93.5454,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.72944,
+			"area": 216251
+		},
+		{
+			"position": 266.067,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.77344,
+			"area": 79718.5
+		},
+		{
+			"position": 189.011,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.76194,
+			"area": 34729.5
+		},
+		{
+			"position": 745.145,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.00065,
+			"area": 13161.9
+		},
+		{
+			"position": 601.68,
+			"AssociatedPosition": 778.9,
+			"FWHM": 1.91093,
+			"area": 15148.6
+		},
+		{
+			"position": 1088.51,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.14083,
+			"area": 12723.7
+		},
+		{
+			"position": 859.831,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.05332,
+			"area": 10465.6
+		},
+		{
+			"position": 342.98,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.7802,
+			"area": 6881.8
+		},
+		{
+			"position": 839.595,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.15327,
+			"area": 7336.35
+		},
+		{
+			"position": 317.618,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.80255,
+			"area": 5714.85
+		},
+		{
+			"position": 670.109,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.00173,
+			"area": 3978.87
+		},
+		{
+			"position": 284.155,
+			"AssociatedPosition": 0,
+			"FWHM": 1.79518,
+			"area": 2123.97
+		},
+		{
+			"position": 228.771,
+			"AssociatedPosition": 0,
+			"FWHM": 1.71138,
+			"area": 1587.25
+		},
+		{
+			"position": 532.056,
+			"AssociatedPosition": 0,
+			"FWHM": 1.61053,
+			"area": 1073.35
+		},
+		{
+			"position": 1004.38,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.05862,
+			"area": 1085
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "126",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 17,
+	"Calibration Degree": 5,
+	"Calibration Data": [
+		1.2812,
+		1.56517
+	],
+	"Peaks": [
+		{
+			"position": 267.861,
+			"AssociatedPosition": 344.28,
+			"FWHM": 2.20183,
+			"area": 24445.3
+		},
+		{
+			"position": 94.1909,
+			"AssociatedPosition": 121.78,
+			"FWHM": 2.07062,
+			"area": 9556.75
+		},
+		{
+			"position": 1097.43,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.4585,
+			"area": 10324.4
+		},
+		{
+			"position": 751.054,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.35113,
+			"area": 8729.18
+		},
+		{
+			"position": 189.964,
+			"AssociatedPosition": 244.7,
+			"FWHM": 2.17948,
+			"area": 6822.76
+		},
+		{
+			"position": 606.658,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.37125,
+			"area": 7960.77
+		},
+		{
+			"position": 866.625,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.43159,
+			"area": 7199.61
+		},
+		{
+			"position": 846.315,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.7129,
+			"area": 5204.37
+		},
+		{
+			"position": 345.477,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.16242,
+			"area": 2624.65
+		},
+		{
+			"position": 675.58,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.30929,
+			"area": 2446
+		},
+		{
+			"position": 319.978,
+			"AssociatedPosition": 411.12,
+			"FWHM": 2.21976,
+			"area": 2026.28
+		},
+		{
+			"position": 114.772,
+			"AssociatedPosition": 0,
+			"FWHM": 12.2308,
+			"area": 966.325
+		},
+		{
+			"position": 281.865,
+			"AssociatedPosition": 0,
+			"FWHM": 23.3634,
+			"area": 20664.4
+		},
+		{
+			"position": 1012.49,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.42245,
+			"area": 878.705
+		},
+		{
+			"position": 945.336,
+			"AssociatedPosition": 1212.95,
+			"FWHM": 2.41926,
+			"area": 759.713
+		},
+		{
+			"position": 229.888,
+			"AssociatedPosition": 0,
+			"FWHM": 2.17135,
+			"area": 574.328
+		},
+		{
+			"position": 102.037,
+			"AssociatedPosition": 0,
+			"FWHM": 19.1311,
+			"area": 26139.4
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "127",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 16,
+	"Calibration Degree": 1,
+	"Calibration Data": [
+		1.34,
+		1.45514
+	],
+	"Peaks": [
+		{
+			"position": 256.343,
+			"AssociatedPosition": 344.28,
+			"FWHM": 2.08944,
+			"area": 23151.9
+		},
+		{
+			"position": 89.9606,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.9859,
+			"area": 9024.41
+		},
+		{
+			"position": 1049.28,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.32504,
+			"area": 9914.8
+		},
+		{
+			"position": 580.065,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.16447,
+			"area": 8157.21
+		},
+		{
+			"position": 717.992,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.22588,
+			"area": 8384.82
+		},
+		{
+			"position": 181.631,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.99679,
+			"area": 6578.15
+		},
+		{
+			"position": 828.642,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.24936,
+			"area": 7146.22
+		},
+		{
+			"position": 809.176,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.54878,
+			"area": 4885.29
+		},
+		{
+			"position": 645.926,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.16099,
+			"area": 2679.1
+		},
+		{
+			"position": 330.627,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.16468,
+			"area": 2141.71
+		},
+		{
+			"position": 306.191,
+			"AssociatedPosition": 411.12,
+			"FWHM": 2.15673,
+			"area": 2183.59
+		},
+		{
+			"position": 513.1,
+			"AssociatedPosition": 0,
+			"FWHM": 1.73945,
+			"area": 481.708
+		},
+		{
+			"position": 273.946,
+			"AssociatedPosition": 0,
+			"FWHM": 1.8824,
+			"area": 639.769
+		},
+		{
+			"position": 968.227,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.25718,
+			"area": 750.019
+		},
+		{
+			"position": 904.086,
+			"AssociatedPosition": 1212.95,
+			"FWHM": 2.12286,
+			"area": 763.506
+		},
+		{
+			"position": 220.145,
+			"AssociatedPosition": 0,
+			"FWHM": 3.7516,
+			"area": 588.678
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "128",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 19,
+	"Calibration Degree": 1,
+	"Calibration Data": [
+		1.3085,
+		1.27313
+	],
+	"Peaks": [
+		{
+			"position": 262.61,
+			"AssociatedPosition": 344.28,
+			"FWHM": 2.21515,
+			"area": 19440.3
+		},
+		{
+			"position": 1074.61,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.49397,
+			"area": 10201.1
+		},
+		{
+			"position": 594.326,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.35451,
+			"area": 7748.88
+		},
+		{
+			"position": 735.571,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.35668,
+			"area": 7982.98
+		},
+		{
+			"position": 848.561,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.46436,
+			"area": 7197.52
+		},
+		{
+			"position": 186.665,
+			"AssociatedPosition": 244.7,
+			"FWHM": 2.12922,
+			"area": 4946.67
+		},
+		{
+			"position": 828.708,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.89118,
+			"area": 4695.46
+		},
+		{
+			"position": 92.8181,
+			"AssociatedPosition": 121.78,
+			"FWHM": 2.16884,
+			"area": 3011.55
+		},
+		{
+			"position": 338.66,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.32029,
+			"area": 2247.62
+		},
+		{
+			"position": 661.858,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.57883,
+			"area": 2377.63
+		},
+		{
+			"position": 311.345,
+			"AssociatedPosition": 0,
+			"FWHM": 13.0678,
+			"area": 801.196
+		},
+		{
+			"position": 991.378,
+			"AssociatedPosition": 1299.14,
+			"FWHM": 2.42226,
+			"area": 744.071
+		},
+		{
+			"position": 430.545,
+			"AssociatedPosition": 0,
+			"FWHM": 4.32626,
+			"area": 63.7575
+		},
+		{
+			"position": 280.507,
+			"AssociatedPosition": 0,
+			"FWHM": 2.0369,
+			"area": 573.889
+		},
+		{
+			"position": 117.761,
+			"AssociatedPosition": 0,
+			"FWHM": 23.5479,
+			"area": 23159.7
+		},
+		{
+			"position": 225.5,
+			"AssociatedPosition": 0,
+			"FWHM": 1.03473,
+			"area": 263.026
+		},
+		{
+			"position": 372.73,
+			"AssociatedPosition": 0,
+			"FWHM": 1.52393,
+			"area": 390.944
+		},
+		{
+			"position": 925.567,
+			"AssociatedPosition": 1212.95,
+			"FWHM": 2.41165,
+			"area": 675.035
+		},
+		{
+			"position": 251.582,
+			"AssociatedPosition": 0,
+			"FWHM": 0.645708,
+			"area": 8.21574
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "129",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 12,
+	"Calibration Degree": 0,
+	"Calibration Data": [
+		1.292,
+		0.85249
+	],
+	"Peaks": [
+		{
+			"position": 264.789,
+			"AssociatedPosition": 0,
+			"FWHM": 2.65239,
+			"area": 19475
+		},
+		{
+			"position": 1090.75,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.8591,
+			"area": 9124.25
+		},
+		{
+			"position": 603.157,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.74705,
+			"area": 7214.44
+		},
+		{
+			"position": 746.955,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.80808,
+			"area": 7636.29
+		},
+		{
+			"position": 860.693,
+			"AssociatedPosition": 1112.08,
+			"FWHM": 2.84115,
+			"area": 6694.35
+		},
+		{
+			"position": 187.245,
+			"AssociatedPosition": 0,
+			"FWHM": 2.69459,
+			"area": 5158.06
+		},
+		{
+			"position": 840.777,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 3.48043,
+			"area": 5253.12
+		},
+		{
+			"position": 93.7519,
+			"AssociatedPosition": 121.78,
+			"FWHM": 2.26956,
+			"area": 2229.31
+		},
+		{
+			"position": 671.827,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.6835,
+			"area": 2319.3
+		},
+		{
+			"position": 342.606,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.89049,
+			"area": 2091.05
+		},
+		{
+			"position": 316.671,
+			"AssociatedPosition": 411.12,
+			"FWHM": 2.35295,
+			"area": 1595.75
+		},
+		{
+			"position": 134.168,
+			"AssociatedPosition": 0,
+			"FWHM": 1.05973,
+			"area": 193.44
+		}
+	]
+}
+{
+	"Source": "Eu-152",
+	"Histogram": "130",
+	"TH2: ": "mDelila_raw",
+	"NumberOfPeaks": 21,
+	"Calibration Degree": 4,
+	"Calibration Data": [
+		1.2751,
+		1.65052
+	],
+	"Peaks": [
+		{
+			"position": 94.4425,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.8261,
+			"area": 545036
+		},
+		{
+			"position": 268.608,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.8668,
+			"area": 517619
+		},
+		{
+			"position": 190.695,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.75537,
+			"area": 187128
+		},
+		{
+			"position": 1103.04,
+			"AssociatedPosition": 1408.01,
+			"FWHM": 2.49514,
+			"area": 171821
+		},
+		{
+			"position": 609.592,
+			"AssociatedPosition": 778.9

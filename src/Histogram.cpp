@@ -108,8 +108,8 @@ void Histogram::findPeaks()
 {
     int result = 0;
     int count = 0;
-
-    while (result == 0 && count < 20) // Căutăm vârfuri până găsim un vârf invalid sau ajungem la 20 de încercări.
+    std::cout<<"Number of peaks: "<<numberOfPeaks<<std::endl;
+    while (result == 0 && count < numberOfPeaks) // Căutăm vârfuri până găsim un vârf invalid sau ajungem la 20 de încercări.
     {
         result = detectAndFitPeaks();
         if (result == -1)
@@ -117,7 +117,7 @@ void Histogram::findPeaks()
             std::cout << "BREAKKKKKKKKK" << std::endl;
             break;
         }
-        // count++;
+        count++;
     }
     // for (int i = 0; i < numberOfPeaks; i++)
     //{
@@ -621,8 +621,6 @@ void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
     }
 
     jsonFile << "\t],\n"; // Încheie vectorul de date de calibrare
-    jsonFile << "\t\"Calibration Factor m\": " << m << ",\n";
-    jsonFile << "\t\"Calibration Factor b\": " << b << ",\n";
     jsonFile << "\t\"Peaks\": [\n";
 
     for (size_t i = 0; i < peaks.size(); ++i)
