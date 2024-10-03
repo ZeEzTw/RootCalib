@@ -8,12 +8,12 @@ sortEnergy::sortEnergy(const std::string &filename)
     // readFromTxt(filename);
     parseJsonFile(filename);
 
-    std::ofstream outputFile("output.txt"); // Create an ofstream object
-    if (outputFile.is_open())
-    {
+    //std::ofstream outputFile("output.txt"); // Create an ofstream object
+    //if (outputFile.is_open())
+    //{
         //printToFile(outputFile);
         // printSources();
-    }
+    //}
     // sortEnergyArray();
 }
 
@@ -148,7 +148,7 @@ int sortEnergy::isSourceValid(const std::string &source)
 {
     for (size_t i = 0; i < sources.size(); ++i)
     {
-        std::cout << sources[i] << std::endl;
+        //std::cout << sources[i] << std::endl;
         if (sources[i] == source)
         {
             return i;
@@ -248,15 +248,25 @@ void sortEnergy::chooseSources(int startPosition, int argc, char *argv[])
 int sortEnergy::getNumberOfPeaks() const
 {
     int totalPeaks = 0;
-    int count = 0;
-    for (const auto &source : requestedSources)
+    for (int i = 0; i < sources.size(); i++)
     {
-        totalPeaks += numberOfPeaks[count];
-        count++;
+        for (int j = 0; j < requestedSources.size(); j++)
+        {
+            if (sources[i] == requestedSources[j])
+            {
+                totalPeaks += numberOfPeaks[i];
+                break;
+            }
+        }
     }
+
     return totalPeaks;
 }
 
+int sortEnergy::getNumberOfPeaks(int position) const
+{
+    return numberOfPeaks[position];
+}
 double *sortEnergy::createSourceArray(int &size)
 {
     std::vector<double *> selectedEnergyArrays;

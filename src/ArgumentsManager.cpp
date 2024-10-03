@@ -64,3 +64,7 @@ void ArgumentsManager::printAllArguments() {
     std::cout << "Save path: " << savePath << std::endl;
     std::cout << "Sources: " << getSourcesName() << std::endl;
 }
+
+void ArgumentsManager::setNumberOfPeaks(int peaks) {
+    number_of_peaks = peaks;
+}

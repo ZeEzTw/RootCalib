@@ -2,18 +2,72 @@
 	"Source": "",
 	"Histogram": "102",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 4,
 	"Calibration Data": [
-		0,
-		-nan
+		1.3073,
+		1.58383
 	],
 	"Peaks": [
 		{
 			"position": 91.9006,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.87856,
 			"area": 191502
+		},
+		{
+			"position": 262.228,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.91393,
+			"area": 77169.4
+		},
+		{
+			"position": 186.008,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.87318,
+			"area": 30858.1
+		},
+		{
+			"position": 594.869,
+			"AssociatedPosition": 778.9,
+			"FWHM": 1.97772,
+			"area": 13810.6
+		},
+		{
+			"position": 735.929,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.08892,
+			"area": 12711.1
+		},
+		{
+			"position": 1075.95,
+			"AssociatedPosition": 0,
+			"FWHM": 2.27045,
+			"area": 12122.3
+		},
+		{
+			"position": 849.249,
+			"AssociatedPosition": 0,
+			"FWHM": 2.17225,
+			"area": 10182
+		},
+		{
+			"position": 338.441,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.94344,
+			"area": 6614.57
+		},
+		{
+			"position": 829.254,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.37869,
+			"area": 6904.32
+		},
+		{
+			"position": 313.317,
+			"AssociatedPosition": 411.12,
+			"FWHM": 2.00936,
+			"area": 4909.09
 		}
 	]
 }
@@ -21,18 +75,72 @@
 	"Source": "",
 	"Histogram": "103",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 4,
 	"Calibration Data": [
-		0,
-		-nan
+		1.3054,
+		1.47953
 	],
 	"Peaks": [
 		{
 			"position": 92.8439,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.76298,
 			"area": 167019
+		},
+		{
+			"position": 262.573,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.82565,
+			"area": 74328.4
+		},
+		{
+			"position": 186.338,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.78091,
+			"area": 32487.5
+		},
+		{
+			"position": 595.534,
+			"AssociatedPosition": 778.9,
+			"FWHM": 1.92516,
+			"area": 13370.7
+		},
+		{
+			"position": 737.069,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.0647,
+			"area": 12267.4
+		},
+		{
+			"position": 1077.05,
+			"AssociatedPosition": 0,
+			"FWHM": 2.20346,
+			"area": 11677.9
+		},
+		{
+			"position": 850.332,
+			"AssociatedPosition": 0,
+			"FWHM": 2.1241,
+			"area": 9365.22
+		},
+		{
+			"position": 338.96,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.88106,
+			"area": 5768.16
+		},
+		{
+			"position": 830.323,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.2801,
+			"area": 6332.53
+		},
+		{
+			"position": 313.822,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.79983,
+			"area": 4262.68
 		}
 	]
 }
@@ -40,18 +148,72 @@
 	"Source": "",
 	"Histogram": "104",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 4,
 	"Calibration Data": [
-		0,
-		-nan
+		1.309,
+		1.51128
 	],
 	"Peaks": [
 		{
 			"position": 92.2559,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.89353,
 			"area": 151547
+		},
+		{
+			"position": 261.989,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.97328,
+			"area": 69641.8
+		},
+		{
+			"position": 186.019,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.90614,
+			"area": 27374.5
+		},
+		{
+			"position": 735.009,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.17893,
+			"area": 10788.5
+		},
+		{
+			"position": 593.749,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.13313,
+			"area": 11462.9
+		},
+		{
+			"position": 1073.99,
+			"AssociatedPosition": 0,
+			"FWHM": 2.3108,
+			"area": 10062.1
+		},
+		{
+			"position": 847.934,
+			"AssociatedPosition": 0,
+			"FWHM": 2.28266,
+			"area": 8739.13
+		},
+		{
+			"position": 337.973,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.00803,
+			"area": 5791.58
+		},
+		{
+			"position": 828.066,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.47327,
+			"area": 5833.81
+		},
+		{
+			"position": 312.976,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.95826,
+			"area": 4327.9
 		}
 	]
 }
@@ -59,18 +221,72 @@
 	"Source": "",
 	"Histogram": "105",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 4,
 	"Calibration Data": [
-		0,
-		-nan
+		1.2577,
+		1.27939
 	],
 	"Peaks": [
 		{
 			"position": 96.4281,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.76166,
 			"area": 225973
+		},
+		{
+			"position": 272.924,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.82719,
+			"area": 76353.4
+		},
+		{
+			"position": 193.87,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.79364,
+			"area": 33835.7
+		},
+		{
+			"position": 617.949,
+			"AssociatedPosition": 778.9,
+			"FWHM": 1.96923,
+			"area": 14184.8
+		},
+		{
+			"position": 765.159,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.05295,
+			"area": 12393.9
+		},
+		{
+			"position": 1117.56,
+			"AssociatedPosition": 0,
+			"FWHM": 2.21024,
+			"area": 11650.8
+		},
+		{
+			"position": 882.575,
+			"AssociatedPosition": 0,
+			"FWHM": 2.1016,
+			"area": 9912.48
+		},
+		{
+			"position": 351.977,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.91063,
+			"area": 6398.71
+		},
+		{
+			"position": 325.918,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.7973,
+			"area": 5146.43
+		},
+		{
+			"position": 861.85,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.29925,
+			"area": 6666.93
 		}
 	]
 }
@@ -78,18 +294,72 @@
 	"Source": "",
 	"Histogram": "106",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
+	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Data": [
-		4.4147,
-		1.98746
+		1.293,
+		1.48288
 	],
 	"Peaks": [
 		{
 			"position": 265.298,
-			"AssociatedPosition": 1173.2,
+			"AssociatedPosition": 344.28,
 			"FWHM": 1.96021,
 			"area": 19789.6
+		},
+		{
+			"position": 1087.15,
+			"AssociatedPosition": 0,
+			"FWHM": 2.29136,
+			"area": 9436.23
+		},
+		{
+			"position": 744.207,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.10802,
+			"area": 7350.33
+		},
+		{
+			"position": 601.004,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.0687,
+			"area": 7829.8
+		},
+		{
+			"position": 858.469,
+			"AssociatedPosition": 0,
+			"FWHM": 2.21025,
+			"area": 6520.64
+		},
+		{
+			"position": 188.408,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.81398,
+			"area": 5221.12
+		},
+		{
+			"position": 838.309,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.41807,
+			"area": 4639.89
+		},
+		{
+			"position": 93.5897,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.80399,
+			"area": 3766.29
+		},
+		{
+			"position": 669.494,
+			"AssociatedPosition": 867.38,
+			"FWHM": 1.99492,
+			"area": 2365.13
+		},
+		{
+			"position": 342.201,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.07224,
+			"area": 2132.91
 		}
 	]
 }
@@ -97,18 +367,72 @@
 	"Source": "",
 	"Histogram": "107",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
+	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Data": [
-		4.6545,
-		1.99969
+		1.3552,
+		1.49518
 	],
 	"Peaks": [
 		{
 			"position": 251.628,
-			"AssociatedPosition": 1173.2,
+			"AssociatedPosition": 0,
 			"FWHM": 2.50425,
 			"area": 15635.4
+		},
+		{
+			"position": 1037.53,
+			"AssociatedPosition": 0,
+			"FWHM": 2.84324,
+			"area": 7887.93
+		},
+		{
+			"position": 573.277,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.67861,
+			"area": 6170.96
+		},
+		{
+			"position": 709.937,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.65053,
+			"area": 6521.74
+		},
+		{
+			"position": 819.237,
+			"AssociatedPosition": 0,
+			"FWHM": 2.77278,
+			"area": 5612.27
+		},
+		{
+			"position": 179.882,
+			"AssociatedPosition": 244.7,
+			"FWHM": 2.57173,
+			"area": 3767.01
+		},
+		{
+			"position": 800.169,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 3.26504,
+			"area": 4547.55
+		},
+		{
+			"position": 638.596,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.54396,
+			"area": 1955.95
+		},
+		{
+			"position": 326.8,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.75814,
+			"area": 1726.13
+		},
+		{
+			"position": 302.569,
+			"AssociatedPosition": 411.12,
+			"FWHM": 2.52424,
+			"area": 1292.92
 		}
 	]
 }
@@ -116,18 +440,72 @@
 	"Source": "",
 	"Histogram": "108",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
+	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Data": [
-		4.4229,
-		1.98431
+		1.296,
+		1.47316
 	],
 	"Peaks": [
 		{
 			"position": 264.807,
-			"AssociatedPosition": 1173.2,
+			"AssociatedPosition": 344.28,
 			"FWHM": 2.07785,
 			"area": 32338.1
+		},
+		{
+			"position": 93.136,
+			"AssociatedPosition": 121.78,
+			"FWHM": 2.03275,
+			"area": 21785.3
+		},
+		{
+			"position": 187.98,
+			"AssociatedPosition": 244.7,
+			"FWHM": 2.05191,
+			"area": 11506.1
+		},
+		{
+			"position": 742.37,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.21798,
+			"area": 9787.35
+		},
+		{
+			"position": 599.54,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.17776,
+			"area": 10005.2
+		},
+		{
+			"position": 1084.64,
+			"AssociatedPosition": 0,
+			"FWHM": 2.36138,
+			"area": 11347.4
+		},
+		{
+			"position": 856.45,
+			"AssociatedPosition": 0,
+			"FWHM": 2.34517,
+			"area": 8582.64
+		},
+		{
+			"position": 836.346,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.50615,
+			"area": 6217.6
+		},
+		{
+			"position": 341.493,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.09751,
+			"area": 3365.32
+		},
+		{
+			"position": 316.183,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.99593,
+			"area": 2727.74
 		}
 	]
 }
@@ -135,18 +513,72 @@
 	"Source": "",
 	"Histogram": "109",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
+	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Data": [
-		4.4678,
-		1.97773
+		1.3068,
+		0.872418
 	],
 	"Peaks": [
 		{
 			"position": 262.147,
-			"AssociatedPosition": 1173.2,
+			"AssociatedPosition": 344.28,
 			"FWHM": 2.56742,
 			"area": 21806.6
+		},
+		{
+			"position": 1077.87,
+			"AssociatedPosition": 0,
+			"FWHM": 2.84593,
+			"area": 9809.47
+		},
+		{
+			"position": 737.552,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.72191,
+			"area": 8410.12
+		},
+		{
+			"position": 595.901,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.61979,
+			"area": 7828.28
+		},
+		{
+			"position": 850.447,
+			"AssociatedPosition": 0,
+			"FWHM": 2.77748,
+			"area": 7322.76
+		},
+		{
+			"position": 185.734,
+			"AssociatedPosition": 244.7,
+			"FWHM": 2.58883,
+			"area": 6306.28
+		},
+		{
+			"position": 830.639,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 3.19973,
+			"area": 5924.78
+		},
+		{
+			"position": 92.3915,
+			"AssociatedPosition": 121.78,
+			"FWHM": 2.65171,
+			"area": 4739.81
+		},
+		{
+			"position": 663.659,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.59737,
+			"area": 2449.78
+		},
+		{
+			"position": 338.702,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.53631,
+			"area": 2434.23
 		}
 	]
 }
@@ -154,18 +586,72 @@
 	"Source": "",
 	"Histogram": "110",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 2,
 	"Calibration Data": [
-		0,
-		-nan
+		1.3035,
+		1.22958
 	],
 	"Peaks": [
 		{
 			"position": 92.3649,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.98003,
 			"area": 490471
+		},
+		{
+			"position": 263.707,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.98653,
+			"area": 528664
+		},
+		{
+			"position": 187.624,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.90709,
+			"area": 183835
+		},
+		{
+			"position": 596.221,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.12572,
+			"area": 143342
+		},
+		{
+			"position": 738.1,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.26585,
+			"area": 151447
+		},
+		{
+			"position": 1078.85,
+			"AssociatedPosition": 0,
+			"FWHM": 2.4862,
+			"area": 170321
+		},
+		{
+			"position": 852.156,
+			"AssociatedPosition": 0,
+			"FWHM": 2.38987,
+			"area": 131264
+		},
+		{
+			"position": 832.089,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.71454,
+			"area": 99636
+		},
+		{
+			"position": 339.914,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.99367,
+			"area": 52021.3
+		},
+		{
+			"position": 663.898,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.15382,
+			"area": 46940.5
 		}
 	]
 }
@@ -173,18 +659,72 @@
 	"Source": "",
 	"Histogram": "112",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 4,
 	"Calibration Data": [
-		0,
-		-nan
+		1.2518,
+		1.28273
 	],
 	"Peaks": [
 		{
 			"position": 96.4396,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.94833,
 			"area": 200826
+		},
+		{
+			"position": 274.363,
+			"AssociatedPosition": 344.28,
+			"FWHM": 2.01572,
+			"area": 75311.7
+		},
+		{
+			"position": 194.95,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.94504,
+			"area": 32666.1
+		},
+		{
+			"position": 620.677,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.13814,
+			"area": 13254.3
+		},
+		{
+			"position": 768.589,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.18613,
+			"area": 11774.5
+		},
+		{
+			"position": 1122.8,
+			"AssociatedPosition": 0,
+			"FWHM": 2.31861,
+			"area": 11655.1
+		},
+		{
+			"position": 886.863,
+			"AssociatedPosition": 0,
+			"FWHM": 2.23084,
+			"area": 9812.13
+		},
+		{
+			"position": 866.034,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.4517,
+			"area": 6624.82
+		},
+		{
+			"position": 353.78,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.07705,
+			"area": 6248.41
+		},
+		{
+			"position": 327.651,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.96092,
+			"area": 4996.17
 		}
 	]
 }
@@ -192,18 +732,72 @@
 	"Source": "",
 	"Histogram": "113",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 4,
 	"Calibration Data": [
-		0,
-		-nan
+		1.2688,
+		1.38433
 	],
 	"Peaks": [
 		{
 			"position": 95.4656,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.7754,
 			"area": 215170
+		},
+		{
+			"position": 270.38,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.82374,
+			"area": 81731.3
+		},
+		{
+			"position": 191.994,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.79966,
+			"area": 33874.5
+		},
+		{
+			"position": 612.63,
+			"AssociatedPosition": 778.9,
+			"FWHM": 1.95853,
+			"area": 14388.8
+		},
+		{
+			"position": 758.347,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.02573,
+			"area": 12627.8
+		},
+		{
+			"position": 1107.95,
+			"AssociatedPosition": 0,
+			"FWHM": 2.18768,
+			"area": 12506.8
+		},
+		{
+			"position": 874.857,
+			"AssociatedPosition": 0,
+			"FWHM": 2.07495,
+			"area": 10367
+		},
+		{
+			"position": 348.847,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.80544,
+			"area": 6388.98
+		},
+		{
+			"position": 854.266,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.21318,
+			"area": 6788.77
+		},
+		{
+			"position": 322.985,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.7848,
+			"area": 4864.31
 		}
 	]
 }
@@ -211,18 +805,72 @@
 	"Source": "",
 	"Histogram": "114",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 4,
 	"Calibration Data": [
-		0,
-		-nan
+		1.2632,
+		1.5486
 	],
 	"Peaks": [
 		{
 			"position": 95.4731,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.92079,
 			"area": 186729
+		},
+		{
+			"position": 271.353,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.9789,
+			"area": 69448.8
+		},
+		{
+			"position": 192.389,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.95507,
+			"area": 31193
+		},
+		{
+			"position": 615.522,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.1021,
+			"area": 11964.3
+		},
+		{
+			"position": 761.656,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.16481,
+			"area": 10598
+		},
+		{
+			"position": 1113.5,
+			"AssociatedPosition": 0,
+			"FWHM": 2.35233,
+			"area": 9604.02
+		},
+		{
+			"position": 878.958,
+			"AssociatedPosition": 0,
+			"FWHM": 2.25395,
+			"area": 8787.17
+		},
+		{
+			"position": 350.301,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.04566,
+			"area": 5914.96
+		},
+		{
+			"position": 858.248,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.43496,
+			"area": 5862.36
+		},
+		{
+			"position": 324.248,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.94904,
+			"area": 4431.3
 		}
 	]
 }
@@ -230,18 +878,72 @@
 	"Source": "",
 	"Histogram": "115",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 4,
 	"Calibration Data": [
-		0,
-		-nan
+		1.2769,
+		1.46724
 	],
 	"Peaks": [
 		{
 			"position": 94.5606,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.77375,
 			"area": 190300
+		},
+		{
+			"position": 268.45,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.84348,
+			"area": 78448.1
+		},
+		{
+			"position": 190.523,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.79244,
+			"area": 34435.6
+		},
+		{
+			"position": 608.874,
+			"AssociatedPosition": 778.9,
+			"FWHM": 1.95516,
+			"area": 13589.6
+		},
+		{
+			"position": 753.459,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.05566,
+			"area": 12324.4
+		},
+		{
+			"position": 1101.42,
+			"AssociatedPosition": 0,
+			"FWHM": 2.17823,
+			"area": 11586.9
+		},
+		{
+			"position": 869.468,
+			"AssociatedPosition": 0,
+			"FWHM": 2.09311,
+			"area": 9708.24
+		},
+		{
+			"position": 848.996,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.27909,
+			"area": 6635.39
+		},
+		{
+			"position": 346.666,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.92463,
+			"area": 6669.87
+		},
+		{
+			"position": 320.949,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.81051,
+			"area": 4660.85
 		}
 	]
 }
@@ -249,18 +951,72 @@
 	"Source": "",
 	"Histogram": "116",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
+	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Data": [
-		4.4251,
-		1.99684
+		1.2958,
+		1.48641
 	],
 	"Peaks": [
 		{
 			"position": 264.673,
-			"AssociatedPosition": 1173.2,
+			"AssociatedPosition": 344.28,
 			"FWHM": 2.03655,
 			"area": 20021.9
+		},
+		{
+			"position": 1084.82,
+			"AssociatedPosition": 0,
+			"FWHM": 2.30214,
+			"area": 9543.06
+		},
+		{
+			"position": 742.463,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.14541,
+			"area": 7466.04
+		},
+		{
+			"position": 599.745,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.13915,
+			"area": 7459.46
+		},
+		{
+			"position": 188.027,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.98324,
+			"area": 4967.71
+		},
+		{
+			"position": 856.687,
+			"AssociatedPosition": 0,
+			"FWHM": 2.22524,
+			"area": 6800.36
+		},
+		{
+			"position": 836.584,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.49654,
+			"area": 4703.09
+		},
+		{
+			"position": 93.4326,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.89138,
+			"area": 2696.87
+		},
+		{
+			"position": 667.915,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.11035,
+			"area": 2368.67
+		},
+		{
+			"position": 341.564,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.06753,
+			"area": 2266.8
 		}
 	]
 }
@@ -268,18 +1024,72 @@
 	"Source": "",
 	"Histogram": "117",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
+	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Data": [
-		4.3198,
-		1.97562
+		1.2644,
+		1.45978
 	],
 	"Peaks": [
 		{
 			"position": 271.129,
-			"AssociatedPosition": 1173.2,
+			"AssociatedPosition": 344.28,
 			"FWHM": 2.04884,
 			"area": 19483.6
+		},
+		{
+			"position": 1112.46,
+			"AssociatedPosition": 0,
+			"FWHM": 2.38218,
+			"area": 9216.12
+		},
+		{
+			"position": 615.144,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.16041,
+			"area": 7755.5
+		},
+		{
+			"position": 761.028,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.20079,
+			"area": 7849.18
+		},
+		{
+			"position": 877.928,
+			"AssociatedPosition": 0,
+			"FWHM": 2.27463,
+			"area": 6864.07
+		},
+		{
+			"position": 192.399,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.97908,
+			"area": 5324.34
+		},
+		{
+			"position": 857.286,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.5747,
+			"area": 4952.81
+		},
+		{
+			"position": 95.6683,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.49497,
+			"area": 2171.14
+		},
+		{
+			"position": 684.903,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.18882,
+			"area": 2658.06
+		},
+		{
+			"position": 349.752,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.11796,
+			"area": 2347.51
 		}
 	]
 }
@@ -287,18 +1097,72 @@
 	"Source": "",
 	"Histogram": "118",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 2,
 	"Calibration Data": [
-		4.2621,
-		1.9794
+		1.2476,
+		1.57578
 	],
 	"Peaks": [
 		{
 			"position": 274.799,
-			"AssociatedPosition": 1173.2,
+			"AssociatedPosition": 344.28,
 			"FWHM": 2.26331,
 			"area": 40654.2
+		},
+		{
+			"position": 96.7582,
+			"AssociatedPosition": 121.78,
+			"FWHM": 2.25101,
+			"area": 31233.5
+		},
+		{
+			"position": 195.157,
+			"AssociatedPosition": 244.7,
+			"FWHM": 2.2559,
+			"area": 13349.3
+		},
+		{
+			"position": 771.265,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.4272,
+			"area": 11322.8
+		},
+		{
+			"position": 622.98,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.41152,
+			"area": 11676.1
+		},
+		{
+			"position": 1126.83,
+			"AssociatedPosition": 0,
+			"FWHM": 2.56467,
+			"area": 12666.6
+		},
+		{
+			"position": 889.613,
+			"AssociatedPosition": 0,
+			"FWHM": 2.52204,
+			"area": 10109.9
+		},
+		{
+			"position": 868.817,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.82071,
+			"area": 6757.38
+		},
+		{
+			"position": 354.545,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.24141,
+			"area": 3657.95
+		},
+		{
+			"position": 693.785,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.40743,
+			"area": 3410.03
 		}
 	]
 }
@@ -306,18 +1170,72 @@
 	"Source": "",
 	"Histogram": "119",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
+	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Data": [
-		4.4077,
-		1.99049
+		1.2909,
+		1.5231
 	],
 	"Peaks": [
 		{
 			"position": 265.719,
-			"AssociatedPosition": 1173.2,
+			"AssociatedPosition": 344.28,
 			"FWHM": 2.44023,
 			"area": 17667.3
+		},
+		{
+			"position": 1088.85,
+			"AssociatedPosition": 0,
+			"FWHM": 2.7059,
+			"area": 8639.01
+		},
+		{
+			"position": 745.301,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.5995,
+			"area": 7096.25
+		},
+		{
+			"position": 601.954,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.4823,
+			"area": 6801.84
+		},
+		{
+			"position": 859.812,
+			"AssociatedPosition": 0,
+			"FWHM": 2.68733,
+			"area": 6399.36
+		},
+		{
+			"position": 188.743,
+			"AssociatedPosition": 244.7,
+			"FWHM": 2.39166,
+			"area": 4620.59
+		},
+		{
+			"position": 839.732,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 3.21215,
+			"area": 5112.03
+		},
+		{
+			"position": 670.413,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.5732,
+			"area": 2231.65
+		},
+		{
+			"position": 93.5807,
+			"AssociatedPosition": 121.78,
+			"FWHM": 2.5629,
+			"area": 2653.92
+		},
+		{
+			"position": 317.468,
+			"AssociatedPosition": 411.12,
+			"FWHM": 2.2902,
+			"area": 1378.76
 		}
 	]
 }
@@ -325,18 +1243,72 @@
 	"Source": "",
 	"Histogram": "120",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 2,
 	"Calibration Data": [
-		0,
-		-nan
+		1.2632,
+		1.58697
 	],
 	"Peaks": [
 		{
 			"position": 95.6114,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.84158,
 			"area": 609629
+		},
+		{
+			"position": 271.452,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.91183,
+			"area": 528471
+		},
+		{
+			"position": 192.756,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.80321,
+			"area": 185734
+		},
+		{
+			"position": 615.198,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.08426,
+			"area": 146501
+		},
+		{
+			"position": 1112.84,
+			"AssociatedPosition": 0,
+			"FWHM": 2.51117,
+			"area": 170096
+		},
+		{
+			"position": 761.686,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.18198,
+			"area": 146163
+		},
+		{
+			"position": 878.666,
+			"AssociatedPosition": 0,
+			"FWHM": 2.36239,
+			"area": 128766
+		},
+		{
+			"position": 858.044,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.65074,
+			"area": 86160.6
+		},
+		{
+			"position": 350.195,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.91824,
+			"area": 51486
+		},
+		{
+			"position": 685.199,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.08416,
+			"area": 43856.9
 		}
 	]
 }
@@ -344,18 +1316,72 @@
 	"Source": "",
 	"Histogram": "122",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 4,
 	"Calibration Data": [
-		0,
-		-nan
+		1.272,
+		1.29627
 	],
 	"Peaks": [
 		{
 			"position": 94.9473,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.95578,
 			"area": 250387
+		},
+		{
+			"position": 269.922,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.9992,
+			"area": 83764.4
+		},
+		{
+			"position": 191.503,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.96967,
+			"area": 39701.5
+		},
+		{
+			"position": 611.117,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.10968,
+			"area": 15806.7
+		},
+		{
+			"position": 756.381,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.17526,
+			"area": 12934
+		},
+		{
+			"position": 1105.47,
+			"AssociatedPosition": 0,
+			"FWHM": 2.33399,
+			"area": 13137.9
+		},
+		{
+			"position": 872.925,
+			"AssociatedPosition": 0,
+			"FWHM": 2.24129,
+			"area": 11262.7
+		},
+		{
+			"position": 348.167,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.07204,
+			"area": 7229
+		},
+		{
+			"position": 852.371,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.30007,
+			"area": 7445.61
+		},
+		{
+			"position": 322.368,
+			"AssociatedPosition": 411.12,
+			"FWHM": 2.02195,
+			"area": 5488.69
 		}
 	]
 }
@@ -363,18 +1389,72 @@
 	"Source": "",
 	"Histogram": "123",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 4,
 	"Calibration Data": [
-		0,
-		-nan
+		1.2668,
+		1.55314
 	],
 	"Peaks": [
 		{
 			"position": 95.3531,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.77336,
 			"area": 231189
+		},
+		{
+			"position": 270.799,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.84612,
+			"area": 84320.2
+		},
+		{
+			"position": 192.24,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.77601,
+			"area": 37803.8
+		},
+		{
+			"position": 613.421,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.00714,
+			"area": 15038.6
+		},
+		{
+			"position": 759.487,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.06022,
+			"area": 13018.9
+		},
+		{
+			"position": 1109.46,
+			"AssociatedPosition": 0,
+			"FWHM": 2.24063,
+			"area": 12332.4
+		},
+		{
+			"position": 876.298,
+			"AssociatedPosition": 0,
+			"FWHM": 2.14595,
+			"area": 10177
+		},
+		{
+			"position": 349.076,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.88821,
+			"area": 6598.74
+		},
+		{
+			"position": 323.24,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.79528,
+			"area": 5388.04
+		},
+		{
+			"position": 855.686,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.22785,
+			"area": 7280.84
 		}
 	]
 }
@@ -382,18 +1462,72 @@
 	"Source": "",
 	"Histogram": "124",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 4,
 	"Calibration Data": [
-		0,
-		-nan
+		1.3207,
+		1.23614
 	],
 	"Peaks": [
 		{
 			"position": 91.6383,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.86415,
 			"area": 155242
+		},
+		{
+			"position": 260.17,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.92085,
+			"area": 64571.5
+		},
+		{
+			"position": 184.772,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.86926,
+			"area": 28424.8
+		},
+		{
+			"position": 588.26,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.05547,
+			"area": 11407.1
+		},
+		{
+			"position": 728.579,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.11101,
+			"area": 10428.8
+		},
+		{
+			"position": 1064.23,
+			"AssociatedPosition": 0,
+			"FWHM": 2.26728,
+			"area": 10116.4
+		},
+		{
+			"position": 840.575,
+			"AssociatedPosition": 0,
+			"FWHM": 2.15906,
+			"area": 8288.16
+		},
+		{
+			"position": 335.238,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.89046,
+			"area": 5283.68
+		},
+		{
+			"position": 820.855,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.44173,
+			"area": 5688.21
+		},
+		{
+			"position": 310.531,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.90621,
+			"area": 4386.47
 		}
 	]
 }
@@ -401,18 +1535,72 @@
 	"Source": "",
 	"Histogram": "125",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 4,
 	"Calibration Data": [
-		0,
-		-nan
+		1.2913,
+		1.23491
 	],
 	"Peaks": [
 		{
 			"position": 93.5454,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.72944,
 			"area": 216251
+		},
+		{
+			"position": 266.067,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.77344,
+			"area": 79718.5
+		},
+		{
+			"position": 189.011,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.76194,
+			"area": 34729.5
+		},
+		{
+			"position": 745.145,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.00065,
+			"area": 13161.9
+		},
+		{
+			"position": 601.68,
+			"AssociatedPosition": 778.9,
+			"FWHM": 1.91093,
+			"area": 15148.6
+		},
+		{
+			"position": 1088.51,
+			"AssociatedPosition": 0,
+			"FWHM": 2.14083,
+			"area": 12723.7
+		},
+		{
+			"position": 859.831,
+			"AssociatedPosition": 0,
+			"FWHM": 2.05332,
+			"area": 10465.6
+		},
+		{
+			"position": 342.98,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.7802,
+			"area": 6881.8
+		},
+		{
+			"position": 839.595,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.15327,
+			"area": 7336.35
+		},
+		{
+			"position": 317.618,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.80255,
+			"area": 5714.85
 		}
 	]
 }
@@ -420,18 +1608,72 @@
 	"Source": "",
 	"Histogram": "126",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
+	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Data": [
-		4.3725,
-		1.97734
+		1.281,
+		1.55823
 	],
 	"Peaks": [
 		{
 			"position": 267.861,
-			"AssociatedPosition": 1173.2,
+			"AssociatedPosition": 344.28,
 			"FWHM": 2.20183,
 			"area": 24445.3
+		},
+		{
+			"position": 94.1909,
+			"AssociatedPosition": 121.78,
+			"FWHM": 2.07062,
+			"area": 9556.75
+		},
+		{
+			"position": 1097.43,
+			"AssociatedPosition": 0,
+			"FWHM": 2.4585,
+			"area": 10324.4
+		},
+		{
+			"position": 751.054,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.35113,
+			"area": 8729.18
+		},
+		{
+			"position": 189.964,
+			"AssociatedPosition": 244.7,
+			"FWHM": 2.17948,
+			"area": 6822.76
+		},
+		{
+			"position": 606.658,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.37125,
+			"area": 7960.77
+		},
+		{
+			"position": 866.625,
+			"AssociatedPosition": 0,
+			"FWHM": 2.43159,
+			"area": 7199.61
+		},
+		{
+			"position": 846.315,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.7129,
+			"area": 5204.37
+		},
+		{
+			"position": 345.477,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.16242,
+			"area": 2624.65
+		},
+		{
+			"position": 675.58,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.30929,
+			"area": 2446
 		}
 	]
 }
@@ -439,18 +1681,72 @@
 	"Source": "",
 	"Histogram": "127",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
+	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Data": [
-		4.5689,
-		1.9958
+		1.34,
+		1.4031
 	],
 	"Peaks": [
 		{
 			"position": 256.343,
-			"AssociatedPosition": 1173.2,
+			"AssociatedPosition": 344.28,
 			"FWHM": 2.08944,
 			"area": 23151.9
+		},
+		{
+			"position": 89.9606,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.9859,
+			"area": 9024.41
+		},
+		{
+			"position": 1049.28,
+			"AssociatedPosition": 0,
+			"FWHM": 2.32504,
+			"area": 9914.8
+		},
+		{
+			"position": 580.065,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.16447,
+			"area": 8157.21
+		},
+		{
+			"position": 717.992,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.22588,
+			"area": 8384.82
+		},
+		{
+			"position": 181.631,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.99679,
+			"area": 6578.15
+		},
+		{
+			"position": 828.642,
+			"AssociatedPosition": 0,
+			"FWHM": 2.24936,
+			"area": 7146.22
+		},
+		{
+			"position": 809.176,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.54878,
+			"area": 4885.29
+		},
+		{
+			"position": 645.926,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.16099,
+			"area": 2679.1
+		},
+		{
+			"position": 330.627,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.16468,
+			"area": 2141.71
 		}
 	]
 }
@@ -458,18 +1754,72 @@
 	"Source": "",
 	"Histogram": "128",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
+	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Data": [
-		4.4599,
-		1.98449
+		1.308,
+		1.21727
 	],
 	"Peaks": [
 		{
 			"position": 262.61,
-			"AssociatedPosition": 1173.2,
+			"AssociatedPosition": 344.28,
 			"FWHM": 2.21515,
 			"area": 19440.3
+		},
+		{
+			"position": 1074.61,
+			"AssociatedPosition": 0,
+			"FWHM": 2.49397,
+			"area": 10201.1
+		},
+		{
+			"position": 594.326,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.35451,
+			"area": 7748.88
+		},
+		{
+			"position": 735.571,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.35668,
+			"area": 7982.98
+		},
+		{
+			"position": 848.561,
+			"AssociatedPosition": 0,
+			"FWHM": 2.46436,
+			"area": 7197.52
+		},
+		{
+			"position": 186.665,
+			"AssociatedPosition": 244.7,
+			"FWHM": 2.12922,
+			"area": 4946.67
+		},
+		{
+			"position": 828.708,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.89118,
+			"area": 4695.46
+		},
+		{
+			"position": 92.8181,
+			"AssociatedPosition": 121.78,
+			"FWHM": 2.16884,
+			"area": 3011.55
+		},
+		{
+			"position": 338.66,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.32029,
+			"area": 2247.62
+		},
+		{
+			"position": 661.858,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.57883,
+			"area": 2377.63
 		}
 	]
 }
@@ -477,18 +1827,72 @@
 	"Source": "",
 	"Histogram": "129",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
+	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Data": [
-		4.4232,
-		1.98655
+		1.2927,
+		1.15302
 	],
 	"Peaks": [
 		{
 			"position": 264.789,
-			"AssociatedPosition": 1173.2,
+			"AssociatedPosition": 344.28,
 			"FWHM": 2.65239,
 			"area": 19475
+		},
+		{
+			"position": 1090.75,
+			"AssociatedPosition": 0,
+			"FWHM": 2.8591,
+			"area": 9124.25
+		},
+		{
+			"position": 603.157,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.74705,
+			"area": 7214.44
+		},
+		{
+			"position": 746.955,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.80808,
+			"area": 7636.29
+		},
+		{
+			"position": 860.693,
+			"AssociatedPosition": 0,
+			"FWHM": 2.84115,
+			"area": 6694.35
+		},
+		{
+			"position": 187.245,
+			"AssociatedPosition": 0,
+			"FWHM": 2.69459,
+			"area": 5158.06
+		},
+		{
+			"position": 840.777,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 3.48043,
+			"area": 5253.12
+		},
+		{
+			"position": 93.7519,
+			"AssociatedPosition": 121.78,
+			"FWHM": 2.26956,
+			"area": 2229.31
+		},
+		{
+			"position": 671.827,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.6835,
+			"area": 2319.3
+		},
+		{
+			"position": 342.606,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.89049,
+			"area": 2091.05
 		}
 	]
 }
@@ -496,18 +1900,72 @@
 	"Source": "",
 	"Histogram": "130",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 3,
 	"Calibration Data": [
-		0,
-		-nan
+		1.275,
+		1.68881
 	],
 	"Peaks": [
 		{
 			"position": 94.4425,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.8261,
 			"area": 545036
+		},
+		{
+			"position": 268.608,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.8668,
+			"area": 517619
+		},
+		{
+			"position": 190.695,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.75537,
+			"area": 187128
+		},
+		{
+			"position": 1103.04,
+			"AssociatedPosition": 0,
+			"FWHM": 2.49514,
+			"area": 171821
+		},
+		{
+			"position": 609.592,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.04988,
+			"area": 148344
+		},
+		{
+			"position": 754.626,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.11524,
+			"area": 145627
+		},
+		{
+			"position": 870.588,
+			"AssociatedPosition": 0,
+			"FWHM": 2.33849,
+			"area": 126088
+		},
+		{
+			"position": 850.096,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.58416,
+			"area": 84049.4
+		},
+		{
+			"position": 347.05,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.85393,
+			"area": 47039.8
+		},
+		{
+			"position": 321.093,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.81359,
+			"area": 34820.5
 		}
 	]
 }
@@ -515,18 +1973,72 @@
 	"Source": "",
 	"Histogram": "132",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 5,
 	"Calibration Data": [
-		0,
-		-nan
+		1.311,
+		1.45736
 	],
 	"Peaks": [
 		{
 			"position": 92.0495,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.90587,
 			"area": 247577
+		},
+		{
+			"position": 261.692,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.95083,
+			"area": 89046
+		},
+		{
+			"position": 185.9,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.90588,
+			"area": 39269.9
+		},
+		{
+			"position": 592.76,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.04496,
+			"area": 15632.8
+		},
+		{
+			"position": 1072.22,
+			"AssociatedPosition": 0,
+			"FWHM": 2.24501,
+			"area": 13634.4
+		},
+		{
+			"position": 733.887,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.13417,
+			"area": 14258.9
+		},
+		{
+			"position": 846.705,
+			"AssociatedPosition": 0,
+			"FWHM": 2.17899,
+			"area": 10689.8
+		},
+		{
+			"position": 337.61,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.97707,
+			"area": 7882.11
+		},
+		{
+			"position": 826.835,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.45438,
+			"area": 7583.64
+		},
+		{
+			"position": 312.524,
+			"AssociatedPosition": 411.12,
+			"FWHM": 0.92014,
+			"area": 3940.22
 		}
 	]
 }
@@ -534,18 +2046,72 @@
 	"Source": "",
 	"Histogram": "133",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 4,
 	"Calibration Data": [
-		0,
-		-nan
+		1.2934,
+		1.51576
 	],
 	"Peaks": [
 		{
 			"position": 93.2726,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.72497,
 			"area": 197376
+		},
+		{
+			"position": 265.168,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.8105,
+			"area": 77432.4
+		},
+		{
+			"position": 188.192,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.76616,
+			"area": 34791.4
+		},
+		{
+			"position": 600.857,
+			"AssociatedPosition": 778.9,
+			"FWHM": 1.95712,
+			"area": 14617
+		},
+		{
+			"position": 743.859,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.08054,
+			"area": 13375.1
+		},
+		{
+			"position": 1086.89,
+			"AssociatedPosition": 0,
+			"FWHM": 2.27017,
+			"area": 12927.1
+		},
+		{
+			"position": 858.228,
+			"AssociatedPosition": 0,
+			"FWHM": 2.15262,
+			"area": 10864.7
+		},
+		{
+			"position": 342.209,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.82238,
+			"area": 7055.4
+		},
+		{
+			"position": 838.039,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.35546,
+			"area": 6845.34
+		},
+		{
+			"position": 316.793,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.80414,
+			"area": 5360.09
 		}
 	]
 }
@@ -553,18 +2119,72 @@
 	"Source": "",
 	"Histogram": "134",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 4,
 	"Calibration Data": [
-		0,
-		-nan
+		1.2828,
+		1.42973
 	],
 	"Peaks": [
 		{
 			"position": 93.6726,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.86466,
 			"area": 137623
+		},
+		{
+			"position": 267.439,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.94029,
+			"area": 66476.2
+		},
+		{
+			"position": 189.818,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.89965,
+			"area": 28229.3
+		},
+		{
+			"position": 606.106,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.05278,
+			"area": 12254.9
+		},
+		{
+			"position": 750.005,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.16964,
+			"area": 11057.5
+		},
+		{
+			"position": 1096.46,
+			"AssociatedPosition": 0,
+			"FWHM": 2.3123,
+			"area": 9863.46
+		},
+		{
+			"position": 865.647,
+			"AssociatedPosition": 0,
+			"FWHM": 2.2452,
+			"area": 8724.67
+		},
+		{
+			"position": 345.118,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.98369,
+			"area": 5570.97
+		},
+		{
+			"position": 845.249,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.40074,
+			"area": 5892.73
+		},
+		{
+			"position": 319.519,
+			"AssociatedPosition": 411.12,
+			"FWHM": 2.00439,
+			"area": 4616.64
 		}
 	]
 }
@@ -572,18 +2192,72 @@
 	"Source": "",
 	"Histogram": "135",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 4,
 	"Calibration Data": [
-		0,
-		-nan
+		1.3016,
+		0.952225
 	],
 	"Peaks": [
 		{
 			"position": 92.4247,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.77917,
 			"area": 235365
+		},
+		{
+			"position": 264.411,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.8142,
+			"area": 88646.2
+		},
+		{
+			"position": 188.123,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.77917,
+			"area": 36962.1
+		},
+		{
+			"position": 597.074,
+			"AssociatedPosition": 778.9,
+			"FWHM": 1.91681,
+			"area": 15290.7
+		},
+		{
+			"position": 739.178,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.0733,
+			"area": 13396.8
+		},
+		{
+			"position": 1080.39,
+			"AssociatedPosition": 0,
+			"FWHM": 2.19657,
+			"area": 12841.3
+		},
+		{
+			"position": 853.558,
+			"AssociatedPosition": 0,
+			"FWHM": 2.09228,
+			"area": 11040.4
+		},
+		{
+			"position": 833.412,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.22439,
+			"area": 7143.82
+		},
+		{
+			"position": 340.595,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.79433,
+			"area": 7378.38
+		},
+		{
+			"position": 315.537,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.80902,
+			"area": 6017.05
 		}
 	]
 }
@@ -591,18 +2265,72 @@
 	"Source": "",
 	"Histogram": "136",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
+	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Data": [
-		4.3756,
-		1.97478
+		1.2825,
+		1.44358
 	],
 	"Peaks": [
 		{
 			"position": 267.672,
-			"AssociatedPosition": 1173.2,
+			"AssociatedPosition": 344.28,
 			"FWHM": 2.06421,
 			"area": 25438.6
+		},
+		{
+			"position": 94.2842,
+			"AssociatedPosition": 121.78,
+			"FWHM": 2.02912,
+			"area": 11318.8
+		},
+		{
+			"position": 1096.06,
+			"AssociatedPosition": 0,
+			"FWHM": 2.34894,
+			"area": 10557.7
+		},
+		{
+			"position": 750.154,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.21217,
+			"area": 9000.64
+		},
+		{
+			"position": 605.957,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.10962,
+			"area": 8823.45
+		},
+		{
+			"position": 190.083,
+			"AssociatedPosition": 244.7,
+			"FWHM": 2.0068,
+			"area": 7340.66
+		},
+		{
+			"position": 865.607,
+			"AssociatedPosition": 0,
+			"FWHM": 2.26692,
+			"area": 7332
+		},
+		{
+			"position": 845.184,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.42504,
+			"area": 5083.38
+		},
+		{
+			"position": 345.239,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.04488,
+			"area": 2732.37
+		},
+		{
+			"position": 674.823,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.21304,
+			"area": 2615.63
 		}
 	]
 }
@@ -610,18 +2338,72 @@
 	"Source": "",
 	"Histogram": "137",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
+	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Data": [
-		4.4816,
-		1.99094
+		1.3114,
+		1.01754
 	],
 	"Peaks": [
 		{
 			"position": 261.337,
-			"AssociatedPosition": 1173.2,
+			"AssociatedPosition": 344.28,
 			"FWHM": 1.98348,
 			"area": 18872.9
+		},
+		{
+			"position": 1075.76,
+			"AssociatedPosition": 0,
+			"FWHM": 2.35635,
+			"area": 8848.35
+		},
+		{
+			"position": 735.643,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.12114,
+			"area": 6917.68
+		},
+		{
+			"position": 594.593,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.14974,
+			"area": 6626.2
+		},
+		{
+			"position": 848.598,
+			"AssociatedPosition": 0,
+			"FWHM": 2.24136,
+			"area": 6079.03
+		},
+		{
+			"position": 184.753,
+			"AssociatedPosition": 0,
+			"FWHM": 1.92983,
+			"area": 4832.74
+		},
+		{
+			"position": 828.597,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.42534,
+			"area": 4169.29
+		},
+		{
+			"position": 91.3436,
+			"AssociatedPosition": 121.78,
+			"FWHM": 1.85736,
+			"area": 3429.67
+		},
+		{
+			"position": 338.054,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.02279,
+			"area": 2056.65
+		},
+		{
+			"position": 661.925,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.21856,
+			"area": 2277.47
 		}
 	]
 }
@@ -629,18 +2411,72 @@
 	"Source": "",
 	"Histogram": "138",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
+	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Data": [
-		4.3527,
-		1.99142
+		1.2745,
+		1.64453
 	],
 	"Peaks": [
 		{
 			"position": 269.076,
-			"AssociatedPosition": 1173.2,
+			"AssociatedPosition": 344.28,
 			"FWHM": 2.05103,
 			"area": 19389.5
+		},
+		{
+			"position": 1102.92,
+			"AssociatedPosition": 0,
+			"FWHM": 2.38083,
+			"area": 9291.21
+		},
+		{
+			"position": 754.957,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.23038,
+			"area": 7740.85
+		},
+		{
+			"position": 609.697,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.18444,
+			"area": 7256.34
+		},
+		{
+			"position": 870.892,
+			"AssociatedPosition": 0,
+			"FWHM": 2.35139,
+			"area": 6846.96
+		},
+		{
+			"position": 191.205,
+			"AssociatedPosition": 244.7,
+			"FWHM": 2.12176,
+			"area": 4682.69
+		},
+		{
+			"position": 850.479,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.53773,
+			"area": 4808.77
+		},
+		{
+			"position": 347.009,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.15456,
+			"area": 2237.58
+		},
+		{
+			"position": 679.089,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.31065,
+			"area": 2174.24
+		},
+		{
+			"position": 321.33,
+			"AssociatedPosition": 411.12,
+			"FWHM": 1.95191,
+			"area": 1543.46
 		}
 	]
 }
@@ -648,18 +2484,72 @@
 	"Source": "",
 	"Histogram": "139",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
+	"NumberOfPeaks": 10,
 	"Calibration Degree": 1,
 	"Calibration Data": [
-		4.2848,
-		1.99968
+		1.2544,
+		1.50426
 	],
 	"Peaks": [
 		{
 			"position": 273.338,
-			"AssociatedPosition": 1173.2,
+			"AssociatedPosition": 344.28,
 			"FWHM": 2.65265,
 			"area": 25400
+		},
+		{
+			"position": 1121.18,
+			"AssociatedPosition": 0,
+			"FWHM": 2.87215,
+			"area": 10411.7
+		},
+		{
+			"position": 766.971,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.75539,
+			"area": 8611.88
+		},
+		{
+			"position": 619.709,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.66537,
+			"area": 8728.81
+		},
+		{
+			"position": 193.862,
+			"AssociatedPosition": 244.7,
+			"FWHM": 2.55601,
+			"area": 7255.75
+		},
+		{
+			"position": 884.77,
+			"AssociatedPosition": 0,
+			"FWHM": 2.80341,
+			"area": 7773.51
+		},
+		{
+			"position": 96.1516,
+			"AssociatedPosition": 121.78,
+			"FWHM": 2.48426,
+			"area": 5259.08
+		},
+		{
+			"position": 864.066,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 3.14693,
+			"area": 5881.25
+		},
+		{
+			"position": 353.37,
+			"AssociatedPosition": 443.96,
+			"FWHM": 2.5228,
+			"area": 2952.99
+		},
+		{
+			"position": 690.07,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.65167,
+			"area": 2727.2
 		}
 	]
 }
@@ -667,18 +2557,72 @@
 	"Source": "",
 	"Histogram": "140",
 	"TH2: ": "mDelila_raw",
-	"NumberOfPeaks": 1,
-	"Calibration Degree": 1,
+	"NumberOfPeaks": 10,
+	"Calibration Degree": 3,
 	"Calibration Data": [
-		0,
-		-nan
+		1.2395,
+		1.70786
 	],
 	"Peaks": [
 		{
 			"position": 97.1265,
-			"AssociatedPosition": 0,
+			"AssociatedPosition": 121.78,
 			"FWHM": 1.84127,
 			"area": 703563
+		},
+		{
+			"position": 276.386,
+			"AssociatedPosition": 344.28,
+			"FWHM": 1.93134,
+			"area": 534162
+		},
+		{
+			"position": 196.334,
+			"AssociatedPosition": 244.7,
+			"FWHM": 1.87171,
+			"area": 186472
+		},
+		{
+			"position": 626.955,
+			"AssociatedPosition": 778.9,
+			"FWHM": 2.15432,
+			"area": 160393
+		},
+		{
+			"position": 776.2,
+			"AssociatedPosition": 964.06,
+			"FWHM": 2.21314,
+			"area": 157982
+		},
+		{
+			"position": 1134.43,
+			"AssociatedPosition": 0,
+			"FWHM": 2.60852,
+			"area": 181479
+		},
+		{
+			"position": 895.558,
+			"AssociatedPosition": 0,
+			"FWHM": 2.44266,
+			"area": 138652
+		},
+		{
+			"position": 874.488,
+			"AssociatedPosition": 1085.87,
+			"FWHM": 2.74364,
+			"area": 92178.9
+		},
+		{
+			"position": 356.824,
+			"AssociatedPosition": 443.96,
+			"FWHM": 1.94091,
+			"area": 53241.5
+		},
+		{
+			"position": 698.282,
+			"AssociatedPosition": 867.38,
+			"FWHM": 2.1368,
+			"area": 44695.1
 		}
 	]
 }

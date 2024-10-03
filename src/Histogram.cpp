@@ -114,7 +114,6 @@ void Histogram::findPeaks()
         result = detectAndFitPeaks();
         if (result == -1)
         {
-            std::cout << "BREAKKKKKKKKK" << std::endl;
             break;
         }
         count++;
@@ -292,8 +291,6 @@ void Histogram::calibratePeaks(const double knownEnergies[], int size)
 
     for (double m = 1.0; m <= 5.0; m += 0.0001)
     {
-        for (double b = 0.0; b <= 0.0; b += 0.1)
-        {
             std::vector<double> associatedValues(peaks.size(), 0.0); // Inițializează vectorul cu dimensiunea potrivită
             int correlations = 0;
             int peakCount = 0;
@@ -324,9 +321,7 @@ void Histogram::calibratePeaks(const double knownEnergies[], int size)
                 }
 
                 this->m = m;
-                this->b = b;
             }
-        }
     }
 
     peakMatchCount = bestCorrelation;
@@ -380,39 +375,47 @@ int Histogram::getTheDegreeOfPolynomial() const
         std::cerr << "No peaks available for fitting!" << std::endl;
         return -1;
     }
+    else if (numberOfPeaks < 3)
+    {
+        //std::cerr << "Too few peaks (" << numberOfPeaks << ") for polynomial fitting!" << std::endl;
+        return numberOfPeaks - 1; // Polinom de grad redus pentru puține puncte
+    }
+
+    // Inițializează datele pentru ajustare
     std::vector<double> xValues;
     std::vector<double> yValues;
 
     for (int i = 0; i < numberOfPeaks; i++)
     {
-        // std::cout << "Peak number: " << i << std::endl;
         double peakPosition = peaks[i].getPosition();
         double peakAmplitude = peaks[i].getAmplitude();
         xValues.push_back(peakPosition);
         yValues.push_back(peakAmplitude);
-        // std::cout << "Peak position: " << peakPosition << ", amplitude: " << peakAmplitude << std::endl;
     }
+    
     TGraph graph(xValues.size(), xValues.data(), yValues.data());
 
     int bestDegree = 0;
     double bestR2 = -1 * pow(10, 10);
     double lowestChi2 = 1e10;
 
-    for (int degree = 1; degree <= 5; ++degree)
+    // Testează diferite grade ale polinomului
+    for (int degree = 1; degree <= std::min(5, numberOfPeaks - 1); ++degree)
     {
         TF1 fitFunction("fitFunction", ("pol" + std::to_string(degree)).c_str(), xValues.front(), xValues.back());
 
-        graph.Fit(&fitFunction, "Q");
+        // Încearcă ajustarea și verifică succesul
+        int fitStatus = graph.Fit(&fitFunction, "Q");
+        if (fitStatus != 0)
+        {
+            std::cerr << "Fit failed for degree: " << degree << std::endl;
+            continue;
+        }
 
         double chi2 = fitFunction.GetChisquare();
         int ndf = fitFunction.GetNDF();
         double r2 = 1 - (chi2 / (ndf > 0 ? ndf : 1));
 
-        // std::cout << "Degree: " << degree << ", R^2: " << r2 << ", Chi2: " << chi2 << std::endl;
-
-        // std::cout<<"R2: "<<r2<<" BestR2: "<<bestR2<<std::endl;
-        // std::cout << (r2 > bestR2) << std::endl;
-        // std::cout<<"//////"<<std::endl;
         if (r2 > bestR2)
         {
             bestR2 = r2;
@@ -421,10 +424,9 @@ int Histogram::getTheDegreeOfPolynomial() const
         }
     }
 
-    // std::cout << "Best polynomial degree: " << bestDegree << " with R^2: " << bestR2 << ", Chi2: " << lowestChi2 << std::endl;
-
     return bestDegree;
 }
+
 
 void Histogram::initializeCalibratedHist()
 {

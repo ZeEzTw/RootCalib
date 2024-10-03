@@ -28,6 +28,7 @@ public:
     void chooseSources(int argc, char *argv[]);
     void chooseSources(int startPosition, int argc, char *argv[]);
     int getNumberOfPeaks() const;
+    int getNumberOfPeaks(int position) const;
     double *createSourceArray(int &size);
     void parseJsonFile(const std::string &filename);
     const std::vector<std::string>& getRequestedSources() const { return requestedSources; }

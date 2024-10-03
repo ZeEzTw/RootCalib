@@ -42,4 +42,5 @@ public:
     float getMaxAmplitude() const { return MaxAmplitude; }
     sortEnergy getEnergyProcessor() { return energyProcessor; }
     std::string getSavePath() const { return savePath; }
+    void setNumberOfPeaks(int peaks);
 };

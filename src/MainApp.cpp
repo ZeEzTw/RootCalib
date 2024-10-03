@@ -77,7 +77,6 @@ void convertHistogramsToTH2(const std::vector<Histogram> &histograms, TH2F *inpu
     inputTH2->Reset();
 
     int number_of_histograms = histograms.size();
-
     for (int i = 0; i < number_of_histograms; ++i)
     {
         TH1D *hist1D = histograms[i].getCalibratedHist();
@@ -117,7 +116,6 @@ void processHistogram(ArgumentsManager &arguments, TH1D *hist1D, double *energyA
         histograms.emplace_back();
         return;
     }
-
     Histogram hist(arguments.getXmin(), arguments.getXmax(), arguments.getFWHMmax(), arguments.getMinAmplitude(), arguments.getMaxAmplitude(), arguments.getNumberOfPeaks(), hist1D, arguments.getHistogramName(), arguments.getSourcesName());
     hist.findPeaks();
     hist.calibratePeaks(energyArray, size);
@@ -143,7 +141,6 @@ void process2DHistogram(ArgumentsManager &arguments, TH2F *h2, double *energyArr
         std::cerr << "4" << std::endl;
         return;
     }
-
     std::vector<Histogram> histograms;
     int number_of_columns = h2->GetNbinsX();
     TH2F *coppiedTh2 = (TH2F *)h2->Clone("coppiedTh2");
@@ -192,6 +189,7 @@ void processHistogramsTask(ArgumentsManager &arguments)
         {
             sortEnergy energyProcessor = arguments.getEnergyProcessor();
             energyArray = ui.askAboutSource(energyProcessor, size);
+            arguments.setNumberOfPeaks(size);
             if (!energyArray)
             {
                 std::cerr << "Error: Failed to retrieve energy array from UserInterface." << std::endl;

@@ -12,13 +12,15 @@ void UserInterface::askAboutPeaks(std::vector<Histogram> &histograms, std::ofstr
         for (int i = 0; i < histograms.size(); i++)
         {
             const char *histName = histograms[i].returnNameOfHistogram();
-            if (histName && std::strlen(histName) > 0)
+            auto mainHist = histograms[i].getMainHist();
+            if (histName && std::strlen(histName) > 0 && mainHist && mainHist->GetMean() > 5)
             {
                 std::cout << i << ". " << histName << std::endl;
             }
             else
             {
-                std::cout << i << ". Invalid histogram" << std::endl;
+                continue;
+                //std::cout << i << ". Invalid histogram" << std::endl;
             }
         }
 
@@ -98,48 +100,64 @@ double *UserInterface::askAboutSource(sortEnergy &energys, int &size)
 
     bool addMoreSources = true;
     int totalSize = 0;
+    
     while (addMoreSources)
     {
-        // Afișăm sursele disponibile
+        // Display available sources
         std::cout << "Available sources:" << std::endl;
         energys.printSources();
 
-        // Întrebăm utilizatorul despre sursa dorită
+        // Ask user for the desired source
         std::cout << "Which source do you want? (Enter the source number)" << std::endl;
         int sourceNumber;
         std::cin >> sourceNumber;
 
-        if (sourceNumber < 0 || sourceNumber >= energys.getSize())
+        // Validate source number
+        if (std::cin.fail() || sourceNumber < 0 || sourceNumber >= energys.getSize())
         {
+            std::cin.clear(); // clear input stream
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
             std::cerr << "Invalid source number!" << std::endl;
             continue; 
         }
 
         double *energyArray = energys.getEnergyArray(sourceNumber);
-        int arraySize = energys.getEnergyArraySize(sourceNumber); 
+        int arraySize = energys.getNumberOfPeaks(sourceNumber);
+        std::cout << "Array size: " << arraySize << std::endl;
 
         if (energyArray != nullptr)
         {
             selectedEnergyArrays.push_back(energyArray);
             arraySizes.push_back(arraySize);
             totalSize += arraySize;
+            std::cout << "Total size so far: " << totalSize << std::endl;
         }
 
+        // Ask if more sources are to be added
         std::cout << "Do you want to add more sources? (Y/N)" << std::endl;
         char answer;
         std::cin >> answer;
         addMoreSources = (answer == 'Y' || answer == 'y');
     }
 
-    double *combinedEnergyArray = new double[totalSize];
+    // Combine all selected energy arrays into one
+    if (totalSize == 0) // Handle the case where no sources are selected
+    {
+        std::cerr << "No sources selected!" << std::endl;
+        size = 0;
+        return nullptr;
+    }
 
+    double *combinedEnergyArray = new double[totalSize];
     int index = 0;
     for (size_t i = 0; i < selectedEnergyArrays.size(); ++i)
     {
         int arraySize = arraySizes[i];
         std::copy(selectedEnergyArrays[i], selectedEnergyArrays[i] + arraySize, combinedEnergyArray + index);
-        index += arraySize; 
+        index += arraySize;
     }
-    size = totalSize; 
+
+    size = totalSize; // Set the total size for the caller
     return combinedEnergyArray;
 }
+
