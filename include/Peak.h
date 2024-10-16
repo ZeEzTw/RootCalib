@@ -14,6 +14,7 @@ private:
     double amplitude;
     double sigma;
     double area;
+    double areaError;
     float leftLimit, rightLimit;
 
 public:
@@ -51,6 +52,8 @@ public:
     void setArea(double a);
     double getArea() const;
 
+    double getAreaError() const;
+
     void setLeftLimit(float left);
     float getLeftLimit() const;
 
@@ -63,7 +66,8 @@ public:
     double getFWHM() const;
     double getMean() const;
     void areaPeak(TH1D *hist);
-    float calculateResolution() const;
+    double calculateResolutionError() const;
+    double calculateResolution() const;
     void findStartOfPeak(TH1D *hist, int maxBin, double &leftLimitPosition, double &rightLimitPosition);
 };
 

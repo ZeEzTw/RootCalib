@@ -93,11 +93,10 @@ void UserInterface::showCalibrationInfo(const Histogram &histogram)
 }
 */
 
-double *UserInterface::askAboutSource(sortEnergy &energys, int &size)
+double *UserInterface::askAboutSource(sortEnergy &energys, int &size, std::string &sourceName, int &numberOfPeaks)
 {
     std::vector<double *> selectedEnergyArrays;
     std::vector<int> arraySizes; 
-
     bool addMoreSources = true;
     int totalSize = 0;
     
@@ -122,7 +121,10 @@ double *UserInterface::askAboutSource(sortEnergy &energys, int &size)
         }
 
         double *energyArray = energys.getEnergyArray(sourceNumber);
-        int arraySize = energys.getNumberOfPeaks(sourceNumber);
+        int arraySize = energys.getEnergyArraySize(sourceNumber);
+        numberOfPeaks += energys.getNumberOfPeaks(sourceNumber);
+        sourceName += energys.getSourceName(sourceNumber);
+        std::cout<<"Source name: "<<energys.getSourceName(sourceNumber)<<std::endl;
         std::cout << "Array size: " << arraySize << std::endl;
 
         if (energyArray != nullptr)

@@ -18,17 +18,46 @@ private:
     float MinAmplitude = 0.0f;
     float MaxAmplitude = 1000000000.0f;
     std::string savePath = "output/";
+    int detTypeStandard = 2;
+    std::string serialStandard = "CL";
     bool userInterfaceStatus = true; // Implicită pornirea UI-ului
     std::vector<std::string> userdSources;
     sortEnergy energyProcessor; // Changed to an object instead of a reference
+    std::string sourceName;
+    std::string inputJsonFile;
+    int xMinDomain = -1;
+    int xMaxDomain = -1;
+    std::vector<int> domain;
+    std::vector<int> detType;
+    std::vector<std::string> serial;
+    std::vector<int> ampl;
+    std::vector<int> fwhm;
+    float polynomialFitThreshold = 1e-5;
+
+    struct fitLimits
+    {
+        int Xmin;
+        int Xmax;
+    };
+    std::vector<fitLimits> limits;
+
+    struct PTLimits
+    {
+        int MinAmplitude;
+        int MaxAmplitude;
+    };
+    std::vector<PTLimits> ptLimits;
 
 public:
     ArgumentsManager(int argc, char *argv[]);
-
+    bool isDomainLimitsSet();
+    int GetNumberColomSpecified(int histogramNumber);
+    bool checkIfRunIsValid();
     void parseArguments(int argc, char *argv[]);
-    std::string getSourcesName(); // Metodă care returnează numele surselor
+    void getSourcesNameRun(); // Metodă care returnează numele surselor
+    std::string getSourcesName() const { return sourceName; }
+    void setSourceName(std::string &sourceName) { this->sourceName = sourceName; }
     bool isUserInterfaceEnabled() const { return userInterfaceStatus; }
-
     void printAllArguments();
     // Getters
     int getNumberOfPeaks() const { return number_of_peaks; }
@@ -40,7 +69,21 @@ public:
     float getFWHMmax() const { return FWHMmax; }
     float getMinAmplitude() const { return MinAmplitude; }
     float getMaxAmplitude() const { return MaxAmplitude; }
+    int getDetTypeStandard() const { return detTypeStandard; };
+    std::string getSerialStandard() const { return serialStandard; };
+    void printArgumentsInput();
     sortEnergy getEnergyProcessor() { return energyProcessor; }
     std::string getSavePath() const { return savePath; }
     void setNumberOfPeaks(int peaks);
+    void parseJsonFile();
+    int getXmaxDomain();
+    int getXminDomain();
+    int getXminFile(int position);
+    int getXmaxFile(int position);
+    int getFWHMmaxFile(int position);
+    float getMaxAmplitudeFile(int position) const;
+    std::string getSerialFile(int position) const;
+    int getDetTypeFile(int position) const;
+    std::string getHistogramNameFile(int position);
+    float getPolynomialFitThreshold() const { return polynomialFitThreshold; }
 };

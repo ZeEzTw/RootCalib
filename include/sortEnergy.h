@@ -9,7 +9,7 @@ class sortEnergy
     std::vector<std::vector<double>> energyMatrix;      // Matrice de energie
     std::vector<std::vector<double>> probabilityMatrix; // Matrice de probabilitate
     std::vector<std::string> sources;                   // Numele surselor
-    std::vector<int> numberOfPeaks;                     // Numărul de vârfuri
+    std::vector<int> numberOfPeaks;                     // Numărul de vâr`furi
     std::vector<std::string> requestedSources;          // Numele surselor cerute
 
 public:
@@ -32,6 +32,7 @@ public:
     double *createSourceArray(int &size);
     void parseJsonFile(const std::string &filename);
     const std::vector<std::string>& getRequestedSources() const { return requestedSources; }
+    const std::string &getSourceName(int index) const { return sources[index]; }
 
 private:
     // void parseJsonFile(const std::string &filename);

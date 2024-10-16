@@ -43,10 +43,7 @@ void openFiles(const char *inputFilePath, TFile *&inputFile, TFile *&outputFileH
             ch = '_';
         }
     }
-    // Construim calea completă pentru fișierul JSON
     std::string jsonFilePath = saveDirectory + fileName + ".json";
-    //std::cout << "JSON file path: " << jsonFilePath << std::endl;
-
     jsonFile.open((jsonFilePath).c_str());
 }
 
@@ -116,7 +113,39 @@ void processHistogram(ArgumentsManager &arguments, TH1D *hist1D, double *energyA
         histograms.emplace_back();
         return;
     }
-    Histogram hist(arguments.getXmin(), arguments.getXmax(), arguments.getFWHMmax(), arguments.getMinAmplitude(), arguments.getMaxAmplitude(), arguments.getNumberOfPeaks(), hist1D, arguments.getHistogramName(), arguments.getSourcesName());
+    Histogram hist;
+    int numberOfHistogram = arguments.GetNumberColomSpecified(histograms.size());
+    if (arguments.checkIfRunIsValid() && numberOfHistogram != -1)
+    {
+        std::cout << "Histogram number: " << numberOfHistogram << std::endl;
+        hist = Histogram(arguments.getXminFile(numberOfHistogram),
+                         arguments.getXmaxFile(numberOfHistogram),
+                         arguments.getFWHMmaxFile(numberOfHistogram),
+                         arguments.getMinAmplitude(), // Folosește metoda corectă
+                         arguments.getMaxAmplitudeFile(numberOfHistogram),
+                         arguments.getSerialFile(numberOfHistogram),
+                         arguments.getDetTypeFile(numberOfHistogram),
+                         arguments.getPolynomialFitThreshold(),
+                         arguments.getNumberOfPeaks(),
+                         hist1D,
+                         arguments.getHistogramNameFile(numberOfHistogram),
+                         arguments.getSourcesName());
+    }
+    else
+    {
+        hist = Histogram(arguments.getXmin(),
+                         arguments.getXmax(),
+                         arguments.getFWHMmax(),
+                         arguments.getMinAmplitude(),
+                         arguments.getMaxAmplitude(),
+                         arguments.getSerialStandard(),
+                         arguments.getDetTypeStandard(),
+                         arguments.getPolynomialFitThreshold(),
+                         arguments.getNumberOfPeaks(),
+                         hist1D,
+                         arguments.getHistogramName(),
+                         arguments.getSourcesName());
+    }
     hist.findPeaks();
     hist.calibratePeaks(energyArray, size);
     hist.applyXCalibration();
@@ -142,9 +171,20 @@ void process2DHistogram(ArgumentsManager &arguments, TH2F *h2, double *energyArr
         return;
     }
     std::vector<Histogram> histograms;
+    int start_column = 0;
     int number_of_columns = h2->GetNbinsX();
     TH2F *coppiedTh2 = (TH2F *)h2->Clone("coppiedTh2");
-    for (int column = 0; column <= number_of_columns; ++column)
+    if (arguments.isDomainLimitsSet())
+    {
+        //std::cout << "Domain limits set" << std::endl;
+        number_of_columns = arguments.getXmaxDomain();
+        start_column = arguments.getXminDomain();
+    }
+    else
+    {
+        //std::cout << "Domain limits not set" << std::endl;//cod de eroare daca e
+    }
+    for (int column = start_column; column <= number_of_columns; ++column)
     {
         TH1D *hist1D = h2->ProjectionY(Form("hist1D_col%d", column), column, column);
         if (hist1D)
@@ -188,8 +228,11 @@ void processHistogramsTask(ArgumentsManager &arguments)
         if (arguments.isUserInterfaceEnabled())
         {
             sortEnergy energyProcessor = arguments.getEnergyProcessor();
-            energyArray = ui.askAboutSource(energyProcessor, size);
-            arguments.setNumberOfPeaks(size);
+            std::string sourcesName;
+            int numberOfPeaks = 0;
+            energyArray = ui.askAboutSource(energyProcessor, size, sourcesName, numberOfPeaks);
+            arguments.setNumberOfPeaks(numberOfPeaks);
+            arguments.setSourceName(sourcesName);
             if (!energyArray)
             {
                 std::cerr << "Error: Failed to retrieve energy array from UserInterface." << std::endl;
@@ -199,6 +242,7 @@ void processHistogramsTask(ArgumentsManager &arguments)
         else
         {
             energyArray = arguments.getEnergyProcessor().createSourceArray(size);
+            arguments.getSourcesNameRun();
             if (!energyArray)
             {
                 std::cerr << "2" << std::endl;
@@ -242,6 +286,8 @@ int main(int argc, char *argv[])
     // argumentsManager.printAllArguments();
     // if (argc > 12)
     //{
+    argumentsManager.parseJsonFile();
+    argumentsManager.printArgumentsInput();
     processHistogramsTask(argumentsManager);
     //}
     // else

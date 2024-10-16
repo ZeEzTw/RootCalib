@@ -7,7 +7,7 @@
 using namespace std;
 
 Peak::Peak(TF1 *gausPeak, TH1D *hist)
-    : position(0), associatedPosition(0), gaus(nullptr), amplitude(0), sigma(0), area(0), leftLimit(0), rightLimit(0)
+    : position(0), associatedPosition(0), gaus(nullptr), amplitude(0), sigma(0), area(0), areaError(0), leftLimit(0), rightLimit(0)
 {
     if (gausPeak)
     {
@@ -25,8 +25,8 @@ Peak::Peak(TF1 *gausPeak, TH1D *hist)
 }
 
 Peak::Peak(const Peak &other)
-    : position(other.position), associatedPosition(other.associatedPosition), amplitude(other.amplitude), sigma(other.sigma), area(other.area),
-      leftLimit(other.leftLimit), rightLimit(other.rightLimit)
+    : position(other.position), associatedPosition(other.associatedPosition), amplitude(other.amplitude), sigma(other.sigma),
+      area(other.area), areaError(other.areaError), leftLimit(other.leftLimit), rightLimit(other.rightLimit)
 {
     gaus = other.gaus ? new TF1(*other.gaus) : nullptr;
 }
@@ -40,6 +40,7 @@ Peak &Peak::operator=(const Peak &other)
         associatedPosition = other.associatedPosition;
         sigma = other.sigma;
         area = other.area;
+        areaError = other.areaError;
         leftLimit = other.leftLimit;
         rightLimit = other.rightLimit;
 
@@ -51,7 +52,7 @@ Peak &Peak::operator=(const Peak &other)
 
 Peak::Peak(Peak &&other) noexcept
     : position(other.position), associatedPosition(other.associatedPosition), gaus(other.gaus), amplitude(other.amplitude), sigma(other.sigma),
-      area(other.area), leftLimit(other.leftLimit), rightLimit(other.rightLimit)
+      area(other.area), areaError(other.areaError), leftLimit(other.leftLimit), rightLimit(other.rightLimit)
 {
     other.gaus = nullptr;
 }
@@ -65,6 +66,7 @@ Peak &Peak::operator=(Peak &&other) noexcept
         amplitude = other.amplitude;
         sigma = other.sigma;
         area = other.area;
+        areaError = other.areaError;
         leftLimit = other.leftLimit;
         rightLimit = other.rightLimit;
 
@@ -143,6 +145,12 @@ double Peak::getArea() const
 {
     return area;
 }
+
+double Peak::getAreaError() const
+{
+    return areaError;
+}
+
 void Peak::setLeftLimit(float left)
 {
     leftLimit = left;
@@ -177,6 +185,7 @@ float Peak::getRightLimit() const
 
     area = peakArea;
 }*/
+
 void Peak::areaPeak(TH1D *hist)
 {
     int leftBin = hist->FindBin(leftLimit);
@@ -185,30 +194,71 @@ void Peak::areaPeak(TH1D *hist)
     double leftHeight = hist->GetBinContent(leftBin);
     double rightHeight = hist->GetBinContent(rightBin);
 
+    double errorLeft = hist->GetBinError(leftBin);
+    double errorRight = hist->GetBinError(rightBin);
+
     double peakArea = 0.0;
+    double peakAreaErrorSq = 0.0;
+
     double backgroundArea = 0.0;
+    double backgroundAreaErrorSq = 0.0;
 
     for (int bin = leftBin; bin <= rightBin; ++bin)
     {
         double binCenter = hist->GetBinCenter(bin);
         double binWidth = hist->GetBinWidth(bin);
         double binContent = hist->GetBinContent(bin);
+        double binError = hist->GetBinError(bin);
 
-        double background = leftHeight + (rightHeight - leftHeight) *
-                                             (binCenter - leftLimit) / (rightLimit - leftLimit);
+        double fraction = (binCenter - leftLimit) / (rightLimit - leftLimit);
+        double background = leftHeight + (rightHeight - leftHeight) * fraction;
+
+        if (binContent <= 0 || binError < 0)
+        {
+            std::cerr << "Invalid bin content or bin error at bin " << bin << std::endl;
+            continue;
+        }
+
+        double backgroundError = std::sqrt(std::pow(errorLeft, 2) + std::pow(errorRight, 2)) * fraction;
 
         peakArea += (binContent * binWidth);
+        peakAreaErrorSq += std::pow(binError * binWidth, 2);
 
         backgroundArea += (background * binWidth);
+        backgroundAreaErrorSq += std::pow(backgroundError * binWidth, 2);
     }
 
     area = peakArea - backgroundArea;
+
+    double totalErrorSq = abs(peakAreaErrorSq + backgroundAreaErrorSq);
+    areaError = std::sqrt(totalErrorSq);
 }
 
-float Peak::calculateResolution() const
+double Peak::calculateResolutionError() const
 {
-    float FWHM = 2.3548 * sigma;
-    float resolution = FWHM / amplitude;
+    // Obținem erorile pentru amplitudine și sigma
+    double amplitudeError = gaus->GetParError(0); // Eroarea parametrului de amplitudine
+    double sigmaError = gaus->GetParError(2);     // Eroarea parametrului de sigma
+
+    // Calculăm FWHM
+    double FWHM = 2.3548 * sigma;
+
+    // Calculăm derivatele pentru rezoluție
+    double dR_dA = -FWHM / (amplitude * amplitude); // Derivata rezoluției în raport cu amplitudinea
+    double dR_dSigma = 2.3548 / amplitude;          // Derivata rezoluției în raport cu sigma
+
+    // Calculăm eroarea rezoluției folosind propagarea erorilor
+    double resolutionError = std::sqrt(std::pow(dR_dA * amplitudeError, 2) +
+                                       std::pow(dR_dSigma * sigmaError, 2));
+
+    // Returnăm eroarea rezoluției
+    return resolutionError;
+}
+
+double Peak::calculateResolution() const
+{
+    double FWHM = 2.3548 * sigma;
+    double resolution = FWHM / amplitude;
     return resolution;
 }
 
