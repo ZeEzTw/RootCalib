@@ -32,7 +32,7 @@ private:
     std::vector<std::string> serial;
     std::vector<int> ampl;
     std::vector<int> fwhm;
-    float polynomialFitThreshold = 1e-5;
+    float polynomialFitThreshold = 1e-10;
 
     struct fitLimits
     {

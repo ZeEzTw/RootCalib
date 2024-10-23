@@ -1,6 +1,6 @@
 #include "../include/Histogram.h"
 
-// Variabile globale
+// global limits for the peaks
 float MaxDistance = 10;
 float MinDistance = 1.9f;
 long int iterations = 0;
@@ -108,6 +108,7 @@ Histogram &Histogram::operator=(const Histogram &histogram)
     return *this;
 }
 
+// peak detection section
 void Histogram::findPeaks()
 {
     int result = 0;
@@ -207,6 +208,7 @@ int Histogram::findMaxBin()
     return maxBin;
 }
 
+// Calibration section
 int Histogram::detectAndFitPeaks()
 {
     int maxBin = findMaxBin();
@@ -221,9 +223,9 @@ int Histogram::detectAndFitPeaks()
 
     if (peaks.back().getArea() < 0 || (peaks.back().getPosition() == peaks[peaks.size() - 2].getPosition()) || peaks.back().getPosition() < 0)
     {
-        /*09.29.24 This check take care of the cases when the fit is so bad, that the eliminationPeak() fail, tha real peak is at 12 and the gaus say that is at 150
+        /*09.29.24 This check take care of the cases when the fit is so bad, that the eliminationPeak() fail, the real peak is at 12 and the gaus say that is at 150
         the elimination function eliminate the position 150, but the peak is at 12, so the peak is not eliminated, will repeat
-        And the are is negative when again the fit is so bad that the peak is not a peak, is a valley, so the area is negative
+        And the area is negative when again the fit is so bad that the peak is not a peak, is a valley, so the area is negative
         */
         peaks.pop_back();
         delete gaus;
@@ -365,6 +367,59 @@ double Histogram::refineCalibrationB()
     return totalError / peaksRemained;
 }
 
+// getting polynomial degree + values
+void Histogram::calibratePeaksByDegree()
+{
+    degree = 1;
+
+    std::vector<double> positions;
+    std::vector<double> energies;
+
+    for (const auto &peak : peaks)
+    {
+        if (peak.getAssociatedPosition() > 0)
+        {
+            positions.push_back(peak.getPosition());
+            energies.push_back(peak.getAssociatedPosition());
+        }
+    }
+
+    int n = positions.size();
+
+    for (int currentDegree = 1; currentDegree < 3; ++currentDegree)
+    {
+        Eigen::MatrixXd X(n, currentDegree + 1);
+        Eigen::VectorXd Y(n);
+
+        for (int i = 0; i < n; ++i)
+        {
+            for (int j = 0; j <= currentDegree; ++j)
+            {
+                X(i, j) = std::pow(positions[i], j);
+            }
+            Y(i) = energies[i];
+        }
+
+        Eigen::VectorXd coeffs = X.colPivHouseholderQr().solve(Y);
+        std::cout << "Polynomial degree: " << currentDegree << std::endl;
+        std::cout << "Coefficients: " << coeffs[currentDegree] << std::endl;
+        std::cout << "Threshold: " << polynomialFitThreshold << std::endl;
+        if (std::abs(coeffs[currentDegree]) < polynomialFitThreshold && currentDegree > 1)
+        {
+            break;
+        }
+
+        degree = currentDegree;
+        coefficients.clear();
+        for (int i = 0; i <= currentDegree; ++i)
+        {
+            coefficients.push_back(coeffs(i));
+        }
+    }
+
+    std::cout << "Final polynomial degree: " << degree << std::endl;
+}
+
 void Histogram::getTheDegreeOfPolynomial()
 {
     if (numberOfPeaks == 0)
@@ -416,7 +471,7 @@ void Histogram::getTheDegreeOfPolynomial()
 
     const double epsilon = 1e-20;
 
-    for (int degree = 1; degree <= std::min(2, numberOfPeaks - 1); ++degree)
+    for (int degree = 1; degree <= std::min(3, numberOfPeaks - 1); ++degree)
     {
         TF1 *fitFunction = new TF1(("fitFunction_" + getMainHistName() + "_deg" + std::to_string(degree)).c_str(),
                                    ("pol" + std::to_string(degree)).c_str(), xValues.front(), xValues.back());
@@ -490,6 +545,7 @@ void Histogram::getTheDegreeOfPolynomial()
     }
 }
 
+// Apply calibration section
 void Histogram::initializeCalibratedHist()
 {
     if (mainHist == nullptr)
@@ -504,97 +560,131 @@ void Histogram::initializeCalibratedHist()
         calibratedHist = new TH1D("calibratedHist", "Calibrated Histogram", numBins, mainHist->GetXaxis()->GetXmin(), mainHist->GetXaxis()->GetXmax());
     }
 }
-double Histogram::getInterpolatedContent(int bin_original, double binCenter_original) const
+
+void Histogram::interpolateBins(int start_bin, int end_bin, double start_value, double end_value, double start_position, double end_position)
 {
-    double content_original = mainHist->GetBinContent(bin_original);
-    double content_residual = (bin_original < mainHist->GetNbinsX()) ? mainHist->GetBinContent(bin_original + 1) : content_original;
+    if (end_bin > start_bin)
+    {
+        double distance = end_position - start_position;
 
-    double binLowEdge_original = mainHist->GetXaxis()->GetBinLowEdge(bin_original);
-    double binWidth_original = mainHist->GetXaxis()->GetBinWidth(bin_original);
-    double fraction = (binCenter_original - binLowEdge_original) / binWidth_original;
+        for (int i = start_bin + 1; i < end_bin; ++i)
+        {
+            double fraction = (calibratedHist->GetXaxis()->GetBinCenter(i) - start_position) / distance;
 
-    return content_original + fraction * (content_residual - content_original);
+            double interpolated_content = start_value + fraction * (end_value - start_value);
+
+            calibratedHist->SetBinContent(i, interpolated_content);
+        }
+    }
+}
+
+void Histogram::setCalibratedBinContent(int original_bin)
+{
+    double binCenter_original = mainHist->GetXaxis()->GetBinCenter(original_bin);
+
+    double binCenter_calibrated = evaluateCalibrationPolynomial(binCenter_original);
+
+    double binContent = mainHist->GetBinContent(original_bin);
+
+    int corresponding_bin_calibrated = calibratedHist->GetXaxis()->FindBin(binCenter_calibrated);
+
+    if (corresponding_bin_calibrated < 1 || corresponding_bin_calibrated > calibratedHist->GetNbinsX())
+    {
+        calibratedHist->SetBinContent(corresponding_bin_calibrated, 0);
+    }
+    else
+    {
+        calibratedHist->SetBinContent(corresponding_bin_calibrated, binContent);
+    }
+}
+
+double Histogram::evaluateCalibrationPolynomial(double binCenter_original) const
+{
+    double binCenter_calibrated = 0;
+    double binCenter_power = 1;
+    for (size_t i = 0; i < coefficients.size(); ++i)
+    {
+        binCenter_calibrated += coefficients[i] * binCenter_power;
+        binCenter_power *= binCenter_original;
+    }
+
+    return binCenter_calibrated;
 }
 
 void Histogram::applyXCalibration()
 {
     initializeCalibratedHist();
-    int numBinsCalibrated = calibratedHist->GetNbinsX();
     int numBinsOriginal = mainHist->GetNbinsX();
 
-    for (int bin_calibrated = 1; bin_calibrated <= numBinsCalibrated; ++bin_calibrated)
+    for (int new_bin = 1; new_bin <= numBinsOriginal; ++new_bin)
     {
-        double binCenter_calibrated = calibratedHist->GetXaxis()->GetBinCenter(bin_calibrated);
-        double binCenter_original;
+        setCalibratedBinContent(new_bin);
 
-        if (degree == 1)
+        if (new_bin < numBinsOriginal)
         {
-            binCenter_original = (binCenter_calibrated - coefficients[0]) / coefficients[1];
+            double nextBinCenter_original = mainHist->GetXaxis()->GetBinCenter(new_bin + 1);
+            double nextBinCenter_calibrated = evaluateCalibrationPolynomial(nextBinCenter_original);
+            double nextBinContent = mainHist->GetBinContent(new_bin + 1);
+
+            double binCenter_original_calibrated = evaluateCalibrationPolynomial(mainHist->GetXaxis()->GetBinCenter(new_bin));
+            int current_bin_calibrated = calibratedHist->GetXaxis()->FindBin(binCenter_original_calibrated);
+            int next_bin_calibrated = calibratedHist->GetXaxis()->FindBin(nextBinCenter_calibrated);
+
+            interpolateBins(current_bin_calibrated, next_bin_calibrated,
+                            mainHist->GetBinContent(new_bin), nextBinContent,
+                            binCenter_original_calibrated, nextBinCenter_calibrated);
         }
-        else if (degree == 2)
-        {
-            double a = coefficients[2];
-            double b = coefficients[1];
-            double c = coefficients[0];
-
-            double discriminant = b * b - 4 * a * (c - binCenter_calibrated);
-
-            if (discriminant < 0)
-            {
-                std::cerr << "Error: Negative discriminant. No real solution for bin center calibration." << std::endl;
-                continue;
-            }
-            double sqrtDiscriminant = std::sqrt(discriminant);
-            double x1 = (-b + sqrtDiscriminant) / (2 * a);
-            double x2 = (-b - sqrtDiscriminant) / (2 * a);
-
-            binCenter_original = (x1 >= 0) ? x1 : x2;
-        }
-        else
-        {
-            std::cerr << "Error: Unsupported polynomial degree. Supported degrees are 1 or 2." << std::endl;
-            continue;
-        }
-
-        int bin_original = mainHist->GetXaxis()->FindBin(binCenter_original);
-
-        if (bin_original < 1 || bin_original >= numBinsOriginal)
-        {
-            continue;
-        }
-
-        double interpolated_content = getInterpolatedContent(bin_original, binCenter_original);
-        calibratedHist->SetBinContent(bin_calibrated, interpolated_content);
     }
 }
 
-void Histogram::changePeak(int peakNumber, double newPosition)
+// output section
+
+void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
 {
+    // jsonFile << "[\n";
+    jsonFile << "\t{\n";
+    jsonFile << "\t\t\"domain\": " << getMainHistName() << ",\n";
+    jsonFile << "\t\t\"serial\": \"" << serial << "\",\n";
+    jsonFile << "\t\t\"detType\": " << detType << ",\n";
+    jsonFile << "\t\t\"PT\": [";
+    jsonFile << getPT() << ", " << getPTError();
+    jsonFile << "],\n";
+
+    jsonFile << "\t\t\"pol_list\": [\n";
+    for (size_t i = 0; i < coefficients.size(); ++i)
     {
-        std::cerr << "Error: Invalid peak number." << std::endl;
-        return;
+        jsonFile << "\t\t\t" << coefficients[i];
+        if (i < coefficients.size() - 1)
+        {
+            jsonFile << ",";
+        }
+        jsonFile << "\n";
+    }
+    jsonFile << "\t\t],\n";
+
+    jsonFile << "\t\t\"" << sourceName << "\": {\n";
+
+    for (size_t i = 0; i < peaks.size(); ++i)
+    {
+        jsonFile << "\t\t\t\"" << peaks[i].getAssociatedPosition() << "\": {\n";
+        // jsonFile << "\t\t\t\t\"eff\": [" << peaks[i].getEfficiency() << ", " << peaks[i].getEffError() << "],\n";
+        jsonFile << "\t\t\t\t\"res\": [" << peaks[i].calculateResolution() << ", " << peaks[i].calculateResolutionError() << "],\n";
+        jsonFile << "\t\t\t\t\"pos_ch\": " << peaks[i].getPosition() << ",\n";
+        jsonFile << "\t\t\t\t\"area\": [" << peaks[i].getArea() << ", " << peaks[1].getAreaError() << "]\n";
+
+        if (i < peaks.size() - 1)
+        {
+            jsonFile << "\t\t\t},\n";
+        }
+        else
+        {
+            jsonFile << "\t\t\t\n";
+        }
     }
 
-    TF1 *gaus = createGaussianFit(newPosition);
-    if (gaus == nullptr)
-    {
-        std::cerr << "Error: Failed to create Gaussian fit." << std::endl;
-        return;
-    }
-
-    tempHist->Fit(gaus, "RQ");
-
-    eliminatePeak(peaks[peakNumber]);
-
-    peaks[peakNumber] = {gaus, mainHist};
-    std::cout << "Peak number: " << peakNumber << std::endl;
-    std::cout << "Peak position: " << peaks[peakNumber].getPosition() << std::endl;
-    if (!checkConditions(peaks[peakNumber]))
-    {
-        peaks.erase(peaks.begin() + peakNumber);
-        delete gaus;
-        return;
-    }
+    jsonFile << "\t\t}\n";
+    jsonFile << "\t},\n";
+    // jsonFile << "]\n";
 }
 
 void Histogram::printHistogramWithPeaksRoot(TFile *outputFile)
@@ -639,6 +729,11 @@ void Histogram::printCalibratedHistogramRoot(TFile *outputFile) const
     calibratedHist->Write();
 }
 
+
+
+
+
+//set/get functions section
 void Histogram::setTotalArea()
 {
     totalArea = 0;
@@ -690,54 +785,6 @@ float Histogram::getPTError()
                              std::pow(areaPeakError / areaPeak, 2) + std::pow(totalAreaError / totalArea, 2));
 
     return ptError;
-}
-
-void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
-{
-    // jsonFile << "[\n";
-    jsonFile << "\t{\n";
-    jsonFile << "\t\t\"domain\": " << getMainHistName() << ",\n";
-    jsonFile << "\t\t\"serial\": \"" << serial << "\",\n";
-    jsonFile << "\t\t\"detType\": " << detType << ",\n";
-    jsonFile << "\t\t\"PT\": [";
-    jsonFile << getPT() << ", " << getPTError();
-    jsonFile << "],\n";
-
-    jsonFile << "\t\t\"pol_list\": [\n";
-    for (size_t i = 0; i < coefficients.size(); ++i)
-    {
-        jsonFile << "\t\t\t" << coefficients[i];
-        if (i < coefficients.size() - 1)
-        {
-            jsonFile << ",";
-        }
-        jsonFile << "\n";
-    }
-    jsonFile << "\t\t],\n";
-
-    jsonFile << "\t\t\"" << sourceName << "\": {\n";
-
-    for (size_t i = 0; i < peaks.size(); ++i)
-    {
-        jsonFile << "\t\t\t\"" << peaks[i].getAssociatedPosition() << "\": {\n";
-        // jsonFile << "\t\t\t\t\"eff\": [" << peaks[i].getEfficiency() << ", " << peaks[i].getEffError() << "],\n";
-        jsonFile << "\t\t\t\t\"res\": [" << peaks[i].calculateResolution() << ", " << peaks[i].calculateResolutionError() << "],\n";
-        jsonFile << "\t\t\t\t\"pos_ch\": " << peaks[i].getPosition() << ",\n";
-        jsonFile << "\t\t\t\t\"area\": [" << peaks[i].getArea() << ", " << peaks[1].getAreaError() << "]\n";
-
-        if (i < peaks.size() - 1)
-        {
-            jsonFile << "\t\t\t},\n";
-        }
-        else
-        {
-            jsonFile << "\t\t\t\n";
-        }
-    }
-
-    jsonFile << "\t\t}\n";
-    jsonFile << "\t},\n";
-    // jsonFile << "]\n";
 }
 
 void Histogram::findStartOfPeak(Peak &peak)
@@ -804,6 +851,36 @@ std::string Histogram::getMainHistName() const
     }
 
     return mainHist->GetName();
+}
+
+// extra function section
+void Histogram::changePeak(int peakNumber, double newPosition)
+{
+    {
+        std::cerr << "Error: Invalid peak number." << std::endl;
+        return;
+    }
+
+    TF1 *gaus = createGaussianFit(newPosition);
+    if (gaus == nullptr)
+    {
+        std::cerr << "Error: Failed to create Gaussian fit." << std::endl;
+        return;
+    }
+
+    tempHist->Fit(gaus, "RQ");
+
+    eliminatePeak(peaks[peakNumber]);
+
+    peaks[peakNumber] = {gaus, mainHist};
+    std::cout << "Peak number: " << peakNumber << std::endl;
+    std::cout << "Peak position: " << peaks[peakNumber].getPosition() << std::endl;
+    if (!checkConditions(peaks[peakNumber]))
+    {
+        peaks.erase(peaks.begin() + peakNumber);
+        delete gaus;
+        return;
+    }
 }
 
 /*void Histogram::initializeCalibratedHist()
@@ -986,57 +1063,7 @@ void Histogram::applyXCalibration()
     calibratePeaksByDegree();
     polinomDegree = 1;
 }*/
-void Histogram::calibratePeaksByDegree()
-{
-    degree = 1;
 
-    std::vector<double> positions;
-    std::vector<double> energies;
-
-    for (const auto &peak : peaks)
-    {
-        if (peak.getAssociatedPosition() > 0)
-        {
-            positions.push_back(peak.getPosition());
-            energies.push_back(peak.getAssociatedPosition());
-        }
-    }
-
-    int n = positions.size();
-
-    for (int currentDegree = 1; currentDegree <= 2; ++currentDegree)
-    {
-        Eigen::MatrixXd X(n, currentDegree + 1);
-        Eigen::VectorXd Y(n);
-
-        for (int i = 0; i < n; ++i)
-        {
-            for (int j = 0; j <= currentDegree; ++j)
-            {
-                X(i, j) = std::pow(positions[i], j);
-            }
-            Y(i) = energies[i];
-        }
-
-        Eigen::VectorXd coeffs = X.colPivHouseholderQr().solve(Y);
-        std::cout << "Polynomial degree: " << currentDegree << std::endl;
-        std::cout << "Coefficients: " << coeffs[currentDegree] << std::endl;
-        std::cout << "Threshold: " << polynomialFitThreshold << std::endl;
-        if (std::abs(coeffs[currentDegree]) < polynomialFitThreshold && currentDegree > 1)
-        {
-            break;
-        }
-
-        degree = currentDegree;
-        coefficients.clear();
-        for (int i = 0; i <= currentDegree; ++i)
-        {
-            coefficients.push_back(coeffs(i));
-        }
-    }
-
-    std::cout << "Final polynomial degree: " << degree << std::endl;
-}
 /*std::cout << "Coeficienții polinomului sunt: ";
 for (int i = 0; i <= degree; ++i)
 {
@@ -1071,5 +1098,63 @@ for (auto &peak : peaks)
     }
 }
 
+}
+
+//applyXCalibration old version
+
+double newtonRaphson(const Eigen::VectorXd &coeffs, double initialGuess, int maxIter = 100, double tol = 1e-6)
+{
+    double x = initialGuess;
+
+    for (int iter = 0; iter < maxIter; ++iter)
+    {
+        // Evaluate the polynomial and its derivative
+        double fx = 0.0;
+        double fpx = 0.0;
+
+        int degree = coeffs.size() - 1;
+
+        for (int i = 0; i <= degree; ++i)
+        {
+            fx += coeffs[i] * std::pow(x, degree - i);
+            if (i < degree)
+            {
+                fpx += (degree - i) * coeffs[i] * std::pow(x, degree - i - 1);
+            }
+        }
+
+        // Check if the derivative is too small (to avoid division by zero)
+        if (std::abs(fpx) < tol)
+        {
+            std::cerr << "Derivative too small during Newton-Raphson iteration." << std::endl;
+            break;
+        }
+
+        // Newton-Raphson step
+        double x_new = x - fx / fpx;
+
+        // Check for convergence
+        if (std::abs(x_new - x) < tol)
+        {
+            return x_new;
+        }
+
+        x = x_new;
+    }
+
+    std::cerr << "Newton-Raphson method did not converge." << std::endl;
+    return x; // Return the last estimate
+}
+// Trebuie sa ma ocup aici nu este bine sigur ce fac
+double Histogram::getInterpolatedContent(int bin_original, double binCenter_original) const
+{
+    double content_original = mainHist->GetBinContent(bin_original);
+    double content_residual = (bin_original < mainHist->GetNbinsX()) ? mainHist->GetBinContent(bin_original + 1) : content_original;
+
+    double binLowEdge_original = mainHist->GetXaxis()->GetBinLowEdge(bin_original);
+    double binWidth_original = mainHist->GetXaxis()->GetBinWidth(bin_original);
+    double fraction = (binCenter_original - binLowEdge_original) / binWidth_original;
+
+    return content_original + fraction * (content_residual - content_original);
 }
 */

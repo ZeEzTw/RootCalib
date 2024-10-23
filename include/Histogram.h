@@ -13,6 +13,7 @@
 #include <TLatex.h>
 #include <string>
 #include <TGraph.h>
+#include <cmath>
 #include <eigen3/Eigen/Dense>
 class Histogram
 {
@@ -81,6 +82,12 @@ public:
     float getPTError(); 
     TH1D *getCalibratedHist() const;
     TH1D *getMainHist() const;
+
+    void interpolateBins(int start_bin, int end_bin, double start_value, double end_value, double start_position, double end_position);
+    void setCalibratedBinContent(int original_bin);
+    double evaluateCalibrationPolynomial(double binCenter_original) const;
+
+
 };
 
 #endif // HISTOGRAM_H
