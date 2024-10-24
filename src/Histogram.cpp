@@ -21,7 +21,7 @@ Histogram::Histogram()
     b = 0;
     polinomDegree = 0;
     peakMatchCount = 0;
-    polynomialFitThreshold = 1e-5;
+    polynomialFitThreshold = 1e-3;
     TH2histogram_name = "An empty histogram";
     sourceName = "Empty source";
     peakCount = 0;
@@ -130,7 +130,6 @@ void Histogram::eliminatePeak(const Peak &peak)
     int leftLimit = static_cast<int>(mean - 3 * sigma);
     int rightLimit = static_cast<int>(mean + 3 * sigma);
 
-    // Asigurăm că limitele sunt în interiorul histogramei
     if (leftLimit < 1)
         leftLimit = peak.getPosition() - 5;
     if (rightLimit < 1)
@@ -147,7 +146,6 @@ bool Histogram::checkConditions(const Peak &peak) const
 {
     double FWHM = peak.getFWHM();
     double peakPosition = peak.getPosition();
-
     bool condition1 = peakPosition <= xMax && peakPosition >= xMin;
     bool condition2 = FWHM <= maxFWHM;
     bool condition3 = peak.getAmplitude() > minAmplitude && peak.getAmplitude() < maxAmplitude;
@@ -290,14 +288,12 @@ void Histogram::calibratePeaks(const double knownEnergies[], int size)
     int bestCorrelation = 0;
     double valueAssociatedWith = 0.0;
 
-    // Iterație prin valori posibile pentru m și b
     for (double m = 0.01; m <= 5.0; m += 0.0001)
     {
         std::vector<double> associatedValues(peaks.size(), 0.0);
         int correlations = 0;
         int peakCount = 0;
 
-        // Iterează prin fiecare peak
         for (const auto &peak : peaks)
         {
             double predictedEnergy = m * peak.getPosition() + b;
@@ -324,7 +320,6 @@ void Histogram::calibratePeaks(const double knownEnergies[], int size)
         std::cout << "Peak " << peaks[i].getPosition() << " associated with " << peaks[i].getAssociatedPosition() << std::endl;
     }
     */
-    degree = 1;
     peakMatchCount = bestCorrelation;
     calibratePeaksByDegree(); // mai bun cu acesta
     // Continuă cu calibrarea
@@ -401,9 +396,6 @@ void Histogram::calibratePeaksByDegree()
         }
 
         Eigen::VectorXd coeffs = X.colPivHouseholderQr().solve(Y);
-        std::cout << "Polynomial degree: " << currentDegree << std::endl;
-        std::cout << "Coefficients: " << coeffs[currentDegree] << std::endl;
-        std::cout << "Threshold: " << polynomialFitThreshold << std::endl;
         if (std::abs(coeffs[currentDegree]) < polynomialFitThreshold && currentDegree > 1)
         {
             break;
@@ -416,8 +408,6 @@ void Histogram::calibratePeaksByDegree()
             coefficients.push_back(coeffs(i));
         }
     }
-
-    std::cout << "Final polynomial degree: " << degree << std::endl;
 }
 
 void Histogram::getTheDegreeOfPolynomial()
@@ -637,8 +627,8 @@ void Histogram::applyXCalibration()
     }
 }
 
-// output section
 
+// output section
 void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
 {
     // jsonFile << "[\n";
@@ -729,11 +719,7 @@ void Histogram::printCalibratedHistogramRoot(TFile *outputFile) const
     calibratedHist->Write();
 }
 
-
-
-
-
-//set/get functions section
+// set/get functions section
 void Histogram::setTotalArea()
 {
     totalArea = 0;
@@ -741,7 +727,6 @@ void Histogram::setTotalArea()
     {
         totalArea += mainHist->GetBinContent(bin) * mainHist->GetBinWidth(bin);
     }
-    std::cout << "Total area: " << totalArea << std::endl;
 }
 
 void Histogram::setTotalAreaError()
@@ -754,7 +739,6 @@ void Histogram::setTotalAreaError()
         totalAreaError += std::pow(binError * binWidth, 2);
     }
     totalAreaError = std::sqrt(totalAreaError);
-    std::cout << "Total area error: " << totalAreaError << std::endl;
 }
 
 float Histogram::getPT()
@@ -781,9 +765,7 @@ float Histogram::getPTError()
     }
     areaPeakError = std::sqrt(areaPeakError);
     float pt = totalArea > 0 ? areaPeak / totalArea : 0.0f;
-    float ptError = pt * std::sqrt(
-                             std::pow(areaPeakError / areaPeak, 2) + std::pow(totalAreaError / totalArea, 2));
-
+    float ptError = pt * std::sqrt(std::pow(areaPeakError / areaPeak, 2) + std::pow(totalAreaError / totalArea, 2));
     return ptError;
 }
 

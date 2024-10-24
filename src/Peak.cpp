@@ -215,7 +215,7 @@ void Peak::areaPeak(TH1D *hist)
 
         if (binContent <= 0 || binError < 0)
         {
-            std::cerr << "Invalid bin content or bin error at bin " << bin << std::endl;
+            //std::cerr << "Invalid bin content or bin error at bin " << bin << std::endl;
             continue;
         }
 

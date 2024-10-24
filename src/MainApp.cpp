@@ -7,7 +7,7 @@
 #include <TFile.h>
 #include <TH2F.h>
 #include <TH1D.h>
-#include <TError.h> // Include pentru gErrorIgnoreLevel
+#include <TError.h> 
 
 // Function to open ROOT files and JSON output file
 std::string removeFileExtension(const std::string &filePath)
@@ -34,7 +34,6 @@ void openFiles(const char *inputFilePath, TFile *&inputFile, TFile *&outputFileH
     outputFileTH2 = new TFile((saveDirectory + "combinedHistogram.root").c_str(), "RECREATE");
     std::string fileName = histogramFilePath;
 
-    // Înlăturăm extensia dacă există
     fileName = removeFileExtension(fileName);
     for (char &ch : fileName)
     {
@@ -92,16 +91,14 @@ void convertHistogramsToTH2(const std::vector<Histogram> &histograms, TH2F *inpu
         }
     }
 
-    // Write to the TH2F object
     inputTH2->Write();
 
-    // Write to the output file if it's valid
     if (outputFileTH2)
     {
-        outputFileTH2->cd();    // Change to the output file
-        inputTH2->Write();      // Write the histogram to the file
-        outputFileTH2->Close(); // Close the output file
-        delete outputFileTH2;   // Free the memory for the output file pointer
+        outputFileTH2->cd();    
+        inputTH2->Write();      
+        outputFileTH2->Close(); 
+        delete outputFileTH2;  
     }
 }
 
@@ -121,7 +118,7 @@ void processHistogram(ArgumentsManager &arguments, TH1D *hist1D, double *energyA
         hist = Histogram(arguments.getXminFile(numberOfHistogram),
                          arguments.getXmaxFile(numberOfHistogram),
                          arguments.getFWHMmaxFile(numberOfHistogram),
-                         arguments.getMinAmplitude(), // Folosește metoda corectă
+                         arguments.getMinAmplitude(),
                          arguments.getMaxAmplitudeFile(numberOfHistogram),
                          arguments.getSerialFile(numberOfHistogram),
                          arguments.getDetTypeFile(numberOfHistogram),
@@ -156,8 +153,8 @@ void processHistogram(ArgumentsManager &arguments, TH1D *hist1D, double *energyA
 
     if (arguments.isUserInterfaceEnabled())
     {
+        std::cout << "Histograms processed: " << histograms.size() - 1 << std::endl;
         ui.showCalibrationInfo(hist);
-        std::cout << "Histograms processed: " << histograms.size() << std::endl;
     }
 
     delete hist1D;
@@ -176,13 +173,13 @@ void process2DHistogram(ArgumentsManager &arguments, TH2F *h2, double *energyArr
     TH2F *coppiedTh2 = (TH2F *)h2->Clone("coppiedTh2");
     if (arguments.isDomainLimitsSet())
     {
-        //std::cout << "Domain limits set" << std::endl;
+        // std::cout << "Domain limits set" << std::endl;
         number_of_columns = arguments.getXmaxDomain();
         start_column = arguments.getXminDomain();
     }
     else
     {
-        //std::cout << "Domain limits not set" << std::endl;//cod de eroare daca e
+        // std::cout << "Domain limits not set" << std::endl;//cod de eroare daca e
     }
     for (int column = start_column; column <= number_of_columns; ++column)
     {

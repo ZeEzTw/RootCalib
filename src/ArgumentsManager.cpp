@@ -52,7 +52,7 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
         {
             // std::cout<<"Aici"<<std::endl;
             userInterfaceStatus = false;                      // Dacă se specifică sursele, UI-ul se oprește
-            energyProcessor.chooseSources(i + 1, argc, argv); // Transmit de la poziția i+1 până la final
+            energyProcessor.chooseSources(i + 1, argc, argv);
             number_of_peaks = energyProcessor.getNumberOfPeaks();
             // std::cout<<"start: "<<i<<std::endl;
             // std::cout<<"argc: "<<argc<<std::endl;
@@ -69,7 +69,7 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
             xMinDomain = std::stoi(argv[++i]);
             xMaxDomain = std::stoi(argv[++i]);
         }
-        else if(arg == "calib")
+        else if(arg == "-calib")
         {
             polynomialFitThreshold = std::stoi(argv[++i]);;
         }
@@ -144,17 +144,15 @@ void ArgumentsManager::parseJsonFile()
     std::ifstream file(inputJsonFile);
     if (!file.is_open())
     {
-        std::cerr << "Could not open file: " << inputJsonFile << std::endl;
+        //std::cerr << "Could not open file: " << inputJsonFile << std::endl;
         return;
     }
 
     std::string line;
     while (std::getline(file, line))
     {
-        // Îndepărtăm spațiile și caracterele inutile
         line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
 
-        // Parse 'domain'
         if (line.find("\"domain\"") != std::string::npos)
         {
             size_t colonPos = line.find(":");
@@ -164,7 +162,6 @@ void ArgumentsManager::parseJsonFile()
             }
         }
 
-        // Parse 'detType'
         if (line.find("\"detType\"") != std::string::npos)
         {
             size_t colonPos = line.find(":");
@@ -174,7 +171,6 @@ void ArgumentsManager::parseJsonFile()
             }
         }
 
-        // Parse 'serial'
         if (line.find("\"serial\"") != std::string::npos)
         {
             size_t colonPos = line.find(":");
@@ -186,7 +182,6 @@ void ArgumentsManager::parseJsonFile()
             }
         }
 
-        // Parse 'ampl'
         if (line.find("\"ampl\"") != std::string::npos)
         {
             size_t colonPos = line.find(":");
@@ -196,7 +191,6 @@ void ArgumentsManager::parseJsonFile()
             }
         }
 
-        // Parse 'fwhm'
         if (line.find("\"fwhm\"") != std::string::npos)
         {
             size_t colonPos = line.find(":");

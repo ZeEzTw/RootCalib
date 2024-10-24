@@ -103,7 +103,7 @@ void sortEnergy::readFromTxt(const std::string &filename)
     std::ifstream file(filename);
     if (!file.is_open())
     {
-        std::cerr << "Could not open file: " << filename << std::endl;
+        //std::cerr << "Could not open file: " << filename << std::endl;
         return;
     }
 
@@ -306,9 +306,7 @@ double *sortEnergy::createSourceArray(int &size)
 }
 std::string sortEnergy::cleanSourceName(const std::string &sourceName)
 {
-    // Regex pattern to match quotes and commas
     std::regex pattern("[\",]");
-    // Replace all matches of the pattern with an empty string
     return std::regex_replace(sourceName, pattern, "");
 }
 void sortEnergy::parseJsonFile(const std::string &filename)
@@ -316,7 +314,7 @@ void sortEnergy::parseJsonFile(const std::string &filename)
     std::ifstream file(filename);
     if (!file.is_open())
     {
-        std::cerr << "Could not open file: " << filename << std::endl;
+        //std::cerr << "Could not open file: " << filename << std::endl;
         return;
     }
 
@@ -326,10 +324,8 @@ void sortEnergy::parseJsonFile(const std::string &filename)
 
     while (std::getline(file, line))
     {
-        // Îndepărtăm spațiile și caracterele inutile
         line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
 
-        // Căutăm sursa
         if (line.find("name") != std::string::npos)
         {
             currentSource = line.substr(line.find(":") + 1);
@@ -337,20 +333,17 @@ void sortEnergy::parseJsonFile(const std::string &filename)
             sources.push_back(currentSource);
         }
 
-        // Căutăm numărul de vârfuri
         if (line.find("numberOfPeaks") != std::string::npos)
         {
             peakCount = std::stoi(line.substr(line.find(":") + 1));
             numberOfPeaks.push_back(peakCount);
         }
 
-        // Căutăm vârfurile
         if (line.find("peaks") != std::string::npos || line.find("Peaks") != std::string::npos)
         {
             std::vector<double> energies;
             std::vector<double> probabilities;
 
-            // Continuăm citirea până la finalul vârfurilor
             while (std::getline(file, line) && line.find("]") == std::string::npos)
             {
                 if (line.find("value") != std::string::npos || line.find("Energy_keV") != std::string::npos)
@@ -374,7 +367,6 @@ void sortEnergy::parseJsonFile(const std::string &filename)
                 }
             }
 
-            // Adăugăm energiile și probabilitățile în matrice
             energyMatrix.push_back(energies);
             probabilityMatrix.push_back(probabilities);
         }

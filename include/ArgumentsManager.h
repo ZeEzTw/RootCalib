@@ -2,27 +2,27 @@
 #include <map>
 #include <vector>
 #include <iostream>
-#include <cstring>                 // pentru strcmp
-#include "../include/sortEnergy.h" // Include sortEnergy header
+#include <cstring>              
+#include "../include/sortEnergy.h" 
 
 class ArgumentsManager
 {
 private:
-    int number_of_peaks = 1; // Default value
+    int number_of_peaks = 1;
     std::string histogramFilePath = "data/data.root";
     std::string TH2histogram_name = "mDelila_raw";
     std::string energyFilePath = "data/calibration_sources.json";
     float Xmin = 0.0f;
     float Xmax = 1000000.0f;
-    float FWHMmax = 1000.0f;
     float MinAmplitude = 0.0f;
     float MaxAmplitude = 1000000000.0f;
+    float FWHMmax = 1000.0f;
     std::string savePath = "output/";
     int detTypeStandard = 2;
     std::string serialStandard = "CL";
-    bool userInterfaceStatus = true; // Implicită pornirea UI-ului
+    bool userInterfaceStatus = true; 
     std::vector<std::string> userdSources;
-    sortEnergy energyProcessor; // Changed to an object instead of a reference
+    sortEnergy energyProcessor;
     std::string sourceName;
     std::string inputJsonFile;
     int xMinDomain = -1;
@@ -32,7 +32,7 @@ private:
     std::vector<std::string> serial;
     std::vector<int> ampl;
     std::vector<int> fwhm;
-    float polynomialFitThreshold = 1e-10;
+    float polynomialFitThreshold = 1e-3;
 
     struct fitLimits
     {
@@ -54,7 +54,7 @@ public:
     int GetNumberColomSpecified(int histogramNumber);
     bool checkIfRunIsValid();
     void parseArguments(int argc, char *argv[]);
-    void getSourcesNameRun(); // Metodă care returnează numele surselor
+    void getSourcesNameRun(); 
     std::string getSourcesName() const { return sourceName; }
     void setSourceName(std::string &sourceName) { this->sourceName = sourceName; }
     bool isUserInterfaceEnabled() const { return userInterfaceStatus; }
