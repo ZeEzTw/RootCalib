@@ -322,9 +322,10 @@ void Histogram::calibratePeaks(const double knownEnergies[], int size)
     */
     peakMatchCount = bestCorrelation;
     calibratePeaksByDegree(); // mai bun cu acesta
-    // Continuă cu calibrarea
     // getTheDegreeOfPolynomial();
-    // calibratePeaksByDegree();
+    //   Continuă cu calibrarea
+    //   getTheDegreeOfPolynomial();
+    //   calibratePeaksByDegree();
 }
 
 double Histogram::refineCalibrationM()
@@ -363,6 +364,10 @@ double Histogram::refineCalibrationB()
 }
 
 // getting polynomial degree + values
+#include <vector>
+#include <cmath>
+#include <iostream>
+
 void Histogram::calibratePeaksByDegree()
 {
     degree = 1;
@@ -380,72 +385,212 @@ void Histogram::calibratePeaksByDegree()
     }
 
     int n = positions.size();
-
-    for (int currentDegree = 1; currentDegree < 3; ++currentDegree)
+    if (n == 0)
     {
-        Eigen::MatrixXd X(n, currentDegree + 1);
-        Eigen::VectorXd Y(n);
+        std::cerr << "No valid peaks for calibration!" << std::endl;
+        return;
+    }
+
+    // Gradul maxim bazat pe numărul de puncte (n - 1)
+    int maxDegree = std::min(n - 1, 3);
+    std::cout << "Max degree: " << maxDegree << std::endl;
+    for (int currentDegree = 1; currentDegree <= maxDegree; ++currentDegree)
+    {
+        std::vector<std::vector<double>> X(n, std::vector<double>(currentDegree + 1));
+        std::vector<double> Y(n);
 
         for (int i = 0; i < n; ++i)
         {
             for (int j = 0; j <= currentDegree; ++j)
             {
-                X(i, j) = std::pow(positions[i], j);
+                X[i][j] = std::pow(positions[i], j);
             }
-            Y(i) = energies[i];
+            Y[i] = energies[i];
         }
 
-        Eigen::VectorXd coeffs = X.colPivHouseholderQr().solve(Y);
-        if (std::abs(coeffs[currentDegree]) < polynomialFitThreshold && currentDegree > 1)
-        {
-            break;
-        }
+        std::vector<std::vector<double>> XtX = multiplyTransposeMatrix(X);
+        std::vector<double> XtY = multiplyTransposeVector(X, Y);
+        std::vector<double> coeffs = solveSystem(XtX, XtY);
 
-        degree = currentDegree;
-        coefficients.clear();
-        for (int i = 0; i <= currentDegree; ++i)
+        if (std::abs(coeffs[currentDegree]) >= polynomialFitThreshold)
         {
-            coefficients.push_back(coeffs(i));
+            degree = currentDegree;
+            coefficients = coeffs;
+        }
+        else
+        {
+            std::cout << "Stopping at degree " << currentDegree - 1 << " due to small coefficients." << std::endl;
+            std::cout << "Coefficients: " << coeffs[currentDegree] << std::endl;
+            std::cout << "threshold: " << polynomialFitThreshold << std::endl;
         }
     }
 }
 
-void Histogram::getTheDegreeOfPolynomial()
+// Helper function to multiply a matrix by its transpose
+std::vector<std::vector<double>> Histogram::multiplyTransposeMatrix(const std::vector<std::vector<double>> &X)
+{
+    int rows = X.size();
+    int cols = X[0].size();
+    std::vector<std::vector<double>> XtX(cols, std::vector<double>(cols, 0.0));
+
+    for (int i = 0; i < cols; ++i)
+    {
+        for (int j = 0; j <= i; ++j)
+        {
+            double sum = 0.0;
+            for (int k = 0; k < rows; ++k)
+            {
+                sum += X[k][i] * X[k][j];
+            }
+            XtX[i][j] = XtX[j][i] = sum;
+        }
+    }
+
+    return XtX;
+}
+
+// Helper function to multiply the transpose of a matrix by a vector
+std::vector<double> Histogram::multiplyTransposeVector(const std::vector<std::vector<double>> &X, const std::vector<double> &Y)
+{
+    int rows = X.size();
+    int cols = X[0].size();
+    std::vector<double> XtY(cols, 0.0);
+
+    for (int i = 0; i < cols; ++i)
+    {
+        for (int j = 0; j < rows; ++j)
+        {
+            XtY[i] += X[j][i] * Y[j];
+        }
+    }
+
+    return XtY;
+}
+
+// Helper function to solve a linear system using Gaussian elimination
+std::vector<double> Histogram::solveSystem(const std::vector<std::vector<double>> &A, const std::vector<double> &b)
+{
+    int n = A.size();
+    std::vector<std::vector<double>> augmentedMatrix(n, std::vector<double>(n + 1));
+
+    // Augment the matrix A with the vector b
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            augmentedMatrix[i][j] = A[i][j];
+        }
+        augmentedMatrix[i][n] = b[i];
+    }
+
+    // Perform Gaussian elimination
+    for (int i = 0; i < n; ++i)
+    {
+        // Partial pivoting (find the row with the largest element in the current column)
+        double maxElement = std::abs(augmentedMatrix[i][i]);
+        int maxRow = i;
+        for (int k = i + 1; k < n; ++k)
+        {
+            if (std::abs(augmentedMatrix[k][i]) > maxElement)
+            {
+                maxElement = std::abs(augmentedMatrix[k][i]);
+                maxRow = k;
+            }
+        }
+
+        // Swap rows if necessary
+        if (maxRow != i)
+        {
+            std::swap(augmentedMatrix[i], augmentedMatrix[maxRow]);
+        }
+
+        // Make the diagonal element 1 and eliminate below
+        for (int k = i + 1; k < n; ++k)
+        {
+            double c = -augmentedMatrix[k][i] / augmentedMatrix[i][i];
+            for (int j = i; j <= n; ++j)
+            {
+                if (i == j)
+                {
+                    augmentedMatrix[k][j] = 0;
+                }
+                else
+                {
+                    augmentedMatrix[k][j] += c * augmentedMatrix[i][j];
+                }
+            }
+        }
+    }
+
+    // Back substitution
+    std::vector<double> x(n);
+    for (int i = n - 1; i >= 0; --i)
+    {
+        x[i] = augmentedMatrix[i][n] / augmentedMatrix[i][i];
+        for (int k = i - 1; k >= 0; --k)
+        {
+            augmentedMatrix[k][n] -= augmentedMatrix[k][i] * x[i];
+        }
+    }
+
+    return x;
+}
+
+// V2 calibration section
+
+// Funție pentru validarea și extragerea datelor pentru fit
+bool Histogram::extractDataForFit(std::vector<double> &xValues, std::vector<double> &yValues)
 {
     if (numberOfPeaks == 0)
     {
         std::cerr << "No peaks available for fitting!" << std::endl;
         degree = 0;
-        return;
+        return false;
     }
-    else if (numberOfPeaks < 2)
+    if (numberOfPeaks < 2)
     {
-        degree = 0;
         std::cerr << "Insufficient points for fitting a polynomial." << std::endl;
-        return;
+        degree = 0;
+        return false;
     }
 
-    // Inițializează datele pentru ajustare
-    std::vector<double> xValues;
-    std::vector<double> yValues;
-
-    for (int i = 0; i < numberOfPeaks; i++)
+    for (const auto &peak : peaks)
     {
-        if (peaks[i].getAssociatedPosition() == 0)
+        if (peak.getAssociatedPosition() != 0)
         {
-            continue;
+            xValues.push_back(peak.getPosition());
+            yValues.push_back(peak.getAssociatedPosition());
         }
-        double peakPosition = peaks[i].getPosition();
-        double peakAmplitude = peaks[i].getAssociatedPosition();
-        xValues.push_back(peakPosition);
-        yValues.push_back(peakAmplitude);
     }
 
     if (xValues.size() < 2)
     {
         std::cerr << "Not enough valid peaks for polynomial fitting." << std::endl;
-        return;
+        return false;
     }
+
+    return true;
+}
+
+bool Histogram::areCoefficientsValid(TF1 *fitFunction, int degree, double threshold)
+{
+    for (int i = degree; i >= 0; --i)
+    {
+        double coefficient = fitFunction->GetParameter(i);
+        if (std::abs(coefficient) < threshold)
+        {
+            std::cout << "Coefficient a" << i << " = " << fitFunction->GetParameter(i) << " is below threshold." << std::endl;
+            return false;
+        }
+    }
+    return true;
+}
+
+void Histogram::getTheDegreeOfPolynomial()
+{
+    std::vector<double> xValues, yValues;
+    if (!extractDataForFit(xValues, yValues))
+        return;
 
     TGraph graph(xValues.size(), xValues.data(), yValues.data());
     graph.SetTitle("Polynomial Fit;X-axis;Y-axis");
@@ -454,84 +599,70 @@ void Histogram::getTheDegreeOfPolynomial()
 
     TFile outFile("polynomial_fits.root", "UPDATE");
 
-    int bestDegree = 0;
-    double bestR2 = -1e10;
-    double lowestChi2 = 1e10;
-    TF1 *bestFitFunction = nullptr;
+    int degree = 1; // Start with degree 1
+    coefficients.clear();
+    TF1 *fitFunction = nullptr;
 
-    const double epsilon = 1e-20;
+    bool foundValidFit = false; // Flag to check if a valid fit is found
 
-    for (int degree = 1; degree <= std::min(3, numberOfPeaks - 1); ++degree)
+    while (degree <= std::min(3, numberOfPeaks - 1))
     {
-        TF1 *fitFunction = new TF1(("fitFunction_" + getMainHistName() + "_deg" + std::to_string(degree)).c_str(),
-                                   ("pol" + std::to_string(degree)).c_str(), xValues.front(), xValues.back());
+        fitFunction = new TF1(("fitFunc_deg" + std::to_string(degree)).c_str(),
+                              ("pol" + std::to_string(degree)).c_str(),
+                              xValues.front(), xValues.back());
 
-        int fitStatus = graph.Fit(fitFunction, "RQ");
-        if (fitStatus != 0)
+        if (graph.Fit(fitFunction, "RQ") != 0)
         {
             std::cerr << "Fit failed for degree: " << degree << std::endl;
-            delete fitFunction;
-            continue;
-        }
-
-        fitFunction->Write(("PolynomialFitDegree_" + std::to_string(degree) + "_" + getMainHistName()).c_str());
-
-        double chi2 = fitFunction->GetChisquare();
-        int ndf = fitFunction->GetNDF();
-        double r2 = 1 - (chi2 / (ndf > 0 ? ndf : 1));
-
-        bool coefficientsTooSmall = false;
-        for (int i = degree; i >= 0; --i)
-        {
-            double coeff = fitFunction->GetParameter(i);
-            if (std::abs(coeff) < epsilon)
-            {
-                coefficientsTooSmall = true;
-                std::cout << "Coefficient a" << i << " is below threshold: " << coeff << std::endl;
-                break;
-            }
-        }
-
-        if (coefficientsTooSmall)
-        {
-            std::cout << "Polynomial degree " << degree << " rejected due to small coefficients." << std::endl;
             delete fitFunction;
             break;
         }
 
-        if (r2 > bestR2)
-        {
-            bestR2 = r2;
-            bestDegree = degree;
-            lowestChi2 = chi2;
+        fitFunction->Write(("PolyFit_deg" + std::to_string(degree)).c_str());
 
-            if (bestFitFunction != nullptr)
-                delete bestFitFunction;
-            bestFitFunction = fitFunction;
+        // Check the validity of the coefficients
+        if (areCoefficientsValid(fitFunction, degree, polynomialFitThreshold))
+        {
+            coefficients.clear(); // If valid, update coefficients
+            for (int i = 0; i <= degree; ++i)
+            {
+                coefficients.push_back(fitFunction->GetParameter(i));
+            }
+            foundValidFit = true; // Mark that a valid fit was found
+            ++degree;             // Increase the degree for the next check
         }
         else
         {
+            std::cout << "Stopping at degree " << degree - 1 << " due to small coefficients." << std::endl;
             delete fitFunction;
+            break;
         }
+
+        delete fitFunction;
+    }
+
+    // If no valid fit is found, use a default polynomial of degree 1
+    if (!foundValidFit && coefficients.empty())
+    {
+        std::cout << "Using polynomial of degree 1 as the default fit." << std::endl;
+        fitFunction = new TF1("fitFunc_deg1", "pol1", xValues.front(), xValues.back());
+        if (graph.Fit(fitFunction, "RQ") == 0)
+        {
+            for (int i = 0; i <= 1; ++i)
+            {
+                coefficients.push_back(fitFunction->GetParameter(i));
+            }
+        }
+        delete fitFunction;
     }
 
     graph.Write(("GraphWithDataPoints_" + getMainHistName()).c_str());
     outFile.Close();
 
-    if (bestFitFunction != nullptr)
+    std::cout << "Best polynomial degree: " << (coefficients.size() - 1) << std::endl;
+    for (size_t i = 0; i < coefficients.size(); ++i)
     {
-        std::cout << "Best polynomial degree: " << bestDegree << std::endl;
-        degree = bestDegree;
-        std::cout << "Chi-squared: " << lowestChi2 << std::endl;
-
-        std::cout << "Calibration parameters for the best fit:" << std::endl;
-        for (int i = 0; i <= bestDegree; ++i)
-        {
-            std::cout << "Coefficient a" << i << " = " << bestFitFunction->GetParameter(i) << std::endl;
-            coefficients.push_back(bestFitFunction->GetParameter(i));
-        }
-
-        delete bestFitFunction;
+        std::cout << "Coefficient a" << i << " = " << coefficients[i] << std::endl;
     }
 }
 
@@ -626,7 +757,6 @@ void Histogram::applyXCalibration()
         }
     }
 }
-
 
 // output section
 void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
@@ -766,7 +896,7 @@ float Histogram::getPTError()
     areaPeakError = std::sqrt(areaPeakError);
     float pt = totalArea > 0 ? areaPeak / totalArea : 0.0f;
     float ptError = pt * std::sqrt(std::pow(areaPeakError / areaPeak, 2) + std::pow(totalAreaError / totalArea, 2));
-    return ptError;
+    return ptError > 0 ? ptError : 0.0f;
 }
 
 void Histogram::findStartOfPeak(Peak &peak)

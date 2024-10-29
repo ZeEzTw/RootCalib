@@ -14,7 +14,7 @@
 #include <string>
 #include <TGraph.h>
 #include <cmath>
-#include <eigen3/Eigen/Dense>
+//#include <eigen3/Eigen/Dense>
 class Histogram
 {
 private:
@@ -86,6 +86,14 @@ public:
     void interpolateBins(int start_bin, int end_bin, double start_value, double end_value, double start_position, double end_position);
     void setCalibratedBinContent(int original_bin);
     double evaluateCalibrationPolynomial(double binCenter_original) const;
+
+
+    bool extractDataForFit(std::vector<double>& xValues, std::vector<double>& yValues);
+    double calculateR2(double chi2, int ndf);
+    bool areCoefficientsValid(TF1* fitFunction, int degree, double threshold);
+    std::vector<double> solveSystem(const std::vector<std::vector<double>>& A, const std::vector<double>& b);
+    std::vector<double> multiplyTransposeVector(const std::vector<std::vector<double>>& X, const std::vector<double>& Y);
+    std::vector<std::vector<double>> multiplyTransposeMatrix(const std::vector<std::vector<double>>& X);
 
 
 };

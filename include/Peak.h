@@ -9,7 +9,7 @@ class Peak
 {
 private:
     double position;
-    double associatedPosition;
+    double associatedPosition = 0;
     TF1 *gaus;
     double amplitude;
     double sigma;

@@ -9,7 +9,7 @@ class ArgumentsManager
 {
 private:
     int number_of_peaks = 1;
-    std::string histogramFilePath = "data/data.root";
+    std::string histogramFilePath = "data/dataC.root";
     std::string TH2histogram_name = "mDelila_raw";
     std::string energyFilePath = "data/calibration_sources.json";
     float Xmin = 0.0f;

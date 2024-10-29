@@ -6,7 +6,6 @@ ArgumentsManager::ArgumentsManager(int argc, char *argv[])
     : energyProcessor(energyFilePath)
 { // Initialize energyProcessor with the energyFilePath
     parseArguments(argc, argv);
-
 }
 
 void ArgumentsManager::parseArguments(int argc, char *argv[])
@@ -40,18 +39,18 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
         {
             savePath = argv[++i];
         }
-        else if(arg == "-detType")
+        else if (arg == "-detType")
         {
             detTypeStandard = std::stoi(argv[++i]);
         }
-        else if(arg == "-serial")
+        else if (arg == "-serial")
         {
             serialStandard = argv[++i];
         }
         else if (arg == "-sources")
         {
             // std::cout<<"Aici"<<std::endl;
-            userInterfaceStatus = false;                      // Dacă se specifică sursele, UI-ul se oprește
+            userInterfaceStatus = false; // Dacă se specifică sursele, UI-ul se oprește
             energyProcessor.chooseSources(i + 1, argc, argv);
             number_of_peaks = energyProcessor.getNumberOfPeaks();
             // std::cout<<"start: "<<i<<std::endl;
@@ -69,9 +68,10 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
             xMinDomain = std::stoi(argv[++i]);
             xMaxDomain = std::stoi(argv[++i]);
         }
-        else if(arg == "-calib")
+        else if (arg == "-calib")
         {
-            polynomialFitThreshold = std::stoi(argv[++i]);;
+            polynomialFitThreshold = std::stod(argv[++i]);
+            std::cout << "polyFitThreshold: " << polynomialFitThreshold << std::endl;
         }
     }
 }
@@ -81,17 +81,20 @@ bool ArgumentsManager::isDomainLimitsSet()
     return xMinDomain != -1 && xMaxDomain != -1;
 }
 
-int ArgumentsManager::GetNumberColomSpecified(int histogramNumber) {
+int ArgumentsManager::GetNumberColomSpecified(int histogramNumber)
+{
     auto it = std::find(domain.begin(), domain.end(), histogramNumber);
 
-    if (it != domain.end()) {
-        //std::cout << "Found at position: " << std::distance(domain.begin(), it) << std::endl;
+    if (it != domain.end())
+    {
+        // std::cout << "Found at position: " << std::distance(domain.begin(), it) << std::endl;
         return std::distance(domain.begin(), it);
-    } else {
+    }
+    else
+    {
         return -1;
     }
 }
-
 
 bool ArgumentsManager::checkIfRunIsValid()
 {
@@ -144,7 +147,7 @@ void ArgumentsManager::parseJsonFile()
     std::ifstream file(inputJsonFile);
     if (!file.is_open())
     {
-        //std::cerr << "Could not open file: " << inputJsonFile << std::endl;
+        // std::cerr << "Could not open file: " << inputJsonFile << std::endl;
         return;
     }
 
@@ -260,25 +263,21 @@ int ArgumentsManager::getXminDomain()
 int ArgumentsManager::getXminFile(int position)
 {
     return limits[position].Xmin;
-
 }
 
 int ArgumentsManager::getXmaxFile(int position)
 {
     return limits[position].Xmax;
-
 }
 
 int ArgumentsManager::getFWHMmaxFile(int position)
 {
     return fwhm[position];
-
 }
 
 float ArgumentsManager::getMaxAmplitudeFile(int position) const
 {
     return ampl[position];
-
 }
 
 std::string ArgumentsManager::getHistogramNameFile(int position)
