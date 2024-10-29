@@ -393,7 +393,6 @@ void Histogram::calibratePeaksByDegree()
 
     // Gradul maxim bazat pe numărul de puncte (n - 1)
     int maxDegree = std::min(n - 1, 3);
-    std::cout << "Max degree: " << maxDegree << std::endl;
     for (int currentDegree = 1; currentDegree <= maxDegree; ++currentDegree)
     {
         std::vector<std::vector<double>> X(n, std::vector<double>(currentDegree + 1));
@@ -416,12 +415,6 @@ void Histogram::calibratePeaksByDegree()
         {
             degree = currentDegree;
             coefficients = coeffs;
-        }
-        else
-        {
-            std::cout << "Stopping at degree " << currentDegree - 1 << " due to small coefficients." << std::endl;
-            std::cout << "Coefficients: " << coeffs[currentDegree] << std::endl;
-            std::cout << "threshold: " << polynomialFitThreshold << std::endl;
         }
     }
 }
