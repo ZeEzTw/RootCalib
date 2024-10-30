@@ -98,6 +98,7 @@ Is just an example to show the capability of extension with the code arhitecture
     2: Source names for calibration are not valid (check spelling).
     3: Input file is not valid, or it cannot be opened (check spelling).
     4: TH2F histogram with data is not valid (check spelling).
+    5. No valid peaks for calibration (number of peaks = 0). Histogram.cpp calibratePeaksByDegree()
 
 
 
