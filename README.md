@@ -46,13 +46,13 @@ Compile the code with:
  
  - 1.To run without User Interface, use this example command:
 
-        ./task -hf "data/dataC.root" -hn "mDelila_raw" -ef "data/calibration_sources.json" -limits 0.0 1000000.0 0.0 1000000000.0 1000.0 -sp "output/" -detType 2 -serial "CL" -calib 1e-3 -sources 152Eu
+        ./task -hf "data/data.root" -hn "mDelila_raw" -ef "data/calibration_sources.json" -limits 0.0 1000000.0 0.0 1000000000.0 1000.0 -sp "output/" -detType 2 -serial "CL" -calib 1e-3 -sources 152Eu
    
    Run the program without the UI by specifying the -sources argument:
 
 - 2.To activate User Interface, run it with the following example command:
 
-        ./task -hf "data/dataC.root" -hn "mDelila_raw" -ef "data/calibration_sources.json" -limits 0.0 1000000.0 0.0 1000000000.0 1000.0 -sp "output/" -detType 2 -serial "CL" -calib 1e-3
+        ./task -hf "data/data.root" -hn "mDelila_raw" -ef "data/calibration_sources.json" -limits 0.0 1000000.0 0.0 1000000000.0 1000.0 -sp "output/" -detType 2 -serial "CL" -calib 1e-3
   
 - 3.Default Execution: Running the program without any additional arguments will use default values set in ArgumentsManager.h
 

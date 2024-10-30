@@ -71,7 +71,6 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
         else if (arg == "-calib")
         {
             polynomialFitThreshold = std::stod(argv[++i]);
-            std::cout << "polyFitThreshold: " << polynomialFitThreshold << std::endl;
         }
     }
 }

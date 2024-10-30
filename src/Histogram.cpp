@@ -387,7 +387,7 @@ void Histogram::calibratePeaksByDegree()
     int n = positions.size();
     if (n == 0)
     {
-        std::cerr << "No valid peaks for calibration!" << std::endl;
+        std::cerr <<5<< std::endl;
         return;
     }
 
