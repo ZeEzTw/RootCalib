@@ -7,9 +7,9 @@
 #include <TFile.h>
 #include <TH2F.h>
 #include <TH1D.h>
-#include <TError.h> 
+#include <TError.h>
+#include <sys/stat.h>
 
-// Function to open ROOT files and JSON output file
 std::string removeFileExtension(const std::string &filePath)
 {
     size_t lastDot = filePath.find_last_of('.');
@@ -20,21 +20,24 @@ std::string removeFileExtension(const std::string &filePath)
     return filePath;
 }
 
-void openFiles(const char *inputFilePath, TFile *&inputFile, TFile *&outputFileHistograms, TFile *&outputFileCalibrated, std::ofstream &jsonFile, TFile *&outputFileTH2, const std::string &savePath, const std::string &histogramFilePath)
+std::string extractRunNumber(const std::string &filePath)
 {
-    inputFile = new TFile(inputFilePath, "READ");
-    std::string saveDirectory = savePath;
-    if (!saveDirectory.empty() && saveDirectory.back() != '/')
+    size_t pos = 0;
+    while ((pos = filePath.find('_', pos)) != std::string::npos)
     {
-        saveDirectory += '/';
+        size_t start = pos + 1;
+        size_t end = start;
+        while (end < filePath.size() && std::isdigit(filePath[end]))
+        {
+            ++end;
+        }
+        if (end > start)
+        {
+            return filePath.substr(start, end - start);
+        }
+        pos = end;
     }
-
-    outputFileHistograms = new TFile((saveDirectory + "histogramsWithPeaks.root").c_str(), "RECREATE");
-    outputFileCalibrated = new TFile((saveDirectory + "calibratedHistograms.root").c_str(), "RECREATE");
-    outputFileTH2 = new TFile((saveDirectory + "combinedHistogram.root").c_str(), "RECREATE");
-    std::string fileName = histogramFilePath;
-
-    fileName = removeFileExtension(fileName);
+    std::string fileName = removeFileExtension(filePath);
     for (char &ch : fileName)
     {
         if (ch == '/' || ch == '\\')
@@ -42,8 +45,57 @@ void openFiles(const char *inputFilePath, TFile *&inputFile, TFile *&outputFileH
             ch = '_';
         }
     }
-    std::string jsonFilePath = saveDirectory + fileName + ".json";
-    jsonFile.open((jsonFilePath).c_str());
+    return fileName;
+}
+
+std::string extractDirectoryPath(const std::string &filePath)
+{
+    size_t lastSlash = filePath.find_last_of("/\\");
+    if (lastSlash != std::string::npos)
+    {
+        return filePath.substr(0, lastSlash + 1);
+    }
+    return "./"; 
+}
+
+void openFiles(const char *inputFilePath, TFile *&inputFile, TFile *&outputFileHistograms, TFile *&outputFileCalibrated, std::ofstream &jsonFile, TFile *&outputFileTH2, const std::string &savePath, const std::string &histogramFilePath)
+{
+    inputFile = new TFile(inputFilePath, "READ");
+
+    std::string runName = extractRunNumber(inputFilePath);
+    std::string baseDirectory = extractDirectoryPath(inputFilePath);
+    std::string saveDirectory;
+
+    if (savePath.empty())
+    {
+        saveDirectory = baseDirectory + runName + "/";
+    }
+    else
+    {
+        saveDirectory = savePath;
+        if (saveDirectory.back() != '/')
+        {
+            saveDirectory += '/';
+        }
+    }
+    mkdir(saveDirectory.c_str(), 0777); // POSIX (Unix/Linux)
+    std::cout << "Save Directory: " << saveDirectory << std::endl;
+
+    std::string fileName = removeFileExtension(histogramFilePath);
+    for (char &ch : fileName)
+    {
+        if (ch == '/' || ch == '\\')
+        {
+            ch = '_';
+        }
+    }
+
+    std::string jsonFilePath = saveDirectory + runName + "_peaks_data.json";
+    jsonFile.open(jsonFilePath.c_str());
+
+    outputFileHistograms = new TFile((saveDirectory + runName + "_peaks.root").c_str(), "RECREATE");
+    outputFileCalibrated = new TFile((saveDirectory + runName + "_calibrated_histograms.root").c_str(), "RECREATE");
+    outputFileTH2 = new TFile((saveDirectory + runName + "_combinedHistogram.root").c_str(), "RECREATE");
 }
 
 // Function to close ROOT files and JSON output file
@@ -95,10 +147,10 @@ void convertHistogramsToTH2(const std::vector<Histogram> &histograms, TH2F *inpu
 
     if (outputFileTH2)
     {
-        outputFileTH2->cd();    
-        inputTH2->Write();      
-        outputFileTH2->Close(); 
-        delete outputFileTH2;  
+        outputFileTH2->cd();
+        inputTH2->Write();
+        outputFileTH2->Close();
+        delete outputFileTH2;
     }
 }
 

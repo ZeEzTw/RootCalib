@@ -17,7 +17,7 @@ private:
     float MinAmplitude = 0.0f;
     float MaxAmplitude = 1000000000.0f;
     float FWHMmax = 1000.0f;
-    std::string savePath = "output/";
+    std::string savePath;
     int detTypeStandard = 2;
     std::string serialStandard = "CL";
     bool userInterfaceStatus = true; 
