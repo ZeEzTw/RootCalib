@@ -110,24 +110,30 @@ void closeFiles(TFile *inputFile, TFile *outputFileHistograms, TFile *outputFile
     delete outputFileCalibrated;
     delete inputFile;
 }
-// Function to process all columns in a 2D histogram
-void convertHistogramsToTH2(const std::vector<Histogram> &histograms, TH2F *inputTH2, TFile *outputFileTH2)
+
+void updateHistogramName(TH2F* histogram)
 {
-    if (histograms.empty() || !inputTH2)
+    std::string name = histogram->GetName();
+    size_t pos = name.find("_raw");
+    if (pos != std::string::npos)
     {
-        std::cerr << "5" << std::endl;
-        return;
+        name.replace(pos, 4, "_calib");
+        histogram->SetName(name.c_str());
     }
+}
 
-    int number_of_columns = inputTH2->GetNbinsX();
-    int number_of_binsY = inputTH2->GetNbinsY();
-
-    inputTH2->Reset();
+void fillTH2FromHistograms(const std::vector<Histogram>& histograms, TH2F* th2Histogram)
+{
+    if (!th2Histogram) return;
+    
+    int number_of_columns = th2Histogram->GetNbinsX();
+    int number_of_binsY = th2Histogram->GetNbinsY();
+    th2Histogram->Reset();
 
     int number_of_histograms = histograms.size();
     for (int i = 0; i < number_of_histograms; ++i)
     {
-        TH1D *hist1D = histograms[i].getCalibratedHist();
+        TH1D* hist1D = histograms[i].getCalibratedHist();
         if (hist1D)
         {
             for (int binY = 1; binY <= hist1D->GetNbinsX(); ++binY)
@@ -137,22 +143,39 @@ void convertHistogramsToTH2(const std::vector<Histogram> &histograms, TH2F *inpu
 
                 if (xBinIndex <= number_of_columns && binY <= number_of_binsY)
                 {
-                    inputTH2->SetBinContent(xBinIndex, binY, content);
+                    th2Histogram->SetBinContent(xBinIndex, binY, content);
                 }
             }
         }
     }
+}
 
-    inputTH2->Write();
-
-    if (outputFileTH2)
+void writeAndCloseFile(TH2F* th2Histogram, TFile* outputFile)
+{
+    if (outputFile)
     {
-        outputFileTH2->cd();
-        inputTH2->Write();
-        outputFileTH2->Close();
-        delete outputFileTH2;
+        outputFile->cd();
+        th2Histogram->Write();
+        outputFile->Close();
+        delete outputFile;
     }
 }
+
+void convertHistogramsToTH2(const std::vector<Histogram>& histograms, TH2F* inputTH2, TFile* outputFileTH2)
+{
+    if (histograms.empty() || !inputTH2)
+    {
+        std::cerr << "Input histograms are empty or inputTH2 is null." << std::endl;
+        return;
+    }
+
+    updateHistogramName(inputTH2);
+    fillTH2FromHistograms(histograms, inputTH2);
+    inputTH2->Write();             
+
+    writeAndCloseFile(inputTH2, outputFileTH2); 
+}
+
 
 void processHistogram(ArgumentsManager &arguments, TH1D *hist1D, double *energyArray, int size, std::vector<Histogram> &histograms, std::ofstream &jsonFile, TFile *outputFileHistograms, TFile *outputFileCalibrated, UserInterface &ui)
 {
@@ -164,6 +187,7 @@ void processHistogram(ArgumentsManager &arguments, TH1D *hist1D, double *energyA
     }
     Histogram hist;
     int numberOfHistogram = arguments.GetNumberColomSpecified(histograms.size());
+    std::cout<<"Number of histogram: "<<numberOfHistogram<<std::endl;
     if (arguments.checkIfRunIsValid() && numberOfHistogram != -1)
     {
         std::cout << "Histogram number: " << numberOfHistogram << std::endl;
@@ -182,7 +206,12 @@ void processHistogram(ArgumentsManager &arguments, TH1D *hist1D, double *energyA
     }
     else
     {
-        hist = Histogram(arguments.getXmin(),
+        delete hist1D;
+        histograms.emplace_back();
+        return;
+        //return ;
+        //daca nu e in lut nu merge
+        /*==hist = Histogram(arguments.getXmin(),
                          arguments.getXmax(),
                          arguments.getFWHMmax(),
                          arguments.getMinAmplitude(),
@@ -194,8 +223,12 @@ void processHistogram(ArgumentsManager &arguments, TH1D *hist1D, double *energyA
                          hist1D,
                          arguments.getHistogramName(),
                          arguments.getSourcesName());
+        */
     }
+    std::cout<<"processHistogram"<<std::endl;
     hist.findPeaks();
+    std::cout<<"============"<<std::endl;
+    std::cout<<"size: "<<size<<std::endl;
     hist.calibratePeaks(energyArray, size);
     hist.applyXCalibration();
     hist.outputPeaksDataJson(jsonFile);
@@ -290,7 +323,10 @@ void processHistogramsTask(ArgumentsManager &arguments)
         }
         else
         {
-            energyArray = arguments.getEnergyProcessor().createSourceArray(size);
+            sortEnergy sortEnergyy= arguments.getEnergyProcessor();
+            std::cout<<"getSizeSortEnergy: "<<sortEnergyy.getSize()<<std::endl;
+            energyArray = sortEnergyy.createSourceArray(size);
+            std::cout<<"sizeeeeeeeee: "<<size<<std::endl;
             arguments.getSourcesNameRun();
             if (!energyArray)
             {

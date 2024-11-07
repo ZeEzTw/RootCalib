@@ -14,6 +14,8 @@ class sortEnergy
 
 public:
     sortEnergy(const std::string &filename);
+    sortEnergy& operator=(const sortEnergy &other);
+
     ~sortEnergy();
 
     void sortEnergyArray();

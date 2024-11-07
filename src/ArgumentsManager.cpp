@@ -5,8 +5,12 @@
 ArgumentsManager::ArgumentsManager(int argc, char *argv[])
     : energyProcessor(energyFilePath)
 { // Initialize energyProcessor with the energyFilePath
-    parseArguments(argc, argv);
-}
+    energyFilePath = getDataFolderPath();
+    std::cout << "Energy file path: " << energyFilePath << std::endl;
+    energyProcessor = sortEnergy(energyFilePath); // Update energyProcessor if the energy file changes
+        parseArguments(argc, argv);
+
+    }
 
 void ArgumentsManager::parseArguments(int argc, char *argv[])
 {
@@ -24,10 +28,10 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
         }
         else if (arg == "-ef" || arg == "--energy_file")
         {
-            energyFilePath = argv[++i];
-            energyProcessor = sortEnergy(energyFilePath); // Update energyProcessor if the energy file changes
+            // energyFilePath = argv[++i];
+            //energyProcessor = sortEnergy(energyFilePath); // Update energyProcessor if the energy file changes
         }
-        else if (arg == "-limits")
+        else if (arg == "-l" || arg == "-limits")
         {
             Xmin = std::stof(argv[++i]);
             Xmax = std::stof(argv[++i]);
@@ -39,15 +43,15 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
         {
             savePath = argv[++i];
         }
-        else if (arg == "-detType")
+        else if (arg == "-dt" || arg == "-detType")
         {
             detTypeStandard = std::stoi(argv[++i]);
         }
-        else if (arg == "-serial")
+        else if (arg == "-se" || arg == "-serial")
         {
             serialStandard = argv[++i];
         }
-        else if (arg == "-sources")
+        else if (arg == "-s" || arg == "-sources")
         {
             // std::cout<<"Aici"<<std::endl;
             userInterfaceStatus = false; // Dacă se specifică sursele, UI-ul se oprește
@@ -58,21 +62,50 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
             // std::cout<<"Sources: "<<argv[i + 1]<<std::endl;
             break; // Nu mai continuăm, deoarece sursele sunt ultimele argumente
         }
-        else if (arg == "-json")
+        else if (arg == "-j" || arg == "-json")
         {
             inputJsonFile = argv[++i];
-            // parseJsonFile();
+            parseJsonFile();
+            std::cout<<"aici"<<std::endl;
         }
-        else if (arg == "-domainLimits")
+        else if (arg == "-d" || arg == "-domainLimits")
         {
             xMinDomain = std::stoi(argv[++i]);
             xMaxDomain = std::stoi(argv[++i]);
         }
-        else if (arg == "-calib")
+        else if (arg == "-c" || arg == "-calib")
         {
             polynomialFitThreshold = std::stod(argv[++i]);
         }
     }
+}
+
+std::string ArgumentsManager::getExecutableDir()
+{
+    char buffer[PATH_MAX];
+    ssize_t len = readlink("/proc/self/exe", buffer, sizeof(buffer) - 1);
+
+    if (len == -1)
+    {
+        std::cerr << "Failed to determine executable path." << std::endl;
+        return "";
+    }
+
+    buffer[len] = '\0'; // Null-terminate the path
+    std::string fullPath = buffer;
+
+    // Extract directory path by removing the executable name
+    return fullPath.substr(0, fullPath.find_last_of('/'));
+}
+
+std::string ArgumentsManager::getDataFolderPath()
+{
+    std::string exeDir = getExecutableDir();
+    if (exeDir.empty())
+    {
+        return "";
+    }
+    return exeDir + "/data/calibration_sources.json"; // Assuming the data folder is named "data"
 }
 
 bool ArgumentsManager::isDomainLimitsSet()
@@ -83,10 +116,9 @@ bool ArgumentsManager::isDomainLimitsSet()
 int ArgumentsManager::GetNumberColomSpecified(int histogramNumber)
 {
     auto it = std::find(domain.begin(), domain.end(), histogramNumber);
-
     if (it != domain.end())
     {
-        // std::cout << "Found at position: " << std::distance(domain.begin(), it) << std::endl;
+        std::cout << "Found at position: " << std::distance(domain.begin(), it) << std::endl;
         return std::distance(domain.begin(), it);
     }
     else
@@ -146,7 +178,7 @@ void ArgumentsManager::parseJsonFile()
     std::ifstream file(inputJsonFile);
     if (!file.is_open())
     {
-        // std::cerr << "Could not open file: " << inputJsonFile << std::endl;
+        std::cerr << "Could not open Lut file: " << inputJsonFile << std::endl;
         return;
     }
 

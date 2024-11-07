@@ -4,12 +4,14 @@
 #include <iostream>
 #include <cstring>              
 #include "../include/sortEnergy.h" 
+#include <unistd.h>
+#include <limits.h>
 
 class ArgumentsManager
 {
 private:
     int number_of_peaks = 1;
-    std::string histogramFilePath = "data/dataC.root";
+    std::string histogramFilePath = "data/data.root";
     std::string TH2histogram_name = "mDelila_raw";
     std::string energyFilePath = "data/calibration_sources.json";
     float Xmin = 0.0f;
@@ -86,4 +88,6 @@ public:
     int getDetTypeFile(int position) const;
     std::string getHistogramNameFile(int position);
     float getPolynomialFitThreshold() const { return polynomialFitThreshold; }
+    std::string getExecutableDir();
+    std::string getDataFolderPath();
 };

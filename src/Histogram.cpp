@@ -283,6 +283,8 @@ bool Histogram::checkPredictedEnergies(double predictedEnergy, const double know
 
 void Histogram::calibratePeaks(const double knownEnergies[], int size)
 {
+    std::cout<<"======================= "<<std::endl;
+    std::cout<<"size: "<<size<<std::endl;
     double bestM = 0.0;
     double bestB = 0.0;
     int bestCorrelation = 0;
@@ -753,7 +755,7 @@ void Histogram::applyXCalibration()
 
 // output section
 void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
-{
+{   
     // jsonFile << "[\n";
     jsonFile << "\t{\n";
     jsonFile << "\t\t\"domain\": " << getMainHistName() << ",\n";

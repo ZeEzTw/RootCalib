@@ -17,6 +17,19 @@ sortEnergy::sortEnergy(const std::string &filename)
     // sortEnergyArray();
 }
 
+sortEnergy& sortEnergy::operator=(const sortEnergy &other)
+{
+    if (this != &other)
+    {
+        sources = other.sources;
+        energyMatrix = other.energyMatrix;
+        requestedSources = other.requestedSources;
+        numberOfPeaks = other.numberOfPeaks;
+        probabilityMatrix = other.probabilityMatrix;
+    }
+    return *this;
+}
+
 sortEnergy::~sortEnergy()
 {
     // Destructor implicit
@@ -259,7 +272,6 @@ int sortEnergy::getNumberOfPeaks() const
             }
         }
     }
-
     return totalPeaks;
 }
 
@@ -269,6 +281,7 @@ int sortEnergy::getNumberOfPeaks(int position) const
 }
 double *sortEnergy::createSourceArray(int &size)
 {
+    std::cout<<"requestedSources.size()"<<requestedSources.size()<<std::endl;
     std::vector<double *> selectedEnergyArrays;
     std::vector<int> arraySizes;
     int totalSize = 0;
@@ -314,7 +327,7 @@ void sortEnergy::parseJsonFile(const std::string &filename)
     std::ifstream file(filename);
     if (!file.is_open())
     {
-        //std::cerr << "Could not open file: " << filename << std::endl;
+        std::cerr << "Could not open file: " << filename << std::endl;
         return;
     }
 
