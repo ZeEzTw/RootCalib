@@ -8,9 +8,8 @@ ArgumentsManager::ArgumentsManager(int argc, char *argv[])
     energyFilePath = getDataFolderPath();
     std::cout << "Energy file path: " << energyFilePath << std::endl;
     energyProcessor = sortEnergy(energyFilePath); // Update energyProcessor if the energy file changes
-        parseArguments(argc, argv);
-
-    }
+    parseArguments(argc, argv);
+}
 
 void ArgumentsManager::parseArguments(int argc, char *argv[])
 {
@@ -29,7 +28,7 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
         else if (arg == "-ef" || arg == "--energy_file")
         {
             // energyFilePath = argv[++i];
-            //energyProcessor = sortEnergy(energyFilePath); // Update energyProcessor if the energy file changes
+            // energyProcessor = sortEnergy(energyFilePath); // Update energyProcessor if the energy file changes
         }
         else if (arg == "-l" || arg == "-limits")
         {
@@ -57,6 +56,7 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
             userInterfaceStatus = false; // Dacă se specifică sursele, UI-ul se oprește
             energyProcessor.chooseSources(i + 1, argc, argv);
             number_of_peaks = energyProcessor.getNumberOfPeaks();
+            getSourcesNameRun();
             // std::cout<<"start: "<<i<<std::endl;
             // std::cout<<"argc: "<<argc<<std::endl;
             // std::cout<<"Sources: "<<argv[i + 1]<<std::endl;
@@ -66,7 +66,7 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
         {
             inputJsonFile = argv[++i];
             parseJsonFile();
-            std::cout<<"aici"<<std::endl;
+            std::cout << "aici" << std::endl;
         }
         else if (arg == "-d" || arg == "-domainLimits")
         {
@@ -113,7 +113,7 @@ bool ArgumentsManager::isDomainLimitsSet()
     return xMinDomain != -1 && xMaxDomain != -1;
 }
 
-int ArgumentsManager::GetNumberColomSpecified(int histogramNumber)
+int ArgumentsManager::getNumberColumnSpecified(int histogramNumber)
 {
     auto it = std::find(domain.begin(), domain.end(), histogramNumber);
     if (it != domain.end())

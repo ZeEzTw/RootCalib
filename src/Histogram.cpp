@@ -1,4 +1,5 @@
 #include "../include/Histogram.h"
+#include "../include/EliadeMathFunctions.h"
 
 // global limits for the peaks
 float MaxDistance = 10;
@@ -366,9 +367,6 @@ double Histogram::refineCalibrationB()
 }
 
 // getting polynomial degree + values
-#include <vector>
-#include <cmath>
-#include <iostream>
 
 void Histogram::calibratePeaksByDegree()
 {
@@ -409,9 +407,9 @@ void Histogram::calibratePeaksByDegree()
             Y[i] = energies[i];
         }
 
-        std::vector<std::vector<double>> XtX = multiplyTransposeMatrix(X);
-        std::vector<double> XtY = multiplyTransposeVector(X, Y);
-        std::vector<double> coeffs = solveSystem(XtX, XtY);
+        std::vector<std::vector<double>> XtX = EliadeMathFunctions::multiplyTransposeMatrix(X);
+    std::vector<double> XtY = EliadeMathFunctions::multiplyTransposeVector(X, Y);
+    std::vector<double> coeffs = EliadeMathFunctions::solveSystem(XtX, XtY);
 
         if (std::abs(coeffs[currentDegree]) >= polynomialFitThreshold)
         {
@@ -756,6 +754,7 @@ void Histogram::applyXCalibration()
 // output section
 void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
 {   
+    std::cout<<"======================= Json"<<std::endl;
     // jsonFile << "[\n";
     jsonFile << "\t{\n";
     jsonFile << "\t\t\"domain\": " << getMainHistName() << ",\n";

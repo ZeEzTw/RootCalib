@@ -119,7 +119,6 @@ double *UserInterface::askAboutSource(sortEnergy &energys, int &size, std::strin
             std::cerr << "Invalid source number!" << std::endl;
             continue; 
         }
-
         double *energyArray = energys.getEnergyArray(sourceNumber);
         int arraySize = energys.getEnergyArraySize(sourceNumber);
         numberOfPeaks += energys.getNumberOfPeaks(sourceNumber);

@@ -53,7 +53,7 @@ private:
 public:
     ArgumentsManager(int argc, char *argv[]);
     bool isDomainLimitsSet();
-    int GetNumberColomSpecified(int histogramNumber);
+    int getNumberColumnSpecified(int histogramNumber);
     bool checkIfRunIsValid();
     void parseArguments(int argc, char *argv[]);
     void getSourcesNameRun(); 
