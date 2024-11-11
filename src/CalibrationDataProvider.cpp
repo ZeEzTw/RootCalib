@@ -1,23 +1,11 @@
-#include "../include/sortEnergy.h"
-#include <iostream>
-#include <sstream>
-#include <algorithm>
+#include "../include/CalibrationDataProvider.h"
 
-sortEnergy::sortEnergy(const std::string &filename)
+CalibrationDataProvider::CalibrationDataProvider(const std::string &filename)
 {
-    // readFromTxt(filename);
     parseJsonFile(filename);
-
-    //std::ofstream outputFile("output.txt"); // Create an ofstream object
-    //if (outputFile.is_open())
-    //{
-        //printToFile(outputFile);
-        // printSources();
-    //}
-    // sortEnergyArray();
 }
 
-sortEnergy& sortEnergy::operator=(const sortEnergy &other)
+CalibrationDataProvider& CalibrationDataProvider::operator=(const CalibrationDataProvider &other)
 {
     if (this != &other)
     {
@@ -30,88 +18,12 @@ sortEnergy& sortEnergy::operator=(const sortEnergy &other)
     return *this;
 }
 
-sortEnergy::~sortEnergy()
+CalibrationDataProvider::~CalibrationDataProvider()
 {
     // Destructor implicit
 }
 
-// Citește și parsează fișierul JSON simplificat
-/*void sortEnergy::parseJsonFile(const std::string &filename) {
-    std::ifstream file(filename);
-    if (!file.is_open()) {
-        std::cerr << "Could not open file: " << filename << std::endl;
-        return;
-    }
-
-    std::string line;
-    bool inSourcesSection = false;
-    std::string currentSource;
-    std::vector<double> currentEnergies;
-    int index = -1;
-
-    while (std::getline(file, line)) {
-        // Verifică dacă linia conține "sources"
-
-            if (line.find("source") != std::string::npos) {
-                // Salvează sursa curentă dacă există și adaugă-o în vectorul de surse
-
-                // Extrage numele sursei
-                std::string nameStart = line.find(": \"") + 3;
-                std::string nameEnd = line.find("\"", nameStart);
-                if (nameStart != std::string::npos && nameEnd != std::string::npos) {
-                    currentSource = line.substr(nameStart, nameEnd - nameStart);
-                }
-                    sources.push_back(currentSource);
-                    std::cout<<currentSource<<std::endl;
-                    sources.push_back(currentEnergies);
-                    currentEnergies.clear();
-                index++;
-            }
-            // Verifică dacă linia conține valori de energie
-            else
-            {
-                float energy;
-                fprintf("%d\n",energy);
-                energyMatrix.push_back(energy);
-
-            }
-        }
-    }
-
-// Procesează datele pentru fiecare sursă
-void sortEnergy::processSource(const std::string &sourceLine, const std::string &energiesLine) {
-    std::string sourceName;
-    std::vector<double> energies;
-
-    // Extrage numele sursei
-    std::size_t nameStart = sourceLine.find(": \"") + 3;
-    std::size_t nameEnd = sourceLine.find("\"", nameStart);
-    if (nameStart != std::string::npos && nameEnd != std::string::npos) {
-        sourceName = sourceLine.substr(nameStart, nameEnd - nameStart);
-    }
-    sources.push_back(sourceName);
-
-    // Extrage valorile energiei
-    std::stringstream ss(energiesLine);
-    std::string token;
-    while (std::getline(ss, token, ',')) {
-        try {
-            if (token.find('[') != std::string::npos) {
-                token = token.substr(token.find('[') + 1);
-            }
-            if (token.find(']') != std::string::npos) {
-                token = token.substr(0, token.find(']'));
-            }
-            double energy = std::stod(token);
-            energies.push_back(energy);
-        } catch (const std::invalid_argument&) {
-            // Ignoră valorile nevalide
-        }
-    }
-
-    energyMatrix.push_back(energies);
-}*/
-void sortEnergy::readFromTxt(const std::string &filename)
+void CalibrationDataProvider::readFromTxt(const std::string &filename)
 {
     std::ifstream file(filename);
     if (!file.is_open())
@@ -157,7 +69,7 @@ void sortEnergy::readFromTxt(const std::string &filename)
 
     file.close();
 }
-int sortEnergy::isSourceValid(const std::string &source)
+int CalibrationDataProvider::isSourceValid(const std::string &source)
 {
     for (size_t i = 0; i < sources.size(); ++i)
     {
@@ -170,7 +82,7 @@ int sortEnergy::isSourceValid(const std::string &source)
     return -1;
 }
 
-void sortEnergy::sortEnergyArray()
+void CalibrationDataProvider::CalibrationDataProviderArray()
 {
     for (auto &row : energyMatrix)
     {
@@ -178,7 +90,7 @@ void sortEnergy::sortEnergyArray()
     }
 }
 
-double *sortEnergy::getEnergyArray(int index)
+double *CalibrationDataProvider::getCalibratedEnergyArray(int index)
 {
     if (index < 0 || index >= energyMatrix.size())
     {
@@ -187,7 +99,7 @@ double *sortEnergy::getEnergyArray(int index)
     }
     return energyMatrix[index].data();
 }
-int sortEnergy::getEnergyArraySize(int index) const
+int CalibrationDataProvider::getCalibratedEnergyArraySize(int index) const
 {
     if (index < 0 || index >= energyMatrix.size())
     {
@@ -197,7 +109,7 @@ int sortEnergy::getEnergyArraySize(int index) const
     return energyMatrix[index].size();
 }
 
-void sortEnergy::printToFile(std::ofstream &file) const
+void CalibrationDataProvider::printToFile(std::ofstream &file) const
 {
     for (size_t i = 0; i < sources.size(); ++i)
     {
@@ -210,7 +122,7 @@ void sortEnergy::printToFile(std::ofstream &file) const
     }
 }
 
-void sortEnergy::printSources() const
+void CalibrationDataProvider::printSources() const
 {
     for (size_t i = 0; i < sources.size(); ++i)
     {
@@ -218,7 +130,7 @@ void sortEnergy::printSources() const
     }
 }
 
-void sortEnergy::chooseSources(int argc, char *argv[])
+void CalibrationDataProvider::chooseSources(int argc, char *argv[])
 {
     bool dublicated = false;
     for (int i = 12; i < argc; i++)
@@ -238,7 +150,7 @@ void sortEnergy::chooseSources(int argc, char *argv[])
     }
 }
 
-void sortEnergy::chooseSources(int startPosition, int argc, char *argv[])
+void CalibrationDataProvider::chooseSources(int startPosition, int argc, char *argv[])
 {
     bool dublicated = false;
     for (int i = startPosition; i < argc; i++)
@@ -258,7 +170,7 @@ void sortEnergy::chooseSources(int startPosition, int argc, char *argv[])
     }
 }
 
-int sortEnergy::getNumberOfPeaks() const
+int CalibrationDataProvider::getNumberOfPeaks() const
 {
     int totalPeaks = 0;
     for (int i = 0; i < sources.size(); i++)
@@ -275,11 +187,11 @@ int sortEnergy::getNumberOfPeaks() const
     return totalPeaks;
 }
 
-int sortEnergy::getNumberOfPeaks(int position) const
+int CalibrationDataProvider::getNumberOfPeaks(int position) const
 {
     return numberOfPeaks[position];
 }
-double *sortEnergy::createSourceArray(int &size)
+double *CalibrationDataProvider::createCalibratedSourceArray(int &size)
 {
     std::cout<<"requestedSources.size()"<<requestedSources.size()<<std::endl;
     std::vector<double *> selectedEnergyArrays;
@@ -291,10 +203,10 @@ double *sortEnergy::createSourceArray(int &size)
         int index = isSourceValid(source);
         if (index != -1)
         {
-            int energyArraySize = getEnergyArraySize(index);
+            int energyArraySize = getCalibratedEnergyArraySize(index);
             if (energyArraySize > 0)
             {
-                double *currentEnergyArray = getEnergyArray(index);
+                double *currentEnergyArray = getCalibratedEnergyArray(index);
                 selectedEnergyArrays.push_back(currentEnergyArray);
                 arraySizes.push_back(energyArraySize);
                 totalSize += energyArraySize;
@@ -317,12 +229,17 @@ double *sortEnergy::createSourceArray(int &size)
     size = totalSize;
     return combinedEnergyArray;
 }
-std::string sortEnergy::cleanSourceName(const std::string &sourceName)
-{
-    std::regex pattern("[\",]");
-    return std::regex_replace(sourceName, pattern, "");
+std::string CalibrationDataProvider::cleanSourceName(const std::string &sourceName) {
+    std::string cleanedName = sourceName;
+    cleanedName.erase(
+        std::remove_if(cleanedName.begin(), cleanedName.end(), [](char c) {
+            return c == '\"' || c == ',';  // Condiția de eliminare
+        }),
+        cleanedName.end()
+    );
+    return cleanedName;
 }
-void sortEnergy::parseJsonFile(const std::string &filename)
+void CalibrationDataProvider::parseJsonFile(const std::string &filename)
 {
     std::ifstream file(filename);
     if (!file.is_open())

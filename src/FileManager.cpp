@@ -5,6 +5,10 @@ FileManager::FileManager(const std::string &inputFilePath, const std::string &sa
       inputFile(nullptr), outputFileHistograms(nullptr),
       outputFileCalibrated(nullptr), outputFileTH2(nullptr)
 {
+    std::cout<<"FileManager constructor"<<std::endl;
+    std::cout<<"inputFilePath "<<inputFilePath<<std::endl;
+    std::cout<<"savePath "<<savePath<<std::endl;
+    std::cout<<"delila_name "<<delila_name<<std::endl;
 }
 
 FileManager::~FileManager()
@@ -26,7 +30,6 @@ void FileManager::openFiles()
         return;
     }
 
-    // Get run name and base directory
     std::string runName = extractRunNumber();
     std::string baseDirectory = extractDirectoryPath();
     std::string saveDirectory;
@@ -51,7 +54,6 @@ void FileManager::openFiles()
     }
     std::cout << "\nSave Directory: " << saveDirectory << std::endl;
 
-    // Open JSON file
     std::string jsonFilePath = saveDirectory + runName + "_peaks_data.json";
     jsonFile.open(jsonFilePath);
     if (!jsonFile.is_open())
@@ -181,7 +183,6 @@ void FileManager::saveTH2Histogram(TH2F* const th2Histogram)
 {
     outputFileTH2->cd();
     th2Histogram->Write();
-    // Removed redundant file closure (closed in closeFiles())
 }
 
 void FileManager::updateHistogramName(TH2F* const histogram)

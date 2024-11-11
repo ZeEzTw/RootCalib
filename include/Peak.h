@@ -1,3 +1,21 @@
+/**
+ * @class Peak
+ * @brief A class for analyzing and storing properties of histogram peaks
+ *
+ * The Peak class manages the properties and analysis of peaks in histograms.
+ * Key features:
+ * - Stores peak properties (position, amplitude, sigma, area)
+ * - Calculates peak area with background subtraction
+ * - Computes resolution and FWHM (Full Width at Half Maximum)
+ * - Handles Gaussian fitting functions
+ * - Provides JSON output capabilities
+ * - Supports copy/move semantics
+ *
+ * Note: Some methods are not used in the codebase (ex: findStartOfPeak()) but are retained to facilitate future
+ * extensions, allowing the class to perform different calculations on peaks or to
+ * handle additional information.
+ */
+
 #ifndef PEAK_H
 #define PEAK_H
 
@@ -5,71 +23,78 @@
 #include <TH1D.h>
 #include <iostream>
 #include <fstream>
-class Peak
-{
+
+class Peak {
 private:
+    // Constants
+    enum Constants {
+        SIGMA_MULTIPLIER = 3,
+        MIN_DISTANCE = 1,
+        MAX_DISTANCE = 10
+    };
+    static constexpr double FWHM_CONSTANT = 2.3548;
+
+    // Core peak properties
     double position;
-    double associatedPosition = 0;
-    TF1 *gaus;
+    double associatedPosition;
     double amplitude;
     double sigma;
+    
+    // Area related
     double area;
     double areaError;
-    float leftLimit, rightLimit;
+    float leftLimit;
+    float rightLimit;
+    
+    // Gaussian function
+    TF1* gaus;
+
+    // Helper methods
+    bool isValidBin(double content, double error) const {
+        return content > 0 && error >= 0;
+    }
 
 public:
-    Peak(TF1 *gausPeak, TH1D *hist); // Constructor
-    // Constructor with TF1 parameter
-    Peak(TF1 *gausPeak);
-
-    // Copy constructor
-    Peak(const Peak &other);
-
-    // Copy assignment operator
-    Peak &operator=(const Peak &other);
-
-    // Move constructor
-    Peak(Peak &&other) noexcept;
-
-    // Move assignment operator
-    Peak &operator=(Peak &&other) noexcept;
-
-    // Destructor
+    // Constructors and destructor
+    explicit Peak(TF1* gausPeak, TH1D* hist = nullptr);
+    Peak(const Peak& other);
+    Peak& operator=(const Peak& other);
+    Peak(Peak&& other) noexcept;
+    Peak& operator=(Peak&& other) noexcept;
     ~Peak();
 
-    void setPosition(double pos);
-    double getPosition() const;
-
-    void setAssociatedPosition(double pos);
-    double getAssociatedPosition() const;
-
-    void setAmplitude(double amp);
-    double getAmplitude() const;
-
-    void setSigma(double sig);
-    double getSigma() const;
-
-    void setArea(double a);
-    double getArea() const;
-
-    double getAreaError() const;
-
-    void setLeftLimit(float left);
-    float getLeftLimit() const;
-
-    void setRightLimit(float right);
-    float getRightLimit() const;
-
-    void outputDataJson(std::ofstream &file) const;
-    void createGaussianFunction();
-    TF1 *getGaussianFunction() const;
-    double getFWHM() const;
-    double getMean() const;
-    void areaPeak(TH1D *hist);
-    double calculateResolutionError() const;
+    // Analysis methods
+    void areaPeak(TH1D* hist);
+    double getFWHM() const { return FWHM_CONSTANT * sigma; }
+    double getMean() const {return gaus->GetParameter(1); };
     double calculateResolution() const;
-    void findStartOfPeak(TH1D *hist, int maxBin, double &leftLimitPosition, double &rightLimitPosition);
+    double calculateResolutionError() const;
+    //not used in code
+    void findStartOfPeak(TH1D* hist, int maxBin, double& leftLimitPosition, double& rightLimitPosition);
+
+    // Utility methods
+    TF1* getGaussianFunction() const { return gaus; }
+    void createGaussianFunction();
+    void outputDataJson(std::ofstream& file) const;
+
+    // Getters
+    double getPosition() const { return position; }
+    double getAssociatedPosition() const { return associatedPosition; }
+    double getAmplitude() const { return amplitude; }
+    double getSigma() const { return sigma; }
+    double getArea() const { return area; }
+    double getAreaError() const { return areaError; }
+    float getLeftLimit() const { return leftLimit; }
+    float getRightLimit() const { return rightLimit; }
+
+    // Setters
+    void setPosition(double pos) { position = pos; }
+    void setAssociatedPosition(double pos) { associatedPosition = pos; }
+    void setAmplitude(double amp) { amplitude = amp; }
+    void setSigma(double sig) { sigma = sig; }
+    void setArea(double a) { area = a; }
+    void setLeftLimit(float left) { leftLimit = left; }
+    void setRightLimit(float right) { rightLimit = right; }
 };
 
 #endif // PEAK_H
-       // sa fac functia sa se poata redefinii un peak, adica sa mearga sa zica peak 6 e de fapt la pozitia asta, sa mearga acolo si sa faca fitul
