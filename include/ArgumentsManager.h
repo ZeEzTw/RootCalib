@@ -12,18 +12,22 @@
  * - Providing validated and organized data to the TaskHandler for further processing
  */
 #include <string>
-#include <unistd.h>
-#include <limits.h>
 #include "../include/CalibrationDataProvider.h"
 
-
-
-class ArgumentsManager {
+class ArgumentsManager
+{
 private:
-
     // File data structures
-    struct fitLimits { int Xmin; int Xmax; };
-    struct PTLimits { int MinAmplitude; int MaxAmplitude; };
+    struct fitLimits
+    {
+        int Xmin;
+        int Xmax;
+    };
+    struct PTLimits
+    {
+        int MinAmplitude;
+        int MaxAmplitude;
+    };
 
     // Core configuration
     std::string histogramFilePath = "data/data.root";
@@ -66,25 +70,25 @@ private:
 
     // Private helper methods
     bool validateInputParameters() const;
-    bool parseNumericArgument(const char* arg, float& value, float min, float max);
-
-    // Add file utility method
-    bool fileExists(const std::string& path) const;
+    bool parseNumericArgument(const char *arg, float &value, float min, float max);
+    std::string getHistogramFilename(int runNumber) const;
+    bool isNumber(const std::string &s) const;
+    bool fileExists(const std::string &path) const;
 
 public:
     // Constructor and main interface
     explicit ArgumentsManager(int argc, char *argv[]);
-    
+
     // Main operations
     void parseArguments(int argc, char *argv[]);
     void parseJsonFile();
     void getSourcesNameRun();
-    
+
     // Validation and status
     bool isDomainLimitsSet() const;
     bool checkIfRunIsValid() const;
     bool isUserInterfaceEnabled() const { return userInterfaceStatus; }
-    
+
     // Print functions
     void printUsage() const;
     void printAllArguments() const;
@@ -123,7 +127,7 @@ public:
 
     // Declare non-inlined functions
     int getNumberColumnSpecified(int histogramNumber) const;
-    
+
     // Other functions
     void setNumberOfPeaks(int peaks);
     std::string getExecutableDir() const;

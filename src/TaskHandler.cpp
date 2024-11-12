@@ -1,4 +1,6 @@
 #include "TaskHandler.h"
+#include "../include/ErrorHandle.h"
+#include <TError.h>
 
 TaskHandler::TaskHandler(ArgumentsManager &args)
     : argumentsManager(args), inputTH2(nullptr), energyArray(nullptr), size(0),
@@ -16,24 +18,28 @@ TaskHandler::~TaskHandler()
 
 void TaskHandler::executeHistogramProcessingTask()
 {
-    std::cout<<std::endl<<"aici"<<std::endl;
+    ErrorHandle::getInstance().setUserInterfaceActive(argumentsManager.isUserInterfaceEnabled());
+    ErrorHandle::getInstance().startProgram();
     fileManager.openFiles();
-
+    ErrorHandle::getInstance().setPathForSave(fileManager.getSavePath());
     energyArray = initializeEnergyArray();
-    if (!energyArray)
+
+    if (fileManager.getTH2Histogram() == nullptr)
     {
-        std::cerr << "Error: Failed to initialize energy array." << std::endl;
+        ErrorHandle::getInstance().logStatus("TH2F histogram is null STOP the Task.");
+        ErrorHandle::getInstance().saveLogFile();
         return;
     }
-
     process2DHistogram();
+
     fileManager.closeFiles();
+    ErrorHandle::getInstance().saveLogFile();
 }
 
 double *TaskHandler::initializeEnergyArray()
 {
     CalibrationDataProvider energyProcessor = argumentsManager.getEnergyProcessor();
-    double *array = nullptr;
+    double *array = new double[1]{0.0};
     if (argumentsManager.isUserInterfaceEnabled())
     {
         std::string sourcesName;
@@ -48,13 +54,17 @@ double *TaskHandler::initializeEnergyArray()
     }
     if (!array)
     {
-        std::cerr << "Error: Failed to retrieve energy array from UserInterface." << std::endl;
+        ErrorHandle::getInstance().logStatus("Failed to retrieve energy array.");
+        // return nullptr;
     }
+    ErrorHandle::getInstance().logArrayWithCalibratedValues(array, size);
+    ErrorHandle::getInstance().logStatus("Energy array initialized successfully.");
     return array;
 }
 
 void TaskHandler::process2DHistogram()
 {
+
     int start_column = 0;
     inputTH2 = fileManager.getTH2Histogram();
     int number_of_columns = inputTH2->GetNbinsX();
@@ -64,7 +74,6 @@ void TaskHandler::process2DHistogram()
         start_column = argumentsManager.getXminDomain();
         number_of_columns = argumentsManager.getXmaxDomain();
     }
-
     for (int column = start_column; column <= number_of_columns; ++column)
     {
         TH1D *hist1D = inputTH2->ProjectionY(Form("hist1D_col%d", column), column, column);
@@ -73,7 +82,6 @@ void TaskHandler::process2DHistogram()
             processSingleHistogram(hist1D);
         }
     }
-
     combineHistogramsIntoTH2();
 
     if (argumentsManager.isUserInterfaceEnabled())
@@ -89,6 +97,8 @@ void TaskHandler::processSingleHistogram(TH1D *const hist1D)
     {
         delete hist1D;
         histograms.emplace_back();
+        // if you want to check
+        // ErrorHandle::getInstance().logStatus(std::string("The mean for the histogram ") + std::to_string(histograms.size()) + " is less than 5. ");
         return;
     }
 
@@ -96,13 +106,8 @@ void TaskHandler::processSingleHistogram(TH1D *const hist1D)
     int histIndex = argumentsManager.getNumberColumnSpecified(histograms.size());
     if (argumentsManager.checkIfRunIsValid() && histIndex != -1)
     {
-        std::cout<<"histIndex: "<<histIndex<<std::endl;
-        std::cout<<"Xmin: "<<argumentsManager.getXminFile(histIndex)<<std::endl;
-        std::cout<<"Xmax: "<<argumentsManager.getXmaxFile(histIndex)<<std::endl;
-        std::cout<<"FWHMmax: "<<argumentsManager.getFWHMmaxFile(histIndex)<<std::endl;
-        std::cout<<"MinAmplitude: "<<argumentsManager.getMinAmplitude()<<std::endl;
-        std::cout<<"MaxAmplitude: "<<argumentsManager.getMaxAmplitudeFile(histIndex)<<std::endl;
-        std::cout<<"Serial: "<<argumentsManager.getSerialFile(histIndex)<<std::endl;
+        ErrorHandle::getInstance().logStatus(std::string("Histogram: ") + std::to_string(histograms.size()) + " start to be processed.");
+        ErrorHandle::getInstance().logStatus("start------------------------------------------------.");
         hist = Histogram(
             argumentsManager.getXminFile(histIndex), argumentsManager.getXmaxFile(histIndex),
             argumentsManager.getFWHMmaxFile(histIndex), argumentsManager.getMinAmplitude(),
@@ -115,15 +120,16 @@ void TaskHandler::processSingleHistogram(TH1D *const hist1D)
     {
         delete hist1D;
         histograms.emplace_back();
+        ErrorHandle::getInstance().logStatus(std::string("Histogram: ") + std::to_string(histograms.size()) + " is not in the Lut FIle.");
         return;
     }
 
     hist.findPeaks();
     hist.calibratePeaks(energyArray, size);
     hist.applyXCalibration();
-    hist.outputPeaksDataJson(fileManager.getJsonFile());                      
-    hist.printHistogramWithPeaksRoot(fileManager.getOutputFileHistograms()); 
-    hist.printCalibratedHistogramRoot(fileManager.getOutputFileCalibrated()); 
+    hist.outputPeaksDataJson(fileManager.getJsonFile());
+    hist.printHistogramWithPeaksRoot(fileManager.getOutputFileHistograms());
+    hist.printCalibratedHistogramRoot(fileManager.getOutputFileCalibrated());
     histograms.push_back(hist);
 
     if (argumentsManager.isUserInterfaceEnabled())

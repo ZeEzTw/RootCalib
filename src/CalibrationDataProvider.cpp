@@ -1,7 +1,14 @@
 #include "../include/CalibrationDataProvider.h"
+#include "../include/ErrorHandle.h"
+#include <iostream>
+#include <fstream>
+#include <algorithm>
+
+
 
 CalibrationDataProvider::CalibrationDataProvider(const std::string &filename)
 {
+    ErrorHandle::getInstance().logStatus("Reading calibration data from: " + filename);
     parseJsonFile(filename);
 }
 
@@ -73,7 +80,6 @@ int CalibrationDataProvider::isSourceValid(const std::string &source)
 {
     for (size_t i = 0; i < sources.size(); ++i)
     {
-        //std::cout << sources[i] << std::endl;
         if (sources[i] == source)
         {
             return i;
@@ -193,7 +199,11 @@ int CalibrationDataProvider::getNumberOfPeaks(int position) const
 }
 double *CalibrationDataProvider::createCalibratedSourceArray(int &size)
 {
-    std::cout<<"requestedSources.size()"<<requestedSources.size()<<std::endl;
+    std::string sourceNames;
+    for (const auto& source : requestedSources) {
+        sourceNames += source + " ";
+    }
+    ErrorHandle::getInstance().logStatus("Requested sources size: " + std::to_string(requestedSources.size()) + " Named: " + sourceNames);
     std::vector<double *> selectedEnergyArrays;
     std::vector<int> arraySizes;
     int totalSize = 0;

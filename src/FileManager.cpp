@@ -1,14 +1,14 @@
 #include "../include/FileManager.h"
+#include "../include/ErrorHandle.h"
+#include <iostream>
+#include <sys/stat.h>
 
 FileManager::FileManager(const std::string &inputFilePath, const std::string &savePath, const std::string &delila_name)
     : inputFilePath(inputFilePath), savePath(savePath), delila_name(delila_name),
       inputFile(nullptr), outputFileHistograms(nullptr),
       outputFileCalibrated(nullptr), outputFileTH2(nullptr)
 {
-    std::cout<<"FileManager constructor"<<std::endl;
-    std::cout<<"inputFilePath "<<inputFilePath<<std::endl;
-    std::cout<<"savePath "<<savePath<<std::endl;
-    std::cout<<"delila_name "<<delila_name<<std::endl;
+
 }
 
 FileManager::~FileManager()
@@ -19,16 +19,16 @@ FileManager::~FileManager()
 void FileManager::openFiles()
 {
     // Open input file
-    std::cout << "inputFilePath " << inputFilePath << std::endl;
-    std::cout << "savePath " << savePath << std::endl;
+    
+
     inputFile = new TFile(inputFilePath.c_str(), "READ");
-    std::cout << std::endl
-              << "inputFile " << inputFilePath.c_str() << std::endl;
+    
     if (!inputFile || inputFile->IsZombie())
     {
-        std::cerr << "Error: Could not open input file." << std::endl;
+        ErrorHandle::getInstance().errorHandle(ErrorHandle::INVALID_INPUT_FILE);
         return;
     }
+    ErrorHandle::getInstance().logStatus("Opening input file succefuly: " + inputFilePath);
 
     std::string runName = extractRunNumber();
     std::string baseDirectory = extractDirectoryPath();
@@ -49,16 +49,16 @@ void FileManager::openFiles()
     // Create the save directory if it doesn't exist
     if (mkdir(saveDirectory.c_str(), 0777) && errno != EEXIST)
     {
-        std::cerr << "Error: Could not create save directory." << std::endl;
+        ErrorHandle::getInstance().logStatus(std::string("Error: Could not create save directory. ") + saveDirectory);
         return;
     }
-    std::cout << "\nSave Directory: " << saveDirectory << std::endl;
-
+    savePath = saveDirectory;
+    ErrorHandle::getInstance().logStatus("Opening save path: " + savePath);
     std::string jsonFilePath = saveDirectory + runName + "_peaks_data.json";
     jsonFile.open(jsonFilePath);
     if (!jsonFile.is_open())
     {
-        std::cerr << "Error: Could not open JSON file for writing." << std::endl;
+        ErrorHandle::getInstance().logStatus("Error: Could not open JSON file for writing. " + jsonFilePath);
         return;
     }
 
@@ -67,18 +67,12 @@ void FileManager::openFiles()
     outputFileCalibrated = new TFile((saveDirectory + runName + "_calibrated_histograms.root").c_str(), "RECREATE");
     outputFileTH2 = new TFile((saveDirectory + runName + "_combinedHistogram.root").c_str(), "RECREATE");
 
-    if (!outputFileHistograms || outputFileHistograms->IsZombie())
+    if (!outputFileHistograms || outputFileHistograms->IsZombie() || !outputFileCalibrated || outputFileCalibrated->IsZombie() || !outputFileTH2 || outputFileTH2->IsZombie())
     {
-        std::cerr << "Error: Could not create output file for histograms." << std::endl;
+        ErrorHandle::getInstance().errorHandle(ErrorHandle::INVALID_OUTPUT_FILE);
+        return;
     }
-    if (!outputFileCalibrated || outputFileCalibrated->IsZombie())
-    {
-        std::cerr << "Error: Could not create output file for calibrated histograms." << std::endl;
-    }
-    if (!outputFileTH2 || outputFileTH2->IsZombie())
-    {
-        std::cerr << "Error: Could not create output file for combined histograms." << std::endl;
-    }
+    ErrorHandle::getInstance().logStatus("Opening output files succefuly: " + saveDirectory + runName + "_peaks.root" + " " + saveDirectory + runName + "_calibrated_histograms.root" + " " + saveDirectory + runName + "_combinedHistogram.root");
 }
 
 void FileManager::closeFiles()
@@ -115,6 +109,9 @@ void FileManager::closeFiles()
     {
         jsonFile.close();
     }
+
+    ErrorHandle::getInstance().logStatus("Closed files succefuly.");
+
 }
 
 std::string FileManager::removeFileExtension() const
@@ -173,19 +170,19 @@ TH2F *FileManager::getTH2Histogram() const
         inputFile->GetObject(delila_name.c_str(), histogram);
         if (!histogram)
         {
-            std::cerr << "Error: Histogram " << delila_name << " not found in input file." << std::endl;
+            ErrorHandle::getInstance().errorHandle(ErrorHandle::INVALID_TH2F_HISTOGRAM);
         }
     }
     return histogram;
 }
 
-void FileManager::saveTH2Histogram(TH2F* const th2Histogram)
+void FileManager::saveTH2Histogram(TH2F *const th2Histogram)
 {
     outputFileTH2->cd();
     th2Histogram->Write();
 }
 
-void FileManager::updateHistogramName(TH2F* const histogram)
+void FileManager::updateHistogramName(TH2F *const histogram)
 {
     std::string name = histogram->GetName();
     size_t pos = name.find("_raw");

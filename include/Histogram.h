@@ -42,15 +42,9 @@
 #include "Peak.h"
 #include <TH1D.h>
 #include <TF1.h>
-#include <vector>
-#include <iostream>
-#include <cmath>
-#include <limits>
 #include <TFile.h>
-#include <TCanvas.h>
-#include <TLatex.h>
+#include <vector>
 #include <string>
-#include <TGraph.h>
 
 class Histogram
 {

@@ -1,17 +1,25 @@
 #include "../include/ArgumentsManager.h"
+#include "../include/ErrorHandle.h"
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <unistd.h>
+#include <limits.h>
+#include <algorithm>
+#include <filesystem> 
+#include <cctype>
 
 ArgumentsManager::ArgumentsManager(int argc, char *argv[])
-    : energyProcessor(energyFilePath)
+    : energyFilePath(getDataFolderPath()),
+      energyProcessor(energyFilePath)
 {
-    energyFilePath = getDataFolderPath();
-    std::cout << "Energy file path: " << energyFilePath << std::endl;
-    energyProcessor = CalibrationDataProvider(energyFilePath);
     parseArguments(argc, argv);
 }
 
 void ArgumentsManager::parseArguments(int argc, char *argv[])
 {
-    if (argc < 2) {
+    if (argc < 2)
+    {
         printUsage();
         return;
     }
@@ -22,7 +30,24 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
 
         if (arg == "-hf" || arg == "--histogram_file")
         {
-            histogramFilePath = argv[++i];
+            std::string input = argv[++i];
+            if (isNumber(input))
+            {
+                int runNumber = std::stoi(input);
+                std::string filename = getHistogramFilename(runNumber);
+                if (!filename.empty())
+                {
+                    histogramFilePath = filename;
+                }
+                else
+                {
+                    ErrorHandle::getInstance().logStatus("Histogram file for run number " + std::to_string(runNumber) + " not found. Please provide a valid filename.");
+                }
+            }
+            else
+            {
+                histogramFilePath = input;
+            }
         }
         else if (arg == "-hn" || arg == "--histogram_name")
         {
@@ -40,12 +65,6 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
             MinAmplitude = std::stof(argv[++i]);
             MaxAmplitude = std::stof(argv[++i]);
             FWHMmax = std::stof(argv[++i]);
-            std::cout << "Xmin: " << Xmin << std::endl;
-            std::cout << "Xmax: " << Xmax << std::endl;
-            std::cout << "MinAmplitude: " << MinAmplitude << std::endl;
-            std::cout << "MaxAmplitude: " << MaxAmplitude << std::endl;
-            std::cout << "FWHMmax: " << FWHMmax << std::endl;
-
         }
         else if (arg == "-sp" || arg == "--save_path")
         {
@@ -61,7 +80,7 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
         }
         else if (arg == "-s" || arg == "-sources")
         {
-            userInterfaceStatus = false; 
+            userInterfaceStatus = false;
             energyProcessor.chooseSources(i + 1, argc, argv);
             number_of_peaks = energyProcessor.getNumberOfPeaks();
             getSourcesNameRun();
@@ -71,7 +90,6 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
         {
             inputJsonFile = argv[++i];
             parseJsonFile();
-            std::cout << "aici" << std::endl;
         }
         else if (arg == "-d" || arg == "-domainLimits")
         {
@@ -82,7 +100,7 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
         {
             polynomialFitThreshold = std::stod(argv[++i]);
         }
-        else if(arg == "-h" || arg == "--help")
+        else if (arg == "-h" || arg == "--help")
         {
             printUsage();
             i = argc; // Stop parsing
@@ -97,33 +115,61 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
     }
 }
 
-bool ArgumentsManager::parseNumericArgument(const char* arg, float& value, float min, float max)
+bool ArgumentsManager::parseNumericArgument(const char *arg, float &value, float min, float max)
 {
-    try {
+    try
+    {
         value = std::stof(arg);
-        if (value >= min && value <= max) {
+        if (value >= min && value <= max)
+        {
             return true;
         }
         std::cerr << "Value " << value << " out of range [" << min << ", " << max << "]\n";
-    } catch (...) {
+    }
+    catch (...)
+    {
         std::cerr << "Failed to parse numeric value: " << arg << '\n';
     }
     return false;
+}
+
+// Add helper function to check if a string is a number
+bool ArgumentsManager::isNumber(const std::string &s) const
+{
+    return !s.empty() && std::all_of(s.begin(), s.end(), ::isdigit);
+}
+
+// Modify function to search current directory for .root file containing run number
+std::string ArgumentsManager::getHistogramFilename(int runNumber) const
+{
+    std::string runStr = std::to_string(runNumber);
+    for (const auto &entry : std::filesystem::directory_iterator("."))
+    {
+        if (entry.is_regular_file())
+        {
+            std::string filename = entry.path().filename().string();
+            if (filename.find(runStr) != std::string::npos && filename.find(".root") != std::string::npos)
+            {
+                return filename;
+            }
+        }
+    }
+    return "";
 }
 
 void ArgumentsManager::printUsage() const
 {
     std::cout << "Usage: program [options]\n"
               << "Options:\n"
-              << "  -hf, --histogram_file <path>    Set histogram file path\n"
-              << "  -hn, --histogram_name <name>    Set histogram name\n"
+              << "  -hf, --histogram_file <path or run number>    Set histogram file path or run number\n" // Updated description
+              << "  -hn, --histogram_name <name>                  Set histogram name\n"
               << "  -l, -limits <min> <max> <minA> <maxA> <fwhm>    Set analysis limits\n"
-              << "  -sp, --save_path <path>         Set save path\n"
-              << "  -dt, -detType <type>            Set detector type\n"
-              << "  -s, -sources <source...>        Specify sources\n"
-              << "  -j, -json <file>                Specify JSON configuration file\n"
-              << "  -d, -domainLimits <min> <max>  Set domain limits\n"
-              << "  -c, -calib <threshold>          Set calibration threshold\n";
+              << "  -sp, --save_path <path>                       Set save path\n"
+              << "  -dt, -detType <type>                          Set detector type\n"
+              << "  -s, -sources <source...>                      Specify sources\n"
+              << "  -j, -json <file>                              Specify JSON configuration file\n"
+              << "  -d, -domainLimits <min> <max>                  Set domain limits\n"
+              << "  -c, -calib <threshold>                        Set calibration threshold\n";
 }
 
 std::string ArgumentsManager::getExecutableDir() const
@@ -141,7 +187,7 @@ std::string ArgumentsManager::getExecutableDir() const
     }
     else
     {
-        std::cerr << "Failed to determine executable path." << std::endl;
+        ErrorHandle::getInstance().logStatus("Failed to get executable directory.");
         return "";
     }
 }
@@ -169,7 +215,6 @@ int ArgumentsManager::getNumberColumnSpecified(int histogramNumber) const
     auto it = std::find(domain.begin(), domain.end(), histogramNumber);
     if (it != domain.end())
     {
-        std::cout << "Found at position: " << std::distance(domain.begin(), it) << std::endl;
         return std::distance(domain.begin(), it);
     }
     else
@@ -228,7 +273,8 @@ void ArgumentsManager::setNumberOfPeaks(int peaks)
 void ArgumentsManager::parseJsonFile()
 {
     std::ifstream file(inputJsonFile);
-    if (!file.is_open()) {
+    if (!file.is_open())
+    {
         std::cerr << "Could not open Lut file: " << inputJsonFile << std::endl;
         return;
     }
@@ -237,6 +283,7 @@ void ArgumentsManager::parseJsonFile()
     bool inObject = false;
     // Temporary variables for current object
     int tempDomain = -1;
+    int valuesRead = 0;
     int tempDetType = detTypeStandard;
     std::string tempSerial = serialStandard;
     int tempAmpl = MinAmplitude;
@@ -244,11 +291,13 @@ void ArgumentsManager::parseJsonFile()
     fitLimits tempLimits = {static_cast<int>(Xmin), static_cast<int>(Xmax)};
     PTLimits tempPTLimits = {static_cast<int>(MinAmplitude), static_cast<int>(MaxAmplitude)};
 
-    while (std::getline(file, line)) {
+    while (std::getline(file, line))
+    {
         line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
 
         // Start of new object
-        if (line.find("{") != std::string::npos) {
+        if (line.find("{") != std::string::npos)
+        {
             inObject = true;
             // Reset temporary values to defaults
             tempDomain = -1;
@@ -262,8 +311,10 @@ void ArgumentsManager::parseJsonFile()
         }
 
         // End of object - push all values to vectors
-        if (line.find("}") != std::string::npos && inObject) {
-            if (tempDomain != -1) { // Only add if domain was specified
+        if (line.find("}") != std::string::npos && inObject)
+        {
+            if (tempDomain != -1)
+            { // Only add if domain was specified
                 domain.push_back(tempDomain);
                 detType.push_back(tempDetType);
                 serial.push_back(tempSerial);
@@ -276,42 +327,59 @@ void ArgumentsManager::parseJsonFile()
             continue;
         }
 
-        if (!inObject) continue;
+        if (!inObject)
+            continue;
 
         // Parse values within object
-        if (line.find("\"domain\"") != std::string::npos) {
+        if (line.find("\"domain\"") != std::string::npos)
+        {
             size_t colonPos = line.find(":");
-            if (colonPos != std::string::npos) {
+            if (colonPos != std::string::npos)
+            {
                 tempDomain = std::stoi(line.substr(colonPos + 1));
+                valuesRead++;
             }
         }
-        else if (line.find("\"detType\"") != std::string::npos) {
+        else if (line.find("\"detType\"") != std::string::npos)
+        {
             size_t colonPos = line.find(":");
-            if (colonPos != std::string::npos) {
+            if (colonPos != std::string::npos)
+            {
                 tempDetType = std::stoi(line.substr(colonPos + 1));
+                valuesRead++;
             }
         }
-        else if (line.find("\"serial\"") != std::string::npos) {
+        else if (line.find("\"serial\"") != std::string::npos)
+        {
             size_t colonPos = line.find(":");
-            if (colonPos != std::string::npos) {
+            if (colonPos != std::string::npos)
+            {
                 std::string value = line.substr(colonPos + 1);
-                value.erase(remove(value.begin(), value.end(), '\"'), value.end());
+                value.erase(std::remove(value.begin(), value.end(), '\"'), value.end());
                 tempSerial = value;
+                valuesRead++;
             }
         }
-        else if (line.find("\"ampl\"") != std::string::npos) {
+        else if (line.find("\"ampl\"") != std::string::npos)
+        {
             size_t colonPos = line.find(":");
-            if (colonPos != std::string::npos) {
+            if (colonPos != std::string::npos)
+            {
                 tempAmpl = std::stoi(line.substr(colonPos + 1));
+                valuesRead++;
             }
         }
-        else if (line.find("\"fwhm\"") != std::string::npos) {
+        else if (line.find("\"fwhm\"") != std::string::npos)
+        {
             size_t colonPos = line.find(":");
-            if (colonPos != std::string::npos) {
+            if (colonPos != std::string::npos)
+            {
                 tempFwhm = std::stoi(line.substr(colonPos + 1));
+                valuesRead++;
             }
         }
-        else if (line.find("\"fitLimits\"") != std::string::npos) {
+        else if (line.find("\"fitLimits\"") != std::string::npos)
+        {
             std::getline(file, line);
             line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
             tempLimits.Xmin = std::stoi(line.substr(line.find("[") + 1));
@@ -319,8 +387,10 @@ void ArgumentsManager::parseJsonFile()
             std::getline(file, line);
             line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
             tempLimits.Xmax = std::stoi(line.substr(0, line.find("]")));
+            valuesRead += 2;
         }
-        else if (line.find("\"PTLimits\"") != std::string::npos) {
+        else if (line.find("\"PTLimits\"") != std::string::npos)
+        {
             std::getline(file, line);
             line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
             tempPTLimits.MinAmplitude = std::stoi(line.substr(line.find("[") + 1));
@@ -328,9 +398,10 @@ void ArgumentsManager::parseJsonFile()
             std::getline(file, line);
             line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
             tempPTLimits.MaxAmplitude = std::stoi(line.substr(0, line.find("]")));
+            valuesRead += 2;
         }
     }
-
+    ErrorHandle::getInstance().logStatus("Data read successfully from Lut. Data read: " + std::to_string(valuesRead));
     file.close();
 }
 
@@ -348,7 +419,8 @@ void ArgumentsManager::printArgumentsInput() const
     }
 }
 
-bool ArgumentsManager::fileExists(const std::string& path) const {
-    std::ifstream f(path.c_str());
+bool ArgumentsManager::fileExists(const std::string &path) const
+{
+    std::ifstream f(path);
     return f.good();
 }

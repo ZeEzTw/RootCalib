@@ -21,7 +21,6 @@
 
 #include <TF1.h>
 #include <TH1D.h>
-#include <iostream>
 #include <fstream>
 
 class Peak {

@@ -1,9 +1,7 @@
 #pragma once
 
-#include <iostream>
 #include <vector>
-#include <fstream>
-#include <algorithm>
+#include <string>
 
 // Clasă pentru furnizarea datelor de calibrare
 class CalibrationDataProvider {

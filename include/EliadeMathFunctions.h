@@ -25,7 +25,6 @@
 
 #include <vector>
 
-
 class EliadeMathFunctions {
 public:
     static std::vector<std::vector<double>> multiplyTransposeMatrix(const std::vector<std::vector<double>> &X);

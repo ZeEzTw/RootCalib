@@ -21,7 +21,6 @@
 #include "Peak.h"
 #include "UserInterface.h"
 #include "ArgumentsManager.h"
-#include <TError.h>
 #include <vector>
 
 class TaskHandler

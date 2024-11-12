@@ -1,8 +1,8 @@
 #include "../include/Peak.h"
-#include <TF1.h>
-#include <TH1D.h>
-#include <cmath>
-#include <iostream>
+//#include <cmath>
+//#include <iostream>
+//#include <TF1.h>
+//#include <TH1D.h>
 
 using namespace std;
 

@@ -1,5 +1,13 @@
 #include "../include/Histogram.h"
 #include "../include/EliadeMathFunctions.h"
+#include "../include/ErrorHandle.h"
+//#include <iostream>
+//#include <fstream>
+//#include <cmath>
+//#include <limits>
+//#include <TCanvas.h>
+//#include <TLatex.h>
+//#include <TGraph.h>
 
 // Global constants
 namespace
@@ -35,10 +43,6 @@ Histogram::Histogram(int xMin, int xMax, int maxFWHM, float minAmplitude, float 
     {
         this->tempHist = (TH1D *)mainHist->Clone();
         this->calibratedHist = (TH1D *)mainHist->Clone();
-    }
-    else
-    {
-        std::cerr << "Warning: mainHist is null in Histogram constructor" << std::endl;
     }
 }
 
@@ -118,6 +122,7 @@ void Histogram::findPeaks()
         }
         count++;
     }
+    ErrorHandle::getInstance().logStatus("Peaks detected: " + std::to_string(peaks.size()));
 }
 void Histogram::eliminatePeak(const Peak &peak)
 {
@@ -213,20 +218,21 @@ int Histogram::detectAndFitPeaks()
     tempHist->Fit(gaus, "RQ");
     peaks.emplace_back(gaus, mainHist);
 
+    if (!checkConditions(peaks.back()))
+    {
+        ErrorHandle::getInstance().logStatus("Peak " + std::to_string(peaks.back().getPosition()) + " does not meet the conditions, peak procces stops here.");
+        eliminatePeak(peaks.back());
+        peaks.pop_back();
+        delete gaus;
+        return 0;
+    }
+
     // Validate peak quality
     if (!isValidPeak(peaks.back()))
     {
         peaks.pop_back();
         delete gaus;
         return -1;
-    }
-
-    if (!checkConditions(peaks.back()))
-    {
-        eliminatePeak(peaks.back());
-        peaks.pop_back();
-        delete gaus;
-        return 0;
     }
 
     peakCount++;
@@ -293,6 +299,7 @@ void Histogram::calibratePeaks(const double knownEnergies[], int size)
             }
         }
     }
+    ErrorHandle::getInstance().logStatus("Peaks asociated with calibrated ones: " + std::to_string(bestCorrelation));
     peakMatchCount = bestCorrelation;
     calibratePeaksByDegree();
 }
@@ -318,7 +325,7 @@ void Histogram::calibratePeaksByDegree()
     int n = positions.size();
     if (n == 0)
     {
-        std::cerr << "Error: No valid peaks available for calibration." << std::endl;
+        ErrorHandle::getInstance().errorHandle(ErrorHandle::NO_PEAKS_FOR_CALIBRATION);
         return;
     }
 
@@ -352,14 +359,11 @@ void Histogram::calibratePeaksByDegree()
 
 // V2 calibration section //removed, available in the previous version on github
 
-
-
 // Apply calibration section
 void Histogram::initializeCalibratedHist()
 {
     if (mainHist == nullptr)
     {
-        std::cerr << "Error: mainHist is not initialized." << std::endl;
         return;
     }
 
@@ -495,13 +499,16 @@ void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
     jsonFile << "\t\t}\n";
     jsonFile << "\t},\n";
     // jsonFile << "]\n";
+    ErrorHandle::getInstance().logStatus("Peaks data saved successfully in Json.");
+    ErrorHandle::getInstance().logStatus("end------------------------------------------------.");
+
 }
 
 void Histogram::printHistogramWithPeaksRoot(TFile *outputFile)
 {
     if (!outputFile || outputFile->IsZombie())
     {
-        std::cerr << "Error: Could not open file for writing" << std::endl;
+        ErrorHandle::getInstance().logStatus("Error: Could not open file for writing in printHistogramWithPeaksRoot, filed output its not send corectly.");
         return;
     }
 
@@ -532,7 +539,7 @@ void Histogram::printCalibratedHistogramRoot(TFile *outputFile) const
 {
     if (!outputFile || outputFile->IsZombie())
     {
-        std::cerr << "Error: Could not open file for writing" << std::endl;
+        ErrorHandle::getInstance().logStatus("Error: Could not open file for writing in printCalibratedHistogramRoot, filed output its not send corectly.");
         return;
     }
     outputFile->cd();
@@ -643,7 +650,7 @@ void Histogram::changePeak(int peakNumber, double newPosition)
 
     eliminatePeak(peaks[peakNumber]);
 
-    peaks[peakNumber] = Peak(gaus, mainHist); // Use constructor for clarity
+    peaks[peakNumber] = Peak(gaus, mainHist);
     std::cout << "Peak number: " << peakNumber << std::endl;
     std::cout << "Peak position: " << peaks[peakNumber].getPosition() << std::endl;
     if (!checkConditions(peaks[peakNumber]))

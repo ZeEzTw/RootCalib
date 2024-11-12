@@ -19,11 +19,8 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
-#include <iostream>
-#include <string>
+//#include <string>
 #include <fstream>
-#include <sys/stat.h>  // Pentru mkdir
-#include <TFile.h>
 #include <TFile.h>
 #include <TH2.h>
 
@@ -53,7 +50,7 @@ public:
     TFile* getOutputFileHistograms() { return outputFileHistograms; }
     TFile* getOutputFileCalibrated() { return outputFileCalibrated; }
     const TFile* getOutputFileTH2() const { return outputFileTH2; }
-
+    const std::string getSavePath() const { return savePath; }
     // Functions for saving and updating histograms
     void saveTH2Histogram(TH2F* const th2Histogram);
     void updateHistogramName(TH2F* const histogram);
