@@ -3,12 +3,8 @@
       "domain": 102,
       "detType": 1,
       "serial": "CL31C",
-      "ampl": 96000,
+      "ampl": 0,
       "fwhm": 295000,
-      "fitLimits": [
-         100,
-         11800
-      ],
       "PTLimits": [
          150,
          9700

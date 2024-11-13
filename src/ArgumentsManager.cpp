@@ -23,11 +23,9 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
         printUsage();
         return;
     }
-
     for (int i = 1; i < argc; i++)
     {
         std::string arg = argv[i];
-
         if (arg == "-hf" || arg == "--histogram_file")
         {
             std::string input = argv[++i];
@@ -58,10 +56,10 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
             // energyFilePath = argv[++i];
             // energyProcessor = sortEnergy(energyFilePath); // Update energyProcessor if the energy file changes
         }
-        else if (arg == "-l" || arg == "-limits")
+        else if ((arg == "-l" || arg == "-limits")&& i+5<argc)
         {
-            Xmin = std::stof(argv[++i]);
-            Xmax = std::stof(argv[++i]);
+            Xmin = std::stoi(argv[++i]);
+            Xmax = std::stoi(argv[++i]);
             MinAmplitude = std::stof(argv[++i]);
             MaxAmplitude = std::stof(argv[++i]);
             FWHMmax = std::stof(argv[++i]);
@@ -89,7 +87,6 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
         else if (arg == "-j" || arg == "-json")
         {
             inputJsonFile = argv[++i];
-            parseJsonFile();
         }
         else if (arg == "-d" || arg == "-domainLimits")
         {
@@ -113,6 +110,14 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
             return;
         }
     }
+    if(inputJsonFile.empty())
+    {
+        ErrorHandle::getInstance().logStatus("No JSON file provided. Please provide a JSON file.");
+    }
+    else
+    {
+        parseJsonFile();
+    }
 }
 
 bool ArgumentsManager::parseNumericArgument(const char *arg, float &value, float min, float max)
@@ -133,21 +138,21 @@ bool ArgumentsManager::parseNumericArgument(const char *arg, float &value, float
     return false;
 }
 
-// Add helper function to check if a string is a number
+//function to check if a string is a number
 bool ArgumentsManager::isNumber(const std::string &s) const
 {
     return !s.empty() && std::all_of(s.begin(), s.end(), ::isdigit);
 }
 
-// Modify function to search current directory for .root file containing run number
+//function to search current directory for .root file containing run number
 std::string ArgumentsManager::getHistogramFilename(int runNumber) const
 {
-    std::string runStr = std::to_string(runNumber);
+    std::string runStr = "_" + std::to_string(runNumber) + "_";
     for (const auto &entry : std::filesystem::directory_iterator("."))
     {
         if (entry.is_regular_file())
         {
-            std::string filename = entry.path().filename().string();
+            std::string filename =  entry.path().filename().string();
             if (filename.find(runStr) != std::string::npos && filename.find(".root") != std::string::npos)
             {
                 return filename;
@@ -288,7 +293,7 @@ void ArgumentsManager::parseJsonFile()
     std::string tempSerial = serialStandard;
     int tempAmpl = MinAmplitude;
     int tempFwhm = FWHMmax;
-    fitLimits tempLimits = {static_cast<int>(Xmin), static_cast<int>(Xmax)};
+    fitLimits tempLimits = {Xmin, Xmax};
     PTLimits tempPTLimits = {static_cast<int>(MinAmplitude), static_cast<int>(MaxAmplitude)};
 
     while (std::getline(file, line))
@@ -303,9 +308,9 @@ void ArgumentsManager::parseJsonFile()
             tempDomain = -1;
             tempDetType = detTypeStandard;
             tempSerial = serialStandard;
-            tempAmpl = MaxAmplitude;
+            tempAmpl = MinAmplitude;
             tempFwhm = FWHMmax;
-            tempLimits = {static_cast<int>(Xmin), static_cast<int>(Xmax)};
+            tempLimits = {Xmin, Xmax};
             tempPTLimits = {static_cast<int>(MinAmplitude), static_cast<int>(MaxAmplitude)};
             continue;
         }

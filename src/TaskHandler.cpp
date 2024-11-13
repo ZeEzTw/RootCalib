@@ -23,7 +23,12 @@ void TaskHandler::executeHistogramProcessingTask()
     fileManager.openFiles();
     ErrorHandle::getInstance().setPathForSave(fileManager.getSavePath());
     energyArray = initializeEnergyArray();
-
+    if(energyArray == nullptr)
+    {
+        ErrorHandle::getInstance().logStatus("Energy array is null STOP the Task.");
+        ErrorHandle::getInstance().saveLogFile();
+        return;
+    }
     if (fileManager.getTH2Histogram() == nullptr)
     {
         ErrorHandle::getInstance().logStatus("TH2F histogram is null STOP the Task.");
@@ -39,7 +44,7 @@ void TaskHandler::executeHistogramProcessingTask()
 double *TaskHandler::initializeEnergyArray()
 {
     CalibrationDataProvider energyProcessor = argumentsManager.getEnergyProcessor();
-    double *array = new double[1]{0.0};
+    double *array = nullptr;
     if (argumentsManager.isUserInterfaceEnabled())
     {
         std::string sourcesName;
@@ -55,7 +60,7 @@ double *TaskHandler::initializeEnergyArray()
     if (!array)
     {
         ErrorHandle::getInstance().logStatus("Failed to retrieve energy array.");
-        // return nullptr;
+        return nullptr;
     }
     ErrorHandle::getInstance().logArrayWithCalibratedValues(array, size);
     ErrorHandle::getInstance().logStatus("Energy array initialized successfully.");
@@ -110,8 +115,8 @@ void TaskHandler::processSingleHistogram(TH1D *const hist1D)
         ErrorHandle::getInstance().logStatus("start------------------------------------------------.");
         hist = Histogram(
             argumentsManager.getXminFile(histIndex), argumentsManager.getXmaxFile(histIndex),
-            argumentsManager.getFWHMmaxFile(histIndex), argumentsManager.getMinAmplitude(),
-            argumentsManager.getMaxAmplitudeFile(histIndex), argumentsManager.getSerialFile(histIndex),
+            argumentsManager.getFWHMmaxFile(histIndex), argumentsManager.getMinAmplitudeFile(histIndex),
+            argumentsManager.getMaxAmplitude(), argumentsManager.getSerialFile(histIndex),
             argumentsManager.getDetTypeFile(histIndex), argumentsManager.getPolynomialFitThreshold(),
             argumentsManager.getNumberOfPeaks(), hist1D,
             argumentsManager.getHistogramNameFile(histIndex), argumentsManager.getSourcesName());

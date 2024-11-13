@@ -30,10 +30,10 @@ public:
         INVALID_SOURCE_NAMES = 2,
         INVALID_INPUT_FILE = 3,
         INVALID_TH2F_HISTOGRAM = 4,
-        NO_VALID_PEAKS = 5,           // Added missing comma
-        INVALID_OUTPUT_FILE = 6,      // Added missing comma
-        NO_PEAKS_FOR_CALIBRATION = 7, // Added missing comma
-        LUT_FILE_NOT_FOUND = 8        // Last enumerator can optionally have a comma
+        NO_VALID_PEAKS = 5, 
+        INVALID_OUTPUT_FILE = 6,
+        NO_PEAKS_FOR_CALIBRATION = 7,
+        LUT_FILE_NOT_FOUND = 8
     };
 
     // Static method to get the Singleton instance

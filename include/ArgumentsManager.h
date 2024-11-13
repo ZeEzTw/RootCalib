@@ -39,8 +39,8 @@ private:
     CalibrationDataProvider energyProcessor;
 
     // Analysis parameters
-    float Xmin = 0.0f;
-    float Xmax = 1e6f;
+    int Xmin = 0;
+    int Xmax = 1000000;
     float MinAmplitude = 0.0f;
     float MaxAmplitude = 1e6f;
     float FWHMmax = 1e4f;
@@ -103,8 +103,8 @@ public:
     std::string getHistogramFilePath() const { return histogramFilePath; }
     std::string getHistogramName() const { return TH2histogram_name; }
     std::string getEnergyFilePath() const { return energyFilePath; }
-    float getXmin() const { return Xmin; }
-    float getXmax() const { return Xmax; }
+    int getXmin() const { return Xmin; }
+    int getXmax() const { return Xmax; }
     float getFWHMmax() const { return FWHMmax; }
     float getMinAmplitude() const { return MinAmplitude; }
     float getMaxAmplitude() const { return MaxAmplitude; }
@@ -120,7 +120,7 @@ public:
     int getXminFile(int position) const { return limits[position].Xmin; }
     int getXmaxFile(int position) const { return limits[position].Xmax; }
     int getFWHMmaxFile(int position) const { return fwhm[position]; }
-    int getMaxAmplitudeFile(int position) const { return ampl[position]; }
+    int getMinAmplitudeFile(int position) const { return ampl[position]; }
     std::string getSerialFile(int position) const { return serial[position]; }
     int getDetTypeFile(int position) const { return detType[position]; }
     std::string getHistogramNameFile(int position) const { return serial[position]; }
