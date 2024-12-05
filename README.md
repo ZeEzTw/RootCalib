@@ -51,7 +51,7 @@ Compile the code with:
    
 - 2.With Full Constraints
   
- 		./task -hf "data/data.root" -j "LUT_RECALL_S_20240604.json" -hn "mDelila_raw" -ef "data/calibration_sources.json" -limits 0.0 1000000.0 0.0 1000000000.0 1000.0 -sp "output/" -detType 2 -serial "CL" -calib 1e-3
+ 		./task -hf "data/data.root" -j "LUT_RECALL_S_20240604.json" -hn "mDelila_raw" -limits 0.0 1000000.0 0.0 1000000000.0 1000.0 -sp "output/" -detType 2 -serial "CL" -calib 1e-3 -s "152Eu"
 
   Run the program without the UI by specifying the -sources argument:
 - 3.To activate User Interface, run it with the following example command:
@@ -60,7 +60,7 @@ Compile the code with:
 
 Format without values puted: 
   		
-    ./task -hf string -hn string -ef string -limits float float float float float -sp string -detType int -serial string -json string -calib int -domainLimits int int -sources string
+    ./task -hf string -hn string -limits float float float float float -sp string -detType int -serial string -json string -calib int -domainLimits int int -sources string
 
 You can specify only the parameters you are interested in; any unspecified arguments will use default values or be overridden by values in the JSON file if provided. For example:
 
@@ -78,7 +78,7 @@ Required Arguments
 Optional Arguments
 
     -hn / --histogram_name: Name of the histogram. Default: mDelila_raw.
-    -ef / --energy_file: Calibration source file. Default: data/calibration_sources.json.
+    -ef / --energy_file: Calibration source file. Default: data/calibration_sources.json. taken automatically
     -sources: List of calibration sources.
     -limits: Analysis bounds: Xmin Xmax MinAmplitude MaxAmplitude FWHMmax. Default: 0.0 1000000.0 0.0 1000000000.0 1000.0.
     -sp / --save_path: Output directory. Default: output/.
