@@ -1,6 +1,6 @@
 # Histogram Peak Extraction and Calibration Tool
 
-This project provides tools for extracting and analyzing peaks from ROOT histograms, calibrating them using multiple sources, and saving the results. It also supports making adjustments to peaks after initial processing.
+This project provides tools for extracting and analyzing peaks from ROOT histograms, calibrating them using multiple sources, and saving the results. It also supports making adjustments to peaks after initial processing. The tool is modular and extensible, offering robust error handling and an optional user interface for interactive use.
 
 ## Features
 
@@ -9,7 +9,8 @@ This project provides tools for extracting and analyzing peaks from ROOT histogr
 - **Calibration**: Calibrates each histogram individually using specified sources and return calibration parameters.
 - **File Output**: Saves the histogram with peaks, the calibrated histogram, and detailed data in a JSON file.
 - **User Interface**: Provides an optional UI for interactive calibration and adjustments.
-
+- **Error Handling**: Logs errors and execution details, highlighting critical issues for troubleshooting.
+  
 ## Example of `data.json`
 
 ```json
@@ -34,7 +35,7 @@ Clone Repository
 
 Clone the repository using:
 
-    git clone https://github.com/ZeEzTw/Eli-Europiu.git
+    git clone https://github.com/ZeEzTw/RootCalib.git
 
 #Compilation
 Compile the code with:
@@ -46,21 +47,20 @@ Compile the code with:
  
  - 1.To run without User Interface, use this example command:
 
-        ./task -hf "data/data.root" -hn "mDelila_raw" -ef "data/calibration_sources.json" -limits 0.0 1000000.0 0.0 1000000000.0 1000.0 -sp "output/" -detType 2 -serial "CL" -calib 1e-3 -sources 152Eu
+        ./task -hf 152 -j "LUT_RECALL_S_20240604.json" -s "152Eu"
    
-   Run the program without the UI by specifying the -sources argument:
-
-- 2.To activate User Interface, run it with the following example command:
-
-        ./task -hf "data/data.root" -hn "mDelila_raw" -ef "data/calibration_sources.json" -limits 0.0 1000000.0 0.0 1000000000.0 1000.0 -sp "output/" -detType 2 -serial "CL" -calib 1e-3
+- 2.With Full Constraints
   
-- 3.Default Execution: Running the program without any additional arguments will use default values set in ArgumentsManager.h
+ 		./task -hf "data/data.root" -j "LUT_RECALL_S_20240604.json" -hn "mDelila_raw" -ef "data/calibration_sources.json" -limits 0.0 1000000.0 0.0 1000000000.0 1000.0 -sp "output/" -detType 2 -serial "CL" -calib 1e-3
 
-		./task
+  Run the program without the UI by specifying the -sources argument:
+- 3.To activate User Interface, run it with the following example command:
   
+  		./task -hf 152 -j "LUT_RECALL_S_20240604.json"
+
 Format without values puted: 
   		
-    ./task -hf string -hn string -ef string -limits float float float float float -sp string -detType int -serial string -json string -calib int -domainLimits int int  -sources string
+    ./task -hf string -hn string -ef string -limits float float float float float -sp string -detType int -serial string -json string -calib int -domainLimits int int -sources string
 
 You can specify only the parameters you are interested in; any unspecified arguments will use default values or be overridden by values in the JSON file if provided. For example:
 
@@ -69,17 +69,25 @@ You can specify only the parameters you are interested in; any unspecified argum
 soruces can be puted as much as needed.
 
 
-- hf / --histogram_file: Path to the histogram ROOT file. Default: data/data.root
-- hn / --histogram_name: Name of the histogram within the file. Default: mDelila_raw
-- ef / --energy_file: Path to the calibration source file. Default: data/calibration_sources.json
-- sources: Specify calibration sources. Running without this argument starts the UI.
-- limits: Limits for histogram analysis in the order: Xmin Xmax MinAmplitude MaxAmplitude FWHMmax. Default: 0.0 1000000.0 0.0 1000000000.0 1000.0
-- sp / --save_path: Directory to save output files. Default: output/
-- detType: Detector type used for calibration. Default: 2
-- serial: Serial number of the detector. Default: CL
-- json: Specify a JSON file for individual histogram configuration.
-- domainLimits: Define domain limits for peak extraction in the format: xMin xMax.
-- calib: Calibration polynomial fit threshold. Default: 1e-10
+Required Arguments
+
+    -hf / --histogram_file: Path to the histogram file.
+        Format: Full path (data/data.root) or shorthand (e.g., 152 for data_152_S9.root).
+    -j / --json: Path to the LUT JSON file. Mandatory for analysis.
+
+Optional Arguments
+
+    -hn / --histogram_name: Name of the histogram. Default: mDelila_raw.
+    -ef / --energy_file: Calibration source file. Default: data/calibration_sources.json.
+    -sources: List of calibration sources.
+    -limits: Analysis bounds: Xmin Xmax MinAmplitude MaxAmplitude FWHMmax. Default: 0.0 1000000.0 0.0 1000000000.0 1000.0.
+    -sp / --save_path: Output directory. Default: output/.
+    -detType: Detector type. Default: 2.
+    -serial: Detector serial number. Default: CL.
+    -domainLimits: Peak extraction bounds: xMin xMax.
+    -calib: Calibration polynomial threshold. Default: 1e-10.
+You can specify only the parameters you need; the rest will use defaults or values from the JSON file.
+
 ## Extra Features
 
 After processing, the program offers the option to adjust peaks:
