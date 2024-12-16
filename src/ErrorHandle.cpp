@@ -1,10 +1,12 @@
 #include "../include/ErrorHandle.h"
 #include <iostream>
 #include <fstream>
-//#include <sstream>
-//#include <iomanip>
-//#include <chrono>
-#include <filesystem>
+#include <sstream>
+#include <iomanip>
+#include <chrono>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <cstring> // For strerror
 
 // Singleton instance retrieval
 ErrorHandle &ErrorHandle::getInstance()
@@ -122,34 +124,32 @@ void ErrorHandle::writeProblemToJsonErrorFile(int errorNumber, const std::string
 
 void ErrorHandle::saveLogFile()
 {
+    std::cout<<"Saving log file"<<std::endl;
     // Ensure the save directory exists; create it if it doesn't
     if (pathForSave.empty())
     {
-        pathForSave = std::filesystem::current_path().string();
+        pathForSave = ".";
         // Optionally log the creation of the directory
         logStatus("Using current directory for saving logs, pathForSave was invalid: " + pathForSave);
     }
     else
     {
-        if (!pathForSave.empty())
+        struct stat info;
+        if (stat(pathForSave.c_str(), &info) != 0 || !(info.st_mode & S_IFDIR))
         {
-            std::filesystem::path savePath(pathForSave);
-            if (!std::filesystem::exists(savePath))
+            if (mkdir(pathForSave.c_str(), 0777) != 0)
             {
-                try
-                {
-                    std::filesystem::create_directories(savePath);
-                    // Optionally log the creation of the directory
-                    logStatus("Created log directory: " + pathForSave);
-                }
-                catch (const std::filesystem::filesystem_error &e)
-                {
-                    std::cerr << "Error creating directory: " << e.what() << std::endl;
-                    logStatus(std::string("Failed to create log directory: ") + e.what());
-                    return; // Exit the function if directory creation fails
-                }
+                std::cerr << "Error creating directory: " << strerror(errno) << std::endl;
+                logStatus(std::string("Failed to create log directory: ") + strerror(errno));
+                return; // Exit the function if directory creation fails
+            }
+            else
+            {
+                // Optionally log the creation of the directory
+                logStatus("Created log directory: " + pathForSave);
             }
         }
+        std::cout<<"pathForSave: "<<pathForSave<<std::endl;
     }
 
     std::ofstream logFile(pathForSave + "/error_log.json");

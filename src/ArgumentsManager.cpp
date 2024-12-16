@@ -6,8 +6,9 @@
 #include <unistd.h>
 #include <limits.h>
 #include <algorithm>
-#include <filesystem> 
+#include <dirent.h> // Include dirent.h for directory iteration
 #include <cctype>
+#include <nlohmann/json.hpp> // Include nlohmann/json
 
 ArgumentsManager::ArgumentsManager(int argc, char *argv[])
     : energyFilePath(getDataFolderPath()),
@@ -56,7 +57,7 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
             // energyFilePath = argv[++i];
             // energyProcessor = sortEnergy(energyFilePath); // Update energyProcessor if the energy file changes
         }
-        else if ((arg == "-l" || arg == "-limits")&& i+5<argc)
+        else if ((arg == "-l" || arg == "-limits") && i + 5 < argc)
         {
             Xmin = std::stoi(argv[++i]);
             Xmax = std::stoi(argv[++i]);
@@ -110,7 +111,7 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
             return;
         }
     }
-    if(inputJsonFile.empty())
+    if (inputJsonFile.empty())
     {
         ErrorHandle::getInstance().logStatus("No JSON file provided. Please provide a JSON file.");
     }
@@ -138,26 +139,30 @@ bool ArgumentsManager::parseNumericArgument(const char *arg, float &value, float
     return false;
 }
 
-//function to check if a string is a number
+// function to check if a string is a number
 bool ArgumentsManager::isNumber(const std::string &s) const
 {
     return !s.empty() && std::all_of(s.begin(), s.end(), ::isdigit);
 }
 
-//function to search current directory for .root file containing run number
+// function to search current directory for .root file containing run number
 std::string ArgumentsManager::getHistogramFilename(int runNumber) const
 {
     std::string runStr = "_" + std::to_string(runNumber) + "_";
-    for (const auto &entry : std::filesystem::directory_iterator("."))
+    DIR *dir;
+    struct dirent *ent;
+    if ((dir = opendir(".")) != NULL)
     {
-        if (entry.is_regular_file())
+        while ((ent = readdir(dir)) != NULL)
         {
-            std::string filename =  entry.path().filename().string();
+            std::string filename = ent->d_name;
             if (filename.find(runStr) != std::string::npos && filename.find(".root") != std::string::npos)
             {
+                closedir(dir);
                 return filename;
             }
         }
+        closedir(dir);
     }
     return "";
 }
@@ -280,133 +285,48 @@ void ArgumentsManager::parseJsonFile()
     std::ifstream file(inputJsonFile);
     if (!file.is_open())
     {
-        std::cerr << "Could not open Lut file: " << inputJsonFile << std::endl;
+        std::cerr << "Could not open JSON file: " << inputJsonFile << std::endl;
         return;
     }
 
-    std::string line;
-    bool inObject = false;
-    // Temporary variables for current object
-    int tempDomain = -1;
-    int valuesRead = 0;
-    int tempDetType = detTypeStandard;
-    std::string tempSerial = serialStandard;
-    int tempAmpl = MinAmplitude;
-    int tempFwhm = FWHMmax;
-    fitLimits tempLimits = {Xmin, Xmax};
-    PTLimits tempPTLimits = {static_cast<int>(MinAmplitude), static_cast<int>(MaxAmplitude)};
+    nlohmann::json jsonData;
+    file >> jsonData;
 
-    while (std::getline(file, line))
+    for (const auto& item : jsonData)
     {
-        line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
+        int tempDomain = item.contains("domain") ? item["domain"].get<int>() : -1;
+        int tempDetType = item.contains("detType") ? item["detType"].get<int>() : detTypeStandard;
+        std::string tempSerial = item.contains("serial") ? item["serial"].get<std::string>() : serialStandard;
+        int tempAmpl = item.contains("ampl") ? item["ampl"].get<int>() : MinAmplitude;
+        int tempFwhm = item.contains("fwhm") ? item["fwhm"].get<int>() : FWHMmax;
+        fitLimits tempLimits = {Xmin, Xmax};
+        PTLimits tempPTLimits = {static_cast<int>(MinAmplitude), static_cast<int>(MaxAmplitude)};
 
-        // Start of new object
-        if (line.find("{") != std::string::npos)
+        if (item.contains("fitLimits"))
         {
-            inObject = true;
-            // Reset temporary values to defaults
-            tempDomain = -1;
-            tempDetType = detTypeStandard;
-            tempSerial = serialStandard;
-            tempAmpl = MinAmplitude;
-            tempFwhm = FWHMmax;
-            tempLimits = {Xmin, Xmax};
-            tempPTLimits = {static_cast<int>(MinAmplitude), static_cast<int>(MaxAmplitude)};
-            continue;
+            tempLimits.Xmin = item["fitLimits"].contains("Xmin") ? item["fitLimits"]["Xmin"].get<int>() : Xmin;
+            tempLimits.Xmax = item["fitLimits"].contains("Xmax") ? item["fitLimits"]["Xmax"].get<int>() : Xmax;
         }
 
-        // End of object - push all values to vectors
-        if (line.find("}") != std::string::npos && inObject)
+        if (item.contains("PTLimits"))
         {
-            if (tempDomain != -1)
-            { // Only add if domain was specified
-                domain.push_back(tempDomain);
-                detType.push_back(tempDetType);
-                serial.push_back(tempSerial);
-                ampl.push_back(tempAmpl);
-                fwhm.push_back(tempFwhm);
-                limits.push_back(tempLimits);
-                ptLimits.push_back(tempPTLimits);
-            }
-            inObject = false;
-            continue;
+            tempPTLimits.MinAmplitude = item["PTLimits"].contains("MinAmplitude") ? item["PTLimits"]["MinAmplitude"].get<int>() : static_cast<int>(MinAmplitude);
+            tempPTLimits.MaxAmplitude = item["PTLimits"].contains("MaxAmplitude") ? item["PTLimits"]["MaxAmplitude"].get<int>() : static_cast<int>(MaxAmplitude);
         }
 
-        if (!inObject)
-            continue;
-
-        // Parse values within object
-        if (line.find("\"domain\"") != std::string::npos)
+        if (tempDomain != -1)
         {
-            size_t colonPos = line.find(":");
-            if (colonPos != std::string::npos)
-            {
-                tempDomain = std::stoi(line.substr(colonPos + 1));
-                valuesRead++;
-            }
-        }
-        else if (line.find("\"detType\"") != std::string::npos)
-        {
-            size_t colonPos = line.find(":");
-            if (colonPos != std::string::npos)
-            {
-                tempDetType = std::stoi(line.substr(colonPos + 1));
-                valuesRead++;
-            }
-        }
-        else if (line.find("\"serial\"") != std::string::npos)
-        {
-            size_t colonPos = line.find(":");
-            if (colonPos != std::string::npos)
-            {
-                std::string value = line.substr(colonPos + 1);
-                value.erase(std::remove(value.begin(), value.end(), '\"'), value.end());
-                tempSerial = value;
-                valuesRead++;
-            }
-        }
-        else if (line.find("\"ampl\"") != std::string::npos)
-        {
-            size_t colonPos = line.find(":");
-            if (colonPos != std::string::npos)
-            {
-                tempAmpl = std::stoi(line.substr(colonPos + 1));
-                valuesRead++;
-            }
-        }
-        else if (line.find("\"fwhm\"") != std::string::npos)
-        {
-            size_t colonPos = line.find(":");
-            if (colonPos != std::string::npos)
-            {
-                tempFwhm = std::stoi(line.substr(colonPos + 1));
-                valuesRead++;
-            }
-        }
-        else if (line.find("\"fitLimits\"") != std::string::npos)
-        {
-            std::getline(file, line);
-            line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
-            tempLimits.Xmin = std::stoi(line.substr(line.find("[") + 1));
-
-            std::getline(file, line);
-            line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
-            tempLimits.Xmax = std::stoi(line.substr(0, line.find("]")));
-            valuesRead += 2;
-        }
-        else if (line.find("\"PTLimits\"") != std::string::npos)
-        {
-            std::getline(file, line);
-            line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
-            tempPTLimits.MinAmplitude = std::stoi(line.substr(line.find("[") + 1));
-
-            std::getline(file, line);
-            line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
-            tempPTLimits.MaxAmplitude = std::stoi(line.substr(0, line.find("]")));
-            valuesRead += 2;
+            domain.push_back(tempDomain);
+            detType.push_back(tempDetType);
+            serial.push_back(tempSerial);
+            ampl.push_back(tempAmpl);
+            fwhm.push_back(tempFwhm);
+            limits.push_back(tempLimits);
+            ptLimits.push_back(tempPTLimits);
         }
     }
-    ErrorHandle::getInstance().logStatus("Data read successfully from Lut. Data read: " + std::to_string(valuesRead));
+
+    ErrorHandle::getInstance().logStatus("Data read successfully from JSON file.");
     file.close();
 }
 
