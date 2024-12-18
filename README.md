@@ -45,18 +45,29 @@ Compile the code with:
 
 # Running the Program
  
- - 1.To run without User Interface, use this example command:
+ 1. Run Without User Interface
 
-        ./task -hf 152 -j "LUT_RECALL_S_20240604.json" -s "152Eu"
+    Use the following example commands to execute the program without the UI:
+    
+Basic Command:
+
+	./task -hf 152 -j "LUT_RECALL_S_20240604.json" -s "152Eu"
+
+-With Path Specified:
+
+  	./RootCalib/task -hf 152 -j "RootCalib/LUT_RECALL_S_20240604.json" -sp "output/" -calib 1e-8 -s "152Eu"
    
-- 2.With Full Constraints
+Full Constraints Example:
   
- 		./task -hf "data/data.root" -j "LUT_RECALL_S_20240604.json" -hn "mDelila_raw" -limits 0.0 1000000.0 0.0 1000000000.0 1000.0 -sp "output/" -detType 2 -serial "CL" -calib 1e-3 -s "152Eu"
+ 	./task -hf "data/data.root" -j "LUT_RECALL_S_20240604.json" -hn "mDelila_raw" -limits 0.0 1000000.0 0.0 1000000000.0 1000.0 -sp "output/" -detType 2 -serial "CL" -calib 1e-3 -s "152Eu"
 
   Run the program without the UI by specifying the -sources argument:
-- 3.To activate User Interface, run it with the following example command:
   
-  		./task -hf 152 -j "LUT_RECALL_S_20240604.json"
+  2. Run With User Interface
+  
+  To activate User Interface, run it with the following example command:
+  
+  	./task -hf 152 -j "LUT_RECALL_S_20240604.json"
 
 Format without values puted: 
   		
@@ -78,7 +89,6 @@ Required Arguments
 Optional Arguments
 
     -hn / --histogram_name: Name of the histogram. Default: mDelila_raw.
-    -ef / --energy_file: Calibration source file. Default: data/calibration_sources.json. taken automatically
     -sources: List of calibration sources.
     -limits: Analysis bounds: Xmin Xmax MinAmplitude MaxAmplitude FWHMmax. Default: 0.0 1000000.0 0.0 1000000000.0 1000.0.
     -sp / --save_path: Output directory. Default: output/.
