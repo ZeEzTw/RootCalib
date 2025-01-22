@@ -45,6 +45,7 @@
 #include <TFile.h>
 #include <vector>
 #include <string>
+#include <nlohmann/json.hpp>
 
 class Histogram
 {

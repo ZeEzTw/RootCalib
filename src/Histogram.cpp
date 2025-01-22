@@ -455,14 +455,11 @@ void Histogram::applyXCalibration()
 // output section
 void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
 {
-    // jsonFile << "[\n";
     jsonFile << "\t{\n";
     jsonFile << "\t\t\"domain\": " << getMainHistName() << ",\n";
     jsonFile << "\t\t\"serial\": \"" << serial << "\",\n";
     jsonFile << "\t\t\"detType\": " << detType << ",\n";
-    jsonFile << "\t\t\"PT\": [";
-    jsonFile << getPT() << ", " << getPTError();
-    jsonFile << "],\n";
+    jsonFile << "\t\t\"PT\": [" << getPT() << ", " << getPTError() << "],\n";
 
     jsonFile << "\t\t\"pol_list\": [\n";
     for (size_t i = 0; i < coefficients.size(); ++i)
@@ -472,7 +469,7 @@ void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
         {
             jsonFile << ",";
         }
-        jsonFile << "\n";
+        jsonFile << "\t\n";
     }
     jsonFile << "\t\t],\n";
 
@@ -481,27 +478,21 @@ void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
     for (size_t i = 0; i < peaks.size(); ++i)
     {
         jsonFile << "\t\t\t\"" << peaks[i].getAssociatedPosition() << "\": {\n";
-        // jsonFile << "\t\t\t\t\"eff\": [" << peaks[i].getEfficiency() << ", " << peaks[i].getEffError() << "],\n";
         jsonFile << "\t\t\t\t\"res\": [" << peaks[i].calculateResolution() << ", " << peaks[i].calculateResolutionError() << "],\n";
         jsonFile << "\t\t\t\t\"pos_ch\": " << peaks[i].getPosition() << ",\n";
         jsonFile << "\t\t\t\t\"area\": [" << peaks[i].getArea() << ", " << peaks[i].getAreaError() << "]\n";
-
+        jsonFile << "\t\t\t}";
         if (i < peaks.size() - 1)
         {
-            jsonFile << "\t\t\t},\n";
+            jsonFile << ",";
         }
-        else
-        {
-            jsonFile << "\t\t\t\n";
-        }
+        jsonFile << "\n";
     }
 
     jsonFile << "\t\t}\n";
     jsonFile << "\t},\n";
-    // jsonFile << "]\n";
     ErrorHandle::getInstance().logStatus("Peaks data saved successfully in Json.");
     ErrorHandle::getInstance().logStatus("end------------------------------------------------.");
-
 }
 
 void Histogram::printHistogramWithPeaksRoot(TFile *outputFile)

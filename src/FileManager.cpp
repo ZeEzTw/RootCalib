@@ -192,3 +192,19 @@ void FileManager::updateHistogramName(TH2F *const histogram)
         histogram->SetName(name.c_str());
     }
 }
+
+
+//for handling the json file for the histogram to have an valid form
+
+void FileManager::firstDomainJson()
+{
+    jsonFile << "[\n";
+}
+void FileManager::nextDomainJson(){
+    jsonFile << ",\n";
+}
+void FileManager::lastDomainJson()
+{
+    jsonFile.seekp(-2, std::ios_base::end); // Move back 2 positions to remove the last comma
+    jsonFile << "\n]";
+}

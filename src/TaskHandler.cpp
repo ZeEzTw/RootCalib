@@ -79,6 +79,7 @@ void TaskHandler::process2DHistogram()
         start_column = argumentsManager.getXminDomain();
         number_of_columns = argumentsManager.getXmaxDomain();
     }
+    fileManager.firstDomainJson();
     for (int column = start_column; column <= number_of_columns; ++column)
     {
         TH1D *hist1D = inputTH2->ProjectionY(Form("hist1D_col%d", column), column, column);
@@ -87,6 +88,7 @@ void TaskHandler::process2DHistogram()
             processSingleHistogram(hist1D);
         }
     }
+    fileManager.lastDomainJson();
     combineHistogramsIntoTH2();
 
     if (argumentsManager.isUserInterfaceEnabled())

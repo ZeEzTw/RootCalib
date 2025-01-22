@@ -54,6 +54,9 @@ public:
     // Functions for saving and updating histograms
     void saveTH2Histogram(TH2F* const th2Histogram);
     void updateHistogramName(TH2F* const histogram);
+    void firstDomainJson();
+    void nextDomainJson();
+    void lastDomainJson();
 
 private:
     // Funcții private pentru manipularea numelui de fișier
