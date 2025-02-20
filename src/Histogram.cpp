@@ -150,7 +150,22 @@ bool Histogram::checkConditions(const Peak &peak) const
     bool condition1 = peakPosition <= xMax && peakPosition >= xMin;
     bool condition2 = FWHM <= maxFWHM;
     bool condition3 = peak.getAmplitude() > minAmplitude && peak.getAmplitude() < maxAmplitude;
+    if(!condition1)
+    {
+        ErrorHandle::getInstance().logStatus("Peak " + std::to_string(peak.getPosition()) + " does not meet the domain conditions.");
+        ErrorHandle::getInstance().logStatus("Peak position " + std::to_string(peak.getPosition()) + " is not in the range [" + std::to_string(xMin) + ", " + std::to_string(xMax) + "]");
+    }
+    if(!condition2)
+    {
+        ErrorHandle::getInstance().logStatus("Peak " + std::to_string(peak.getPosition()) + " does not meet the FWHM conditions.");
+        ErrorHandle::getInstance().logStatus("Peak FWHM " + std::to_string(peak.getFWHM()) + " is greater than FWHM limit" + std::to_string(maxFWHM));
 
+    }
+    if(!condition3)
+    {
+        ErrorHandle::getInstance().logStatus("Peak " + std::to_string(peak.getPosition()) + " does not meet the amplitude conditions.");
+        ErrorHandle::getInstance().logStatus("Peak amplitude " + std::to_string(peak.getAmplitude()) + " is not in the range [" + std::to_string(minAmplitude) + ", " + std::to_string(maxAmplitude) + "]");
+    }
     return condition1 && condition2 && condition3;
 }
 
@@ -459,26 +474,33 @@ void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
     jsonFile << "\t\t\"domain\": " << getMainHistName() << ",\n";
     jsonFile << "\t\t\"serial\": \"" << serial << "\",\n";
     jsonFile << "\t\t\"detType\": " << detType << ",\n";
+    /*double area = 0;
+    for (int bin = 1; bin <= mainHist->GetNbinsX(); ++bin)
+    {
+        area += mainHist->GetBinContent(bin) * mainHist->GetBinWidth(bin);
+    }
+    jsonFile<< "\t\t\"TotalArea\" " << area<< ",\n";
+    */
     jsonFile << "\t\t\"PT\": [" << getPT() << ", " << getPTError() << "],\n";
 
-    jsonFile << "\t\t\"pol_list\": [\n";
+    jsonFile << "\t\t\"pol_list\": [";
     for (size_t i = 0; i < coefficients.size(); ++i)
     {
-        jsonFile << "\t\t\t" << coefficients[i];
+        jsonFile << coefficients[i];
         if (i < coefficients.size() - 1)
         {
-            jsonFile << ",";
+            jsonFile << ", ";
         }
-        jsonFile << "\t\n";
     }
-    jsonFile << "\t\t],\n";
+    jsonFile << "],\n";
 
     jsonFile << "\t\t\"" << sourceName << "\": {\n";
 
     for (size_t i = 0; i < peaks.size(); ++i)
     {
         jsonFile << "\t\t\t\"" << peaks[i].getAssociatedPosition() << "\": {\n";
-        jsonFile << "\t\t\t\t\"res\": [" << peaks[i].calculateResolution() << ", " << peaks[i].calculateResolutionError() << "],\n";
+        jsonFile << "\t\t\t\t\"eff\": [" <<0<< ", " <<0<< "],\n";
+        jsonFile << "\t\t\t\t\"res\": [" << 1000*peaks[i].calculateResolution() << ", " << peaks[i].calculateResolutionError() << "],\n";
         jsonFile << "\t\t\t\t\"pos_ch\": " << peaks[i].getPosition() << ",\n";
         jsonFile << "\t\t\t\t\"area\": [" << peaks[i].getArea() << ", " << peaks[i].getAreaError() << "]\n";
         jsonFile << "\t\t\t}";
@@ -490,10 +512,13 @@ void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
     }
 
     jsonFile << "\t\t}\n";
-    jsonFile << "\t},\n";
+    jsonFile << "\t},";
+    jsonFile << "\n";
+
     ErrorHandle::getInstance().logStatus("Peaks data saved successfully in Json.");
     ErrorHandle::getInstance().logStatus("end------------------------------------------------.");
 }
+
 
 void Histogram::printHistogramWithPeaksRoot(TFile *outputFile)
 {

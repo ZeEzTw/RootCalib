@@ -23,7 +23,7 @@ void TaskHandler::executeHistogramProcessingTask()
     fileManager.openFiles();
     ErrorHandle::getInstance().setPathForSave(fileManager.getSavePath());
     energyArray = initializeEnergyArray();
-    if(energyArray == nullptr)
+    if (energyArray == nullptr)
     {
         ErrorHandle::getInstance().logStatus("Energy array is null STOP the Task.");
         ErrorHandle::getInstance().saveLogFile();
@@ -69,33 +69,61 @@ double *TaskHandler::initializeEnergyArray()
 
 void TaskHandler::process2DHistogram()
 {
-
-    int start_column = 0;
     inputTH2 = fileManager.getTH2Histogram();
     int number_of_columns = inputTH2->GetNbinsX();
+    int start_column = 0;
+    int end_column = number_of_columns;
 
+    // Set domain limits if specified
     if (argumentsManager.isDomainLimitsSet())
     {
         start_column = argumentsManager.getXminDomain();
-        number_of_columns = argumentsManager.getXmaxDomain();
+        end_column = argumentsManager.getXmaxDomain();
+        if (start_column < 0) start_column = 0;
+        if (end_column > number_of_columns) end_column = number_of_columns;
+        
+        std::string logMessage = "Domain limits set - Processing from " + 
+                               std::to_string(start_column) + " to " + 
+                               std::to_string(end_column);
+        ErrorHandle::getInstance().logStatus(logMessage);
     }
+
     fileManager.firstDomainJson();
-    for (int column = start_column; column <= number_of_columns; ++column)
+    std::cout << "Processing columns from " << start_column << " to " << end_column << std::endl;
+    
+    // First pass: Add empty histograms before start_column
+    for (int column = 0; column < start_column; ++column) {
+        histograms.emplace_back();
+    }
+
+    // Second pass: Process histograms within range
+    for (int column = start_column; column <= end_column; ++column)
     {
         TH1D *hist1D = inputTH2->ProjectionY(Form("hist1D_col%d", column), column, column);
         if (hist1D)
         {
             processSingleHistogram(hist1D);
         }
+        else 
+        {
+            histograms.emplace_back();
+        }
     }
+
+    // Third pass: Add empty histograms after end_column
+    for (int column = end_column + 1; column <= number_of_columns; ++column) {
+        histograms.emplace_back();
+    }
+
     fileManager.lastDomainJson();
     combineHistogramsIntoTH2();
-
+    
     if (argumentsManager.isUserInterfaceEnabled())
     {
-        ui.askAboutPeaks(histograms, fileManager.getJsonFile(), fileManager.getOutputFileHistograms(), fileManager.getOutputFileCalibrated());
+        ui.askAboutPeaks(histograms, fileManager.getJsonFile(), 
+                        fileManager.getOutputFileHistograms(), 
+                        fileManager.getOutputFileCalibrated());
     }
-    // The part where UI asks if you want to change a peak
 }
 
 void TaskHandler::processSingleHistogram(TH1D *const hist1D)
@@ -111,25 +139,15 @@ void TaskHandler::processSingleHistogram(TH1D *const hist1D)
 
     Histogram hist;
     int histIndex = argumentsManager.getNumberColumnSpecified(histograms.size());
-    if (argumentsManager.checkIfRunIsValid() && histIndex != -1)
-    {
-        ErrorHandle::getInstance().logStatus(std::string("Histogram: ") + std::to_string(histograms.size()) + " start to be processed.");
-        ErrorHandle::getInstance().logStatus("start------------------------------------------------.");
-        hist = Histogram(
-            argumentsManager.getXminFile(histIndex), argumentsManager.getXmaxFile(histIndex),
-            argumentsManager.getFWHMmaxFile(histIndex), argumentsManager.getMinAmplitudeFile(histIndex),
-            argumentsManager.getMaxAmplitude(), argumentsManager.getSerialFile(histIndex),
-            argumentsManager.getDetTypeFile(histIndex), argumentsManager.getPolynomialFitThreshold(),
-            argumentsManager.getNumberOfPeaks(), hist1D,
-            argumentsManager.getHistogramNameFile(histIndex), argumentsManager.getSourcesName());
-    }
-    else
-    {
-        delete hist1D;
-        histograms.emplace_back();
-        ErrorHandle::getInstance().logStatus(std::string("Histogram: ") + std::to_string(histograms.size()) + " is not in the Lut FIle.");
-        return;
-    }
+    ErrorHandle::getInstance().logStatus(std::string("Histogram: ") + std::to_string(histograms.size()) + " start to be processed.");
+    ErrorHandle::getInstance().logStatus("start------------------------------------------------.");
+    hist = Histogram(
+        argumentsManager.getXminFile(histIndex), argumentsManager.getXmaxFile(histIndex),
+        argumentsManager.getFWHMmaxFile(histIndex), argumentsManager.getMinAmplitudeFile(histIndex),
+        argumentsManager.getMaxAmplitude(), argumentsManager.getSerialFile(histIndex),
+        argumentsManager.getDetTypeFile(histIndex), argumentsManager.getPolynomialFitThreshold(),
+        argumentsManager.getNumberOfPeaks(), hist1D,
+        argumentsManager.getHistogramNameFile(histIndex), argumentsManager.getSourcesName());
 
     hist.findPeaks();
     hist.calibratePeaks(energyArray, size);

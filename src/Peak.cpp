@@ -125,20 +125,20 @@ double Peak::calculateResolutionError() const
 {
     if (!gaus) return 0.0;
     
-    double amplitudeError = gaus->GetParError(0);
+    double sigma = gaus->GetParameter(2);
     double sigmaError = gaus->GetParError(2);
-    double fwhm = getFWHM();
-    
-    double dR_dA = -fwhm / (amplitude * amplitude);
-    double dR_dSigma = FWHM_CONSTANT / amplitude;
-    
-    return std::sqrt(dR_dA * dR_dA * amplitudeError * amplitudeError + 
-                    dR_dSigma * dR_dSigma * sigmaError * sigmaError);
+    double positionError = gaus->GetParError(1);
+
+    double dR_dSigma = FWHM_CONSTANT / position;
+    double dR_dPeakPosition = -FWHM_CONSTANT * sigma / (position * position);
+
+    return std::sqrt(dR_dSigma * dR_dSigma * sigmaError * sigmaError +
+                     dR_dPeakPosition * dR_dPeakPosition * positionError * positionError);
 }
 
 double Peak::calculateResolution() const 
 {
-    return getFWHM() / amplitude;
+    return getFWHM() / position;
 }
 
 void Peak::findStartOfPeak(TH1D *hist, int maxBin, double &leftLimitPosition, double &rightLimitPosition)

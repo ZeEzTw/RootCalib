@@ -103,7 +103,7 @@ void ErrorHandle::errorHandle(int errorNumber)
             std::cerr << "Solution: " << errorSolution << std::endl;
         }
     }
-    else
+    else if(errorNumber != 7)
     {
         std::cerr << "Error Code " << errorNumber << std::endl;
     }

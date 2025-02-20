@@ -27,7 +27,7 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
     for (int i = 1; i < argc; i++)
     {
         std::string arg = argv[i];
-        if (arg == "-hf" || arg == "--histogram_file")
+        if (arg == "-f" || arg == "--histogram_file")
         {
             std::string input = argv[++i];
             if (isNumber(input))
@@ -85,13 +85,21 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
             getSourcesNameRun();
             break;
         }
-        else if (arg == "-j" || arg == "-json")
+        else if (arg == "-rp" || arg == "-json")
         {
+        
             inputJsonFile = argv[++i];
+            std::cout<<std::endl;
+            std::cout<<"neagoe tine secrete";
+            std::cout<<inputJsonFile;
+            std::cout<<std::endl;
         }
-        else if (arg == "-d" || arg == "-domainLimits")
+        else if (arg == "-sc" || arg == "-domainLimitsStart")
         {
             xMinDomain = std::stoi(argv[++i]);
+        }
+        else if (arg == "-ec" || arg == "-domainLimitsEnd")
+        {
             xMaxDomain = std::stoi(argv[++i]);
         }
         else if (arg == "-c" || arg == "-calib")

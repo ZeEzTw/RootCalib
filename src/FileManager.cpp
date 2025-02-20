@@ -19,8 +19,6 @@ FileManager::~FileManager()
 void FileManager::openFiles()
 {
     // Open input file
-    
-
     inputFile = new TFile(inputFilePath.c_str(), "READ");
     
     if (!inputFile || inputFile->IsZombie())
@@ -30,31 +28,33 @@ void FileManager::openFiles()
     }
     ErrorHandle::getInstance().logStatus("Opening input file succefuly: " + inputFilePath);
 
-    std::string runName = extractRunNumber();
-    std::string baseDirectory = extractDirectoryPath();
-    std::string saveDirectory;
+    std::string baseName = extractBaseFileName();
+    std::string outputDirPath = baseName + "_output_data";
 
     if (savePath.empty())
     {
-        saveDirectory = baseDirectory + runName + "/";
+        savePath = outputDirPath + "/";
     }
     else
     {
-        saveDirectory = savePath;
-        if (saveDirectory.back() != '/')
-        {
-            saveDirectory += '/';
-        }
+        savePath = savePath + "/" + outputDirPath + "/";
     }
+
     // Create the save directory if it doesn't exist
-    if (mkdir(saveDirectory.c_str(), 0777) && errno != EEXIST)
+    if (mkdir(savePath.c_str(), 0777) && errno != EEXIST)
     {
-        ErrorHandle::getInstance().logStatus(std::string("Error: Could not create save directory. ") + saveDirectory);
+        ErrorHandle::getInstance().logStatus(std::string("Error: Could not create save directory. ") + savePath);
         return;
     }
-    savePath = saveDirectory;
+
     ErrorHandle::getInstance().logStatus("Opening save path: " + savePath);
-    std::string jsonFilePath = saveDirectory + runName + "_peaks_data.json";
+    
+    // Create filenames with consistent naming pattern
+    std::string jsonFilePath = savePath + baseName + "_parameters.json";
+    std::string histogramsPath = savePath + baseName + "_CALIBRATEDFITS.root";
+    std::string calibratedPath = savePath + baseName + "_CalibratedSpectra.root";
+    std::string th2Path = savePath + baseName + "_CalibratedSpectraTH2F.root";
+
     jsonFile.open(jsonFilePath);
     if (!jsonFile.is_open())
     {
@@ -62,17 +62,20 @@ void FileManager::openFiles()
         return;
     }
 
-    // Open ROOT files for histograms
-    outputFileHistograms = new TFile((saveDirectory + runName + "_peaks.root").c_str(), "RECREATE");
-    outputFileCalibrated = new TFile((saveDirectory + runName + "_calibrated_histograms.root").c_str(), "RECREATE");
-    outputFileTH2 = new TFile((saveDirectory + runName + "_combinedHistogram.root").c_str(), "RECREATE");
+    // Open ROOT files for histograms with new naming pattern
+    outputFileHistograms = new TFile(histogramsPath.c_str(), "RECREATE");
+    outputFileCalibrated = new TFile(calibratedPath.c_str(), "RECREATE");
+    outputFileTH2 = new TFile(th2Path.c_str(), "RECREATE");
 
-    if (!outputFileHistograms || outputFileHistograms->IsZombie() || !outputFileCalibrated || outputFileCalibrated->IsZombie() || !outputFileTH2 || outputFileTH2->IsZombie())
+    if (!outputFileHistograms || outputFileHistograms->IsZombie() || 
+        !outputFileCalibrated || outputFileCalibrated->IsZombie() || 
+        !outputFileTH2 || outputFileTH2->IsZombie())
     {
         ErrorHandle::getInstance().errorHandle(ErrorHandle::INVALID_OUTPUT_FILE);
         return;
     }
-    ErrorHandle::getInstance().logStatus("Opening output files succefuly: " + saveDirectory + runName + "_peaks.root" + " " + saveDirectory + runName + "_calibrated_histograms.root" + " " + saveDirectory + runName + "_combinedHistogram.root");
+
+    ErrorHandle::getInstance().logStatus("Opening output files successfully with base name: " + baseName);
 }
 
 void FileManager::closeFiles()
@@ -160,6 +163,24 @@ std::string FileManager::extractDirectoryPath() const
         return inputFilePath.substr(0, lastSlash + 1);
     }
     return "./";
+}
+
+std::string FileManager::extractBaseFileName() const
+{
+    // Get filename from path
+    size_t lastSlash = inputFilePath.find_last_of("/\\");
+    std::string fileName = (lastSlash != std::string::npos) ? 
+                          inputFilePath.substr(lastSlash + 1) : 
+                          inputFilePath;
+
+    // Remove file extension if present
+    size_t lastDot = fileName.find_last_of('.');
+    if (lastDot != std::string::npos)
+    {
+        fileName = fileName.substr(0, lastDot);
+    }
+
+    return fileName;
 }
 
 TH2F *FileManager::getTH2Histogram() const

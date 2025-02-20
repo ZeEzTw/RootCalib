@@ -63,6 +63,7 @@ private:
     std::string removeFileExtension() const;
     std::string extractRunNumber() const;
     std::string extractDirectoryPath() const;
+    std::string extractBaseFileName() const;
 };
 
 #endif // FILEMANAGER_H
