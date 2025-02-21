@@ -14,12 +14,12 @@ ArgumentsManager::ArgumentsManager(int argc, char *argv[])
     : energyFilePath(getDataFolderPath()),
       energyProcessor(energyFilePath)
 {
-    parseArguments(argc, argv);
+    parseArguments(argc, argv); // take the data from the terminal when the class is initialized
 }
 
 void ArgumentsManager::parseArguments(int argc, char *argv[])
 {
-    if (argc < 2)
+    if (argc < 2)//100% required -f / --histogram_file and -rp / --json: Path to the LUT JSON
     {
         printUsage();
         return;
@@ -27,7 +27,7 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
     for (int i = 1; i < argc; i++)
     {
         std::string arg = argv[i];
-        if (arg == "-f" || arg == "--histogram_file")
+        if (arg == "-f" || arg == "--histogram_file")//location of the TH2F histogram file
         {
             std::string input = argv[++i];
             if (isNumber(input))
@@ -48,7 +48,7 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
                 histogramFilePath = input;
             }
         }
-        else if (arg == "-hn" || arg == "--histogram_name")
+        else if (arg == "-hn" || arg == "--histogram_name")//ex m_deliaRaw, name of the TH2F histogram
         {
             TH2histogram_name = argv[++i];
         }
@@ -62,21 +62,23 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
             Xmin = std::stoi(argv[++i]);
             Xmax = std::stoi(argv[++i]);
             MinAmplitude = std::stof(argv[++i]);
-            MaxAmplitude = std::stof(argv[++i]);
+            MaxAmplitude = std::stof(argv[++i]);//not used really
             FWHMmax = std::stof(argv[++i]);
         }
-        else if (arg == "-sp" || arg == "--save_path")
+        else if (arg == "-sp" || arg == "--save_path")//Output directory. Default: output/.
         {
             savePath = argv[++i];
         }
-        else if (arg == "-dt" || arg == "-detType")
+        else if (arg == "-dt" || arg == "-detType")//Detector type. Default: 2. Its updated by pyCalib
         {
             detTypeStandard = std::stoi(argv[++i]);
         }
-        else if (arg == "-se" || arg == "-serial")
+        else if (arg == "-se" || arg == "-serial")//Detector serial number. Default: CL.
         {
             serialStandard = argv[++i];
         }
+        //if not specified (here can pe puted mode then 1 soruces), the user interface will pop up
+        //and the soruce need to be the last in the comand line
         else if (arg == "-s" || arg == "-sources")
         {
             userInterfaceStatus = false;
@@ -85,16 +87,11 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
             getSourcesNameRun();
             break;
         }
-        else if (arg == "-rp" || arg == "-json")
+        else if (arg == "-rp" || arg == "-json")//Path to the LUT JSON file
         {
-        
             inputJsonFile = argv[++i];
-            std::cout<<std::endl;
-            std::cout<<"neagoe tine secrete";
-            std::cout<<inputJsonFile;
-            std::cout<<std::endl;
         }
-        else if (arg == "-sc" || arg == "-domainLimitsStart")
+        else if (arg == "-sc" || arg == "-domainLimitsStart")//Domain limits for the TH2F histogram, 
         {
             xMinDomain = std::stoi(argv[++i]);
         }
@@ -102,11 +99,11 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
         {
             xMaxDomain = std::stoi(argv[++i]);
         }
-        else if (arg == "-c" || arg == "-calib")
+        else if (arg == "-c" || arg == "-calib")//calibration polynomial threshold. Default: 1e-10.
         {
             polynomialFitThreshold = std::stod(argv[++i]);
         }
-        else if (arg == "-h" || arg == "--help")
+        else if (arg == "-h" || arg == "--help")//the help function, it will pop up when called or when not all requred data are given(ex: source)
         {
             printUsage();
             i = argc; // Stop parsing
@@ -129,6 +126,7 @@ void ArgumentsManager::parseArguments(int argc, char *argv[])
     }
 }
 
+
 bool ArgumentsManager::parseNumericArgument(const char *arg, float &value, float min, float max)
 {
     try
@@ -147,7 +145,7 @@ bool ArgumentsManager::parseNumericArgument(const char *arg, float &value, float
     return false;
 }
 
-// function to check if a string is a number
+// function to check if a string is a number, for only run number specified
 bool ArgumentsManager::isNumber(const std::string &s) const
 {
     return !s.empty() && std::all_of(s.begin(), s.end(), ::isdigit);
@@ -175,6 +173,7 @@ std::string ArgumentsManager::getHistogramFilename(int runNumber) const
     return "";
 }
 
+//help function
 void ArgumentsManager::printUsage() const
 {
     std::cout << "Usage: program [options]\n"
@@ -190,6 +189,7 @@ void ArgumentsManager::printUsage() const
               << "  -c, -calib <threshold>                        Set calibration threshold\n";
 }
 
+//retrieves the directory path where the currently running executable is located
 std::string ArgumentsManager::getExecutableDir() const
 {
     char buffer[PATH_MAX];
@@ -209,7 +209,7 @@ std::string ArgumentsManager::getExecutableDir() const
         return "";
     }
 }
-
+//This function determines the path where the calibration will be saved
 std::string ArgumentsManager::getDataFolderPath() const
 {
     std::string exeDir = getExecutableDir();
@@ -228,6 +228,7 @@ bool ArgumentsManager::isDomainLimitsSet() const
     return xMinDomain != -1 && xMaxDomain != -1;
 }
 
+//check if the run number is in the domain (in the lut)
 int ArgumentsManager::getNumberColumnSpecified(int histogramNumber) const
 {
     auto it = std::find(domain.begin(), domain.end(), histogramNumber);
@@ -253,6 +254,7 @@ bool ArgumentsManager::checkIfRunIsValid() const
     }
 }
 
+//for the json, in case multiple sources are used, will handle them
 void ArgumentsManager::getSourcesNameRun()
 {
     std::string sourcesName;
@@ -288,6 +290,17 @@ void ArgumentsManager::setNumberOfPeaks(int peaks)
     number_of_peaks = peaks;
 }
 
+
+/**
+ * @brief Parses configuration data from a JSON file.
+ * This method reads and processes a JSON file containing configuration data for detector parameters.
+ * The method populates class member vectors with the parsed values.
+ * Only entries with valid domain values (!= -1) are stored.
+ * 
+ * @throws May throw exceptions from file operations or JSON parsing
+ * @note Logs success message upon completion via ErrorHandle singleton
+ * rediding the data from the LUT JSON file
+ */
 void ArgumentsManager::parseJsonFile()
 {
     std::ifstream file(inputJsonFile);
@@ -300,7 +313,7 @@ void ArgumentsManager::parseJsonFile()
     nlohmann::json jsonData;
     file >> jsonData;
 
-    for (const auto& item : jsonData)
+    for (const auto &item : jsonData)
     {
         int tempDomain = item.contains("domain") ? item["domain"].get<int>() : -1;
         int tempDetType = item.contains("detType") ? item["detType"].get<int>() : detTypeStandard;

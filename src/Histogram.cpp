@@ -143,13 +143,15 @@ void Histogram::eliminatePeak(const Peak &peak)
     }
 }
 
+// Check if peak meets the conditions imposed by the user or the Lut file
+//if not, more detalied information is provided in Log file
 bool Histogram::checkConditions(const Peak &peak) const
 {
     double FWHM = peak.getFWHM();
     double peakPosition = peak.getPosition();
     bool condition1 = peakPosition <= xMax && peakPosition >= xMin;
     bool condition2 = FWHM <= maxFWHM;
-    bool condition3 = peak.getAmplitude() > minAmplitude && peak.getAmplitude() < maxAmplitude;
+    bool condition3 = peak.getAmplitude() > minAmplitude; //&& peak.getAmplitude() < maxAmplitude; maxAmplitude is not
     if(!condition1)
     {
         ErrorHandle::getInstance().logStatus("Peak " + std::to_string(peak.getPosition()) + " does not meet the domain conditions.");
@@ -179,23 +181,42 @@ TF1 *Histogram::createGaussianFit(int maxBin)
     return gaus;
 }
 
+// Peak Extraction Section
+// How the peak-finding process works:
+// This section handles detecting peaks in a histogram iteratively. It starts by creating a temporary
+// clone of the main histogram (tempHist). The algorithm then:
+// 1. Scans the temporary histogram to find the bin with the highest value, adjusted for a local
+//    background estimated from nearby bins.
+// 2. Fits a Gaussian over the peak position in the main histogram (mainHist).
+// 3. Validates the peak against predefined conditions (e.g., height, width).
+// 4. If valid, adds the peak to the list and removes it from the temporary histogram by setting its
+//    value to 0. (will remove the peak if its invalid too)
+// 5. Repeats until no significant peaks remain. The process ensures peaks are extracted one by one
+//    without overlap interference.
+
+// Finds the bin with the maximum value in the temporary histogram, adjusted for background.
 int Histogram::findMaxBin()
 {
-    double threshold = 0.001;
-    float maxPeakY = 0;
-    int maxBin = 0;
-    double peakWithoutBackground = 0;
-    double leftLimit = MIN_DISTANCE;
-    double rightLimit = MIN_DISTANCE;
+    float maxPeakY = 0;                     // Raw height of the tallest bin.
+    int maxBin = 0;                         // Index of the tallest bin.
+    double peakWithoutBackground = 0;       // Height of the tallest peak after background subtraction.
+    const double threshold = 0.001;         // Minimum bin content threshold to consider background valid.
+    const double leftLimit = MIN_DISTANCE;  // Distance to the left for background estimation.
+    const double rightLimit = MIN_DISTANCE; // Distance to the right for background estimation.
 
+    // Loop through all bins in the temporary histogram.
     for (int bin = 1; bin <= tempHist->GetNbinsX(); ++bin)
     {
         float binContent = tempHist->GetBinContent(bin);
-        if (binContent == 0)
+        if (binContent == 0) // Skip bins already cleared from previous peak removals.
             continue;
+
+        // Estimate background using the average of left and right neighbor bins from the main histogram.
         double leftLimityContent = mainHist->GetBinContent(mainHist->FindBin(bin - leftLimit));
         double rightLimityContent = mainHist->GetBinContent(mainHist->FindBin(bin + rightLimit));
-        double peakWithoutBackgroundTemp = binContent - ((leftLimityContent + rightLimityContent) / 2);
+        double peakWithoutBackgroundTemp;
+
+        // Adjust background calculation if one side is below threshold. To avoid cutted sections to be detected as peaks
         if (leftLimityContent < threshold)
         {
             peakWithoutBackgroundTemp = binContent - rightLimityContent;
@@ -208,7 +229,8 @@ int Histogram::findMaxBin()
         {
             peakWithoutBackgroundTemp = binContent - ((leftLimityContent + rightLimityContent) / 2);
         }
-        // double peakWithoutBackgroundTemp1 = binContent - (mainHist->GetBinContent(mainHist->FindBin(bin - leftLimit)) + mainHist->GetBinContent(mainHist->FindBin(bin + rightLimit))) / 2;
+
+        // Update the maximum if this bin’s adjusted height is greater.
         if (peakWithoutBackgroundTemp > peakWithoutBackground)
         {
             peakWithoutBackground = peakWithoutBackgroundTemp;
@@ -217,53 +239,66 @@ int Histogram::findMaxBin()
         }
     }
 
-    return maxBin;
+    return maxBin; // Returns 0 if no valid peak is found.
 }
 
-// Calibration section
+// Detects and fits peaks in the histogram one at a time.
 int Histogram::detectAndFitPeaks()
 {
     int maxBin = findMaxBin();
-    if (maxBin == 0)
+    if (maxBin == 0) // No more peaks to process.
     {
         return -1;
     }
 
+    // Create and fit a Gaussian over the peak position in the temporary histogram.
     TF1 *gaus = createGaussianFit(maxBin);
-    tempHist->Fit(gaus, "RQ");
-    peaks.emplace_back(gaus, mainHist);
+    tempHist->Fit(gaus, "RQ"); // "R" for restricted range, "Q" for quiet mode.
+    peaks.emplace_back(gaus, mainHist); // Add the fitted peak to the list.
 
+    // Check if the peak meets minimum requirements (e.g., amplitude, width).
     if (!checkConditions(peaks.back()))
     {
-        ErrorHandle::getInstance().logStatus("Peak " + std::to_string(peaks.back().getPosition()) + " does not meet the conditions, peak procces stops here.");
-        eliminatePeak(peaks.back());
-        peaks.pop_back();
+        ErrorHandle::getInstance().logStatus("Peak " + std::to_string(peaks.back().getPosition()) +
+                                             " does not meet the conditions, peak process stops here.");
+        eliminatePeak(peaks.back()); // Remove the peak from the temp histogram.
+        peaks.pop_back();            // Discard the invalid peak.
         delete gaus;
         return 0;
     }
 
-    // Validate peak quality
+    // Validate peak quality (e.g., good fit, symmetry).
     if (!isValidPeak(peaks.back()))
     {
-        peaks.pop_back();
+        peaks.pop_back(); // Remove if it doesn’t pass validation.
         delete gaus;
         return -1;
     }
 
-    peakCount++;
-    eliminatePeak(peaks.back());
+    peakCount++;                // Increment the count of valid peaks.
+    eliminatePeak(peaks.back()); // Clear the peak from tempHist for the next iteration.
 
-    delete gaus;
-    return 0;
+    delete gaus; // Free the Gaussian object.
+    return 0;    // Success, continue searching for more peaks.
 }
 
+
+// Calibration Section
+// How it works:
+// This section calibrates peak positions to known energy values using a linear polynomial (y = mx + b).
+// It iterates through possible slope values (m), predicts energies for each peak, and checks how many match
+// known energies within an error margin. The best slope (highest matches) is selected. Later, a higher-degree
+// polynomial can be refined using least squares based on the matched peaks. 
+
+// Checks if a peak meets basic validity conditions.
 bool Histogram::isValidPeak(const Peak &peak) const
 {
-    return peak.getArea() > 0 &&
-           (peaks.empty() || peak.getPosition() != peaks[peaks.size() - 2].getPosition()) &&
-           peak.getPosition() >= 0;
+    return peak.getArea() > 0 &&                     // Positive area.
+           (peaks.empty() || peak.getPosition() != peaks[peaks.size() - 2].getPosition()) && // Unique position.
+           peak.getPosition() >= 0;                  // Non-negative position.
 }
 
+// Compares a predicted energy to a list of known energies, finding the closest match.
 bool Histogram::checkPredictedEnergies(double predictedEnergy, const double knownEnergies[], int size, float errorAdmitted, double &valueAssociatedWith) const
 {
     double minError = std::numeric_limits<double>::max();
@@ -273,20 +308,21 @@ bool Histogram::checkPredictedEnergies(double predictedEnergy, const double know
         if (error < minError)
         {
             minError = error;
-            valueAssociatedWith = knownEnergies[i];
+            valueAssociatedWith = knownEnergies[i]; // Store the closest known energy.
         }
     }
-
-    return minError < errorAdmitted;
+    return minError < errorAdmitted; // True if within allowed error.
 }
 
+// Calibrates peaks by testing linear polynomials and matching to known energies.
 void Histogram::calibratePeaks(const double knownEnergies[], int size)
 {
-    double bestM = 0.0;
-    double bestB = 0.0;
-    int bestCorrelation = 0;
+    double bestM = 0.0;         // Best slope found.
+    double bestB = 0.0;         // Intercept (currently fixed at 0).
+    int bestCorrelation = 0;    // Highest number of matched peaks.
     double valueAssociatedWith = 0.0;
 
+    // Test slope values from 0.01 to 5.0 with small steps.
     for (double m = 0.01; m <= 5.0; m += 0.0001)
     {
         std::vector<double> associatedValues(peaks.size(), 0.0);
@@ -295,39 +331,43 @@ void Histogram::calibratePeaks(const double knownEnergies[], int size)
 
         for (const auto &peak : peaks)
         {
-            double predictedEnergy = m * peak.getPosition() + b;
-
+            double predictedEnergy = m * peak.getPosition() + bestB; // Linear prediction.
             if (checkPredictedEnergies(predictedEnergy, knownEnergies, size, 10, valueAssociatedWith))
             {
                 ++correlations;
-                associatedValues[peakCount] = valueAssociatedWith;
+                associatedValues[peakCount] = valueAssociatedWith; // Save matched energy.
             }
             peakCount++;
         }
+
+        // Update if this slope gives more matches.
         if (correlations > bestCorrelation)
         {
             bestCorrelation = correlations;
             bestM = m;
             for (int i = 0; i < peaks.size(); ++i)
             {
-                peaks[i].setAssociatedPosition(associatedValues[i]);
+                peaks[i].setAssociatedPosition(associatedValues[i]); // Assign matched energies.
             }
         }
     }
-    ErrorHandle::getInstance().logStatus("Peaks asociated with calibrated ones: " + std::to_string(bestCorrelation));
+
+    ErrorHandle::getInstance().logStatus("Peaks associated with calibrated ones: " + std::to_string(bestCorrelation));
     peakMatchCount = bestCorrelation;
-    calibratePeaksByDegree();
+    calibratePeaksByDegree(); // Refine with higher-degree polynomial if needed.
 }
 
-// getting polynomial degree + values
-
+// Polynomial Calibration Section
+//It uses the least squares method to find
+// Refines peak calibration by determining the best polynomial degree and coefficients.
 void Histogram::calibratePeaksByDegree()
 {
-    calibrationDegree = 1;
+    calibrationDegree = 1; // Start with a linear fit.
 
-    std::vector<double> positions;
-    std::vector<double> energies;
+    std::vector<double> positions; // Peak positions (x-values).
+    std::vector<double> energies;  // Associated known energies (y-values).
 
+    // Collect peaks with valid associated energies.
     for (const auto &peak : peaks)
     {
         if (peak.getAssociatedPosition() > 0)
@@ -338,16 +378,17 @@ void Histogram::calibratePeaksByDegree()
     }
 
     int n = positions.size();
-    if (n == 0)
+    if (n == 0) // No valid peaks for calibration. BAD
     {
         ErrorHandle::getInstance().errorHandle(ErrorHandle::NO_PEAKS_FOR_CALIBRATION);
         return;
     }
 
-    // Gradul maxim bazat pe numărul de puncte (n - 1)
+    // Maximum degree is limited by number of points (n-1) or 3, whichever is smaller.
     int maxDegree = std::min(n - 1, 3);
     for (int currentDegree = 1; currentDegree <= maxDegree; ++currentDegree)
     {
+        // Build the design matrix X (powers of positions) and response vector Y (energies).
         std::vector<std::vector<double>> X(n, std::vector<double>(currentDegree + 1));
         std::vector<double> Y(n);
 
@@ -355,19 +396,21 @@ void Histogram::calibratePeaksByDegree()
         {
             for (int j = 0; j <= currentDegree; ++j)
             {
-                X[i][j] = std::pow(positions[i], j);
+                X[i][j] = std::pow(positions[i], j); // X[i][j] = position[i]^j.
             }
             Y[i] = energies[i];
         }
 
+        // Solve least squares: coeffs = (X^T * X)^(-1) * (X^T * Y).
         std::vector<std::vector<double>> XtX = EliadeMathFunctions::multiplyTransposeMatrix(X);
         std::vector<double> XtY = EliadeMathFunctions::multiplyTransposeVector(X, Y);
         std::vector<double> coeffs = EliadeMathFunctions::solveSystem(XtX, XtY);
 
+        // Accept this degree if the leading coefficient is significant.
         if (std::abs(coeffs[currentDegree]) >= polynomialFitThreshold)
         {
             calibrationDegree = currentDegree;
-            coefficients = coeffs;
+            coefficients = coeffs; // Store the best coefficients.
         }
     }
 }
@@ -474,13 +517,6 @@ void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
     jsonFile << "\t\t\"domain\": " << getMainHistName() << ",\n";
     jsonFile << "\t\t\"serial\": \"" << serial << "\",\n";
     jsonFile << "\t\t\"detType\": " << detType << ",\n";
-    /*double area = 0;
-    for (int bin = 1; bin <= mainHist->GetNbinsX(); ++bin)
-    {
-        area += mainHist->GetBinContent(bin) * mainHist->GetBinWidth(bin);
-    }
-    jsonFile<< "\t\t\"TotalArea\" " << area<< ",\n";
-    */
     jsonFile << "\t\t\"PT\": [" << getPT() << ", " << getPTError() << "],\n";
 
     jsonFile << "\t\t\"pol_list\": [";
@@ -500,7 +536,7 @@ void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
     {
         jsonFile << "\t\t\t\"" << peaks[i].getAssociatedPosition() << "\": {\n";
         jsonFile << "\t\t\t\t\"eff\": [" <<0<< ", " <<0<< "],\n";
-        jsonFile << "\t\t\t\t\"res\": [" << 1000*peaks[i].calculateResolution() << ", " << peaks[i].calculateResolutionError() << "],\n";
+        jsonFile << "\t\t\t\t\"res\": [" << peaks[i].calculateResolution() << ", " << peaks[i].calculateResolutionError() << "],\n";
         jsonFile << "\t\t\t\t\"pos_ch\": " << peaks[i].getPosition() << ",\n";
         jsonFile << "\t\t\t\t\"area\": [" << peaks[i].getArea() << ", " << peaks[i].getAreaError() << "]\n";
         jsonFile << "\t\t\t}";
@@ -565,10 +601,11 @@ void Histogram::printCalibratedHistogramRoot(TFile *outputFile) const
 // set/get functions section
 void Histogram::setTotalArea()
 {
-    totalArea = 0;
-    for (int bin = 1; bin <= mainHist->GetNbinsX(); ++bin)
-    {
-        totalArea += mainHist->GetBinContent(bin) * mainHist->GetBinWidth(bin);
+    // Calculate total area by integrating over the full histogram range
+    if (mainHist) {
+        totalArea = mainHist->Integral();
+    } else {
+        totalArea = 0;
     }
 }
 

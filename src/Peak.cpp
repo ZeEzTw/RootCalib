@@ -138,7 +138,7 @@ double Peak::calculateResolutionError() const
 
 double Peak::calculateResolution() const 
 {
-    return getFWHM() / position;
+    return (getFWHM() / position) * 100;
 }
 
 void Peak::findStartOfPeak(TH1D *hist, int maxBin, double &leftLimitPosition, double &rightLimitPosition)

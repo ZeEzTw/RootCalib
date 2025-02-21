@@ -16,6 +16,7 @@ TaskHandler::~TaskHandler()
     }
 }
 
+//start function
 void TaskHandler::executeHistogramProcessingTask()
 {
     ErrorHandle::getInstance().setUserInterfaceActive(argumentsManager.isUserInterfaceEnabled());
@@ -41,6 +42,7 @@ void TaskHandler::executeHistogramProcessingTask()
     ErrorHandle::getInstance().saveLogFile();
 }
 
+//create the array with the energy values known for the specified source
 double *TaskHandler::initializeEnergyArray()
 {
     CalibrationDataProvider energyProcessor = argumentsManager.getEnergyProcessor();
@@ -89,7 +91,6 @@ void TaskHandler::process2DHistogram()
     }
 
     fileManager.firstDomainJson();
-    std::cout << "Processing columns from " << start_column << " to " << end_column << std::endl;
     
     // First pass: Add empty histograms before start_column
     for (int column = 0; column < start_column; ++column) {
@@ -126,6 +127,7 @@ void TaskHandler::process2DHistogram()
     }
 }
 
+
 void TaskHandler::processSingleHistogram(TH1D *const hist1D)
 {
     if (!hist1D || hist1D->GetMean() < 5)
@@ -149,6 +151,7 @@ void TaskHandler::processSingleHistogram(TH1D *const hist1D)
         argumentsManager.getNumberOfPeaks(), hist1D,
         argumentsManager.getHistogramNameFile(histIndex), argumentsManager.getSourcesName());
 
+    //all the function that take care of the task 
     hist.findPeaks();
     hist.calibratePeaks(energyArray, size);
     hist.applyXCalibration();

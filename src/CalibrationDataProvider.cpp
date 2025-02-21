@@ -4,8 +4,9 @@
 #include <fstream>
 #include <algorithm>
 
-
-
+/**
+ * @param filename Path to calibration configuration file
+ */
 CalibrationDataProvider::CalibrationDataProvider(const std::string &filename)
 {
     ErrorHandle::getInstance().logStatus("Reading calibration data from: " + filename);
@@ -30,6 +31,8 @@ CalibrationDataProvider::~CalibrationDataProvider()
     // Destructor implicit
 }
 
+//not used, but if the data are in a txt file, this function can be used
+//will take the peaks for each source
 void CalibrationDataProvider::readFromTxt(const std::string &filename)
 {
     std::ifstream file(filename);
@@ -76,6 +79,9 @@ void CalibrationDataProvider::readFromTxt(const std::string &filename)
 
     file.close();
 }
+
+
+//Validates if a source exists in the loaded configuration
 int CalibrationDataProvider::isSourceValid(const std::string &source)
 {
     for (size_t i = 0; i < sources.size(); ++i)
@@ -88,6 +94,7 @@ int CalibrationDataProvider::isSourceValid(const std::string &source)
     return -1;
 }
 
+//sort the peaks in descending order
 void CalibrationDataProvider::CalibrationDataProviderArray()
 {
     for (auto &row : energyMatrix)
@@ -105,6 +112,7 @@ double *CalibrationDataProvider::getCalibratedEnergyArray(int index)
     }
     return energyMatrix[index].data();
 }
+
 int CalibrationDataProvider::getCalibratedEnergyArraySize(int index) const
 {
     if (index < 0 || index >= energyMatrix.size())
@@ -176,6 +184,8 @@ void CalibrationDataProvider::chooseSources(int startPosition, int argc, char *a
     }
 }
 
+
+//Gets total number of peaks across all requested sources
 int CalibrationDataProvider::getNumberOfPeaks() const
 {
     int totalPeaks = 0;
@@ -197,6 +207,8 @@ int CalibrationDataProvider::getNumberOfPeaks(int position) const
 {
     return numberOfPeaks[position];
 }
+
+// Creates combined energy array from requested sources
 double *CalibrationDataProvider::createCalibratedSourceArray(int &size)
 {
     std::string sourceNames;
@@ -249,6 +261,20 @@ std::string CalibrationDataProvider::cleanSourceName(const std::string &sourceNa
     );
     return cleanedName;
 }
+
+/**
+ * @brief Parses JSON configuration file containing source data
+ * @param filename Path to JSON file
+ * 
+ * File format expected:
+ * {
+ *   "name": "sourceName",
+ *   "numberOfPeaks": N,
+ *   "peaks": [
+ *     {"value": energy, "probability": prob}
+ *   ]
+ * }
+ */
 void CalibrationDataProvider::parseJsonFile(const std::string &filename)
 {
     std::ifstream file(filename);
