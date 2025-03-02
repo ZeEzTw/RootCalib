@@ -139,6 +139,78 @@
                     "Probability": 0.09
                 }
             ]
+        },
+        {
+            "name": "56Co",
+            "numberOfPeaks": 2,
+            "peaks": [
+                {
+                    "value": 847.8,
+                    "probability": 0.85
+                },
+                {
+                    "value": 1238.6,
+                    "probability": 0.80
+                }
+            ]
+        },
+        {
+            "name": "22Na",
+            "numberOfPeaks": 2,
+            "peaks": [
+                {
+                    "value": 511.0,
+                    "probability": 0.98
+                },
+                {
+                    "value": 1274.5,
+                    "probability": 0.75
+                }
+            ]
+        },
+        {
+            "name": "54Mn",
+            "numberOfPeaks": 1,
+            "peaks": [
+                {
+                    "value": 834.8,
+                    "probability": 0.99
+                }
+            ]
+        },
+        {
+            "name": "133Ba",
+            "numberOfPeaks": 4,
+            "peaks": [
+            {
+                "value": 80.9,
+                "probability": 0.34
+            },
+            {
+                "value": 276.4,
+                "probability": 0.07
+            },
+            {
+                "value": 302.9,
+                "probability": 0.18
+            },
+            {
+                "value": 356.0,
+                "probability": 0.62
+            },
+            {
+                "value": 383.8,
+                "probability": 0.089
+            },
+            {
+                "value": 53.2,
+                "probability": 0.022
+            },
+            {
+                "value": 79.6,
+                "probability": 0.026
+            }
+            ]
         }
     ]
 }

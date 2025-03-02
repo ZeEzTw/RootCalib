@@ -113,6 +113,7 @@ void Histogram::findPeaks()
 {
     int result = 0;
     int count = 0;
+    std::cout<<"Number of peaks: "<<numberOfPeaks<<std::endl;
     while (result == 0 && count < numberOfPeaks)
     {
         result = detectAndFitPeaks();

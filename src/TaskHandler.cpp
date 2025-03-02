@@ -81,6 +81,7 @@ void TaskHandler::process2DHistogram()
     {
         start_column = argumentsManager.getXminDomain();
         end_column = argumentsManager.getXmaxDomain();
+        std::cout<<"Start column: "<<start_column<<std::endl;
         if (start_column < 0) start_column = 0;
         if (end_column > number_of_columns) end_column = number_of_columns;
         
@@ -93,16 +94,18 @@ void TaskHandler::process2DHistogram()
     fileManager.firstDomainJson();
     
     // First pass: Add empty histograms before start_column
-    for (int column = 0; column < start_column; ++column) {
+    for (int column = 0; column < start_column; column++) {
         histograms.emplace_back();
     }
 
     // Second pass: Process histograms within range
-    for (int column = start_column; column <= end_column; ++column)
+    for (int column = start_column; column <= end_column; column++)
     {
-        TH1D *hist1D = inputTH2->ProjectionY(Form("hist1D_col%d", column), column, column);
+        TH1D *hist1D = inputTH2->ProjectionY(Form("hist1D_col%d", column-1), column, column);
+        std::cout<<"hist1d_name: "<<hist1D->GetName()<<std::endl;
         if (hist1D)
         {
+            std::cout<<"Processing column: "<<column<<std::endl;
             processSingleHistogram(hist1D);
         }
         else 
@@ -132,6 +135,10 @@ void TaskHandler::processSingleHistogram(TH1D *const hist1D)
 {
     if (!hist1D || hist1D->GetMean() < 5)
     {
+        if(hist1D->GetMean() < 5)
+        std::cout<<"Skipped1"<<std::endl;
+        else
+        std::cout<<"Skipped2"<<std::endl;
         delete hist1D;
         histograms.emplace_back();
         // if you want to check
