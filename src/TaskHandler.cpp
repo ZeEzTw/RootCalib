@@ -101,7 +101,7 @@ void TaskHandler::process2DHistogram()
     // Second pass: Process histograms within range
     for (int column = start_column; column <= end_column; column++)
     {
-        TH1D *hist1D = inputTH2->ProjectionY(Form("hist1D_col%d", column-1), column, column);
+        TH1D *hist1D = inputTH2->ProjectionY(Form("hist1D_col%d", column - 1), column, column);
         std::cout<<"hist1d_name: "<<hist1D->GetName()<<std::endl;
         if (hist1D)
         {
