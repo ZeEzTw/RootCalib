@@ -40,7 +40,7 @@ Clone the repository using:
 #Compilation
 Compile the code with:
 
-    g++ src/*.cpp -Iinclude $(root-config --glibs --cflags --libs) -o task
+    g++ src/*.cpp -Iinclude $(root-config --glibs --cflags --libs) -o rootcalib
 
 
 # Running the Program
@@ -51,15 +51,15 @@ Compile the code with:
     
 Basic Command:
 
-	./task -hf 152 -j "LUT_RECALL_S_20240604.json" -s "152Eu"
+	./rootcalib -hf 152 -j "LUT_RECALL_S_20240604.json" -s "152Eu"
 
 -With Path Specified:
 
-  	./RootCalib/task -hf 152 -j "RootCalib/LUT_RECALL_S_20240604.json" -sp "output/" -calib 1e-8 -s "152Eu"
+  	./RootCalib/rootcalib -hf 152 -j "RootCalib/LUT_RECALL_S_20240604.json" -sp "output/" -calib 1e-8 -s "152Eu"
    
 Full Constraints Example:
   
- 	./task -hf "data/data.root" -j "LUT_RECALL_S_20240604.json" -hn "mDelila_raw" -limits 0.0 1000000.0 0.0 1000000000.0 1000.0 -sp "output/" -detType 2 -serial "CL" -calib 1e-3 -s "152Eu"
+ 	./rootcalib -hf "data/data.root" -j "LUT_RECALL_S_20240604.json" -hn "mDelila_raw" -limits 0.0 1000000.0 0.0 1000000000.0 1000.0 -sp "output/" -detType 2 -serial "CL" -calib 1e-3 -s "152Eu"
 
   Run the program without the UI by specifying the -sources argument:
   
@@ -67,11 +67,11 @@ Full Constraints Example:
   
   To activate User Interface, run it with the following example command:
   
-  	./task -hf 152 -j "LUT_RECALL_S_20240604.json"
+  	./rootcalib -hf 152 -j "LUT_RECALL_S_20240604.json"
 
 Format without values puted: 
   		
-    ./task -hf string -hn string -limits float float float float float -sp string -detType int -serial string -json string -calib int -domainLimits int int -sources string
+    ./rootcalib -hf string -hn string -limits float float float float float -sp string -detType int -serial string -json string -calib int -domainLimits int int -sources string
 
 You can specify only the parameters you are interested in; any unspecified arguments will use default values or be overridden by values in the JSON file if provided. For example:
 

@@ -29,7 +29,8 @@ void FileManager::openFiles()
     ErrorHandle::getInstance().logStatus("Opening input file succefuly: " + inputFilePath);
 
     std::string baseName = extractBaseFileName();
-    std::string outputDirPath = baseName + "_output_data";
+//    std::string outputDirPath = baseName + "_output_data";
+    std::string outputDirPath = baseName + "_calib";
 
     if (savePath.empty())
     {
@@ -50,7 +51,8 @@ void FileManager::openFiles()
     ErrorHandle::getInstance().logStatus("Opening save path: " + savePath);
     
     // Create filenames with consistent naming pattern
-    std::string jsonFilePath = savePath + baseName + "_parameters.json";
+//    std::string jsonFilePath = savePath + baseName + "_parameters.json";
+    std::string jsonFilePath = savePath + baseName + ".json";
     std::string histogramsPath = savePath + baseName + "_CALIBRATEDFITS.root";
     std::string calibratedPath = savePath + baseName + "_CalibratedSpectra.root";
     std::string th2Path = savePath + baseName + "_CalibratedSpectraTH2F.root";
