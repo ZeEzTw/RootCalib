@@ -125,6 +125,13 @@ public:
     //--------------------
     int getNumberOfPeaks() const { return number_of_peaks; }
     std::string getHistogramFilePath() const { return histogramFilePath; }
+    std::string getHistogramFilePathWithoutExtension() const {
+        size_t lastDot = histogramFilePath.find_last_of('.');
+        if (lastDot == std::string::npos) {
+            return histogramFilePath; // No extension found
+        }
+        return histogramFilePath.substr(0, lastDot);
+    }
     std::string getHistogramName() const { return TH2histogram_name; }
     std::string getEnergyFilePath() const { return energyFilePath; }
     int getXmin() const { return Xmin; }

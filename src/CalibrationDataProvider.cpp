@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include <iomanip>
 
 /**
  * @param filename Path to calibration configuration file
@@ -314,8 +315,12 @@ void CalibrationDataProvider::parseJsonFile(const std::string &filename)
             {
                 if (line.find("value") != std::string::npos || line.find("Energy_keV") != std::string::npos)
                 {
-                    double energy = std::stod(line.substr(line.find(":") + 1));
+                    long double energyLong = std::stold(line.substr(line.find(":") + 1));//o problema cu precizia, trebuie sa schim in tot codul in long double ca sa ia
+                    std::cout<<std::setprecision(10)<<"Energy: "<<energyLong<<std::endl;
+                    double energy = static_cast<double>(energyLong);
+                    std::cout << "Energy: " << energy << std::endl;
                     energies.push_back(energy);
+                    std::cout<<"energie last added: "<<energies.back()<<std::endl;
                 }
                 else
                 {

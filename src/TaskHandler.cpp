@@ -19,6 +19,7 @@ TaskHandler::~TaskHandler()
 //start function
 void TaskHandler::executeHistogramProcessingTask()
 {
+    ErrorHandle::getInstance().setHistogramFilePath(argumentsManager.getHistogramFilePathWithoutExtension());
     ErrorHandle::getInstance().setUserInterfaceActive(argumentsManager.isUserInterfaceEnabled());
     ErrorHandle::getInstance().startProgram();
     fileManager.openFiles();
@@ -147,9 +148,17 @@ void TaskHandler::processSingleHistogram(TH1D *const hist1D)
     }
 
     Histogram hist;
-    int histIndex = argumentsManager.getNumberColumnSpecified(histograms.size());
-    ErrorHandle::getInstance().logStatus(std::string("Histogram: ") + std::to_string(histograms.size()) + " start to be processed.");
+    size_t histSize = histograms.size() - 1;
+    int histIndex = argumentsManager.getNumberColumnSpecified(histSize);
+    ErrorHandle::getInstance().logStatus(std::string("Histogram: ") + std::to_string(histSize) + " start to be processed.");
     ErrorHandle::getInstance().logStatus("start------------------------------------------------.");
+    std::cout<<"histograms.size() = "<<histSize<<std::endl;
+    if(histSize == 110)
+    {
+        std::cout<<"daaaaaaaaaaaaaaaaa"<<std::endl;
+        ErrorHandle::getInstance().logStatus("histIndex is 110");
+
+    }
     hist = Histogram(
         argumentsManager.getXminFile(histIndex), argumentsManager.getXmaxFile(histIndex),
         argumentsManager.getFWHMmaxFile(histIndex), argumentsManager.getMinAmplitudeFile(histIndex),

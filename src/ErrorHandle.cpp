@@ -152,7 +152,7 @@ void ErrorHandle::saveLogFile()
         std::cout<<"pathForSave: "<<pathForSave<<std::endl;
     }
 
-    std::ofstream logFile(pathForSave + "/error_log.json");
+    std::ofstream logFile(pathForSave + "/log_" + histogramFilePath + ".json");
     if (logFile.is_open())
     {
         logFile << "{\n";
@@ -217,6 +217,9 @@ void ErrorHandle::logStatus(const std::string &statusMessage)
 
 void ErrorHandle::startProgram()
 {
+    std::stringstream ss;
+    ss << "This is the debug file for the file " << histogramFilePath << ". It will provide errors, problems, and checks that were made for all the analyzed data, along with possible causes and solutions for the errors/problems.";
+    logStatus(ss.str());
     if (isUserInterfaceActive)
         std::cout << "Program started successfully." << std::endl;
     logStatus("Program started successfully.");

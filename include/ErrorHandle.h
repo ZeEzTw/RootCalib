@@ -22,6 +22,7 @@ struct StatusEntry
 
 class ErrorHandle
 {
+std::string histogramFilePath; 
 public:
     enum ErrorCode
     {
@@ -50,7 +51,7 @@ public:
     void logLutFileInput(const std::string &lutFileName, int rowsRead);
     void logArrayWithCalibratedValues(const double *array, int size);
     void startProgram();
-
+    void setHistogramFilePath(const std::string &path){histogramFilePath = path;}
     // Setter methods for configuration
     void setUserInterfaceActive(bool isActive);
     void setPathForSave(const std::string &path);

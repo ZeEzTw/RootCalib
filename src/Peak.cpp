@@ -127,18 +127,31 @@ double Peak::calculateResolutionError() const
     
     double sigma = gaus->GetParameter(2);
     double sigmaError = gaus->GetParError(2);
-    double positionError = gaus->GetParError(1);
-
-    double dR_dSigma = FWHM_CONSTANT / position;
-    double dR_dPeakPosition = -FWHM_CONSTANT * sigma / (position * position);
-
-    return std::sqrt(dR_dSigma * dR_dSigma * sigmaError * sigmaError +
-                     dR_dPeakPosition * dR_dPeakPosition * positionError * positionError);
+    double position_error = gaus->GetParError(1);
+    
+    // FWHM = FWHM_CONSTANT * sigma
+    double fwhm = FWHM_CONSTANT * sigma;
+    double fwhm_error = FWHM_CONSTANT * sigmaError;
+    
+    // Resolution = (FWHM / position) * associatedPosition
+    // Apply error propagation formula for R = (A/B) * C
+    
+    double term1 = (fwhm_error / fwhm) * (fwhm_error / fwhm);
+    double term2 = (position_error / position) * (position_error / position);
+    
+    // We assume associatedPosition has no error for now
+    // If it does, we would add: (associated_pos_error/associatedPosition)²
+    
+    double relative_error = sqrt(term1 + term2);
+    
+    // Return absolute error
+    return relative_error * ((fwhm / position) * associatedPosition);
 }
 
 double Peak::calculateResolution() const 
 {
-    return (getFWHM() / position) * 100;
+
+    return ((getFWHM() / position) * associatedPosition);//sa mai inlumtlm cu energia europiului din peakul ala
 }
 
 void Peak::findStartOfPeak(TH1D *hist, int maxBin, double &leftLimitPosition, double &rightLimitPosition)
