@@ -324,6 +324,41 @@ void Histogram::calibratePeaks(const double knownEnergies[], int size)
     int bestCorrelation = 0;    // Highest number of matched peaks.
     double valueAssociatedWith = 0.0;
 
+    // Special case: Only one peak
+    if (peaks.size() == 1) {
+        ErrorHandle::getInstance().logStatus("Only one peak detected - using simple linear calibration");
+        
+        // Try to match the single peak to the closest known energy
+        double minError = std::numeric_limits<double>::max();
+        double bestEnergy = 0.0;
+        
+        for (int i = 0; i < size; ++i) {
+            double error = std::abs(knownEnergies[i] - peaks[0].getPosition());
+            if (error < minError) {
+                minError = error;
+                bestEnergy = knownEnergies[i];
+            }
+        }
+        
+        // Use linear calibration with slope = known_energy/peak_position
+        bestM = bestEnergy / peaks[0].getPosition();
+        bestB = 0.0;
+        bestCorrelation = 1;
+        
+        // Assign the matched energy to the peak
+        peaks[0].setAssociatedPosition(bestEnergy);
+        
+        // Store coefficients for a linear calibration
+        coefficients.clear();
+        coefficients.push_back(bestB);  // Intercept
+        coefficients.push_back(bestM);  // Slope
+        
+        peakMatchCount = 1;
+        ErrorHandle::getInstance().logStatus("Single peak calibrated to energy: " + std::to_string(bestEnergy));
+        calibrationDegree = 1;
+        return;
+    }
+
     // Test slope values from 0.01 to 5.0 with small steps.
     for (double m = 0.01; m <= 5.0; m += 0.0001)
     {
@@ -360,8 +395,7 @@ void Histogram::calibratePeaks(const double knownEnergies[], int size)
 }
 
 // Polynomial Calibration Section
-//It uses the least squares method to find
-// Refines peak calibration by determining the best polynomial degree and coefficients.
+// It uses the least squares method to find
 void Histogram::calibratePeaksByDegree()
 {
     calibrationDegree = 1; // Start with a linear fit.
@@ -383,6 +417,12 @@ void Histogram::calibratePeaksByDegree()
     if (n == 0) // No valid peaks for calibration. BAD
     {
         ErrorHandle::getInstance().errorHandle(ErrorHandle::NO_PEAKS_FOR_CALIBRATION);
+        return;
+    }
+    
+    // Single peak case - already handled in calibratePeaks()
+    if (n == 1) {
+        // We've already set up a basic linear calibration in calibratePeaks()
         return;
     }
 
