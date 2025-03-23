@@ -137,10 +137,14 @@ public:
     CalibrationDataProvider getEnergyProcessor() const { return energyProcessor; }
     std::string getSavePath() const { return savePath; }
     float getPolynomialFitThreshold() const { return polynomialFitThreshold; }
-
-    //--------------------
-    // Domain and File Getters
-    //--------------------
+    std::string extractHistogramName() const {
+        size_t lastSlash = histogramFilePath.find_last_of("/\\");
+        size_t dotRoot = histogramFilePath.find(".root");
+        if (dotRoot == std::string::npos) {
+            return ""; // Return empty string if ".root" is not found
+        }
+        return histogramFilePath.substr(lastSlash + 1, dotRoot - lastSlash - 1);
+    }
     int getXmaxDomain() const { return xMaxDomain; }
     int getXminDomain() const { return xMinDomain; }
     int getXminFile(int position) const { return limits[position].Xmin; }
@@ -155,11 +159,11 @@ public:
     // Declare Non-Inlined Functions
     //--------------------
     int getNumberColumnSpecified(int histogramNumber) const;
+    std::string getExecutableDir() const;
+    std::string getDataFolderPath() const;
 
     //--------------------
     // Other Functions
     //--------------------
     void setNumberOfPeaks(int peaks);
-    std::string getExecutableDir() const;
-    std::string getDataFolderPath() const;
 };

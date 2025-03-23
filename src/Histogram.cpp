@@ -1,6 +1,7 @@
 #include "../include/Histogram.h"
 #include "../include/EliadeMathFunctions.h"
 #include "../include/ErrorHandle.h"
+#include <iomanip> // Include for setting precision
 //#include <iostream>
 //#include <fstream>
 //#include <cmath>
@@ -514,6 +515,7 @@ void Histogram::applyXCalibration()
 // output section
 void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
 {
+    jsonFile << std::fixed << std::setprecision(3); // Set precision to 3 decimals
     jsonFile << "\t{\n";
     jsonFile << "\t\t\"domain\": " << getMainHistName() << ",\n";
     jsonFile << "\t\t\"serial\": \"" << serial << "\",\n";

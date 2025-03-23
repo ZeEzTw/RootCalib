@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include <iomanip> // Include for setting precision
 
 /**
  * @param filename Path to calibration configuration file
@@ -125,6 +126,7 @@ int CalibrationDataProvider::getCalibratedEnergyArraySize(int index) const
 
 void CalibrationDataProvider::printToFile(std::ofstream &file) const
 {
+    file << std::fixed << std::setprecision(3); // Set precision to 3 decimals
     for (size_t i = 0; i < sources.size(); ++i)
     {
         file << sources[i] << ": ";

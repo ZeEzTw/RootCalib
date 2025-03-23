@@ -112,6 +112,13 @@ void ErrorHandle::errorHandle(int errorNumber)
     writeProblemToJsonErrorFile(errorNumber, errorMessage, errorSolution);
 }
 
+void ErrorHandle::startProgram(std::string newfileName)
+{
+    // Log the start of the program
+    logStatus("Program started. The ErrorHandle will provide information about all the processes the code goes through, including all verifications and any errors/problems encountered. It will also offer possible solutions for them.");
+    fileName = newfileName;
+}
+
 void ErrorHandle::writeProblemToJsonErrorFile(int errorNumber, const std::string &errorMessage, const std::string &errorSolution)
 {
     ErrorEntry entry;
@@ -152,7 +159,7 @@ void ErrorHandle::saveLogFile()
         std::cout<<"pathForSave: "<<pathForSave<<std::endl;
     }
 
-    std::ofstream logFile(pathForSave + "/error_log.json");
+    std::ofstream logFile(pathForSave + "/"  + "_error_log" + fileName + ".json");
     if (logFile.is_open())
     {
         logFile << "{\n";
@@ -215,12 +222,7 @@ void ErrorHandle::logStatus(const std::string &statusMessage)
     status_updates.push_back(entry);
 }
 
-void ErrorHandle::startProgram()
-{
-    if (isUserInterfaceActive)
-        std::cout << "Program started successfully." << std::endl;
-    logStatus("Program started successfully.");
-}
+
 void ErrorHandle::logLutFileInput(const std::string &lutFileName, int rowsRead)
 {
     std::stringstream ss;

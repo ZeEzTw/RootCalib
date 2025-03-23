@@ -36,13 +36,13 @@ public:
         LUT_FILE_NOT_FOUND = 8
     };
 
+    std::string fileName;
     // Static method to get the Singleton instance
     static ErrorHandle &getInstance();
 
     // Delete copy constructor and assignment operator
     ErrorHandle(const ErrorHandle &) = delete;
     ErrorHandle &operator=(const ErrorHandle &) = delete;
-
     // Member function declarations
     void errorHandle(int errorNumber);
     void saveLogFile();
@@ -50,9 +50,9 @@ public:
     void logLutFileInput(const std::string &lutFileName, int rowsRead);
     void logArrayWithCalibratedValues(const double *array, int size);
     void startProgram();
-
     // Setter methods for configuration
     void setUserInterfaceActive(bool isActive);
+    void startProgram(std::string fileName);
     void setPathForSave(const std::string &path);
 
 private:

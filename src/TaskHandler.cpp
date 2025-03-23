@@ -19,8 +19,9 @@ TaskHandler::~TaskHandler()
 //start function
 void TaskHandler::executeHistogramProcessingTask()
 {
+    //ErrorHandle::getInstance().setPathForSave(argumentsManager.extractHistogramName());
     ErrorHandle::getInstance().setUserInterfaceActive(argumentsManager.isUserInterfaceEnabled());
-    ErrorHandle::getInstance().startProgram();
+    ErrorHandle::getInstance().startProgram(argumentsManager.extractHistogramName());
     fileManager.openFiles();
     ErrorHandle::getInstance().setPathForSave(fileManager.getSavePath());
     energyArray = initializeEnergyArray();
