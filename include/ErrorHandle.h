@@ -44,7 +44,7 @@ public:
     ErrorHandle(const ErrorHandle &) = delete;
     ErrorHandle &operator=(const ErrorHandle &) = delete;
     // Member function declarations
-    void errorHandle(int errorNumber);
+    void errorHandle(int errorNumber, const std::string& histogramName = "");
     void saveLogFile();
     void logStatus(const std::string &statusMessage);
     void logLutFileInput(const std::string &lutFileName, int rowsRead);

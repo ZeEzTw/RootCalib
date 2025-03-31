@@ -44,7 +44,7 @@ std::string ErrorHandle::getCurrentTime()
     return ss.str();
 }
 
-void ErrorHandle::errorHandle(int errorNumber)
+void ErrorHandle::errorHandle(int errorNumber, const std::string &histogramName) // histogramNumber is specified only for NO_PEAKS_FOR_CALIBRATION, for the rest is -1, no need to pe spcified
 {
     std::string errorMessage;
     std::string errorSolution;
@@ -83,6 +83,10 @@ void ErrorHandle::errorHandle(int errorNumber)
     case NO_PEAKS_FOR_CALIBRATION:
         errorMessage = "No peaks available for calibration. n = 0";
         errorSolution = "Probably no peaks pass the conditions (check LUT file, input data from terminal or default conditions).";
+        if (!histogramName.empty())
+        {
+            errorMessage += " (Histogram: " + histogramName + ")";
+        }
         break;
     case LUT_FILE_NOT_FOUND:
         errorMessage = "LUT file not found. Called in ArgumentsManager::parseJsonFile()";
@@ -103,7 +107,7 @@ void ErrorHandle::errorHandle(int errorNumber)
             std::cerr << "Solution: " << errorSolution << std::endl;
         }
     }
-    else if(errorNumber != 7)
+    else if (errorNumber != 7)
     {
         std::cerr << "Error Code " << errorNumber << std::endl;
     }
@@ -131,7 +135,7 @@ void ErrorHandle::writeProblemToJsonErrorFile(int errorNumber, const std::string
 
 void ErrorHandle::saveLogFile()
 {
-    std::cout<<"Saving log file"<<std::endl;
+    std::cout << "Saving log file" << std::endl;
     // Ensure the save directory exists; create it if it doesn't
     if (pathForSave.empty())
     {
@@ -156,10 +160,10 @@ void ErrorHandle::saveLogFile()
                 logStatus("Created log directory: " + pathForSave);
             }
         }
-        std::cout<<"pathForSave: "<<pathForSave<<std::endl;
+        std::cout << "pathForSave: " << pathForSave << std::endl;
     }
 
-    std::ofstream logFile(pathForSave + "/"  + "_error_log" + fileName + ".json");
+    std::ofstream logFile(pathForSave + "/" + "_error_log" + fileName + ".json");
     if (logFile.is_open())
     {
         logFile << "{\n";
@@ -221,7 +225,6 @@ void ErrorHandle::logStatus(const std::string &statusMessage)
     entry.message = statusMessage;
     status_updates.push_back(entry);
 }
-
 
 void ErrorHandle::logLutFileInput(const std::string &lutFileName, int rowsRead)
 {

@@ -162,7 +162,7 @@ bool Histogram::checkConditions(const Peak &peak) const
     if(!condition2)
     {
         ErrorHandle::getInstance().logStatus("Peak " + std::to_string(peak.getPosition()) + " does not meet the FWHM conditions.");
-        ErrorHandle::getInstance().logStatus("Peak FWHM " + std::to_string(peak.getFWHM()) + " is greater than FWHM limit" + std::to_string(maxFWHM));
+        ErrorHandle::getInstance().logStatus("Peak FWHM " + std::to_string(peak.getFWHM()) + " is greater than FWHM limit " + std::to_string(maxFWHM));
 
     }
     if(!condition3)
@@ -416,7 +416,7 @@ void Histogram::calibratePeaksByDegree()
     int n = positions.size();
     if (n == 0) // No valid peaks for calibration. BAD
     {
-        ErrorHandle::getInstance().errorHandle(ErrorHandle::NO_PEAKS_FOR_CALIBRATION);
+        ErrorHandle::getInstance().errorHandle(ErrorHandle::NO_PEAKS_FOR_CALIBRATION, getMainHistName());
         return;
     }
     

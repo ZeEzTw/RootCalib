@@ -99,6 +99,16 @@
             ]
         },
         {
+            "name": "137Cs",
+            "numberOfPeaks": 1,
+            "peaks": [
+                {
+                    "value": 661.657,
+                    "probability": 0.85
+                }
+            ]
+        }
+        {
             "name": "133Ba",
             "numberOfPeaks": 4,
             "peaks": [

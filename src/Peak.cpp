@@ -121,7 +121,7 @@ void Peak::areaPeak(TH1D* hist)
     areaError = std::sqrt(std::abs(totalError + bgError));
 }
 
-double Peak::calculateResolutionError() const
+/*double Peak::calculateResolutionError() const
 {
     if (!gaus) return 0.0;
     
@@ -138,6 +138,24 @@ double Peak::calculateResolutionError() const
 
     return std::sqrt(dR_dSigma * dR_dSigma * sigmaError * sigmaError +
                      dR_dPeakPosition * dR_dPeakPosition * positionError * positionError);
+}*/
+
+double Peak::calculateResolutionError() const
+{
+    if (!gaus) return 0.0;
+
+    double sigmaError = gaus->GetParError(2);
+    double positionError = gaus->GetParError(1);
+
+    // FWHM = 2.35482 * sigma
+    double fwhmError = FWHM_CONSTANT * sigmaError;
+
+    // Resolution is (FWHM / position) * associatedPosition
+    double dR_dFWHM = 1.0 / position * associatedPosition;
+    double dR_dPosition = -getFWHM() * associatedPosition / (position * position);
+
+    return std::sqrt(dR_dFWHM * dR_dFWHM * fwhmError * fwhmError +
+                     dR_dPosition * dR_dPosition * positionError * positionError);
 }
 
 double Peak::calculateResolution() const 
