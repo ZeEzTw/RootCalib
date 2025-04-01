@@ -1,7 +1,6 @@
 #include "../include/Histogram.h"
 #include "../include/EliadeMathFunctions.h"
 #include "../include/ErrorHandle.h"
-#include <iomanip> // Include for setting precision
 //#include <iostream>
 //#include <fstream>
 //#include <cmath>
@@ -162,7 +161,7 @@ bool Histogram::checkConditions(const Peak &peak) const
     if(!condition2)
     {
         ErrorHandle::getInstance().logStatus("Peak " + std::to_string(peak.getPosition()) + " does not meet the FWHM conditions.");
-        ErrorHandle::getInstance().logStatus("Peak FWHM " + std::to_string(peak.getFWHM()) + " is greater than FWHM limit " + std::to_string(maxFWHM));
+        ErrorHandle::getInstance().logStatus("Peak FWHM " + std::to_string(peak.getFWHM()) + " is greater than FWHM limit" + std::to_string(maxFWHM));
 
     }
     if(!condition3)
@@ -324,41 +323,54 @@ void Histogram::calibratePeaks(const double knownEnergies[], int size)
     int bestCorrelation = 0;    // Highest number of matched peaks.
     double valueAssociatedWith = 0.0;
 
-    // Special case: Only one peak
-    if (peaks.size() == 1) {
-        ErrorHandle::getInstance().logStatus("Only one peak detected - using simple linear calibration");
-        
-        // Try to match the single peak to the closest known energy
+    // If we only have one peak, handle it as a special case
+    if (peaks.size() == 1)
+    {
+        const auto &peak = peaks[0];
+        // Try to find the best energy match for this single peak
         double minError = std::numeric_limits<double>::max();
         double bestEnergy = 0.0;
         
-        for (int i = 0; i < size; ++i) {
-            double error = std::abs(knownEnergies[i] - peaks[0].getPosition());
-            if (error < minError) {
+        for (int i = 0; i < size; ++i)
+        {
+            // For one peak, we can only do a simple scaling factor (through origin)
+            double m = knownEnergies[i] / peak.getPosition();
+            double error = std::abs(knownEnergies[i] - m * peak.getPosition());
+            
+            if (error < minError)
+            {
                 minError = error;
                 bestEnergy = knownEnergies[i];
+                bestM = m;
             }
         }
         
-        // Use linear calibration with slope = known_energy/peak_position
-        bestM = bestEnergy / peaks[0].getPosition();
-        bestB = 0.0;
-        bestCorrelation = 1;
-        
-        // Assign the matched energy to the peak
-        peaks[0].setAssociatedPosition(bestEnergy);
-        
-        // Store coefficients for a linear calibration
-        coefficients.clear();
-        coefficients.push_back(bestB);  // Intercept
-        coefficients.push_back(bestM);  // Slope
-        
-        peakMatchCount = 1;
-        ErrorHandle::getInstance().logStatus("Single peak calibrated to energy: " + std::to_string(bestEnergy));
-        calibrationDegree = 1;
-        return;
+        // Only associate if within error threshold (use a more generous limit for single peak)
+        if (minError < 20) // Higher tolerance for single peak case
+        {
+            peaks[0].setAssociatedPosition(bestEnergy);
+            peakMatchCount = 1;
+            
+            // Set up linear coefficient (y = mx) for a single point calibration
+            coefficients.clear();
+            coefficients.push_back(0.0);    // b = 0 (intercept)
+            coefficients.push_back(bestM);  // m (slope)
+            calibrationDegree = 1;  // Linear fit
+            
+            ErrorHandle::getInstance().logStatus("Single peak calibration: Matched peak at position " + 
+                                               std::to_string(peak.getPosition()) + 
+                                               " to energy " + std::to_string(bestEnergy) +
+                                               " with slope " + std::to_string(bestM));
+            return;
+        }
+        else
+        {
+            ErrorHandle::getInstance().logStatus("Failed to calibrate with single peak - no good energy match found");
+            return;
+        }
     }
 
+    // Original multi-peak calibration logic
     // Test slope values from 0.01 to 5.0 with small steps.
     for (double m = 0.01; m <= 5.0; m += 0.0001)
     {
@@ -369,7 +381,7 @@ void Histogram::calibratePeaks(const double knownEnergies[], int size)
         for (const auto &peak : peaks)
         {
             double predictedEnergy = m * peak.getPosition() + bestB; // Linear prediction.
-            if (checkPredictedEnergies(predictedEnergy, knownEnergies, size, 10, valueAssociatedWith))
+            if (checkPredictedEnergies(predictedEnergy, knownEnergies, size, 15, valueAssociatedWith))
             {
                 ++correlations;
                 associatedValues[peakCount] = valueAssociatedWith; // Save matched energy.
@@ -395,7 +407,7 @@ void Histogram::calibratePeaks(const double knownEnergies[], int size)
 }
 
 // Polynomial Calibration Section
-// It uses the least squares method to find
+// Refines peak calibration by determining the best polynomial degree and coefficients.
 void Histogram::calibratePeaksByDegree()
 {
     calibrationDegree = 1; // Start with a linear fit.
@@ -416,13 +428,14 @@ void Histogram::calibratePeaksByDegree()
     int n = positions.size();
     if (n == 0) // No valid peaks for calibration. BAD
     {
-        ErrorHandle::getInstance().errorHandle(ErrorHandle::NO_PEAKS_FOR_CALIBRATION, getMainHistName());
+        ErrorHandle::getInstance().errorHandle(ErrorHandle::NO_PEAKS_FOR_CALIBRATION);
         return;
     }
     
-    // Single peak case - already handled in calibratePeaks()
-    if (n == 1) {
-        // We've already set up a basic linear calibration in calibratePeaks()
+    // If we have only one peak, we've already set a linear calibration in calibratePeaks()
+    if (n == 1)
+    {
+        // We already set the coefficients in calibratePeaks() for single peak case
         return;
     }
 
@@ -449,6 +462,7 @@ void Histogram::calibratePeaksByDegree()
         std::vector<double> coeffs = EliadeMathFunctions::solveSystem(XtX, XtY);
 
         // Accept this degree if the leading coefficient is significant.
+        std::cout<<"polynomialFitThreshold: "<<polynomialFitThreshold<<std::endl;
         if (std::abs(coeffs[currentDegree]) >= polynomialFitThreshold)
         {
             calibrationDegree = currentDegree;
@@ -456,8 +470,6 @@ void Histogram::calibratePeaksByDegree()
         }
     }
 }
-
-// V2 calibration section //removed, available in the previous version on github
 
 // Apply calibration section
 void Histogram::initializeCalibratedHist()
@@ -555,7 +567,6 @@ void Histogram::applyXCalibration()
 // output section
 void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
 {
-    jsonFile << std::fixed << std::setprecision(3); // Set precision to 3 decimals
     jsonFile << "\t{\n";
     jsonFile << "\t\t\"domain\": " << getMainHistName() << ",\n";
     jsonFile << "\t\t\"serial\": \"" << serial << "\",\n";
@@ -577,7 +588,8 @@ void Histogram::outputPeaksDataJson(std::ofstream &jsonFile)
 
     for (size_t i = 0; i < peaks.size(); ++i)
     {
-        jsonFile << "\t\t\t\"" << peaks[i].getAssociatedPosition() << "\": {\n";
+        //to print corect the values in the json, to match the key in pycalib
+        jsonFile << "\t\t\t\"" << std::fixed << std::setprecision(3) << peaks[i].getAssociatedPosition() << "\": {\n";
         jsonFile << "\t\t\t\t\"eff\": [" <<0<< ", " <<0<< "],\n";
         jsonFile << "\t\t\t\t\"res\": [" << peaks[i].calculateResolution() << ", " << peaks[i].calculateResolutionError() << "],\n";
         jsonFile << "\t\t\t\t\"pos_ch\": " << peaks[i].getPosition() << ",\n";
@@ -681,15 +693,33 @@ float Histogram::getPTError()
     float areaPeak = 0;
     float areaPeakError = 0;
 
+    // Calculate the total area of peaks and its error
     for (const auto &peak : peaks)
     {
         areaPeak += peak.getArea();
         areaPeakError += std::pow(peak.getAreaError(), 2);
     }
     areaPeakError = std::sqrt(areaPeakError);
-    float pt = totalArea > 0 ? areaPeak / totalArea : 0.0f;
-    float ptError = pt * std::sqrt(std::pow(areaPeakError / areaPeak, 2) + std::pow(totalAreaError / totalArea, 2));
-    return ptError > 0 ? ptError : 0.0f;
+    
+    // Check for division by zero
+    if (totalArea <= 0 || areaPeak <= 0)
+    {
+        return 0.0f;
+    }
+    
+    // Calculate PT
+    float pt = areaPeak / totalArea;
+    
+    // Apply error propagation formula for ratio PT = areaPeak / totalArea
+    // For ratio R = A/B: (ΔR/R)² = (ΔA/A)² + (ΔB/B)²
+    float relativeErrorPeaks = areaPeakError / areaPeak;
+    float relativeErrorTotal = totalAreaError / totalArea;
+    float relativeErrorPT = std::sqrt(std::pow(relativeErrorPeaks, 2) + std::pow(relativeErrorTotal, 2));
+    
+    // Convert relative error to absolute error
+    float ptError = pt * relativeErrorPT;
+    
+    return ptError;
 }
 
 void Histogram::findStartOfPeak(Peak &peak)

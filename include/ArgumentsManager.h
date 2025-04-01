@@ -46,7 +46,7 @@ private:
     float MinAmplitude = 0.0f;
     float MaxAmplitude = 1e10f;
     float FWHMmax = 1e4f;
-    float polynomialFitThreshold = 1e-6f;
+    float polynomialFitThreshold = 1e-12f;
     int number_of_peaks = 1;
 
     //--------------------
@@ -125,6 +125,13 @@ public:
     //--------------------
     int getNumberOfPeaks() const { return number_of_peaks; }
     std::string getHistogramFilePath() const { return histogramFilePath; }
+    std::string getHistogramFilePathWithoutExtension() const {
+        size_t lastDot = histogramFilePath.find_last_of('.');
+        if (lastDot == std::string::npos) {
+            return histogramFilePath; // No extension found
+        }
+        return histogramFilePath.substr(0, lastDot);
+    }
     std::string getHistogramName() const { return TH2histogram_name; }
     std::string getEnergyFilePath() const { return energyFilePath; }
     int getXmin() const { return Xmin; }
@@ -137,14 +144,10 @@ public:
     CalibrationDataProvider getEnergyProcessor() const { return energyProcessor; }
     std::string getSavePath() const { return savePath; }
     float getPolynomialFitThreshold() const { return polynomialFitThreshold; }
-    std::string extractHistogramName() const {
-        size_t lastSlash = histogramFilePath.find_last_of("/\\");
-        size_t dotRoot = histogramFilePath.find(".root");
-        if (dotRoot == std::string::npos) {
-            return ""; // Return empty string if ".root" is not found
-        }
-        return histogramFilePath.substr(lastSlash + 1, dotRoot - lastSlash - 1);
-    }
+
+    //--------------------
+    // Domain and File Getters
+    //--------------------
     int getXmaxDomain() const { return xMaxDomain; }
     int getXminDomain() const { return xMinDomain; }
     int getXminFile(int position) const { return limits[position].Xmin; }
@@ -159,11 +162,11 @@ public:
     // Declare Non-Inlined Functions
     //--------------------
     int getNumberColumnSpecified(int histogramNumber) const;
-    std::string getExecutableDir() const;
-    std::string getDataFolderPath() const;
 
     //--------------------
     // Other Functions
     //--------------------
     void setNumberOfPeaks(int peaks);
+    std::string getExecutableDir() const;
+    std::string getDataFolderPath() const;
 };

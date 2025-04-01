@@ -5,12 +5,48 @@
             "numberOfPeaks": 2,
             "peaks": [
                 {
-                    "value": 1173.238,
+                    "value": 1173.2,
                     "probability": 0.9
                 },
                 {
-                    "value": 1332.513,
+                    "value": 1332.5,
                     "probability": 0.75
+                }
+            ]
+        },
+        {
+            "name": "60CoWeak",
+            "numberOfPeaks": 2,
+            "peaks": [
+                {
+                    "value": 1173.238,
+                    "probability": 0.999736
+                },
+                {
+                    "value": 1332.513,
+                    "probability": 0.999856
+                }
+            ]
+        },
+        {
+            "name": "60CoBG",
+            "numberOfPeaks": 2,
+            "peaks": [
+                {
+                    "value": 1173.238,
+                    "probability": 0.999736
+                },
+                {
+                    "value": 1332.513,
+                    "probability": 0.999856
+                },
+                {
+                    "value": 1460.82,
+                    "probability": 0
+                },
+                {
+                    "value": 2614.51,
+                    "probability": 0
                 }
             ]
         },
@@ -20,43 +56,43 @@
             "Peaks": [
                 {
                     "Energy_keV": 121.779,
-                    "Probability": 28.41
+                    "Probability": 0.2858
                 },
                 {
                     "Energy_keV": 244.693,
-                    "Probability": 7.55
+                    "Probability": 0.0758
                 },
                 {
                     "Energy_keV": 344.272,
-                    "Probability": 26.59
+                    "Probability": 0.2659
                 },
                 {
                     "Energy_keV": 411.111,
-                    "Probability": 2.23
+                    "Probability": 0.02234
                 },
                 {
                     "Energy_keV": 443.979,
-                    "Probability": 3.13
+                    "Probability": 0.0282
                 },
                 {
                     "Energy_keV": 778.890,
-                    "Probability": 12.96
+                    "Probability": 0.12942
                 },
                 {
                     "Energy_keV": 964.014,
-                    "Probability": 14.61
+                    "Probability": 0.14605
                 },
                 {
                     "Energy_keV": 1085.793,
-                    "Probability": 10.18
+                    "Probability": 0.10207
                 },
                 {
                     "Energy_keV": 1112.070,
-                    "Probability": 13.61
+                    "Probability": 0.13644
                 },
                 {
                     "Energy_keV": 1407.993,
-                    "Probability": 20.87
+                    "Probability": 0.21005
                 }
             ]
         },
@@ -65,12 +101,52 @@
             "numberOfPeaks": 2,
             "peaks": [
                 {
-                    "value": 846.772,
-                    "probability": 0.85
+                    "value": 1037.84,
+                    "probability": 1
+                },
+                {
+                    "value": 1175.102,
+                    "probability": 1
                 },
                 {
                     "value": 1238.282,
-                    "probability": 0.80
+                    "probability": 1
+                },
+                {
+                    "value": 1360.250,
+                    "probability": 1
+                },
+                {
+                    "value": 1771.351,
+                    "probability": 1
+                },
+                {
+                    "value": 2015.181,
+                    "probability": 1
+                },
+                {
+                    "value": 2034.755,
+                    "probability": 1
+                },
+                {
+                    "value": 2598.4582,
+                    "probability": 1
+                },
+                {
+                    "value": 3201.962,
+                    "probability": 1
+                },
+                {
+                    "value": 3272.990,
+                    "probability": 1
+                },
+                {
+                    "value": 3451.152,
+                    "probability": 1
+                },
+                {
+                    "value": 3547.925,
+                    "probability": 1
                 }
             ]
         },
@@ -79,12 +155,12 @@
             "numberOfPeaks": 2,
             "peaks": [
                 {
-                    "value": 511.006,
+                    "value": 511.0,
                     "probability": 0.98
                 },
                 {
                     "value": 1274.545,
-                    "probability": 0.75
+                    "probability": 0.99940
                 }
             ]
         },
@@ -94,7 +170,7 @@
             "peaks": [
                 {
                     "value": 834.848,
-                    "probability": 0.99
+                    "probability": 1
                 }
             ]
         },
@@ -103,43 +179,59 @@
             "numberOfPeaks": 1,
             "peaks": [
                 {
-                    "value": 661.657,
-                    "probability": 0.85
+                    "value": 661.661,
+                    "probability": 0.9998
                 }
             ]
-        }
+        },
         {
             "name": "133Ba",
-            "numberOfPeaks": 4,
+            "numberOfPeaks": 6,
             "peaks": [
-                {
-                    "value": 53.156,
-                    "probability": 0.022
-                },
-                {
-                    "value": 79.623,
-                    "probability": 0.026
-                },
-                {
-                    "value": 80.999,
-                    "probability": 0.34
-                },
-                {
-                    "value": 276.404,
-                    "probability": 0.07
-                },
-                {
-                    "value": 302.858,
-                    "probability": 0.18
-                },
-                {
-                    "value": 356.014,
-                    "probability": 0.62
-                },
-                {
-                    "value": 383.859,
-                    "probability": 0.089
-                }
+            {
+                "value": 53.156,
+                "probability": 0.0196
+            },
+            {
+                "value": 79.623,
+                "probability": 0.335
+            },
+            {
+                "value": 80.999,
+                "probability": 0.335
+            },
+            {
+                "value": 160.609,
+                "probability": 0.00626
+            },
+            {
+                "value": 223.116,
+                "probability": 0.00416
+            },
+            {
+                "value": 276.404,
+                "probability": 0.06
+            },
+            {
+                "value": 302.858,
+                "probability": 0.026
+            },
+            {
+                "value": 223.116,
+                "probability": 0.00416
+            },
+            {
+                "value": 276.404,
+                "probability": 0.06
+            },
+            {
+                "value": 356.014,
+                "probability": 0.517
+            },
+            {
+                "value": 383.859,
+                "probability": 0.0734
+            }
             ]
         }
     ]

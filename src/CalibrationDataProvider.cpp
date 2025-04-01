@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
-#include <iomanip> // Include for setting precision
+#include <iomanip>
 
 /**
  * @param filename Path to calibration configuration file
@@ -126,7 +126,6 @@ int CalibrationDataProvider::getCalibratedEnergyArraySize(int index) const
 
 void CalibrationDataProvider::printToFile(std::ofstream &file) const
 {
-    file << std::fixed << std::setprecision(3); // Set precision to 3 decimals
     for (size_t i = 0; i < sources.size(); ++i)
     {
         file << sources[i] << ": ";
@@ -316,8 +315,12 @@ void CalibrationDataProvider::parseJsonFile(const std::string &filename)
             {
                 if (line.find("value") != std::string::npos || line.find("Energy_keV") != std::string::npos)
                 {
-                    double energy = std::stod(line.substr(line.find(":") + 1));
+                    long double energyLong = std::stold(line.substr(line.find(":") + 1));//o problema cu precizia, trebuie sa schim in tot codul in long double ca sa ia
+                    std::cout<<std::setprecision(10)<<"Energy: "<<energyLong<<std::endl;
+                    double energy = static_cast<double>(energyLong);
+                    std::cout << "Energy: " << energy << std::endl;
                     energies.push_back(energy);
+                    std::cout<<"energie last added: "<<energies.back()<<std::endl;
                 }
                 else
                 {

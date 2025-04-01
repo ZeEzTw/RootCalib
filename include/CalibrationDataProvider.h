@@ -26,6 +26,7 @@ public:
     double *createCalibratedSourceArray(int &size);
     int getCalibratedEnergyArraySize(int index) const;
     double *getCalibratedEnergyArray(int index);
+    double extractNumericValue(const std::string &line);
 
     // Funcții pentru validarea și manipularea surselor
     void readFromTxt(const std::string &sourceLine);
