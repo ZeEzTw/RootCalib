@@ -82,7 +82,6 @@ void TaskHandler::process2DHistogram()
     {
         start_column = argumentsManager.getXminDomain();
         end_column = argumentsManager.getXmaxDomain();
-        std::cout<<"Start column: "<<start_column<<std::endl;
         if (start_column < 0) start_column = 0;
         if (end_column > number_of_columns) end_column = number_of_columns;
         
@@ -103,10 +102,8 @@ void TaskHandler::process2DHistogram()
     for (int column = start_column; column <= end_column; column++)
     {
         TH1D *hist1D = inputTH2->ProjectionY(Form("hist1D_col%d", column - 1), column, column);
-        std::cout<<"hist1d_name: "<<hist1D->GetName()<<std::endl;
         if (hist1D)
         {
-            std::cout<<"Processing column: "<<column<<std::endl;
             processSingleHistogram(hist1D);
         }
         else 
@@ -136,11 +133,6 @@ void TaskHandler::processSingleHistogram(TH1D *const hist1D)
 {
     if (!hist1D || hist1D->GetMean() < 5)
     {
-        if(hist1D->GetMean() < 5)
-        std::cout<<"Skipped1"<<std::endl;
-        else
-        std::cout<<"Skipped2"<<std::endl;
-        delete hist1D;
         histograms.emplace_back();
         // if you want to check
         // ErrorHandle::getInstance().logStatus(std::string("The mean for the histogram ") + std::to_string(histograms.size()) + " is less than 5. ");
@@ -152,10 +144,8 @@ void TaskHandler::processSingleHistogram(TH1D *const hist1D)
     int histIndex = argumentsManager.getNumberColumnSpecified(histSize);
     ErrorHandle::getInstance().logStatus(std::string("Histogram: ") + std::to_string(histSize) + " start to be processed.");
     ErrorHandle::getInstance().logStatus("start------------------------------------------------.");
-    std::cout<<"histograms.size() = "<<histSize<<std::endl;
     if(histSize == 110)
     {
-        std::cout<<"daaaaaaaaaaaaaaaaa"<<std::endl;
         ErrorHandle::getInstance().logStatus("histIndex is 110");
 
     }

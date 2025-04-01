@@ -46,7 +46,7 @@ private:
     float MinAmplitude = 0.0f;
     float MaxAmplitude = 1e10f;
     float FWHMmax = 1e4f;
-    float polynomialFitThreshold = 1e-6f;
+    float polynomialFitThreshold = 1e-12f;
     int number_of_peaks = 1;
 
     //--------------------

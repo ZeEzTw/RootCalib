@@ -381,7 +381,7 @@ void Histogram::calibratePeaks(const double knownEnergies[], int size)
         for (const auto &peak : peaks)
         {
             double predictedEnergy = m * peak.getPosition() + bestB; // Linear prediction.
-            if (checkPredictedEnergies(predictedEnergy, knownEnergies, size, 10, valueAssociatedWith))
+            if (checkPredictedEnergies(predictedEnergy, knownEnergies, size, 15, valueAssociatedWith))
             {
                 ++correlations;
                 associatedValues[peakCount] = valueAssociatedWith; // Save matched energy.
@@ -462,6 +462,7 @@ void Histogram::calibratePeaksByDegree()
         std::vector<double> coeffs = EliadeMathFunctions::solveSystem(XtX, XtY);
 
         // Accept this degree if the leading coefficient is significant.
+        std::cout<<"polynomialFitThreshold: "<<polynomialFitThreshold<<std::endl;
         if (std::abs(coeffs[currentDegree]) >= polynomialFitThreshold)
         {
             calibrationDegree = currentDegree;

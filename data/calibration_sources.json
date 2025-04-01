@@ -186,7 +186,7 @@
         },
         {
             "name": "133Ba",
-            "numberOfPeaks": 4,
+            "numberOfPeaks": 6,
             "peaks": [
             {
                 "value": 53.156,
