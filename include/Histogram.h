@@ -100,8 +100,11 @@ private:
     void initializeCalibratedHist();
     void interpolateBins(int start_bin, int end_bin, double start_value, double end_value,
                          double start_position, double end_position);
+    void singlePeakCalibration(const double knownEnergies[], int size);
+    void multiplePeakCalibration(const double knownEnergies[], int size);
     bool checkPredictedEnergies(double predictedEnergy, const double knownEnergies[],
                                 int size, float errorAdmitted, double &valueAssociatedWith) const;
+    bool checkIfValuesAreDubbled(std::vector<double> values);
 
 public:
     // Constructors and destructor
