@@ -173,29 +173,36 @@ bool Histogram::checkConditions(const Peak &peak) const
     double FWHM = peak.getFWHM();
     double peakPosition = peak.getPosition();
     bool condition1 = peakPosition <= xMax && peakPosition >= xMin;
-    std::cout << "Xmax" << xMax << "xMin" << xMin << std::endl;
+    std::cout << "Xmax: " << xMax << " xMin: " << xMin << std::endl;  // Fixed spacing for readability
     bool condition2 = FWHM <= maxFWHM;
     bool condition3 = peak.getAmplitude() > minAmplitude; //&& peak.getAmplitude() < maxAmplitude; maxAmplitude is not
     bool condition4 = peakPosition > 0;
+    
     if (!condition1)
     {
         ErrorHandle::getInstance().logStatus("Peak " + std::to_string(peak.getPosition()) + " does not meet the domain conditions.");
-        ErrorHandle::getInstance().logStatus("Peak position " + std::to_string(peak.getPosition()) + " is not in the range [" + std::to_string(xMin) + ", " + std::to_string(xMax) + "]");
+        ErrorHandle::getInstance().logStatus("Peak position " + std::to_string(peak.getPosition()) + 
+                                           " is not in the range [" + std::to_string(xMin) + ", " + 
+                                           std::to_string(xMax) + "]");
     }
     if (!condition2)
     {
         ErrorHandle::getInstance().logStatus("Peak " + std::to_string(peak.getPosition()) + " does not meet the FWHM conditions.");
-        ErrorHandle::getInstance().logStatus("Peak FWHM " + std::to_string(peak.getFWHM()) + " is greater than FWHM limit" + std::to_string(maxFWHM));
+        ErrorHandle::getInstance().logStatus("Peak FWHM " + std::to_string(peak.getFWHM()) + 
+                                           " is greater than FWHM limit " + std::to_string(maxFWHM));  // Added space after "FWHM limit"
     }
     if (!condition3)
     {
         ErrorHandle::getInstance().logStatus("Peak " + std::to_string(peak.getPosition()) + " does not meet the amplitude conditions.");
-        ErrorHandle::getInstance().logStatus("Peak amplitude " + std::to_string(peak.getAmplitude()) + " is not in the range [" + std::to_string(minAmplitude) + ", " + std::to_string(maxAmplitude) + "]");
+        ErrorHandle::getInstance().logStatus("Peak amplitude " + std::to_string(peak.getAmplitude()) + 
+                                           " is not in the range [" + std::to_string(minAmplitude) + ", " + 
+                                           std::to_string(maxAmplitude) + "]");
     }
     if(!condition4)
     {
-        ErrorHandle::getInstance().logStatus("Peak " + std::to_string(peak.getPosition()) + " peak was neagitve.");
-        ErrorHandle::getInstance().logStatus("Peak position " + std::to_string(peak.getPosition()) + " is not in the range [0, " + std::to_string(tempHist->GetNbinsX()) + "]");
+        ErrorHandle::getInstance().logStatus("Peak " + std::to_string(peak.getPosition()) + " peak was negative.");  // Fixed typo "neagitve" to "negative"
+        ErrorHandle::getInstance().logStatus("Peak position " + std::to_string(peak.getPosition()) + 
+                                           " is not in the range [0, " + std::to_string(tempHist->GetNbinsX()) + "]");
     }
     return condition1 && condition2 && condition3;
 }

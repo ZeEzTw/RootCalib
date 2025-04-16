@@ -99,17 +99,16 @@ void TaskHandler::process2DHistogram()
     std::cout<<"---------------------------"<<std::endl;
 
     // First pass: Add empty histograms before start_column
-    for (int column = 0; column < start_column; column++) {
+    for (int column = 1; column <= start_column; column++) {
         histograms.emplace_back();
     }
 
     // Second pass: Process histograms within range
     for (int column = start_column; column <= end_column; column++)
     {
-        TH1D *hist1D = inputTH2->ProjectionY(Form("hist1D_col%d", column - 1), column, column);
+        TH1D *hist1D = inputTH2->ProjectionY(Form("hist1D_col%d", column), column + 1, column + 1);
         if (hist1D)
         {
-            std::cout<<"Processing column: "<<column<<std::endl;
             processSingleHistogram(hist1D);
         }
         else 
@@ -151,9 +150,15 @@ void TaskHandler::processSingleHistogram(TH1D *const hist1D)
     }
 
     Histogram hist;
-    int histIndex = argumentsManager.getNumberColumnSpecified(histograms.size());
-    ErrorHandle::getInstance().logStatus(std::string("Histogram: ") + std::to_string(histograms.size()) + " start to be processed.");
+    // Calculate the actual histogram index based on the current histograms.size()
+    // This ensures we're referring to the correct histogram when using domain limits
+    int actualHistogramIndex = histograms.size();
+    int histIndex = argumentsManager.getNumberColumnSpecified(actualHistogramIndex);
+    
+    // Log the actual histogram index (matches column being processed)
+    ErrorHandle::getInstance().logStatus(std::string("Histogram: ") + std::to_string(actualHistogramIndex) + " start to be processed.");
     ErrorHandle::getInstance().logStatus("start------------------------------------------------.");
+    
     hist = Histogram(
         argumentsManager.getXminFile(histIndex), argumentsManager.getXmaxFile(histIndex),
         argumentsManager.getFWHMmaxFile(histIndex), argumentsManager.getMinAmplitudeFile(histIndex),
