@@ -312,7 +312,7 @@ void ArgumentsManager::parseJsonFile()
 
     nlohmann::json jsonData;
     file >> jsonData;
-
+    std::cout<<"sunt in parseJson"<<std::endl;
     for (const auto &item : jsonData)
     {
         int tempDomain = item.contains("domain") ? item["domain"].get<int>() : -1;
@@ -323,16 +323,17 @@ void ArgumentsManager::parseJsonFile()
         fitLimits tempLimits = {Xmin, Xmax};
         PTLimits tempPTLimits = {static_cast<int>(MinAmplitude), static_cast<int>(MaxAmplitude)};
 
-        if (item.contains("fitLimits"))
-        {
-            tempLimits.Xmin = item["fitLimits"].contains("Xmin") ? item["fitLimits"]["Xmin"].get<int>() : Xmin;
-            tempLimits.Xmax = item["fitLimits"].contains("Xmax") ? item["fitLimits"]["Xmax"].get<int>() : Xmax;
+        if (item.contains("fitLimits") && item["fitLimits"].is_array() && item["fitLimits"].size() == 2)
+        {  
+            std::cout << "am gasit fitLimits" << std::endl;
+            tempLimits.Xmin = item["fitLimits"][0].get<int>();
+            tempLimits.Xmax = item["fitLimits"][1].get<int>();
         }
 
-        if (item.contains("PTLimits"))
+        if (item.contains("PTLimits") && item["PTLimits"].is_array() && item["PTLimits"].size() == 2)
         {
-            tempPTLimits.MinAmplitude = item["PTLimits"].contains("MinAmplitude") ? item["PTLimits"]["MinAmplitude"].get<int>() : static_cast<int>(MinAmplitude);
-            tempPTLimits.MaxAmplitude = item["PTLimits"].contains("MaxAmplitude") ? item["PTLimits"]["MaxAmplitude"].get<int>() : static_cast<int>(MaxAmplitude);
+            tempPTLimits.MinAmplitude = item["PTLimits"][0].get<int>();
+            tempPTLimits.MaxAmplitude = item["PTLimits"][1].get<int>();
         }
 
         if (tempDomain != -1)

@@ -39,6 +39,8 @@ public:
      * @return A vector containing the solution to the system of equations.
      */
     static std::vector<double> solveSystem(const std::vector<std::vector<double>> &A, const std::vector<double> &b);
+    static double binomialCoefficient(int n, int k);
+
 };
 
 #endif // ELIADEMATHFUNCTIONS_H

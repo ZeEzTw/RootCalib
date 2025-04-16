@@ -22,7 +22,6 @@ struct StatusEntry
 
 class ErrorHandle
 {
-std::string histogramFilePath; 
 public:
     enum ErrorCode
     {
@@ -37,23 +36,23 @@ public:
         LUT_FILE_NOT_FOUND = 8
     };
 
+    std::string fileName;
     // Static method to get the Singleton instance
     static ErrorHandle &getInstance();
 
     // Delete copy constructor and assignment operator
     ErrorHandle(const ErrorHandle &) = delete;
     ErrorHandle &operator=(const ErrorHandle &) = delete;
-
     // Member function declarations
-    void errorHandle(int errorNumber);
+    void errorHandle(int errorNumber, const std::string& histogramName = "");
     void saveLogFile();
     void logStatus(const std::string &statusMessage);
     void logLutFileInput(const std::string &lutFileName, int rowsRead);
     void logArrayWithCalibratedValues(const double *array, int size);
     void startProgram();
-    void setHistogramFilePath(const std::string &path){histogramFilePath = path;}
     // Setter methods for configuration
     void setUserInterfaceActive(bool isActive);
+    void startProgram(std::string fileName);
     void setPathForSave(const std::string &path);
 
 private:

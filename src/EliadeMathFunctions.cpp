@@ -83,3 +83,17 @@ std::vector<double> EliadeMathFunctions::solveSystem(const std::vector<std::vect
 
     return x;
 }
+
+
+double EliadeMathFunctions::binomialCoefficient(int n, int k)
+{
+    if (k > n) return 0.0;
+    if (k == 0 || k == n) return 1.0;
+    double res = 1.0;
+    for (int i = 1; i <= k; ++i)
+    {
+        res *= (n - (k - i));
+        res /= i;
+    }
+    return res;
+}

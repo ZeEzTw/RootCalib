@@ -121,6 +121,11 @@ void Peak::areaPeak(TH1D* hist)
     areaError = std::sqrt(std::abs(totalError + bgError));
 }
 
+bool Peak::isValidBin(double content, double error) const {
+    // Example implementation: A bin is valid if its content is positive and error is non-negative
+    return content > 0 && error >= 0;
+}
+
 double Peak::calculateResolutionError() const
 {
     if (!gaus) return 0.0;
@@ -132,6 +137,9 @@ double Peak::calculateResolutionError() const
     // FWHM = FWHM_CONSTANT * sigma
     double fwhm = FWHM_CONSTANT * sigma;
     double fwhm_error = FWHM_CONSTANT * sigmaError;
+    
+    // Ensure no division by zero or invalid values
+    if (fwhm == 0.0 || position == 0.0 || associatedPosition == 0.0) return 0.0;
     
     // Resolution = (FWHM / position) * associatedPosition
     // Apply error propagation formula for R = (A/B) * C

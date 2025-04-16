@@ -49,9 +49,7 @@ private:
     TF1* gaus;
 
     // Helper methods
-    bool isValidBin(double content, double error) const {
-        return content > 0 && error >= 0;
-    }
+    bool isValidBin(double content, double error) const;
 
 public:
     // Constructors and destructor
@@ -68,6 +66,9 @@ public:
     double getMean() const {return gaus->GetParameter(1); };
     double calculateResolution() const;
     double calculateResolutionError() const;
+    double calculateAreaFromFit() const;
+    double calculateAreaErrorFromFit() const;
+    
     //not used in code
     void findStartOfPeak(TH1D* hist, int maxBin, double& leftLimitPosition, double& rightLimitPosition);
 

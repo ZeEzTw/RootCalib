@@ -19,9 +19,9 @@ TaskHandler::~TaskHandler()
 //start function
 void TaskHandler::executeHistogramProcessingTask()
 {
-    ErrorHandle::getInstance().setHistogramFilePath(argumentsManager.getHistogramFilePathWithoutExtension());
+    //ErrorHandle::getInstance().setPathForSave(argumentsManager.extractHistogramName());
     ErrorHandle::getInstance().setUserInterfaceActive(argumentsManager.isUserInterfaceEnabled());
-    ErrorHandle::getInstance().startProgram();
+    ErrorHandle::getInstance().startProgram(argumentsManager.extractHistogramName());
     fileManager.openFiles();
     ErrorHandle::getInstance().setPathForSave(fileManager.getSavePath());
     energyArray = initializeEnergyArray();
@@ -82,6 +82,7 @@ void TaskHandler::process2DHistogram()
     {
         start_column = argumentsManager.getXminDomain();
         end_column = argumentsManager.getXmaxDomain();
+        std::cout<<"Start column: "<<start_column<<std::endl;
         if (start_column < 0) start_column = 0;
         if (end_column > number_of_columns) end_column = number_of_columns;
         
@@ -92,7 +93,11 @@ void TaskHandler::process2DHistogram()
     }
 
     fileManager.firstDomainJson();
-    
+    std::cout<<"---------------------------"<<std::endl;
+    std::cout<<"Start column: "<<start_column<<std::endl;
+    std::cout<<"End column: "<<end_column<<std::endl;
+    std::cout<<"---------------------------"<<std::endl;
+
     // First pass: Add empty histograms before start_column
     for (int column = 0; column < start_column; column++) {
         histograms.emplace_back();
@@ -104,6 +109,7 @@ void TaskHandler::process2DHistogram()
         TH1D *hist1D = inputTH2->ProjectionY(Form("hist1D_col%d", column - 1), column, column);
         if (hist1D)
         {
+            std::cout<<"Processing column: "<<column<<std::endl;
             processSingleHistogram(hist1D);
         }
         else 
@@ -133,6 +139,11 @@ void TaskHandler::processSingleHistogram(TH1D *const hist1D)
 {
     if (!hist1D || hist1D->GetMean() < 5)
     {
+        if(hist1D->GetMean() < 5)
+        std::cout<<"Skipped1"<<std::endl;
+        else
+        std::cout<<"Skipped2"<<std::endl;
+        delete hist1D;
         histograms.emplace_back();
         // if you want to check
         // ErrorHandle::getInstance().logStatus(std::string("The mean for the histogram ") + std::to_string(histograms.size()) + " is less than 5. ");
@@ -140,15 +151,9 @@ void TaskHandler::processSingleHistogram(TH1D *const hist1D)
     }
 
     Histogram hist;
-    size_t histSize = histograms.size() - 1;
-    int histIndex = argumentsManager.getNumberColumnSpecified(histSize);
-    ErrorHandle::getInstance().logStatus(std::string("Histogram: ") + std::to_string(histSize) + " start to be processed.");
+    int histIndex = argumentsManager.getNumberColumnSpecified(histograms.size());
+    ErrorHandle::getInstance().logStatus(std::string("Histogram: ") + std::to_string(histograms.size()) + " start to be processed.");
     ErrorHandle::getInstance().logStatus("start------------------------------------------------.");
-    if(histSize == 110)
-    {
-        ErrorHandle::getInstance().logStatus("histIndex is 110");
-
-    }
     hist = Histogram(
         argumentsManager.getXminFile(histIndex), argumentsManager.getXmaxFile(histIndex),
         argumentsManager.getFWHMmaxFile(histIndex), argumentsManager.getMinAmplitudeFile(histIndex),

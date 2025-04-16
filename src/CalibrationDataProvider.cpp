@@ -4,7 +4,9 @@
 #include <fstream>
 #include <algorithm>
 #include <iomanip>
+#include <nlohmann/json.hpp>
 
+using json = nlohmann::json;
 /**
  * @param filename Path to calibration configuration file
  */
@@ -14,7 +16,7 @@ CalibrationDataProvider::CalibrationDataProvider(const std::string &filename)
     parseJsonFile(filename);
 }
 
-CalibrationDataProvider& CalibrationDataProvider::operator=(const CalibrationDataProvider &other)
+CalibrationDataProvider &CalibrationDataProvider::operator=(const CalibrationDataProvider &other)
 {
     if (this != &other)
     {
@@ -32,14 +34,14 @@ CalibrationDataProvider::~CalibrationDataProvider()
     // Destructor implicit
 }
 
-//not used, but if the data are in a txt file, this function can be used
-//will take the peaks for each source
+// not used, but if the data are in a txt file, this function can be used
+// will take the peaks for each source
 void CalibrationDataProvider::readFromTxt(const std::string &filename)
 {
     std::ifstream file(filename);
     if (!file.is_open())
     {
-        //std::cerr << "Could not open file: " << filename << std::endl;
+        // std::cerr << "Could not open file: " << filename << std::endl;
         return;
     }
 
@@ -81,8 +83,7 @@ void CalibrationDataProvider::readFromTxt(const std::string &filename)
     file.close();
 }
 
-
-//Validates if a source exists in the loaded configuration
+// Validates if a source exists in the loaded configuration
 int CalibrationDataProvider::isSourceValid(const std::string &source)
 {
     for (size_t i = 0; i < sources.size(); ++i)
@@ -95,7 +96,7 @@ int CalibrationDataProvider::isSourceValid(const std::string &source)
     return -1;
 }
 
-//sort the peaks in descending order
+// sort the peaks in descending order
 void CalibrationDataProvider::CalibrationDataProviderArray()
 {
     for (auto &row : energyMatrix)
@@ -185,8 +186,7 @@ void CalibrationDataProvider::chooseSources(int startPosition, int argc, char *a
     }
 }
 
-
-//Gets total number of peaks across all requested sources
+// Gets total number of peaks across all requested sources
 int CalibrationDataProvider::getNumberOfPeaks() const
 {
     int totalPeaks = 0;
@@ -213,7 +213,8 @@ int CalibrationDataProvider::getNumberOfPeaks(int position) const
 double *CalibrationDataProvider::createCalibratedSourceArray(int &size)
 {
     std::string sourceNames;
-    for (const auto& source : requestedSources) {
+    for (const auto &source : requestedSources)
+    {
         sourceNames += source + " ";
     }
     ErrorHandle::getInstance().logStatus("Requested sources size: " + std::to_string(requestedSources.size()) + " Named: " + sourceNames);
@@ -252,21 +253,22 @@ double *CalibrationDataProvider::createCalibratedSourceArray(int &size)
     size = totalSize;
     return combinedEnergyArray;
 }
-std::string CalibrationDataProvider::cleanSourceName(const std::string &sourceName) {
+std::string CalibrationDataProvider::cleanSourceName(const std::string &sourceName)
+{
     std::string cleanedName = sourceName;
     cleanedName.erase(
-        std::remove_if(cleanedName.begin(), cleanedName.end(), [](char c) {
-            return c == '\"' || c == ',';  // Condiția de eliminare
-        }),
-        cleanedName.end()
-    );
+        std::remove_if(cleanedName.begin(), cleanedName.end(), [](char c)
+                       {
+                           return c == '\"' || c == ','; // Condiția de eliminare
+                       }),
+        cleanedName.end());
     return cleanedName;
 }
 
 /**
  * @brief Parses JSON configuration file containing source data
  * @param filename Path to JSON file
- * 
+ *
  * File format expected:
  * {
  *   "name": "sourceName",
@@ -285,63 +287,51 @@ void CalibrationDataProvider::parseJsonFile(const std::string &filename)
         return;
     }
 
-    std::string line;
-    std::string currentSource;
-    int peakCount = 0;
+    json j;
+    file >> j;
+    file.close();
 
-    while (std::getline(file, line))
+    for (auto &[sourceName, sourceData] : j.items())
     {
-        line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
+        sources.push_back(sourceName);
 
-        if (line.find("name") != std::string::npos)
+        std::vector<double> energies;
+        std::vector<double> probabilities;
+
+        std::cout << "----------------------------------------" << std::endl;
+        std::cout << "Source: " << sourceName << std::endl;
+
+        if (sourceData.contains("gammas") && sourceData["gammas"].is_object())
         {
-            currentSource = line.substr(line.find(":") + 1);
-            currentSource = cleanSourceName(currentSource);
-            sources.push_back(currentSource);
-        }
-
-        if (line.find("numberOfPeaks") != std::string::npos)
-        {
-            peakCount = std::stoi(line.substr(line.find(":") + 1));
-            numberOfPeaks.push_back(peakCount);
-        }
-
-        if (line.find("peaks") != std::string::npos || line.find("Peaks") != std::string::npos)
-        {
-            std::vector<double> energies;
-            std::vector<double> probabilities;
-
-            while (std::getline(file, line) && line.find("]") == std::string::npos)
+            for (auto &[energyStr, values] : sourceData["gammas"].items())
             {
-                if (line.find("value") != std::string::npos || line.find("Energy_keV") != std::string::npos)
+                try
                 {
-                    long double energyLong = std::stold(line.substr(line.find(":") + 1));//o problema cu precizia, trebuie sa schim in tot codul in long double ca sa ia
-                    std::cout<<std::setprecision(10)<<"Energy: "<<energyLong<<std::endl;
+                    long double energyLong = std::stold(energyStr);
                     double energy = static_cast<double>(energyLong);
-                    std::cout << "Energy: " << energy << std::endl;
+                    double probability = values[1]; // index 1 is the probability
+
                     energies.push_back(energy);
-                    std::cout<<"energie last added: "<<energies.back()<<std::endl;
-                }
-                else
-                {
-                    continue;
-                }
-                std::getline(file, line);
-                if (line.find("probability") != std::string::npos || line.find("Probability") != std::string::npos)
-                {
-                    double probability = std::stod(line.substr(line.find(":") + 1));
                     probabilities.push_back(probability);
+
+                    std::cout << std::setprecision(10)
+                              << "Energy: " << energy
+                              << "  Probability: " << probability
+                              << std::endl;
                 }
-                else
+                catch (const std::exception &e)
                 {
-                    continue;
+                    std::cerr << "Error parsing gamma entry: " << e.what() << std::endl;
                 }
             }
-
-            energyMatrix.push_back(energies);
-            probabilityMatrix.push_back(probabilities);
         }
-    }
+        else
+        {
+            std::cerr << "Warning: 'gammas' not found or not an object in source " << sourceName << std::endl;
+        }
 
-    file.close();
+        energyMatrix.push_back(energies);
+        probabilityMatrix.push_back(probabilities);
+        numberOfPeaks.push_back(static_cast<int>(energies.size()));
+    }
 }

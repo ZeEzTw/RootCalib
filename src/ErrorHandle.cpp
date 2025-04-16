@@ -44,7 +44,7 @@ std::string ErrorHandle::getCurrentTime()
     return ss.str();
 }
 
-void ErrorHandle::errorHandle(int errorNumber)
+void ErrorHandle::errorHandle(int errorNumber, const std::string &histogramName) // histogramNumber is specified only for NO_PEAKS_FOR_CALIBRATION, for the rest is -1, no need to pe spcified
 {
     std::string errorMessage;
     std::string errorSolution;
@@ -83,6 +83,10 @@ void ErrorHandle::errorHandle(int errorNumber)
     case NO_PEAKS_FOR_CALIBRATION:
         errorMessage = "No peaks available for calibration. n = 0";
         errorSolution = "Probably no peaks pass the conditions (check LUT file, input data from terminal or default conditions).";
+        if (!histogramName.empty())
+        {
+            errorMessage += " (Histogram: " + histogramName + ")";
+        }
         break;
     case LUT_FILE_NOT_FOUND:
         errorMessage = "LUT file not found. Called in ArgumentsManager::parseJsonFile()";
@@ -103,13 +107,20 @@ void ErrorHandle::errorHandle(int errorNumber)
             std::cerr << "Solution: " << errorSolution << std::endl;
         }
     }
-    else if(errorNumber != 7)
+    else if (errorNumber != 7)
     {
         std::cerr << "Error Code " << errorNumber << std::endl;
     }
 
     // Log error to internal container with timestamp
     writeProblemToJsonErrorFile(errorNumber, errorMessage, errorSolution);
+}
+
+void ErrorHandle::startProgram(std::string newfileName)
+{
+    // Log the start of the program
+    logStatus("Program started. The ErrorHandle will provide information about all the processes the code goes through, including all verifications and any errors/problems encountered. It will also offer possible solutions for them.");
+    fileName = newfileName;
 }
 
 void ErrorHandle::writeProblemToJsonErrorFile(int errorNumber, const std::string &errorMessage, const std::string &errorSolution)
@@ -124,7 +135,7 @@ void ErrorHandle::writeProblemToJsonErrorFile(int errorNumber, const std::string
 
 void ErrorHandle::saveLogFile()
 {
-    std::cout<<"Saving log file"<<std::endl;
+    std::cout << "Saving log file" << std::endl;
     // Ensure the save directory exists; create it if it doesn't
     if (pathForSave.empty())
     {
@@ -149,10 +160,10 @@ void ErrorHandle::saveLogFile()
                 logStatus("Created log directory: " + pathForSave);
             }
         }
-        std::cout<<"pathForSave: "<<pathForSave<<std::endl;
+        std::cout << "pathForSave: " << pathForSave << std::endl;
     }
 
-    std::ofstream logFile(pathForSave + "/log_" + histogramFilePath + ".json");
+    std::ofstream logFile(pathForSave + "/" + "_error_log" + fileName + ".json");
     if (logFile.is_open())
     {
         logFile << "{\n";
@@ -215,15 +226,6 @@ void ErrorHandle::logStatus(const std::string &statusMessage)
     status_updates.push_back(entry);
 }
 
-void ErrorHandle::startProgram()
-{
-    std::stringstream ss;
-    ss << "This is the debug file for the file " << histogramFilePath << ". It will provide errors, problems, and checks that were made for all the analyzed data, along with possible causes and solutions for the errors/problems.";
-    logStatus(ss.str());
-    if (isUserInterfaceActive)
-        std::cout << "Program started successfully." << std::endl;
-    logStatus("Program started successfully.");
-}
 void ErrorHandle::logLutFileInput(const std::string &lutFileName, int rowsRead)
 {
     std::stringstream ss;
