@@ -11,23 +11,40 @@ This project provides tools for extracting and analyzing peaks from ROOT histogr
 - **User Interface**: Provides an optional UI for interactive calibration and adjustments.
 - **Error Handling**: Logs errors and execution details, highlighting critical issues for troubleshooting.
   
-## Example of `data.json`
+## Example of data output
 
 ```json
 {
-  "domain": 102,
-  "serial": "CL",
+  "domain": 101,
+  "serial": "CL29B",
   "detType": 2,
-  "PT": [0.183011, 0.000410268],
-  "pol_list": [1.43531, 1.30784, -3.2675e-07],
+  "PT": [
+    0.1864,
+    0.0001
+  ],
+  "pol_list": [
+    1.7518,
+    1.302805
+  ],
   "152Eu": {
-    "121.78": {
-      "res": [1.73549e-05, 6.57896e-08],
-      "pos_ch": 91.9006,
-      "area": [191502, 324.311]
+    "121.779": {
+      "eff": [
+        0.039331128777616554,
+        0.0019667635904604525
+      ],
+      "res": [
+        2.495,
+        0.001
+      ],
+      "pos_ch": 92.019,
+      "area": [
+        3052036.973,
+        2214.853
+      ]
     }
   }
 }
+
 ```
 
 ## Installation and Usage
@@ -40,7 +57,7 @@ Clone the repository using:
 #Compilation
 Compile the code with:
 
-    g++ src/*.cpp -Iinclude $(root-config --glibs --cflags --libs) -o task
+    g++ src/*.cpp -Iinclude $(root-config --glibs --cflags --libs) -o rootcalib
 
 
 # Running the Program
@@ -51,15 +68,15 @@ Compile the code with:
     
 Basic Command:
 
-	./task -hf 152 -j "LUT_RECALL_S_20240604.json" -s "152Eu"
+	./rootcalib -f selected_run_163_999_eliadeS1.root -rp py_calib/LUT_RECALL.json -s 22Na
 
 -With Path Specified:
 
-  	./RootCalib/task -hf 152 -j "RootCalib/LUT_RECALL_S_20240604.json" -sp "output/" -calib 1e-8 -s "152Eu"
-   
+  	/home/andrei/rootcalib/rootcalib -f selected_run_163_999_eliadeS1.root -rp /home/andrei/py_calib/LUT_RECALL.json -sc 100  -ec 140 -s 22Na
+
 Full Constraints Example:
   
- 	./task -hf "data/data.root" -j "LUT_RECALL_S_20240604.json" -hn "mDelila_raw" -limits 0.0 1000000.0 0.0 1000000000.0 1000.0 -sp "output/" -detType 2 -serial "CL" -calib 1e-3 -s "152Eu"
+ 	/home/andrei/rootcalib/rootcalib -f selected_run_163_999_eliadeS1.root -rp /home/andrei/py_calib/LUT_RECALL.json -sc 100 -ec 140 -s 22Na -sp "output/" -detType 2 -serial "CL" -calib 1e-3 -limits 0.0 1000000.0 0.0 1000000000.0 1000.0
 
   Run the program without the UI by specifying the -sources argument:
   
@@ -67,11 +84,11 @@ Full Constraints Example:
   
   To activate User Interface, run it with the following example command:
   
-  	./task -hf 152 -j "LUT_RECALL_S_20240604.json"
+  	./rootcalib -f selected_run_163_999_eliadeS1.root -rp /home/andrei/py_calib/LUT_RECALL.json
 
 Format without values puted: 
   		
-    ./task -hf string -hn string -limits float float float float float -sp string -detType int -serial string -json string -calib int -domainLimits int int -sources string
+    ./rootcalib -f string -rp string -sc int -ec int -s string -sp string -detType int -serial string -calib float -limits float float float float float
 
 You can specify only the parameters you are interested in; any unspecified arguments will use default values or be overridden by values in the JSON file if provided. For example:
 
@@ -82,20 +99,25 @@ soruces can be puted as much as needed.
 
 Required Arguments
 
-    -hf / --histogram_file: Path to the histogram file.
-        Format: Full path (data/data.root) or shorthand (e.g., 152 for data_152_S9.root).
-    -j / --json: Path to the LUT JSON file. Mandatory for analysis.
+    -f / --file: Path to the ROOT histogram file.
+	Format: Full path (/home/andrei/data/data.root) or shorthand (e.g., 152 for data_152_S9.root).
+    -rp / --recall_path: Path to the LUT JSON file (recall profile).
+	Mandatory for analysis.
 
 Optional Arguments
 
-    -hn / --histogram_name: Name of the histogram. Default: mDelila_raw.
-    -sources: List of calibration sources.
-    -limits: Analysis bounds: Xmin Xmax MinAmplitude MaxAmplitude FWHMmax. Default: 0.0 1000000.0 0.0 1000000000.0 1000.0.
-    -sp / --save_path: Output directory. Default: output/.
-    -detType: Detector type. Default: 2.
-    -serial: Detector serial number. Default: CL.
-    -domainLimits: Peak extraction bounds: xMin xMax.
-    -calib: Calibration polynomial threshold. Default: 1e-10.
+	-s / --sources: List of calibration sources (e.g., 22Na, 152Eu).
+	-sc / --start_channel: Starting channel for analysis.
+	-ec / --end_channel: Ending channel for analysis.
+	-sp / --save_path: Output directory. Default: output/.
+	-detType: Detector type. Default: 2.
+	-serial: Detector serial number. Default: CL.
+	-calib: Calibration polynomial threshold. Default: 1e-10.
+	-limits: Analysis bounds:
+	Xmin Xmax MinAmplitude MaxAmplitude FWHMmax.
+	Default: 0.0 1000000.0 0.0 1000000000.0 1000.0.
+	-domainLimits: Peak extraction bounds: xMin xMax.
+ 
 You can specify only the parameters you need; the rest will use defaults or values from the JSON file.
 
 ## Extra Features
@@ -110,13 +132,41 @@ After processing, the program offers the option to adjust peaks:
 This feature allows you to refine peak positions or calibrate histograms with different sets of peaks.
 Is just an example to show the capability of extension with the code arhitecture.
 ## Error Codes:
-
-    0: Program finished successfully.
-    1: Too few arguments to run.
-    2: Source names for calibration are not valid (check spelling).
-    3: Input file is not valid, or it cannot be opened (check spelling).
-    4: TH2F histogram with data is not valid (check spelling).
-    5. No valid peaks for calibration (number of peaks = 0). Histogram.cpp calibratePeaksByDegree()
+	
+	0: Program finished successfully.
+	
+	1: Too few arguments to run.
+	   Fired by: ArgumentsManager::parseArguments()
+	   Solution: Please provide the necessary arguments. Use -h for help.
+	
+	2: Source names for calibration are not valid.
+	   Fired by: ArgumentsManager::validateSourceNames()
+	   Solution: Check the spelling of the source names or open the file calibration_sources.json in data to see the available names. You can also run the program without -s to let the User Interface suggest sources.
+	
+	3: Input file is invalid or cannot be opened.
+	   Fired by: Histogram::loadHistogramFile()
+	   Solution: Check the spelling of the input file path.
+	
+	4: The TH2F histogram with data is not valid.
+	   Fired by: Histogram::loadHistogram()
+	   Solution: Check the spelling of the histogram name (default is mDelila_raw) or ensure the input file path is correct.
+	
+	5: No valid peaks for calibration (number of peaks = 0).
+	   Fired by: Histogram.cpp calibratePeaksByDegree()
+	   Solution: Ensure that there are valid peaks in the data.
+	
+	6: Output file is invalid or cannot be opened.
+	   Fired by: Histogram::saveHistogram(), saveCombined(), or similar functions.
+	   Solution: Check the spelling of the output file path. If this path is not specified, it will be created automatically.
+	
+	7: No peaks available for calibration. n = 0.
+	   Fired by: Histogram::getBestDegree()
+	   Solution: Probably no peaks pass the conditions (check LUT file, input data from terminal or default conditions).
+	   Additional: If a histogram name was provided, it will be shown in the error message.
+	
+	8: LUT file not found.
+	   Fired by: ArgumentsManager::parseJsonFile()
+	   Solution: Check the spelling of the LUT file path.
 
 
 
